@@ -389,13 +389,28 @@
   }
   function rgbToHex(r,g,b){ return '#' + [r,g,b].map(v=> v.toString(16).padStart(2,'0')).join(''); }
   function lerp(a,b,t){ return a + (b-a)*t; }
+  // Read legend colors from CSS root variables
+  const LEGEND_COLORS = (() => {
+    const root = getComputedStyle(document.documentElement);
+    return {
+      waterShallow: (root.getPropertyValue('--water-shallow') || '#1a3a7a').trim(),
+      waterMid: (root.getPropertyValue('--water-mid') || '#164e8a').trim(),
+      waterDeep: (root.getPropertyValue('--water-deep') || '#103863').trim(),
+      land: (root.getPropertyValue('--land') || '#2e5d2c').trim(),
+      unitBlue: (root.getPropertyValue('--unit-blue') || '#3a7aff').trim(),
+      unitRed: (root.getPropertyValue('--unit-red') || '#ff3a5c').trim(),
+      mine: (root.getPropertyValue('--mine') || '#ffd54a').trim(),
+      range: (root.getPropertyValue('--range') || 'rgba(255,255,255,.18)').trim()
+    };
+  })();
+
   function waterColor(norm) {
     // Use three discrete tiers: shallow, mid, deep.
     // norm is 0..1 where higher means deeper.
     const t = Math.min(1, Math.max(0, norm));
-    if (t < 0.33) return '#1a3a7a'; // shallow
-    if (t < 0.66) return '#0b2745'; // mid
-    return '#041018'; // deep
+    if (t < 0.33) return LEGEND_COLORS.waterShallow;
+    if (t < 0.66) return LEGEND_COLORS.waterMid;
+    return LEGEND_COLORS.waterDeep;
   }
 
   // --- Drawing ---
@@ -416,7 +431,7 @@
     for (let r=0;r<GRID_H;r++) {
       for (let q=0;q<GRID_W;q++) {
         const c = getCell(q,r); const p = hexToPixel(q,r); const x = origin.x + p.x; const y = origin.y + p.y;
-        const fill = c.land ? '#2e5d2c' : waterColor(c.depthNormalized);
+        const fill = c.land ? LEGEND_COLORS.land : waterColor(c.depthNormalized);
         drawHex(x, y, fill, 'rgba(255,255,255,.08)', 1);
 
         if (sel && sel.q===q && sel.r===r) drawHex(x,y,'rgba(255,255,255,.08)','rgba(255,255,255,.45)',2);
@@ -424,13 +439,13 @@
         if (attackSet.some(h => h.q===q && h.r===r)) drawHex(x,y,'rgba(255,58,92,.10)','rgba(255,58,92,.40)',2);
         if (mineSet.some(h => h.q===q && h.r===r)) drawHex(x,y,'rgba(255,213,74,.08)','rgba(255,213,74,.40)',2);
 
-        const m = mines.get(keyOf(q,r)); if (m) { ctx.beginPath(); ctx.arc(x, y, 5.5, 0, Math.PI*2); ctx.fillStyle = '#ffd54a'; ctx.fill(); ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 2; ctx.stroke(); }
+        const m = mines.get(keyOf(q,r)); if (m) { ctx.beginPath(); ctx.arc(x, y, 5.5, 0, Math.PI*2); ctx.fillStyle = LEGEND_COLORS.mine; ctx.fill(); ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 2; ctx.stroke(); }
       }
     }
 
     for (const u of units) {
       const p = hexToPixel(u.q,u.r); const x = origin.x + p.x; const y = origin.y + p.y;
-      const col = (u.side===Side.BLUE) ? '#3a7aff' : '#ff3a5c'; ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI*2); ctx.fillStyle = col; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2; ctx.stroke();
+      const col = (u.side===Side.BLUE) ? LEGEND_COLORS.unitBlue : LEGEND_COLORS.unitRed; ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI*2); ctx.fillStyle = col; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2; ctx.stroke();
       ctx.fillStyle = '#0b1220'; ctx.font = 'bold 10px system-ui, -apple-system, Segoe UI, Roboto, Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(typeGlyph(u.type), x, y);
       const maxHP = UNIT_STATS[u.type].hp; const w = 26; const h = 5; const hpw = Math.max(0, Math.min(1, u.hp/maxHP)) * w; ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.fillRect(x - w/2, y + 16, w, h); ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.fillRect(x - w/2, y + 16, hpw, h);
       if (selectedId === u.id) { ctx.beginPath(); ctx.arc(x, y, 18, 0, Math.PI*2); ctx.strokeStyle = 'rgba(255,255,255,.65)'; ctx.lineWidth = 2; ctx.stroke(); }

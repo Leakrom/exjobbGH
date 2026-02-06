@@ -2,8 +2,13 @@
 :root {
     color-scheme: dark;
     --water-shallow: #1a3a7a;
-    --water-mid: #0b2745;
-    --water-deep: #041018;
+    --water-mid: #164e8a;
+    --water-deep: #103863;
+    --land: #2e5d2c;
+    --unit-blue: #3a7aff;
+    --unit-red: #ff3a5c;
+    --mine: #ffd54a;
+    --range: rgba(255,255,255,.18);
 }
 
 body {
