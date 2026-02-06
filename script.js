@@ -239,9 +239,12 @@
       }
     }
 
-    // Beräkna 'djup' för vattenrutor: avstånd till närmaste land
+    // Beräkna 'djup' för vattenrutor: avstånd till närmaste land + variationer
     const landCells = map.filter(c => c.land);
     let maxDist = 0;
+    const SHALLOW_ZONE = 2; // Direkt nära land (inom 2 hexar) = alltid grunt
+    
+    // Först: beräkna basdjup från avstånd till land
     for (const cell of map) {
       if (cell.land) { cell.depth = 0; continue; }
       let minD = Infinity;
@@ -250,9 +253,29 @@
         if (d < minD) minD = d;
       }
       if (!isFinite(minD)) minD = Math.max(GRID_W, GRID_H);
-      cell.depth = minD;
+      // Direkt nära land = alltid grunt (cappa på SHALLOW_ZONE)
+      cell.baseDistance = minD;
+      cell.depth = Math.min(minD, SHALLOW_ZONE);
       if (minD > maxDist) maxDist = minD;
     }
+    
+    // Lägg till pseudo-random variationer, men bara på djupare vatten
+    const depthRand = mulberry32(seed | 0);
+    for (const cell of map) {
+      if (!cell.land) {
+        // Bara applicera variationer på vatten bortom shallow-zonen
+        if (cell.baseDistance > SHALLOW_ZONE) {
+          // Större amplitude (1.5) för mer synliga stråk av djupare/grundare vatten
+          const variation = (depthRand() - 0.5) * 1.5 * cell.depth;
+          cell.depth = Math.max(SHALLOW_ZONE + 0.1, cell.depth + variation);
+        } else {
+          depthRand(); // Keep RNG in sync by consuming random value
+        }
+      }
+    }
+    
+    // Normalisera depthNormalized baserat på uppdaterat maxDist
+    maxDist = Math.max(...map.filter(c => !c.land).map(c => c.depth));
     for (const cell of map) {
       cell.depthNormalized = cell.land ? 0 : (maxDist ? (cell.depth / maxDist) : 0);
     }
