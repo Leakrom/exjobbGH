@@ -1,0 +1,447 @@
+(() => {
+  // --- Konfiguration ---
+  const GRID_W = 15;          // q
+  const GRID_H = 20;          // r
+  const HEX_SIZE = 34;        // px
+  const ACTIONS_PER_TURN = 3;
+
+  const UnitType = {
+    FRIGATE: 'Fregatt',
+    DESTROYER: 'Jagare',
+    SUBMARINE: 'Ubåt',
+  };
+
+  /**
+   * Rörelse / attackprofil (enkel prototyp).
+   */
+  const UNIT_STATS = {
+    [UnitType.FRIGATE]:   { hp: 4, move: 2, range: 3, mines: 4 },
+    [UnitType.DESTROYER]: { hp: 5, move: 2, range: 2, mines: 1 },
+    [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 1, mines: 0 },
+  };
+
+  const Side = { BLUE:'Blå', RED:'Röd' };
+
+  // --- Canvas / rendering setup ---
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const stageWrap = document.getElementById('stageWrap');
+
+  function resize() {
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const rect = stageWrap.getBoundingClientRect();
+    canvas.width = Math.floor(rect.width * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+  window.addEventListener('resize', resize);
+
+  // --- Hex-helpers (axiala coords) ---
+  const SQRT3 = Math.sqrt(3);
+
+  function hexToPixel(q, r) {
+    // pointy-top axial
+    const x = HEX_SIZE * (SQRT3 * (q + r/2));
+    const y = HEX_SIZE * (3/2 * r);
+    return { x, y };
+  }
+
+  function pixelToHex(x, y) {
+    // Inverse of pointy-top axial
+    const q = (SQRT3/3 * x - 1/3 * y) / HEX_SIZE;
+    const r = (2/3 * y) / HEX_SIZE;
+    return hexRound(q, r);
+  }
+
+  function hexRound(q, r) {
+    let x = q;
+    let z = r;
+    let y = -x - z;
+
+    let rx = Math.round(x);
+    let ry = Math.round(y);
+    let rz = Math.round(z);
+
+    const xDiff = Math.abs(rx - x);
+    const yDiff = Math.abs(ry - y);
+    const zDiff = Math.abs(rz - z);
+
+    if (xDiff > yDiff && xDiff > zDiff) rx = -ry - rz;
+    else if (yDiff > zDiff) ry = -rx - rz;
+    else rz = -rx - ry;
+
+    return { q: rx, r: rz };
+  }
+
+  const HEX_DIRS = [
+    {q: 1, r: 0}, {q: 1, r: -1}, {q: 0, r: -1},
+    {q: -1, r: 0}, {q: -1, r: 1}, {q: 0, r: 1}
+  ];
+
+  function hexAdd(a,b){ return {q:a.q+b.q, r:a.r+b.r}; }
+  function hexEq(a,b){ return a.q===b.q && a.r===b.r; }
+
+  function hexDistance(a, b) {
+    const dq = a.q - b.q;
+    const dr = a.r - b.r;
+    const ds = (a.q + a.r) - (b.q + b.r);
+    return Math.max(Math.abs(dq), Math.abs(dr), Math.abs(ds));
+  }
+
+  function inBounds(h) {
+    return h.q >= 0 && h.q < GRID_W && h.r >= 0 && h.r < GRID_H;
+  }
+
+  function hexPolygon(x, y) {
+    const pts = [];
+    for (let i = 0; i < 6; i++) {
+      const ang = (Math.PI / 180) * (60 * i - 30);
+      pts.push({ x: x + HEX_SIZE * Math.cos(ang), y: y + HEX_SIZE * Math.sin(ang) });
+    }
+    return pts;
+  }
+
+  function drawHex(x, y, fill, stroke, lw=1) {
+    const pts = hexPolygon(x, y);
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x, pts[i].y);
+    ctx.closePath();
+    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
+  }
+
+  // --- Game state ---
+  let map = []; // [{q,r, land:boolean, depthNormalized:0..1}]
+  let mines = new Map(); // key -> {side}
+  let units = [];
+
+  let turn = 1;
+  let activeSide = Side.BLUE;
+  let actionsLeft = ACTIONS_PER_TURN;
+
+  let selectedId = null;
+  let mode = 'order'; // 'order' | 'attack' | 'mine'
+
+  // --- UI handles ---
+  const elTurnPill = document.getElementById('turnPill');
+  const elPhasePill = document.getElementById('phasePill');
+  const elHintPill = document.getElementById('hintPill');
+
+  const elSelType = document.getElementById('selType');
+  const elSelSide = document.getElementById('selSide');
+  const elSelHP = document.getElementById('selHP');
+  const elSelMove = document.getElementById('selMove');
+  const elSelRange = document.getElementById('selRange');
+  const elSelMines = document.getElementById('selMines');
+
+  const elActivePlayer = document.getElementById('activePlayer');
+  const elActionsLeft = document.getElementById('actionsLeft');
+
+  const btnEndTurn = document.getElementById('btnEndTurn');
+  const btnReset = document.getElementById('btnReset');
+  const btnHelp = document.getElementById('btnHelp');
+  const btnAttack = document.getElementById('btnAttack');
+  const btnMine = document.getElementById('btnMine');
+
+  const toast = document.getElementById('toast');
+  let toastTimer = null;
+  function showToast(title, msg) {
+    toast.style.display = 'block';
+    toast.innerHTML = `<b>${escapeHtml(title)}</b><small>${escapeHtml(msg)}</small>`;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2600);
+  }
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  function keyOf(q,r){ return `${q},${r}`; }
+  function getCell(q,r){ return map[r*GRID_W + q]; }
+
+  function unitAt(q,r) { return units.find(u => u.q===q && u.r===r); }
+  function getUnit(id){ return units.find(u => u.id===id) || null; }
+
+  function updateUI() {
+    elTurnPill.textContent = `Tur ${turn} • ${activeSide}`;
+    elPhasePill.textContent = `Fas: ${mode === 'order' ? 'Order' : (mode === 'attack' ? 'Attack' : 'Minering')}`;
+
+    elActivePlayer.textContent = activeSide;
+    elActionsLeft.textContent = String(actionsLeft);
+
+    const sel = selectedId ? getUnit(selectedId) : null;
+    if (!sel) {
+      elSelType.textContent = '–';
+      elSelSide.textContent = '–';
+      elSelHP.textContent = '–';
+      elSelMove.textContent = '–';
+      elSelRange.textContent = '–';
+      elSelMines.textContent = '–';
+      btnAttack.disabled = true;
+      btnMine.disabled = true;
+      return;
+    }
+
+    const st = UNIT_STATS[sel.type];
+    elSelType.textContent = sel.type;
+    elSelSide.textContent = sel.side;
+    elSelHP.textContent = `${sel.hp}/${st.hp}`;
+    elSelMove.textContent = String(st.move);
+    elSelRange.textContent = String(st.range);
+    elSelMines.textContent = String(sel.minesLeft);
+
+    const isOwn = sel.side === activeSide;
+    btnAttack.disabled = !isOwn || actionsLeft <= 0;
+    btnMine.disabled = !isOwn || actionsLeft <= 0 || sel.minesLeft <= 0;
+
+    if (mode === 'order') elHintPill.textContent = 'Klicka en hex i räckvidd för att flytta';
+    if (mode === 'attack') elHintPill.textContent = 'Klicka en fiende inom räckvidd för att attackera';
+    if (mode === 'mine') elHintPill.textContent = 'Klicka en vattenhex intill för att lägga mina';
+  }
+
+  // --- Map generation: skärgårdskänsla (öar + sund) ---
+  function generateMap(seed = Math.random()*1e9) {
+    const rand = mulberry32(seed|0);
+
+    map = [];
+    mines = new Map();
+
+    const islands = [];
+    const islandCount = 10 + Math.floor(rand()*6);
+    for (let i=0;i<islandCount;i++) {
+      islands.push({ q: Math.floor(rand()*GRID_W), r: Math.floor(rand()*GRID_H), radius: 1.2 + rand()*2.8 });
+    }
+
+    for (let r=0;r<GRID_H;r++) {
+      for (let q=0;q<GRID_W;q++) {
+        let score = -0.2;
+        for (const isl of islands) {
+          const d = hexDistance({q,r}, isl);
+          score += Math.max(0, (isl.radius - d)) * 0.55;
+        }
+        score += (rand() - 0.5) * 0.25;
+        const edge = Math.min(q, r, GRID_W-1-q, GRID_H-1-r);
+        score += (edge < 2 ? 0.25 : 0);
+        const land = score > 0.65;
+        map.push({ q, r, land, depth: 0, depthNormalized: 0 });
+      }
+    }
+
+    // Säkerställ startzoner vatten
+    const safe = [ {q:1,r:2},{q:1,r:5},{q:2,r:8},{q:3,r:6},{q:2,r:3}, {q:GRID_W-2,r:2},{q:GRID_W-2,r:5},{q:GRID_W-3,r:8},{q:GRID_W-4,r:6},{q:GRID_W-3,r:3} ];
+    for (const h of safe) { if (inBounds(h)) getCell(h.q,h.r).land = false; }
+
+    // Sund
+    for (let r=0;r<GRID_H;r++) {
+      const q = Math.floor((GRID_W-1) * (r/(GRID_H-1)));
+      for (let dq=-1; dq<=1; dq++) {
+        const qq = q + dq;
+        if (qq>=0 && qq<GRID_W) getCell(qq,r).land = false;
+      }
+    }
+
+    // Beräkna 'djup' för vattenrutor: avstånd till närmaste land
+    const landCells = map.filter(c => c.land);
+    let maxDist = 0;
+    for (const cell of map) {
+      if (cell.land) { cell.depth = 0; continue; }
+      let minD = Infinity;
+      for (const l of landCells) {
+        const d = hexDistance({q:cell.q,r:cell.r}, {q:l.q,r:l.r});
+        if (d < minD) minD = d;
+      }
+      if (!isFinite(minD)) minD = Math.max(GRID_W, GRID_H);
+      cell.depth = minD;
+      if (minD > maxDist) maxDist = minD;
+    }
+    for (const cell of map) {
+      cell.depthNormalized = cell.land ? 0 : (maxDist ? (cell.depth / maxDist) : 0);
+    }
+  }
+
+  function mulberry32(a) {
+    return function() {
+      let t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+  }
+
+  // --- Setup units ---
+  let nextId = 1;
+  function spawn(side, type, q, r) {
+    const st = UNIT_STATS[type];
+    units.push({ id: nextId++, side, type, q, r, hp: st.hp, minesLeft: st.mines });
+  }
+
+  function resetGame() {
+    nextId = 1; turn = 1; activeSide = Side.BLUE; actionsLeft = ACTIONS_PER_TURN; selectedId = null; mode = 'order';
+    generateMap(); units = [];
+    spawn(Side.BLUE, UnitType.FRIGATE,   1, 2);
+    spawn(Side.BLUE, UnitType.DESTROYER,2, 5);
+    spawn(Side.BLUE, UnitType.SUBMARINE,3, 8);
+    spawn(Side.RED, UnitType.FRIGATE,   GRID_W-2, 2);
+    spawn(Side.RED, UnitType.DESTROYER,GRID_W-3, 5);
+    spawn(Side.RED, UnitType.SUBMARINE,GRID_W-4, 8);
+    showToast('Nytt slag', 'Skärgården är genererad. Blå börjar.');
+    updateUI(); draw();
+  }
+
+  // --- Rules / helpers ---
+  function isWater(q,r) { if (!inBounds({q,r})) return false; return !getCell(q,r).land; }
+  function canSelect(u) { return u.side === activeSide; }
+
+  function legalMoves(u) {
+    const st = UNIT_STATS[u.type]; const origin = {q:u.q, r:u.r}; const res = [];
+    const visited = new Set([keyOf(origin.q, origin.r)]);
+    const queue = [{h: origin, d:0}];
+    while (queue.length) {
+      const {h, d} = queue.shift();
+      for (const dir of HEX_DIRS) {
+        const nh = {q: h.q + dir.q, r: h.r + dir.r}; if (!inBounds(nh)) continue; const k = keyOf(nh.q, nh.r);
+        if (visited.has(k)) continue; if (!isWater(nh.q, nh.r)) continue; if (unitAt(nh.q, nh.r)) continue;
+        const nd = d + 1; if (nd <= st.move) { visited.add(k); res.push(nh); queue.push({h: nh, d: nd}); }
+      }
+    }
+    return res;
+  }
+
+  function enemiesInRange(u) { const st = UNIT_STATS[u.type]; return units.filter(o => o.side !== u.side && hexDistance({q:u.q,r:u.r},{q:o.q,r:o.r}) <= st.range); }
+  function adjacentWaterHexes(u) { const res = []; for (const dir of HEX_DIRS) { const h = {q:u.q+dir.q, r:u.r+dir.r}; if (!inBounds(h)) continue; if (!isWater(h.q,h.r)) continue; if (unitAt(h.q,h.r)) continue; res.push(h); } return res; }
+
+  function applyMineTrigger(q,r, enteringSide) {
+    const m = mines.get(keyOf(q,r)); if (!m) return false; if (m.side === enteringSide) return false;
+    mines.delete(keyOf(q,r)); const u = unitAt(q,r); if (u) { u.hp -= 2; showToast('Mina!', `${u.type} tar 2 skada.`); if (u.hp <= 0) { showToast('Sänkt!', `${u.type} sjunker.`); units = units.filter(x => x.id !== u.id); if (selectedId === u.id) selectedId = null; } }
+    return true;
+  }
+
+  function checkWin() { const blue = units.some(u => u.side === Side.BLUE); const red  = units.some(u => u.side === Side.RED); if (!blue || !red) { const winner = blue ? Side.BLUE : Side.RED; showToast('Spelet är slut', `${winner} vinner! Tryck “Nytt slag” för att spela igen.`); return true; } return false; }
+
+  // --- Input handling ---
+  function canvasToWorld(ev) { const rect = canvas.getBoundingClientRect(); return { x: (ev.clientX - rect.left), y: (ev.clientY - rect.top) }; }
+  function worldToHex(ev) { const p = canvasToWorld(ev); const origin = getMapOrigin(); const wx = p.x - origin.x; const wy = p.y - origin.y; return pixelToHex(wx, wy); }
+
+  canvas.addEventListener('click', (ev) => {
+    const h = worldToHex(ev); if (!inBounds(h)) return; const clickedUnit = unitAt(h.q, h.r);
+    if (clickedUnit) {
+      const sel = selectedId ? getUnit(selectedId) : null;
+      if (mode === 'attack' && sel && sel.side === activeSide && clickedUnit.side !== activeSide) { tryAttack(sel, clickedUnit); return; }
+      selectedId = clickedUnit.id; mode = 'order'; updateUI(); draw(); return;
+    }
+    const sel = selectedId ? getUnit(selectedId) : null; if (!sel) return; if (sel.side !== activeSide) return; if (actionsLeft <= 0) { showToast('Inga åtgärder kvar', 'Avsluta tur för att fortsätta.'); return; }
+
+    if (mode === 'order') {
+      const moves = legalMoves(sel); if (!moves.some(m => hexEq(m, h))) { showToast('Ogiltigt drag', 'Du kan bara flytta till markerade vattenhexar.'); return; }
+      sel.q = h.q; sel.r = h.r; actionsLeft -= 1; if (mines.has(keyOf(h.q,h.r))) { applyMineTrigger(h.q,h.r, sel.side); }
+      updateUI(); draw(); checkWin(); return;
+    }
+
+    if (mode === 'mine') {
+      if (sel.minesLeft <= 0) { showToast('Inga minor kvar', 'Den här enheten kan inte minera mer.'); return; }
+      const adj = adjacentWaterHexes(sel); if (!adj.some(a => hexEq(a, h))) { showToast('Ogiltig minering', 'Du kan bara lägga mina på intilliggande vattenhex.'); return; }
+      mines.set(keyOf(h.q,h.r), { side: sel.side }); sel.minesLeft -= 1; actionsLeft -= 1; mode = 'order'; showToast('Mina utlagd', 'Ett sund är nu minerat.'); updateUI(); draw(); return;
+    }
+  });
+
+  function tryAttack(attacker, target) {
+    if (actionsLeft <= 0) { showToast('Inga åtgärder kvar', 'Avsluta tur för att fortsätta.'); return; }
+    const st = UNIT_STATS[attacker.type]; const d = hexDistance({q:attacker.q,r:attacker.r},{q:target.q,r:target.r}); if (d > st.range) { showToast('För långt bort', 'Målet är utanför räckvidd.'); return; }
+    let dmg = 1; if (attacker.type === UnitType.SUBMARINE && d === 1) dmg = 2;
+    target.hp -= dmg; actionsLeft -= 1; showToast('Träff', `${attacker.type} träffar ${target.type} för ${dmg} skada.`);
+    if (target.hp <= 0) { units = units.filter(u => u.id !== target.id); if (selectedId === target.id) selectedId = null; showToast('Sänkt!', `${target.type} sjunker.`); }
+    mode = 'order'; updateUI(); draw(); checkWin();
+  }
+
+  // --- Buttons ---
+  btnEndTurn.addEventListener('click', () => { endTurn(); });
+  function endTurn() {
+    selectedId = null; mode = 'order'; activeSide = (activeSide === Side.BLUE) ? Side.RED : Side.BLUE; if (activeSide === Side.BLUE) turn += 1; actionsLeft = ACTIONS_PER_TURN;
+    showToast('Ny tur', `${activeSide} är aktiv.`); updateUI(); draw(); if (activeSide === Side.RED) runSimpleAI();
+  }
+  btnReset.addEventListener('click', () => { resetGame(); });
+  btnHelp.addEventListener('click', () => { showToast('Hjälp', 'Välj en enhet, flytta/attackera/minera. Prototyp: inga sensorer, ingen siktlinje.'); });
+  btnAttack.addEventListener('click', () => { const sel = selectedId ? getUnit(selectedId) : null; if (!sel || sel.side !== activeSide) return; mode = 'attack'; updateUI(); draw(); });
+  btnMine.addEventListener('click', () => { const sel = selectedId ? getUnit(selectedId) : null; if (!sel || sel.side !== activeSide) return; if (sel.minesLeft <= 0) return; mode = 'mine'; updateUI(); draw(); });
+
+  // --- Simple AI (för Röd) ---
+  function runSimpleAI() {
+    let steps = 0;
+    function tick() {
+      if (activeSide !== Side.RED) return; if (actionsLeft <= 0) { endTurn(); return; } if (checkWin()) return;
+      const reds = units.filter(u => u.side === Side.RED); const blues = units.filter(u => u.side === Side.BLUE); if (!reds.length || !blues.length) return;
+      for (const u of reds) {
+        const inR = enemiesInRange(u); if (inR.length) { inR.sort((a,b)=>a.hp-b.hp); selectedId = u.id; mode = 'attack'; updateUI(); draw(); tryAttack(u, inR[0]); steps++; if (steps >= 2) { endTurn(); } else setTimeout(tick, 350); return; }
+      }
+      const mover = reds[Math.floor(Math.random()*reds.length)];
+      const target = blues.reduce((best, b) => { const d = hexDistance({q:mover.q,r:mover.r},{q:b.q,r:b.r}); return (!best || d < best.d) ? {b, d} : best; }, null).b;
+      const moves = legalMoves(mover); if (!moves.length) { steps++; setTimeout(tick, 250); return; }
+      moves.sort((a,b)=> hexDistance(a, {q:target.q,r:target.r}) - hexDistance(b, {q:target.q,r:target.r})); const dest = moves[0]; selectedId = mover.id; mode = 'order'; mover.q = dest.q; mover.r = dest.r; actionsLeft -= 1; if (mines.has(keyOf(dest.q,dest.r))) applyMineTrigger(dest.q,dest.r, mover.side); updateUI(); draw(); steps++; if (steps >= 2) { endTurn(); } else setTimeout(tick, 350);
+    }
+    setTimeout(tick, 450);
+  }
+
+  // --- Color helpers for water gradient ---
+  function hexToRgb(hex) {
+    const h = hex.replace('#',''); const bigint = parseInt(h,16); if (h.length===3) {
+      return { r: parseInt(h[0]+h[0],16), g: parseInt(h[1]+h[1],16), b: parseInt(h[2]+h[2],16) };
+    }
+    return { r: (bigint>>16)&255, g: (bigint>>8)&255, b: bigint&255 };
+  }
+  function rgbToHex(r,g,b){ return '#' + [r,g,b].map(v=> v.toString(16).padStart(2,'0')).join(''); }
+  function lerp(a,b,t){ return a + (b-a)*t; }
+  function waterColor(norm) {
+    // Use three discrete tiers: shallow, mid, deep.
+    // norm is 0..1 where higher means deeper.
+    const t = Math.min(1, Math.max(0, norm));
+    if (t < 0.33) return '#1a3a7a'; // shallow
+    if (t < 0.66) return '#0b2745'; // mid
+    return '#041018'; // deep
+  }
+
+  // --- Drawing ---
+  function getMapOrigin() {
+    const tl = hexToPixel(0,0); const br = hexToPixel(GRID_W-1, GRID_H-1); const mapW = br.x - tl.x + HEX_SIZE*2; const mapH = br.y - tl.y + HEX_SIZE*2;
+    const rect = canvas.getBoundingClientRect(); const cx = rect.width/2; const cy = rect.height/2;
+    return { x: cx - mapW/2 + HEX_SIZE, y: cy - mapH/2 + HEX_SIZE };
+  }
+
+  function draw() {
+    if (!canvas.width || !canvas.height) return; const rect = canvas.getBoundingClientRect(); ctx.clearRect(0,0,rect.width,rect.height);
+    const origin = getMapOrigin();
+    const sel = selectedId ? getUnit(selectedId) : null;
+    const moveSet = sel && sel.side===activeSide && mode==='order' ? legalMoves(sel) : [];
+    const attackSet = sel && sel.side===activeSide && mode==='attack' ? enemiesInRange(sel).map(u => ({q:u.q,r:u.r})) : [];
+    const mineSet = sel && sel.side===activeSide && mode==='mine' ? adjacentWaterHexes(sel) : [];
+
+    for (let r=0;r<GRID_H;r++) {
+      for (let q=0;q<GRID_W;q++) {
+        const c = getCell(q,r); const p = hexToPixel(q,r); const x = origin.x + p.x; const y = origin.y + p.y;
+        const fill = c.land ? '#2e5d2c' : waterColor(c.depthNormalized);
+        drawHex(x, y, fill, 'rgba(255,255,255,.08)', 1);
+
+        if (sel && sel.q===q && sel.r===r) drawHex(x,y,'rgba(255,255,255,.08)','rgba(255,255,255,.45)',2);
+        if (moveSet.some(h => h.q===q && h.r===r)) drawHex(x,y,'rgba(255,255,255,.06)','rgba(255,255,255,.18)',2);
+        if (attackSet.some(h => h.q===q && h.r===r)) drawHex(x,y,'rgba(255,58,92,.10)','rgba(255,58,92,.40)',2);
+        if (mineSet.some(h => h.q===q && h.r===r)) drawHex(x,y,'rgba(255,213,74,.08)','rgba(255,213,74,.40)',2);
+
+        const m = mines.get(keyOf(q,r)); if (m) { ctx.beginPath(); ctx.arc(x, y, 5.5, 0, Math.PI*2); ctx.fillStyle = '#ffd54a'; ctx.fill(); ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 2; ctx.stroke(); }
+      }
+    }
+
+    for (const u of units) {
+      const p = hexToPixel(u.q,u.r); const x = origin.x + p.x; const y = origin.y + p.y;
+      const col = (u.side===Side.BLUE) ? '#3a7aff' : '#ff3a5c'; ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI*2); ctx.fillStyle = col; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = '#0b1220'; ctx.font = 'bold 10px system-ui, -apple-system, Segoe UI, Roboto, Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(typeGlyph(u.type), x, y);
+      const maxHP = UNIT_STATS[u.type].hp; const w = 26; const h = 5; const hpw = Math.max(0, Math.min(1, u.hp/maxHP)) * w; ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.fillRect(x - w/2, y + 16, w, h); ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.fillRect(x - w/2, y + 16, hpw, h);
+      if (selectedId === u.id) { ctx.beginPath(); ctx.arc(x, y, 18, 0, Math.PI*2); ctx.strokeStyle = 'rgba(255,255,255,.65)'; ctx.lineWidth = 2; ctx.stroke(); }
+    }
+
+    updateUI();
+  }
+
+  function typeGlyph(t) { if (t===UnitType.FRIGATE) return 'F'; if (t===UnitType.DESTROYER) return 'J'; if (t===UnitType.SUBMARINE) return 'U'; return '?'; }
+
+  // --- Init ---
+  resetGame(); resize(); setTimeout(() => showToast('Tips', 'Välj din enhet (Blå) och flytta/attackera/minera. Röd styrs av enkel AI.'), 450);
+
+})();
