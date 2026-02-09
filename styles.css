@@ -50,6 +50,7 @@ main {
     grid-template-columns: 1fr 360px;
     gap: 0;
     min-height: calc(100vh - 56px);
+    align-items: start;
 }
 
 #stageWrap {

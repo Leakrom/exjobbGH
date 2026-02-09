@@ -41,8 +41,8 @@
   const SQRT3 = Math.sqrt(3);
 
   function hexToPixel(q, r) {
-    // pointy-top axial
-    const x = HEX_SIZE * (SQRT3 * (q + r/2));
+    // pointy-top axial with offset rows for square appearance
+    const x = HEX_SIZE * (SQRT3 * (q + (r % 2) * 0.5));
     const y = HEX_SIZE * (3/2 * r);
     return { x, y };
   }
@@ -438,8 +438,13 @@
 
   // --- Drawing ---
   function getMapOrigin() {
-    const tl = hexToPixel(0,0); const br = hexToPixel(GRID_W-1, GRID_H-1); const mapW = br.x - tl.x + HEX_SIZE*2; const mapH = br.y - tl.y + HEX_SIZE*2;
-    const rect = canvas.getBoundingClientRect(); const cx = rect.width/2; const cy = rect.height/2;
+    const tl = hexToPixel(0,0); 
+    const br = hexToPixel(GRID_W-1, GRID_H-1); 
+    const mapW = br.x - tl.x + HEX_SIZE*2; 
+    const mapH = br.y - tl.y + HEX_SIZE*2;
+    const rect = canvas.getBoundingClientRect(); 
+    const cx = rect.width/2; 
+    const cy = rect.height/2;
     return { x: cx - mapW/2 + HEX_SIZE, y: cy - mapH/2 + HEX_SIZE };
   }
 
