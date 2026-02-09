@@ -2,22 +2,36 @@
   // =====================================================
   // KONFIGURATION
   // =====================================================
-  const GRID_W = 15;
+  const GRID_W = 20;
   const GRID_H = 20;
   const HEX_SIZE = 34;
   const ACTIONS_PER_TURN = 3;
 
   const UnitType = {
     FRIGATE: 'Fregatt',
-    DESTROYER: 'Jagare',
+    STEALTH_CORVETTE: 'Stealth-korvett',
     SUBMARINE: 'Ubåt',
+    UAV: 'UAV',
+    USV: 'USV',
+    UUV: 'UUV',
+    SUBMARINE_HUNTER: 'Ubåtsjakthelikopter',
+    CONVENTIONAL_CORVETTE: 'Konventionell korvett',
+    UNCONTROL_MINE: 'Okontrollerbar mina',
+    CONTROL_MINE: 'Kontrollerbar mina',
   };
 
-  // Rörelse / attackprofil (enkel prototyp)
+  // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay)
   const UNIT_STATS = {
-    [UnitType.FRIGATE]: { hp: 4, move: 2, range: 3, mines: 4 },
-    [UnitType.DESTROYER]: { hp: 5, move: 2, range: 2, mines: 1 },
+    [UnitType.FRIGATE]: { hp: 4, move: 2, range: 3, mines: 0 },
+    [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 2, mines: 0 },
     [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 1, mines: 0 },
+    [UnitType.UAV]: { hp: 1, move: 4, range: 1, mines: 0 },
+    [UnitType.USV]: { hp: 2, move: 2, range: 1, mines: 0 },
+    [UnitType.UUV]: { hp: 1, move: 2, range: 2, mines: 0 },
+    [UnitType.SUBMARINE_HUNTER]: { hp: 2, move: 3, range: 3, mines: 0 },
+    [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 2, mines: 0 },
+    [UnitType.UNCONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0 },
+    [UnitType.CONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0 },
   };
 
   const Side = { BLUE: 'Blå', RED: 'Röd' };
@@ -467,14 +481,29 @@
     generateMap();
     units = [];
     // Randomize start positions per side but ensure no unit spawns on land
-    const blueTypes = [UnitType.FRIGATE, UnitType.DESTROYER, UnitType.SUBMARINE];
-    for (const t of blueTypes) {
+    // Blue: 1 Fregatt, 2 Stealth-korvett, 1 Ubåt, 2 UAV, 2 USV, 2 UUV, 1 Ubåtsjakthelikopter
+    const blueUnits = [
+      UnitType.FRIGATE,
+      UnitType.STEALTH_CORVETTE, UnitType.STEALTH_CORVETTE,
+      UnitType.SUBMARINE,
+      UnitType.UAV, UnitType.UAV,
+      UnitType.USV, UnitType.USV,
+      UnitType.UUV, UnitType.UUV,
+      UnitType.SUBMARINE_HUNTER,
+    ];
+    for (const t of blueUnits) {
       const h = findStartHex(Side.BLUE);
       spawn(Side.BLUE, t, h.q, h.r);
     }
 
-    const redTypes = [UnitType.FRIGATE, UnitType.DESTROYER, UnitType.SUBMARINE];
-    for (const t of redTypes) {
+    // Red: 2 Konventionell korvett, 1 Ubåt, 2 Okontrollerbar mina, 2 Kontrollerbar mina
+    const redUnits = [
+      UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
+      UnitType.SUBMARINE,
+      UnitType.UNCONTROL_MINE, UnitType.UNCONTROL_MINE,
+      UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
+    ];
+    for (const t of redUnits) {
       const h = findStartHex(Side.RED);
       spawn(Side.RED, t, h.q, h.r);
     }
@@ -905,8 +934,15 @@
 
   function typeGlyph(t) {
     if (t === UnitType.FRIGATE) return 'F';
-    if (t === UnitType.DESTROYER) return 'J';
+    if (t === UnitType.STEALTH_CORVETTE) return 'S';
     if (t === UnitType.SUBMARINE) return 'U';
+    if (t === UnitType.UAV) return 'A';
+    if (t === UnitType.USV) return 'V';
+    if (t === UnitType.UUV) return 'u';
+    if (t === UnitType.SUBMARINE_HUNTER) return 'H';
+    if (t === UnitType.CONVENTIONAL_CORVETTE) return 'C';
+    if (t === UnitType.UNCONTROL_MINE) return 'X';
+    if (t === UnitType.CONTROL_MINE) return 'M';
     return '?';
   }
 
