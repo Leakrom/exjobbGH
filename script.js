@@ -413,6 +413,50 @@
     });
   }
 
+  // Find a suitable water hex for spawning a unit for the given side.
+  // We prefer the left half for Blue and the right half for Red so
+  // starting positions are reasonably separated. The function ensures
+  // the chosen hex is in-bounds, not land and not already occupied.
+  function findStartHex(side) {
+    const mid = Math.floor(GRID_W / 2);
+    const minQ = side === Side.BLUE ? 0 : mid;
+    const maxQ = side === Side.BLUE ? Math.max(0, mid - 1) : GRID_W - 1;
+    const attempts = 500;
+    for (let i = 0; i < attempts; i++) {
+      const q = Math.floor(Math.random() * (maxQ - minQ + 1)) + minQ;
+      const r = Math.floor(Math.random() * GRID_H);
+      if (!inBounds({ q, r })) continue;
+      const cell = getCell(q, r);
+      if (!cell || cell.land) continue;
+      if (unitAt(q, r)) continue;
+      return { q, r };
+    }
+
+    // Fallback: scan for any free water hex in the preferred half
+    for (let r = 0; r < GRID_H; r++) {
+      for (let q = minQ; q <= maxQ; q++) {
+        if (!inBounds({ q, r })) continue;
+        const cell = getCell(q, r);
+        if (!cell || cell.land) continue;
+        if (unitAt(q, r)) continue;
+        return { q, r };
+      }
+    }
+
+    // Final fallback: any free water hex on the map
+    for (let r = 0; r < GRID_H; r++) {
+      for (let q = 0; q < GRID_W; q++) {
+        const cell = getCell(q, r);
+        if (!cell || cell.land) continue;
+        if (unitAt(q, r)) continue;
+        return { q, r };
+      }
+    }
+
+    // If everything fails (very unlikely), return a safe default
+    return { q: 0, r: 0 };
+  }
+
   function resetGame() {
     nextId = 1;
     turn = 1;
@@ -422,13 +466,18 @@
     mode = 'order';
     generateMap();
     units = [];
+    // Randomize start positions per side but ensure no unit spawns on land
+    const blueTypes = [UnitType.FRIGATE, UnitType.DESTROYER, UnitType.SUBMARINE];
+    for (const t of blueTypes) {
+      const h = findStartHex(Side.BLUE);
+      spawn(Side.BLUE, t, h.q, h.r);
+    }
 
-    spawn(Side.BLUE, UnitType.FRIGATE, 1, 2);
-    spawn(Side.BLUE, UnitType.DESTROYER, 2, 5);
-    spawn(Side.BLUE, UnitType.SUBMARINE, 3, 8);
-    spawn(Side.RED, UnitType.FRIGATE, GRID_W - 2, 2);
-    spawn(Side.RED, UnitType.DESTROYER, GRID_W - 3, 5);
-    spawn(Side.RED, UnitType.SUBMARINE, GRID_W - 4, 8);
+    const redTypes = [UnitType.FRIGATE, UnitType.DESTROYER, UnitType.SUBMARINE];
+    for (const t of redTypes) {
+      const h = findStartHex(Side.RED);
+      spawn(Side.RED, t, h.q, h.r);
+    }
 
     showToast('Nytt slag', 'Skärgården är genererad. Blå börjar.');
     updateUI();
