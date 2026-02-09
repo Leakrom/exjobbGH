@@ -36,6 +36,33 @@
 
   const Side = { BLUE: 'Blå', RED: 'Röd' };
 
+  // Sensor types: RADAR (surface) or SONAR (underwater)
+  const SensorType = { RADAR: 'Radar', SONAR: 'Sonar' };
+
+  // Determine if a unit type is underwater capable
+  const SUBMARINE_TYPES = new Set([
+    UnitType.SUBMARINE,
+    UnitType.UUV,
+    UnitType.SUBMARINE_HUNTER,
+  ]);
+
+  // Sensor system configuration
+  const SENSOR_CONFIG = {
+    [UnitType.FRIGATE]: { type: SensorType.RADAR, passiveRange: 4, activeRange: 6 },
+    [UnitType.STEALTH_CORVETTE]: { type: SensorType.RADAR, passiveRange: 3, activeRange: 5 },
+    [UnitType.SUBMARINE]: { type: SensorType.SONAR, passiveRange: 3, activeRange: 5 },
+    [UnitType.UAV]: { type: SensorType.RADAR, passiveRange: 5, activeRange: 8 },
+    [UnitType.USV]: { type: SensorType.RADAR, passiveRange: 2, activeRange: 4 },
+    [UnitType.UUV]: { type: SensorType.SONAR, passiveRange: 2, activeRange: 4 },
+    [UnitType.SUBMARINE_HUNTER]: { type: SensorType.SONAR, passiveRange: 4, activeRange: 6 },
+    [UnitType.CONVENTIONAL_CORVETTE]: { type: SensorType.RADAR, passiveRange: 3, activeRange: 5 },
+    [UnitType.UNCONTROL_MINE]: { type: null, passiveRange: 0, activeRange: 0 },
+    [UnitType.CONTROL_MINE]: { type: null, passiveRange: 0, activeRange: 0 },
+  };
+
+  // Max depths: 0 = surface, 1-3 = various depths
+  const MAX_DEPTH = 3;
+
   // =====================================================
   // Canvas och rendering setup
   // =====================================================
@@ -189,6 +216,7 @@
   const elSelHP = document.getElementById('selHP');
   const elSelMove = document.getElementById('selMove');
   const elSelRange = document.getElementById('selRange');
+  const elSelDepth = document.getElementById('selDepth');
   const elSelMines = document.getElementById('selMines');
 
   const elActivePlayer = document.getElementById('activePlayer');
@@ -199,6 +227,9 @@
   const btnHelp = document.getElementById('btnHelp');
   const btnAttack = document.getElementById('btnAttack');
   const btnMine = document.getElementById('btnMine');
+  const btnDepthUp = document.getElementById('btnDepthUp');
+  const btnDepthDown = document.getElementById('btnDepthDown');
+  const btnToggleSensor = document.getElementById('btnToggleSensor');
 
   const toast = document.getElementById('toast');
   let toastTimer = null;
@@ -257,9 +288,13 @@
       elSelHP.textContent = '–';
       elSelMove.textContent = '–';
       elSelRange.textContent = '–';
+      elSelDepth.textContent = '–';
       elSelMines.textContent = '–';
       btnAttack.disabled = true;
       btnMine.disabled = true;
+      btnDepthUp.disabled = true;
+      btnDepthDown.disabled = true;
+      btnToggleSensor.disabled = true;
       return;
     }
 
@@ -269,11 +304,22 @@
     elSelHP.textContent = `${sel.hp}/${st.hp}`;
     elSelMove.textContent = String(st.move);
     elSelRange.textContent = String(st.range);
+    elSelDepth.textContent = `${sel.depth}/${MAX_DEPTH}`;
     elSelMines.textContent = String(sel.minesLeft);
 
     const isOwn = sel.side === activeSide;
     btnAttack.disabled = !isOwn || actionsLeft <= 0;
     btnMine.disabled = !isOwn || actionsLeft <= 0 || sel.minesLeft <= 0;
+    // Depth buttons only for submarines and if own unit
+    const cell = sel.q !== undefined ? getCell(sel.q, sel.r) : null;
+    const maxDepthAtHex = cell ? Math.ceil(cell.depthNormalized * MAX_DEPTH) : MAX_DEPTH;
+    btnDepthUp.disabled = !isOwn || actionsLeft <= 0 || !SUBMARINE_TYPES.has(sel.type) || sel.depth >= maxDepthAtHex;
+    btnDepthDown.disabled = !isOwn || actionsLeft <= 0 || !SUBMARINE_TYPES.has(sel.type) || sel.depth <= 0;
+    // Sensor toggle only for blue units with sensors
+    btnToggleSensor.disabled = !isOwn || !SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type;
+    if (!btnToggleSensor.disabled) {
+      btnToggleSensor.textContent = sel.sensorActive ? 'Växla sensor (Aktiv)' : 'Växla sensor (Passiv)';
+    }
 
     if (mode === 'order') {
       elHintPill.textContent = 'Klicka en hex i räckvidd för att flytta';
@@ -452,15 +498,33 @@
 
   function spawn(side, type, q, r) {
     const st = UNIT_STATS[type];
-    units.push({
+    // Submarines start at random depth, but cannot exceed water depth at this hex
+    let depth = 0;
+    if (SUBMARINE_TYPES.has(type)) {
+      const cell = getCell(q, r);
+      const maxDepth = Math.ceil(cell.depthNormalized * MAX_DEPTH);
+      depth = Math.floor(Math.random() * (maxDepth + 1));
+    }
+    const unit = {
       id: nextId++,
       side,
       type,
       q,
       r,
+      depth,
       hp: st.hp,
       minesLeft: st.mines,
-    });
+    };
+    // Blue units: add sensor mode (false = passive, true = active)
+    if (side === Side.BLUE) {
+      unit.sensorActive = false;
+    }
+    // Red units: add detection state (false until detected, then identified may be true/false)
+    if (side === Side.RED) {
+      unit.detected = false;
+      unit.identified = false;
+    }
+    units.push(unit);
   }
 
   // Find a suitable water hex for spawning a unit for the given side.
@@ -644,6 +708,73 @@
     return false;
   }
 
+  // Line-of-sight check: can see from h1 to h2?
+  // Land blocks all sight. Skerries only block sonar (underwater sensors).
+  function hasLineOfSight(h1, h2, isSonar = false) {
+    const dist = hexDistance(h1, h2);
+    if (dist === 0) return true;
+
+    // Bresenham-like hex line tracing
+    const steps = [];
+    for (let i = 0; i <= dist; i++) {
+      const t = i / dist;
+      const q = h1.q + (h2.q - h1.q) * t;
+      const r = h1.r + (h2.r - h1.r) * t;
+      const h = hexRound(q, r);
+      if (!inBounds(h)) return false;
+      const cell = getCell(h.q, h.r);
+      if (cell.land) return false; // Land blocks all sight
+      if (isSonar && cell.isSkerry) return false; // Skerries only block sonar
+    }
+    return true;
+  }
+
+  // Attempt to detect a red unit for blue unit with sensors
+  function updateDetection() {
+    // For each blue unit, check what red units it can detect
+    for (const blue of units.filter((u) => u.side === Side.BLUE)) {
+      const sensor = SENSOR_CONFIG[blue.type];
+      if (!sensor || !sensor.type) continue; // No sensor
+
+      const range = blue.sensorActive ? sensor.activeRange : sensor.passiveRange;
+
+      for (const red of units.filter((u) => u.side === Side.RED)) {
+        // Skip if already known
+        if (red.detected && red.identified) continue;
+
+        // Check line of sight
+        const isSonar = sensor.type === SensorType.SONAR;
+        if (!hasLineOfSight({ q: blue.q, r: blue.r }, { q: red.q, r: red.r }, isSonar)) {
+          continue;
+        }
+
+        // For sonar, must be same depth to detect underwater units
+        if (isSonar && SUBMARINE_TYPES.has(red.type)) {
+          if (blue.depth !== red.depth) continue;
+        }
+
+        // For radar, cannot detect underwater units
+        if (sensor.type === SensorType.RADAR && SUBMARINE_TYPES.has(red.type)) {
+          continue;
+        }
+
+        // Check distance and randomness
+        const dist = hexDistance({ q: blue.q, r: blue.r }, { q: red.q, r: red.r });
+        const randFactor = Math.floor(Math.random() * 10) + 1;
+        if (dist + randFactor > range) continue;
+
+        // Detected!
+        red.detected = true;
+
+        // Check identification: randFactor - 5 > 0
+        const identRand = Math.floor(Math.random() * 10) + 1;
+        if (identRand - 5 > 0) {
+          red.identified = true;
+        }
+      }
+    }
+  }
+
 
   function canvasToWorld(ev) {
     const rect = canvas.getBoundingClientRect();
@@ -740,6 +871,42 @@
     if (!sel || sel.side !== activeSide) return;
     if (sel.minesLeft <= 0) return;
     mode = 'mine';
+    updateUI();
+    draw();
+  });
+
+  btnDepthUp.addEventListener('click', () => {
+    const sel = selectedId ? getUnit(selectedId) : null;
+    if (!sel || sel.side !== activeSide) return;
+    if (!SUBMARINE_TYPES.has(sel.type)) return;
+    if (actionsLeft <= 0) return;
+    // Cannot go deeper than water depth at this hex
+    const cell = getCell(sel.q, sel.r);
+    const maxDepth = Math.ceil(cell.depthNormalized * MAX_DEPTH);
+    if (sel.depth >= maxDepth) return;
+    sel.depth += 1;
+    actionsLeft -= 1;
+    updateUI();
+    draw();
+  });
+
+  btnDepthDown.addEventListener('click', () => {
+    const sel = selectedId ? getUnit(selectedId) : null;
+    if (!sel || sel.side !== activeSide) return;
+    if (!SUBMARINE_TYPES.has(sel.type)) return;
+    if (sel.depth <= 0) return;
+    if (actionsLeft <= 0) return;
+    sel.depth -= 1;
+    actionsLeft -= 1;
+    updateUI();
+    draw();
+  });
+
+  btnToggleSensor.addEventListener('click', () => {
+    const sel = selectedId ? getUnit(selectedId) : null;
+    if (!sel || sel.side !== activeSide) return;
+    if (!SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type) return;
+    sel.sensorActive = !sel.sensorActive;
     updateUI();
     draw();
   });
@@ -874,6 +1041,11 @@
     const rect = canvas.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
 
+    // Update detection before rendering
+    if (activeSide === Side.BLUE) {
+      updateDetection();
+    }
+
     const origin = getMapOrigin();
     const sel = selectedId ? getUnit(selectedId) : null;
     const moveSet =
@@ -925,38 +1097,54 @@
 
     // Rita enheter
     for (const u of units) {
+      // Hide red units unless detected (or if we're the red player)
+      if (u.side === Side.RED && !u.detected && activeSide !== Side.RED) {
+        continue; // Skip rendering
+      }
+
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
       const y = origin.y + p.y;
       const col = u.side === Side.BLUE ? LEGEND_COLORS.unitBlue : LEGEND_COLORS.unitRed;
 
-      // Enhetscirkel
+      // Unit circle (dimmer if not identified)
       ctx.beginPath();
       ctx.arc(x, y, 12, 0, Math.PI * 2);
       ctx.fillStyle = col;
+      if (u.side === Side.RED && u.detected && !u.identified) {
+        // Detected but not identified: dimmer
+        ctx.globalAlpha = 0.5;
+      }
       ctx.fill();
+      ctx.globalAlpha = 1.0;
       ctx.strokeStyle = 'rgba(255,255,255,.35)';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Typglyf
+      // Type glyph or question mark
       ctx.fillStyle = '#0b1220';
       ctx.font = 'bold 10px system-ui, -apple-system, Segoe UI, Roboto, Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(typeGlyph(u.type), x, y);
+      if (u.side === Side.RED && u.detected && !u.identified) {
+        ctx.fillText('?', x, y); // Question mark for detected but not identified
+      } else {
+        ctx.fillText(typeGlyph(u.type), x, y);
+      }
 
-      // HP-bar
-      const maxHP = UNIT_STATS[u.type].hp;
-      const w = 26;
-      const h = 5;
-      const hpw = Math.max(0, Math.min(1, u.hp / maxHP)) * w;
-      ctx.fillStyle = 'rgba(0,0,0,.45)';
-      ctx.fillRect(x - w / 2, y + 16, w, h);
-      ctx.fillStyle = 'rgba(255,255,255,.75)';
-      ctx.fillRect(x - w / 2, y + 16, hpw, h);
+      // HP-bar (only show if identified or our own unit)
+      if (u.side === Side.BLUE || u.identified) {
+        const maxHP = UNIT_STATS[u.type].hp;
+        const w = 26;
+        const h = 5;
+        const hpw = Math.max(0, Math.min(1, u.hp / maxHP)) * w;
+        ctx.fillStyle = 'rgba(0,0,0,.45)';
+        ctx.fillRect(x - w / 2, y + 16, w, h);
+        ctx.fillStyle = 'rgba(255,255,255,.75)';
+        ctx.fillRect(x - w / 2, y + 16, hpw, h);
+      }
 
-      // Selektionsring
+      // Selection ring
       if (selectedId === u.id) {
         ctx.beginPath();
         ctx.arc(x, y, 18, 0, Math.PI * 2);
@@ -1022,6 +1210,15 @@
       if (!moves.some((m) => hexEq(m, h))) {
         showToast('Ogiltigt drag', 'Du kan bara flytta till markerade vattenhexar.');
         return;
+      }
+      // Check if submarine is too deep for destination hex
+      if (SUBMARINE_TYPES.has(sel.type)) {
+        const destCell = getCell(h.q, h.r);
+        const maxDepthAtDest = Math.ceil(destCell.depthNormalized * MAX_DEPTH);
+        if (sel.depth > maxDepthAtDest) {
+          showToast('För djupt', `Du kan inte flytta till hexagonen på djup ${sel.depth}. Max djup där är ${maxDepthAtDest}.`);
+          return;
+        }
       }
       sel.q = h.q;
       sel.r = h.r;
