@@ -231,6 +231,10 @@
   const btnDepthDown = document.getElementById('btnDepthDown');
   const btnToggleSensor = document.getElementById('btnToggleSensor');
 
+  const elRedMove1 = document.getElementById('redMove1');
+  const elRedMove2 = document.getElementById('redMove2');
+  const elRedMove3 = document.getElementById('redMove3');
+
   const toast = document.getElementById('toast');
   let toastTimer = null;
 
@@ -241,6 +245,19 @@
     toastTimer = setTimeout(() => {
       toast.style.display = 'none';
     }, 4500);
+  }
+
+  // Red moves history (most recent first)
+  const redMoves = [];
+  function pushRedMove(txt) {
+    redMoves.unshift(txt);
+    if (redMoves.length > 3) redMoves.length = 3;
+    updateRedMovesUI();
+  }
+  function updateRedMovesUI() {
+    if (elRedMove1) elRedMove1.textContent = redMoves[0] || '–';
+    if (elRedMove2) elRedMove2.textContent = redMoves[1] || '–';
+    if (elRedMove3) elRedMove3.textContent = redMoves[2] || '–';
   }
 
   function escapeHtml(s) {
@@ -939,8 +956,9 @@
           updateUI();
           draw();
           tryAttack(u, inR[0]);
+          pushRedMove(`${u.type} attackerade ${inR[0].type}`);
           steps++;
-          if (steps >= 2) {
+          if (steps >= ACTIONS_PER_TURN) {
             endTurn();
           } else {
             setTimeout(tick, 350);
@@ -977,6 +995,7 @@
       mode = 'order';
       mover.q = dest.q;
       mover.r = dest.r;
+      pushRedMove(`${mover.type} flyttade`);
       actionsLeft -= 1;
       if (mines.has(keyOf(dest.q, dest.r))) {
         applyMineTrigger(dest.q, dest.r, mover.side);
@@ -984,7 +1003,7 @@
       updateUI();
       draw();
       steps++;
-      if (steps >= 2) {
+      if (steps >= ACTIONS_PER_TURN) {
         endTurn();
       } else {
         setTimeout(tick, 350);

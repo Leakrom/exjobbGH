@@ -48,7 +48,7 @@ header h1 {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: 1fr 260px 360px;
     gap: 0;
     min-height: calc(100vh - 56px);
     align-items: start;
@@ -56,6 +56,15 @@ main {
 
 #stageWrap {
     position: relative;
+}
+
+#redMovesWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 12px;
+    margin: 0 12px;
+    align-self: start;
 }
 
 canvas {
