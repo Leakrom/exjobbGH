@@ -240,7 +240,7 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toast.style.display = 'none';
-    }, 2600);
+    }, 4500);
   }
 
   function escapeHtml(s) {
