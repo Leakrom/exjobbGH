@@ -248,16 +248,39 @@
   }
 
   // Red moves history (most recent first)
-  const redMoves = [];
+  let redMoves = [];
+  let redMovesLastRedTurn = 0;
   function pushRedMove(txt) {
-    redMoves.unshift(txt);
-    if (redMoves.length > 3) redMoves.length = 3;
+    // If a new Red turn, clear moves
+    if (activeSide === Side.RED && turn !== redMovesLastRedTurn) {
+      redMoves = [];
+      redMovesLastRedTurn = turn;
+    }
+    redMoves.push(txt);
     updateRedMovesUI();
   }
   function updateRedMovesUI() {
-    if (elRedMove1) elRedMove1.textContent = redMoves[0] || '–';
-    if (elRedMove2) elRedMove2.textContent = redMoves[1] || '–';
-    if (elRedMove3) elRedMove3.textContent = redMoves[2] || '–';
+    const rows = [
+      document.getElementById('redMoveRow1'),
+      document.getElementById('redMoveRow2'),
+      document.getElementById('redMoveRow3')
+    ];
+    const texts = [elRedMove1, elRedMove2, elRedMove3];
+    // Show only moves from this round, first move at top
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const txt = redMoves[i];
+      if (!row) continue;
+      if (txt) {
+        row.style.display = 'flex';
+        texts[i].textContent = txt;
+        row.querySelector('.redDot').style.visibility = 'visible';
+      } else {
+        row.style.display = 'none';
+        texts[i].textContent = '';
+        row.querySelector('.redDot').style.visibility = 'hidden';
+      }
+    }
   }
 
   function escapeHtml(s) {
@@ -831,6 +854,14 @@
     actionsLeft -= 1;
     showToast('Träff', `${attacker.type} träffar ${target.type} för ${dmg} skada.`);
 
+    if (attacker.side === Side.RED && target.side === Side.BLUE) {
+      if (target.hp <= 0) {
+        pushRedMove(`Röd enhet sänkte ${target.type}`);
+      } else {
+        pushRedMove(`Röd enhet attackerade ${target.type}`);
+      }
+    }
+
     if (target.hp <= 0) {
       units = units.filter((u) => u.id !== target.id);
       if (selectedId === target.id) selectedId = null;
@@ -856,6 +887,13 @@
     activeSide = activeSide === Side.BLUE ? Side.RED : Side.BLUE;
     if (activeSide === Side.BLUE) turn += 1;
     actionsLeft = ACTIONS_PER_TURN;
+
+    // Clear redMoves only at the start of Red's next turn
+    if (activeSide === Side.RED && turn !== redMovesLastRedTurn) {
+      redMoves = [];
+      redMovesLastRedTurn = turn;
+      updateRedMovesUI();
+    }
 
     showToast('Ny tur', `${activeSide} är aktiv.`);
     updateUI();
@@ -956,7 +994,6 @@
           updateUI();
           draw();
           tryAttack(u, inR[0]);
-          pushRedMove(`${u.type} attackerade ${inR[0].type}`);
           steps++;
           if (steps >= ACTIONS_PER_TURN) {
             endTurn();
@@ -995,7 +1032,6 @@
       mode = 'order';
       mover.q = dest.q;
       mover.r = dest.r;
-      pushRedMove(`${mover.type} flyttade`);
       actionsLeft -= 1;
       if (mines.has(keyOf(dest.q, dest.r))) {
         applyMineTrigger(dest.q, dest.r, mover.side);

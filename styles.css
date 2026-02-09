@@ -97,10 +97,33 @@ aside {
 
 .row {
     display: flex;
-    gap: 10px;
     align-items: center;
-    justify-content: space-between;
+    gap: 0;
     margin: 6px 0;
+    justify-content: flex-start;
+}
+.redMoves {
+    margin-top: 6px;
+}
+
+.redDot {
+    display: inline-block;
+    width: 1.1em;
+    min-width: 1.1em;
+    text-align: left;
+    font-size: 1.2em;
+    color: #ff3a5c;
+    font-weight: bold;
+    margin-right: 0.3em;
+    vertical-align: middle;
+}
+.redMoveText {
+    display: inline-block;
+    text-align: left;
+    font-size: 1em;
+    font-weight: 500;
+    color: #e8eefc;
+    vertical-align: middle;
 }
 
 .row small {
