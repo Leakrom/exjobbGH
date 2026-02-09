@@ -398,6 +398,42 @@
     for (const cell of map) {
       cell.depthNormalized = cell.land ? 0 : maxDist ? cell.depth / maxDist : 0;
     }
+
+    // Identifiera kobbar (små isolerade landöar med 1-2 hexagoner)
+    const visitedLand = new Set();
+    for (const cell of map) {
+      if (!cell.land) continue;
+      const key = keyOf(cell.q, cell.r);
+      if (visitedLand.has(key)) continue;
+
+      // Flood fill för att hitta alla anslutna landceller
+      const group = [];
+      const queue = [cell];
+      while (queue.length) {
+        const curr = queue.shift();
+        const currKey = keyOf(curr.q, curr.r);
+        if (visitedLand.has(currKey)) continue;
+        visitedLand.add(currKey);
+        group.push(curr);
+        for (const dir of HEX_DIRS) {
+          const nh = { q: curr.q + dir.q, r: curr.r + dir.r };
+          if (!inBounds(nh)) continue;
+          const nCell = getCell(nh.q, nh.r);
+          if (!nCell.land) continue;
+          const nKey = keyOf(nh.q, nh.r);
+          if (!visitedLand.has(nKey)) {
+            queue.push(nCell);
+          }
+        }
+      }
+
+      // Markera små grupper (1-2 hexagoner) som kobbar
+      if (group.length <= 2) {
+        for (const gCell of group) {
+          gCell.isSkerry = true;
+        }
+      }
+    }
   }
 
   function mulberry32(a) {
@@ -801,6 +837,7 @@
       waterMid: (root.getPropertyValue('--water-mid') || '#164e8a').trim(),
       waterDeep: (root.getPropertyValue('--water-deep') || '#103863').trim(),
       land: (root.getPropertyValue('--land') || '#2e5d2c').trim(),
+      skerry: (root.getPropertyValue('--skerry') || '#888888').trim(),
       unitBlue: (root.getPropertyValue('--unit-blue') || '#3a7aff').trim(),
       unitRed: (root.getPropertyValue('--unit-red') || '#ff3a5c').trim(),
       mine: (root.getPropertyValue('--mine') || '#ffd54a').trim(),
@@ -857,7 +894,7 @@
         const p = hexToPixel(q, r);
         const x = origin.x + p.x;
         const y = origin.y + p.y;
-        const fill = c.land ? LEGEND_COLORS.land : waterColor(c.depthNormalized);
+        const fill = c.isSkerry ? LEGEND_COLORS.skerry : c.land ? LEGEND_COLORS.land : waterColor(c.depthNormalized);
         drawHex(x, y, fill, 'rgba(255,255,255,.08)', 1);
 
         if (sel && sel.q === q && sel.r === r) {
