@@ -1,0 +1,2 @@
+Upptäckt: Räckvidd + slumpfaktor(1-10) > 0
+Identifiering: slumpfaktor(1-10) -5 > 0

@@ -1124,6 +1124,16 @@
         const fill = c.isSkerry ? LEGEND_COLORS.skerry : c.land ? LEGEND_COLORS.land : waterColor(c.depthNormalized);
         drawHex(x, y, fill, 'rgba(255,255,255,.08)', 1);
 
+        // Draw coordinate label
+        ctx.save();
+        ctx.fillStyle = '#fff';
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.globalAlpha = 0.85;
+        ctx.fillText(`${q},${r}`, x, y - HEX_SIZE * 0.45);
+        ctx.restore();
+
         if (sel && sel.q === q && sel.r === r) {
           drawHex(x, y, 'rgba(255,255,255,.08)', 'rgba(255,255,255,.45)', 2);
         }
@@ -1275,13 +1285,48 @@
           return;
         }
       }
+
+      // --- BEGIN: Mine trigger for passing over or touching any mine cell along the true line ---
+      // Use hex line interpolation (lerp + hexRound) to get all cells the line passes through
+      const start = { q: sel.q, r: sel.r };
+      const end = { q: h.q, r: h.r };
+      const dist = hexDistance(start, end);
+      let mineTriggered = false;
+      let stopQ = sel.q;
+      let stopR = sel.r;
+      console.log(`Blue unit starts at (${sel.q},${sel.r})`);
+      for (let i = 1; i <= dist; i++) {
+        const t = i / dist;
+        const qf = sel.q + (h.q - sel.q) * t;
+        const rf = sel.r + (h.r - sel.r) * t;
+        const hex = hexRound(qf, rf);
+        // Only check in-bounds
+        if (!inBounds(hex)) continue;
+        console.log(`Checking hex (${hex.q},${hex.r}) for mine, i=${i}, dist=${dist}`);
+        if (mines.has(keyOf(hex.q, hex.r))) {
+          console.log('Mine detected at', hex.q, hex.r, 'stopping movement');
+          stopQ = hex.q;
+          stopR = hex.r;
+          mineTriggered = true;
+          break;
+        }
+      }
+      if (mineTriggered) {
+        sel.q = stopQ;
+        sel.r = stopR;
+        actionsLeft -= 1;
+        applyMineTrigger(stopQ, stopR, sel.side);
+        console.log(`Blue unit ends at (${sel.q},${sel.r})`);
+        updateUI();
+        draw();
+        checkWin();
+        return;
+      }
+      // No mine encountered, move normally
       sel.q = h.q;
       sel.r = h.r;
       actionsLeft -= 1;
-      
-      if (mines.has(keyOf(h.q, h.r))) {
-        applyMineTrigger(h.q, h.r, sel.side);
-      }
+      console.log(`Blue unit ends at (${sel.q},${sel.r})`);
       updateUI();
       draw();
       checkWin();
