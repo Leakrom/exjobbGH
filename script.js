@@ -1282,7 +1282,7 @@ function applyMineTrigger(q, r, enteringSide) {
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
             ctx.strokeStyle = "red";
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
