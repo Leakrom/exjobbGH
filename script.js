@@ -372,6 +372,31 @@
     }
   }
 
+  function mineAt(q, r, enteringSide) {
+  // Mina från mines-Map
+  const mapMine = mines.get(keyOf(q, r));
+  if (mapMine && mapMine.side !== enteringSide) {
+    return { type: 'map' };
+  }
+
+  // Mina som är en enhet
+  const unitMine = units.find(
+    (u) =>
+      u.q === q &&
+      u.r === r &&
+      u.side !== enteringSide &&
+      (u.type === UnitType.UNCONTROL_MINE ||
+       u.type === UnitType.CONTROL_MINE)
+  );
+
+  if (unitMine) {
+    return { type: 'unit', unit: unitMine };
+  }
+
+  return null;
+}
+
+
   // =====================================================
   // Kartgenerering: skärgårdskänsla (öar + sund)
   // =====================================================
@@ -611,6 +636,9 @@
     return { q: 0, r: 0 };
   }
 
+
+  //////////////
+
   function resetGame() {
     nextId = 1;
     turn = 1;
@@ -715,24 +743,23 @@
     return res;
   }
 
-  function applyMineTrigger(q, r, enteringSide) {
-    const m = mines.get(keyOf(q, r));
-    if (!m) return false;
-    if (m.side === enteringSide) return false;
+function applyMineTrigger(q, r, enteringSide) {
+  const u = unitAt(q, r);
+  if (!u) return false;
 
-    mines.delete(keyOf(q, r));
-    const u = unitAt(q, r);
-    if (u) {
-      u.hp -= 2;
-      showToast('Mina!', `${u.type} tar 2 skada.`);
-      if (u.hp <= 0) {
-        showToast('Sänkt!', `${u.type} sjunker.`);
-        units = units.filter((x) => x.id !== u.id);
-        if (selectedId === u.id) selectedId = null;
-      }
-    }
-    return true;
+  u.hp -= 2;
+  showToast('💥 Mina!', `${u.type} tar 2 skada.`);
+
+  if (u.hp <= 0) {
+    showToast('Sänkt!', `${u.type} sjunker.`);
+    units = units.filter((x) => x.id !== u.id);
+    if (selectedId === u.id) selectedId = null;
   }
+
+  return true;
+}
+
+
 
   function checkWin() {
     const blue = units.some((u) => u.side === Side.BLUE);
@@ -1303,13 +1330,24 @@
         // Only check in-bounds
         if (!inBounds(hex)) continue;
         console.log(`Checking hex (${hex.q},${hex.r}) for mine, i=${i}, dist=${dist}`);
-        if (mines.has(keyOf(hex.q, hex.r))) {
-          console.log('Mine detected at', hex.q, hex.r, 'stopping movement');
+        const foundMine = mineAt(hex.q, hex.r, sel.side);
+        if (foundMine) {
           stopQ = hex.q;
           stopR = hex.r;
           mineTriggered = true;
+
+          // Ta bort minan direkt
+          if (foundMine.type === 'map') {
+            mines.delete(keyOf(hex.q, hex.r));
+          }
+
+          if (foundMine.type === 'unit') {
+            units = units.filter((u) => u.id !== foundMine.unit.id);
+          }
+
           break;
         }
+
       }
       if (mineTriggered) {
         sel.q = stopQ;
