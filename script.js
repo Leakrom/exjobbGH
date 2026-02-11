@@ -194,7 +194,8 @@
   // Spelstatus
   // =====================================================
   let map = []; // [{q, r, land: boolean, depthNormalized: 0..1}]
-  let mines = new Map(); // key -> {side}
+  let mines = new Map();      // faktiska minor
+  let minefields = [];        // visuella områden
   let units = [];
 
   let turn = 1;
@@ -299,6 +300,60 @@
   function keyOf(q, r) {
     return `${q},${r}`;
   }
+
+  function placeMine(q, r, side) {
+    mines.set(keyOf(q, r), { side });
+    createMinefieldArea(q, r);
+  }
+
+  function createMinefieldArea(centerQ, centerR) {
+    const targetSize = 12;
+    const start = { q: centerQ, r: centerR };
+
+    const cells = new Set();
+    const frontier = [start];
+
+    cells.add(keyOf(start.q, start.r));
+
+    while (cells.size < targetSize && frontier.length > 0) {
+      const idx = Math.floor(Math.random() * frontier.length);
+      const current = frontier[idx];
+
+      const dirs = [...HEX_DIRS].sort(() => Math.random() - 0.5);
+
+      for (const dir of dirs) {
+        const next = { q: current.q + dir.q, r: current.r + dir.r };
+        const k = keyOf(next.q, next.r);
+
+        if (!inBounds(next)) continue;
+        if (!isWater(next.q, next.r)) continue;
+        if (cells.has(k)) continue;
+
+        cells.add(k);
+        frontier.push(next);
+
+        if (cells.size >= targetSize) break;
+      }
+    }
+
+    minefields.push({
+      center: { q: centerQ, r: centerR },
+      cells
+    });
+  }
+
+/*   // Ta bort mina från mines-Map och dess visuella minefield
+  function removeMineAndField(q, r) {
+    const key = keyOf(q, r);
+
+    // Ta bort från mines
+    mines.delete(key);
+
+    // Ta bort matchande minfält
+    minefields = minefields.filter(
+      field => !(field.center.q === q && field.center.r === r)
+    );
+  } */
 
   function getCell(q, r) {
     return map[r * GRID_W + q];
@@ -590,6 +645,14 @@
       unit.identified = false;
     }
     units.push(unit);
+
+    // Om enheten är en mina → skapa minfält
+    if (
+      type === UnitType.UNCONTROL_MINE ||
+      type === UnitType.CONTROL_MINE
+    ) {
+      createMinefieldArea(q, r);
+    }
   }
 
   // Find a suitable water hex for spawning a unit for the given side.
@@ -743,21 +806,28 @@
     return res;
   }
 
+
+
 function applyMineTrigger(q, r, enteringSide) {
   const u = unitAt(q, r);
   if (!u) return false;
 
-  u.hp -= 2;
-  showToast('💥 Mina!', `${u.type} tar 2 skada.`);
+  showToast('💥 Mina!', `${u.type} träffade en mina och sänks!`);
 
-  if (u.hp <= 0) {
-    showToast('Sänkt!', `${u.type} sjunker.`);
-    units = units.filter((x) => x.id !== u.id);
-    if (selectedId === u.id) selectedId = null;
+  // Ta bort minan och minfältet från mines-Map och minefields-arrayen
+  //removeMineAndField(q, r);
+  
+  // Ta bort minan och blå enheten från units-arrayen
+  units = units.filter((x) => x.id !== u.id);
+  
+
+  if (selectedId === u.id) {
+    selectedId = null;
   }
 
   return true;
 }
+
 
 
 
@@ -936,7 +1006,10 @@ function applyMineTrigger(q, r, enteringSide) {
   btnHelp.addEventListener('click', () => {
     showToast(
       'Hjälp',
-      'Välj en enhet, flytta/attackera/minera. Prototyp: inga sensorer, ingen siktlinje.'
+      'Välj en enhet, flytta/attackera/minera.',
+      'Minor sänker enhet direkt vid utlösning.',
+      'Minor utlöses när en enhet rör sig över dem.'
+
     );
   });
 
@@ -1187,6 +1260,35 @@ function applyMineTrigger(q, r, enteringSide) {
       }
     }
 
+    // ===== RITA MINFÄLT-BORDER =====
+    for (const field of minefields) {
+      for (const key of field.cells) {
+        const [q, r] = key.split(',').map(Number);
+
+        const p = hexToPixel(q, r);
+        const x = origin.x + p.x;
+        const y = origin.y + p.y;
+
+        for (let i = 0; i < HEX_DIRS.length; i++) {
+          const dir = HEX_DIRS[i];
+          const neighborKey = keyOf(q + dir.q, r + dir.r);
+
+          if (!field.cells.has(neighborKey)) {
+            const pts = hexPolygon(x, y);
+            const a = pts[i];
+            const b = pts[(i + 1) % 6];
+
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
     // Rita enheter
     for (const u of units) {
       // Hide red units unless detected (or if we're the red player)
@@ -1381,7 +1483,7 @@ function applyMineTrigger(q, r, enteringSide) {
         showToast('Ogiltig minering', 'Du kan bara lägga mina på intilliggande vattenhex.');
         return;
       }
-      mines.set(keyOf(h.q, h.r), { side: sel.side });
+      placeMine(h.q, h.r, sel.side);
       sel.minesLeft -= 1;
       actionsLeft -= 1;
       mode = 'order';

@@ -1,2 +1,12 @@
 Upptäckt: Räckvidd + slumpfaktor(1-10) > 0
 Identifiering: slumpfaktor(1-10) -5 > 0
+
+
+Kvar att fixa:
+Minfält ser ut som hej kom och hjälp mig.
+//Jag bygger ett spel om sjöstrid med två spelare där röd spelas av datorn och blå av en människa. 
+//Det ska vara synligt vilket område som är minerat genom att skapa en röd boarder runt en område av hexagoner. 
+//Området ska bestå av 12 hexagoner och dras slumpmässigt runt omkring en mina. Minan ska alltså inte alltid befinna sig i mitten av området utan kan också befinna sig i kanten av området.
+
+
+Vill inte att minfältet tas bort när minan sprängts för att man inte ska veta hur många minor det ligger ute.
