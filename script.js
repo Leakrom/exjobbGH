@@ -833,7 +833,11 @@ function applyMineTrigger(q, r, enteringSide) {
 
   function checkWin() {
     const blue = units.some((u) => u.side === Side.BLUE);
-    const red = units.some((u) => u.side === Side.RED);
+    const red = units.some((u) => 
+      u.side === Side.RED && 
+      u.type !== UnitType.UNCONTROL_MINE && 
+      u.type !== UnitType.CONTROL_MINE
+    );
     if (!blue || !red) {
       const winner = blue ? Side.BLUE : Side.RED;
       showToast(
