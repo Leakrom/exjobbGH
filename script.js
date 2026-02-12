@@ -413,7 +413,9 @@
     // Sensor toggle only for blue units with sensors
     btnToggleSensor.disabled = !isOwn || !SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type;
     if (!btnToggleSensor.disabled) {
-      btnToggleSensor.textContent = sel.sensorActive ? 'Växla sensor (Aktiv)' : 'Växla sensor (Passiv)';
+      btnToggleSensor.innerHTML = sel.sensorActive
+        ? 'Växla sensorläge<br>(<span class="sensor-active">Aktiv</span>)'
+        : 'Växla sensorläge<br>(Passiv)';
     }
 
     if (mode === 'order') {
@@ -1315,7 +1317,7 @@ function applyMineTrigger(q, r, enteringSide) {
       }
       ctx.fill();
       ctx.globalAlpha = 1.0;
-      ctx.strokeStyle = 'rgba(255,255,255,.35)';
+      ctx.strokeStyle = u.sensorActive ? 'orange' : 'rgba(255,255,255,.35)';
       ctx.lineWidth = 2;
       ctx.stroke();
 
