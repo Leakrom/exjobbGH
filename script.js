@@ -592,6 +592,7 @@
   let redSpawnIndex = 0;
   let loadedMapIndex = -1; // Track which map is currently loaded
 
+  // Kartorna genereras on-demand när de behövs.
   function ensureMapLoaded(mapIndex) {
     console.log('    [ensureMapLoaded] Called with mapIndex:', mapIndex);
     console.log('    [ensureMapLoaded] Current loadedMapIndex:', loadedMapIndex);
@@ -1062,8 +1063,8 @@ function applyMineTrigger(q, r, enteringSide) {
       showToast(
         'Hjälp',
         'Välj en enhet, flytta/attackera/minera.',
-        'Minor sänker enhet direkt vid utlösning.',
-        'Minor utlöses när en enhet rör sig över dem.'
+        'Minor utlöses när en enhet rör sig över dem.',
+        'Minor sänker enhet direkt vid utlösning.'
 
       );
     });

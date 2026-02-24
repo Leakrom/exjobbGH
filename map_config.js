@@ -329,8 +329,9 @@ function generateMapWithSeed(seed, GRID_W, GRID_H) {
 
 // Generate all map cells with their seeds
 // This will be called from script.js after GRID_W/GRID_H are available
-function initializeMapConfigs(GRID_W, GRID_H) {
+// initializeMapConfigs() – Genererar alla 4 kartorna på en gång vid start
+/*function initializeMapConfigs(GRID_W, GRID_H) {
   for (let i = 0; i < MAP_CONFIGS.length; i++) {
     MAP_CONFIGS[i].cells = generateMapWithSeed(MAP_CONFIGS[i].seed, GRID_W, GRID_H);
   }
-}
+}*/
