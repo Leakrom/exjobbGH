@@ -11,9 +11,9 @@ Minfält ser ut som hej kom och hjälp mig. Fixa om nödvändigt, annars är det
 //Området ska bestå av 12 hexagoner och dras slumpmässigt runt omkring en mina. Minan ska alltså inte alltid befinna sig i mitten av området utan kan också befinna sig i kanten av området.
 
 Funderingar:
-Ska sensorväxling vara ett drag?
+Ska sensorväxling vara ett drag? Nej.
 Röd ska ha lättare att upptäcka blå när blå är i aktivt sensorläge. Fixa eller skrota? Istället göra så att blå får gå kortare i aktivt sensorläge för prototypen?
 
 
-Anledningar:
-Vill inte att minfältet tas bort när minan sprängts för att man inte ska veta hur många minor det ligger ute.
+Motiveringar:
+Vill inte att minfältet tas bort när minan sprängts för att man inte ska veta hur många minor som ligger ute.

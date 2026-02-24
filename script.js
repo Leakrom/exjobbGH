@@ -1297,8 +1297,13 @@ function applyMineTrigger(q, r, enteringSide) {
 
     // Rita enheter
     for (const u of units) {
-      // Hide red units unless detected (or if we're the red player)
+     /* // Hide red units unless detected (or if we're the red player)
       if (u.side === Side.RED && !u.detected && activeSide !== Side.RED) {
+        continue; // Skip rendering
+      }*/
+
+      // Hide red units unless detected
+      if (u.side === Side.RED && !u.detected) {
         continue; // Skip rendering
       }
 
