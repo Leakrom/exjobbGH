@@ -622,21 +622,49 @@
 
   function findStartHex(side) {
     const mapConfig = MAP_CONFIGS[selectedMapIndex];
+
+    function findNearestWater(start) {
+      if (!inBounds(start)) return null;
+      if (isWater(start.q, start.r)) return start;
+
+      const visited = new Set([keyOf(start.q, start.r)]);
+      const queue = [start];
+
+      while (queue.length) {
+        const curr = queue.shift();
+        for (const dir of HEX_DIRS) {
+          const next = { q: curr.q + dir.q, r: curr.r + dir.r };
+          if (!inBounds(next)) continue;
+          const k = keyOf(next.q, next.r);
+          if (visited.has(k)) continue;
+          if (isWater(next.q, next.r)) return next;
+          visited.add(k);
+          queue.push(next);
+        }
+      }
+
+      return null;
+    }
     
     if (side === Side.BLUE) {
       const positions = mapConfig.blueStartPositions;
       if (blueSpawnIndex < positions.length) {
-        return positions[blueSpawnIndex++];
+        const pos = positions[blueSpawnIndex++];
+        const waterPos = findNearestWater(pos); //onödigt, hårdkoda i map_configs istället
+        if (waterPos) return waterPos;
       }
     } else {
       const positions = mapConfig.redStartPositions;
       if (redSpawnIndex < positions.length) {
-        return positions[redSpawnIndex++];
+        const pos = positions[redSpawnIndex++];
+        const waterPos = findNearestWater(pos); //onödigt, hårdkoda i map_configs istället
+        if (waterPos) return waterPos;
       }
     }
     
     // Fallback if we run out of predefined positions
-    return { q: side === Side.BLUE ? 5 : 14, r: 10 };
+    return findNearestWater({ q: side === Side.BLUE ? 5 : 14, r: 10 }) ||
+      { q: side === Side.BLUE ? 5 : 14, r: 10 };
   }
 
 
@@ -1363,10 +1391,10 @@ function applyMineTrigger(q, r, enteringSide) {
         continue; // Skip rendering
       }*/
 
-      // Hide red units unless detected
+      /*// Hide red units unless detected
       if (u.side === Side.RED && !u.detected) {
         continue; // Skip rendering
-      }
+      }*/
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;

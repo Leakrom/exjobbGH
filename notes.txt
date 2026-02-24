@@ -1,7 +1,11 @@
 Upptäckt: Räckvidd + slumpfaktor(1-10) > 0
 Identifiering: slumpfaktor(1-10) -5 > 0
 
-Blå vinner om alla röda enheter förutom minorna är sänkta.
+Just nu: Blå vinner om alla röda enheter förutom minorna är sänkta.
+
+
+
+
 
 
 Kvar att fixa:
@@ -10,10 +14,27 @@ Minfält ser ut som hej kom och hjälp mig. Fixa om nödvändigt, annars är det
 //Det ska vara synligt vilket område som är minerat genom att skapa en röd boarder runt en område av hexagoner. 
 //Området ska bestå av 12 hexagoner och dras slumpmässigt runt omkring en mina. Minan ska alltså inte alltid befinna sig i mitten av området utan kan också befinna sig i kanten av området.
 
+Minfältet ändras när man laddar samma karta igen, måste vara fixerat sen när det är bestämt var
+alla minor ska ligga.
+
+
+
+
+
+
+
 Funderingar:
 Ska sensorväxling vara ett drag? Nej.
-Röd ska ha lättare att upptäcka blå när blå är i aktivt sensorläge. Fixa eller skrota? Istället göra så att blå får gå kortare i aktivt sensorläge för prototypen?
+
+Röd ska ha lättare att upptäcka blå när blå är i aktivt sensorläge. Fixa eller skrota? 
+Istället göra så att blå får gå kortare i aktivt sensorläge för prototypen?
+
+
+
+
+
 
 
 Motiveringar:
-Vill inte att minfältet tas bort när minan sprängts för att man inte ska veta hur många minor som ligger ute.
+Vill inte att minfältet tas bort när minan sprängts för att man inte ska 
+veta hur många minor som ligger ute.

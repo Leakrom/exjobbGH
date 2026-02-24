@@ -68,7 +68,7 @@ const MAP_CONFIGS = [
     redStartPositions: [
       { q: 17, r: 2 }, { q: 18, r: 4 }, { q: 16, r: 6 },
       { q: 17, r: 8 }, { q: 15, r: 7 }, { q: 18, r: 11 },
-      { q: 16, r: 13 }, { q: 17, r: 15 }, { q: 15, r: 16 },
+      { q: 18, r: 16}, { q: 17, r: 15 }, { q: 15, r: 16 },
       { q: 18, r: 18 }, { q: 16, r: 10 }
     ]
   }
@@ -162,6 +162,9 @@ function generateMapWithSeed(seed, GRID_W, GRID_H) {
   console.log('        [generateMapWithSeed] Cells created:', map.length);
 
   // Safety zones must be water
+  // Utan detta kunde kartgenereringen slumpmässigt skapa öar på dessa 
+  // platser, vilket skulle stoppa enhetsspawningen. Denna kod reserverar 
+  // dessa platser för enheter att starta i.
   console.log('        [generateMapWithSeed] Setting safety zones...');
   const safe = [
     { q: 1, r: 2 },
@@ -290,14 +293,35 @@ function generateMapWithSeed(seed, GRID_W, GRID_H) {
       }
     }
 
-    // Mark small groups (1-2 hexagons) as skerries
+    // Mark small groups (1-2 hexagons) as skerries on land
     if (group.length <= 2) {
       for (const gCell of group) {
         gCell.isSkerry = true;
       }
     }
   }
-  console.log('        [generateMapWithSeed] Skerries identified');
+
+  // Count land skerries and add water skerries to ensure 4-6 total
+  const landSkeryCount = map.filter(c => c.isSkerry && c.land).length;
+  const targetSkeryCount = 5; // Target 5 skerry groups
+  const waterSkeryNeeded = Math.max(2, targetSkeryCount - (landSkeryCount > 0 ? 1 : 0)); // Aim for 4-6 total
+  
+  // Add skerries to shallow/medium water (baseDistance 2-3)
+  let waterSkeryAdded = 0;
+  const skeryRand = mulberry32(seed | 0);
+  
+  for (const cell of map) {
+    if (waterSkeryAdded >= waterSkeryNeeded) break;
+    if (cell.land || cell.isSkerry) continue;
+    if (cell.baseDistance > 1 && cell.baseDistance <= 3) {
+      if (skeryRand() < 0.2) { // 20% chance per water cell
+        cell.isSkerry = true;
+        waterSkeryAdded++;
+      }
+    }
+  }
+
+  console.log('        [generateMapWithSeed] Skerries identified: ' + landSkeryCount + ' land, ' + waterSkeryAdded + ' water');
   console.log('        [generateMapWithSeed] COMPLETE - returning', map.length, 'cells');
 
   return map;
