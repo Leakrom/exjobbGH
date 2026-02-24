@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Load Test</title>
+  <style>
+    body { font-family: monospace; background: #222; color: #0f0; padding: 20px; }
+    .log { margin: 5px 0; padding: 5px; background: #111; border-left: 3px solid #0f0; }
+    .error { border-left-color: #f00; color: #f00; }
+    button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Script Load Test</h1>
+  <div id="logs"></div>
+  <button onclick="openMain()">Open Main Game</button>
+  
+  <script>
+    console.log = function(msg) {
+      const div = document.createElement('div');
+      div.className = 'log';
+      div.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+      document.getElementById('logs').appendChild(div);
+    };
+    
+    console.error = function(msg) {
+      const div = document.createElement('div');
+      div.className = 'log error';
+      div.textContent = '[ERROR] ' + msg;
+      document.getElementById('logs').appendChild(div);
+    };
+    
+    window.onerror = function(msg, url, line, col, err) {
+      console.error('ERROR: ' + msg + ' at ' + url + ':' + line + ':' + col);
+      return true;
+    };
+    
+    function openMain() {
+      window.location.href = 'marint_hex_kriegsspel_prototyp.html';
+    }
+    
+    console.log('===== Load Test Page Ready =====');
+  </script>
+  
+  <script>
+    console.log('Starting to load map_config.js...');
+  </script>
+  <script src="map_config.js"></script>
+  <script>
+    console.log('map_config.js loaded successfully');
+    console.log('MAP_CONFIGS: ' + (typeof MAP_CONFIGS !== 'undefined' ? 'defined' : 'undefined'));
+  </script>
+  
+  <script>
+    console.log('Starting to load script.js...');
+  </script>
+  <script src="script.js"></script>
+  <script>
+    console.log('script.js loaded successfully');
+    setTimeout(() => {
+      console.log('All scripts loaded. Ready to play!');
+    }, 100);
+  </script>
+</body>
+</html>

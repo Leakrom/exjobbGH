@@ -1,13 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Skärgårdskrig – turbaserat hexspel (prototyp)</title>
   <link rel="stylesheet" href="styles.css">
-
+  <style>
+    .debug-console {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 400px;
+      height: 200px;
+      background: rgba(0,0,0,0.9);
+      color: #0f0;
+      font-family: monospace;
+      font-size: 11px;
+      overflow: auto;
+      padding: 10px;
+      z-index: 10000;
+      border: 1px solid #0f0;
+    }
+  </style>
 </head>
 <body>
+  <div class="debug-console" id="debugConsole"></div>
+  
   <header>
     <h1>Skärgårdskrig</h1>
     <span class="pill" id="turnPill">Tur 1 • Blå</span>
@@ -20,7 +38,7 @@
       <canvas id="c"></canvas>
       <div class="toast" id="toast" style="display:none"></div>
     </div>
-    
+
     <div id="redMovesWrap" class="panel">
       <h2>Röda drag</h2>
       <div class="redMoves">
@@ -80,8 +98,8 @@
           <div class="legItem"><span class="swatch" style="background:var(--water-shallow)"></span>Grunt vatten</div>
           <div class="legItem"><span class="swatch" style="background:var(--land)"></span>Land med skog</div>
           <div class="legItem"><span class="swatch" style="background:var(--water-mid)"></span>Medeldjupt vatten</div>
-          <div class="legItem"><span class="swatch" style="background:var(--skerry)"></span>Kobbe</div>   
-          <div class="legItem"><span class="swatch" style="background:var(--water-deep)"></span>Djupt vatten</div>                 
+          <div class="legItem"><span class="swatch" style="background:var(--skerry)"></span>Kobbe</div>
+          <div class="legItem"><span class="swatch" style="background:var(--water-deep)"></span>Djupt vatten</div>
           <div class="legItem"><span class="swatch" style="background:var(--unit-blue)"></span>Blå enhet</div>
           <div class="legItem"><span class="swatch" style="background:var(--range)"></span>Räckvidd</div>
           <div class="legItem"><span class="swatch" style="background:var(--unit-red)"></span>Röd enhet</div>
@@ -89,7 +107,6 @@
           <div class="legItem"><span class="swatch" style="background:transparent; border:2px solid rgba(255,72,72,.85)"></span>Minfält</div>
         </div>
       </div>
-
 
       <div class="panel">
         <h2>Kontroller</h2>
@@ -104,7 +121,42 @@
       </div>
     </aside>
   </main>
+
+  <script>
+    // Debug console setup
+    const debugDiv = document.getElementById('debugConsole');
+    const originalLog = console.log;
+    const originalError = console.error;
+    
+    function addDebug(msg, isError) {
+      const line = document.createElement('div');
+      line.style.color = isError ? '#f00' : '#0f0';
+      line.textContent = msg;
+      debugDiv.appendChild(line);
+      debugDiv.scrollTop = debugDiv.scrollHeight;
+      if (isError) {
+        originalError.apply(console, [msg]);
+      } else {
+        originalLog.apply(console, [msg]);
+      }
+    }
+    
+    window.onerror = function(msg, url, line, col, err) {
+      addDebug('[ERROR] ' + msg + ' at ' + url + ':' + line, true);
+      return true;
+    };
+    
+    addDebug('Page loaded, debugging console active');
+  </script>
+
   <script src="map_config.js"></script>
-  <script src="script.js"></script> 
+  <script>
+    addDebug('map_config.js loaded successfully');
+  </script>
+
+  <script src="script.js"></script>
+  <script>
+    addDebug('script.js loaded successfully - game ready!');
+  </script>
 </body>
 </html>

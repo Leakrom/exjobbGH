@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Script Loading Test</title>
+  <style>
+    body { font-family: monospace; background: #1a1a1a; color: #0f0; padding: 20px; }
+    .log { background: #222; padding: 10px; margin: 5px 0; border-left: 3px solid #0f0; }
+    .error { border-left-color: #f00; color: #f00; }
+    .warn { border-left-color: #ff0; color: #ff0; }
+    .ok { border-left-color: #0f0; color: #0f0; }
+    button { padding: 8px 16px; margin: 5px; background: #333; color: #0f0; cursor: pointer; border: 1px solid #0f0; }
+    button:hover { background: #0f0; color: #000; }
+  </style>
+</head>
+<body>
+  <h1>Script Loading & Initialization Test</h1>
+  
+  <button onclick="testOpen()">Open Main Game</button>
+  <button onclick="window.location.reload()">Reload Test</button>
+  <button onclick="document.getElementById('logs').innerHTML = ''">Clear Logs</button>
+  
+  <div id="logs"></div>
+  
+  <script>
+    function addLog(msg, type = 'normal') {
+      const logsDiv = document.getElementById('logs');
+      const logEl = document.createElement('div');
+      logEl.className = 'log ' + (type === 'error' ? 'error' : type === 'warn' ? 'warn' : type === 'ok' ? 'ok' : '');
+      logEl.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+      logsDiv.appendChild(logEl);
+      logsDiv.scrollTop = logsDiv.scrollHeight;
+      console.log(msg);
+    }
+    
+    function testOpen() {
+      addLog('Opening main game...', 'ok');
+      window.location.href = 'marint_hex_kriegsspel_prototyp.html';
+    }
+    
+    // Global error handler
+    window.addEventListener('error', (e) => {
+      addLog(`ERROR: ${e.message} at ${e.filename}:${e.lineno}:${e.colno}`, 'error');
+    });
+    
+    // Unhandled promise rejection handler
+    window.addEventListener('unhandledrejection', (e) => {
+      addLog(`UNHANDLED PROMISE REJECTION: ${e.reason}`, 'error');
+    });
+    
+    addLog('=== Test Page Loaded ===', 'ok');
+    addLog('Starting to load scripts...', 'normal');
+  </script>
+  
+  <script src="map_config.js" onload="addLog('✓ map_config.js loaded', 'ok')" onerror="addLog('✗ map_config.js FAILED', 'error')"></script>
+  <script src="script.js" onload="addLog('✓ script.js loaded', 'ok')" onerror="addLog('✗ script.js FAILED', 'error')"></script>
+  
+  <script>
+    setTimeout(() => {
+      addLog('Checking globals after script load...', 'normal');
+      
+      const checks = {
+        'MAP_CONFIGS': typeof MAP_CONFIGS,
+        'initializeMapConfigs': typeof initializeMapConfigs && 'function',
+        'generateMapWithSeed': typeof generateMapWithSeed && 'function',
+        'GRID_W': typeof GRID_W,
+        'GRID_H': typeof GRID_H,
+        'canvas #c': document.getElementById('c') ? 'found' : 'NOT FOUND',
+        'stageWrap #stageWrap': document.getElementById('stageWrap') ? 'found' : 'NOT FOUND',
+        'btnMap1 #btnMap1': document.getElementById('btnMap1') ? 'found' : 'NOT FOUND'
+      };
+      
+      for (const [name, value] of Object.entries(checks)) {
+        const type = value === 'found' || value === 'function' ? 'ok' : value === 'number' || value === 'object' ? 'ok' : 'error';
+        addLog(`${name}: ${value}`, type === 'error' ? 'error' : 'ok');
+      }
+      
+      addLog('=== Ready to test ===', 'ok');
+    }, 500);
+  </script>
+</body>
+</html>

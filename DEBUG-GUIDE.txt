@@ -1,0 +1,50 @@
+DEBUGGING GUIDE FOR PAGE HANG ISSUE
+====================================
+
+If you're getting "page isn't responding" when opening the game, do this:
+
+1. FIRST: Open simple-test.html instead of the main game
+   - This will show you detailed logs of what's happening during script load
+   - You'll see "Step 1", "Step 2", etc. in the console at the top of the page
+   - This helps identify where the hang is occurring
+
+2. CHECK THE BROWSER CONSOLE (F12):
+   - Open the browser's Developer Tools
+   - Go to the Console tab  
+   - Look for any error messages or red text
+   - The console will show detailed logging as scripts load
+
+3. WHAT THE STEPS MEAN:
+   - Step 1: Defining game constants  
+   - Step 2: Game constants defined
+   - Step 3: Getting canvas element
+   - Step 4: Getting canvas 2D context
+   - Step 5: Getting stage wrapper
+   - Step 6: DOM elements acquired successfully
+   - Step 7: Setting up button event listeners
+   - Step 8: Attaching canvas click listener
+   - Step 9: GAME INITIALIZATION COMPLETE
+
+If the console shows an error or stops at one of these steps, that's where the problem is.
+
+4. FILES AVAILABLE TO TEST:
+   - simple-test.html  ← USE THIS FIRST
+   - load-test.html
+   - test-load.html
+   - You can then click "Go to Main Game" button to try the actual game
+
+5. WHAT'S BEEN FIXED:
+   ✓ Removed duplicate btnMap1-4 variable declarations
+   ✓ Added null checks for all DOM elements before use
+   ✓ Added null checks for button event listeners
+   ✓ Added draw() guard for empty map
+   ✓ Wrapped entire script in try-catch with detailed error logging
+   ✓ Added detailed console logging at each initialization step
+   ✓ Fixed button event listener indentation and syntax
+   ✓ Fixed resetGame() function syntax error
+
+6. IF YOU STILL GET A HANG:
+   Let me know:
+   - What's the last "Step X" message you see in the console?
+   - What error message (if any) appears?
+   - Can you paste the browser console output?

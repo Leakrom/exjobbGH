@@ -1,24 +1,36 @@
 (() => {
-  // =====================================================
-  // KONFIGURATION
-  // =====================================================
-  const GRID_W = 20;
-  const GRID_H = 20;
-  const HEX_SIZE = 34;
-  const ACTIONS_PER_TURN = 3;
+  try {
+    console.log('=== Script.js loading START ===');
+    
+    // Add global error handler for debugging
+    window.addEventListener('error', (e) => {
+      console.error('Global error:', e.error);
+    });
+    
+    console.log('Step 1: Defining game constants...');
+    
+    // =====================================================
+    // KONFIGURATION
+    // =====================================================
+    const GRID_W = 20;
+    const GRID_H = 20;
+    const HEX_SIZE = 34;
+    const ACTIONS_PER_TURN = 3;
+    
+    console.log('Step 2: Game constants defined');
 
-  const UnitType = {
-    FRIGATE: 'Fregatt',
-    STEALTH_CORVETTE: 'Stealth-korvett',
-    SUBMARINE: 'Ubåt',
-    UAV: 'UAV',
-    USV: 'USV',
-    UUV: 'UUV',
-    SUBMARINE_HUNTER: 'Ubåtsjakthelikopter',
-    CONVENTIONAL_CORVETTE: 'Konventionell korvett',
-    UNCONTROL_MINE: 'Okontrollerbar mina',
-    CONTROL_MINE: 'Kontrollerbar mina',
-  };
+    const UnitType = {
+      FRIGATE: 'Fregatt',
+      STEALTH_CORVETTE: 'Stealth-korvett',
+      SUBMARINE: 'Ubåt',
+      UAV: 'UAV',
+      USV: 'USV',
+      UUV: 'UUV',
+      SUBMARINE_HUNTER: 'Ubåtsjakthelikopter',
+      CONVENTIONAL_CORVETTE: 'Konventionell korvett',
+      UNCONTROL_MINE: 'Okontrollerbar mina',
+      CONTROL_MINE: 'Kontrollerbar mina',
+    };
 
   // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay)
   const UNIT_STATS = {
@@ -63,12 +75,43 @@
   // Max depths: 0 = surface, 1-3 = various depths
   const MAX_DEPTH = 3;
 
+  // Current selected map
+  let selectedMapIndex = 0;
+
   // =====================================================
   // Canvas och rendering setup
   // =====================================================
+  console.log('Step 3: Getting canvas element...');
   const canvas = document.getElementById('c');
-  const ctx = canvas.getContext('2d');
+  if (!canvas) {
+    console.error('FATAL: Canvas element "c" not found - game cannot start');
+    const err = new Error('Canvas not found');
+    console.error(err);
+    throw err;
+  }
+  
+  console.log('Step 4: Getting canvas 2D context...');
+  let ctx;
+  try {
+    ctx = canvas.getContext('2d');
+  } catch (getCtxErr) {
+    console.error('FATAL: Cannot get 2D context', getCtxErr);
+    throw new Error('Cannot initialize canvas context');
+  }
+  
+  if (!ctx) {
+    console.error('FATAL: Canvas context is null');
+    throw new Error('Canvas context is null');
+  }
+  
+  console.log('Step 5: Getting stage wrapper...');
   const stageWrap = document.getElementById('stageWrap');
+  if (!stageWrap) {
+    console.error('FATAL: Stage wrapper element "stageWrap" not found');
+    throw new Error('stageWrap not found');
+  }
+  
+  console.log('Step 6: DOM elements acquired successfully');
 
   function resize() {
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
@@ -232,6 +275,12 @@
   const btnDepthDown = document.getElementById('btnDepthDown');
   const btnToggleSensor = document.getElementById('btnToggleSensor');
 
+  // Map selection buttons
+  const btnMap1 = document.getElementById('btnMap1');
+  const btnMap2 = document.getElementById('btnMap2');
+  const btnMap3 = document.getElementById('btnMap3');
+  const btnMap4 = document.getElementById('btnMap4');
+
   const elRedMove1 = document.getElementById('redMove1');
   const elRedMove2 = document.getElementById('redMove2');
   const elRedMove3 = document.getElementById('redMove3');
@@ -240,6 +289,7 @@
   let toastTimer = null;
 
   function showToast(title, msg) {
+    if (!toast) return; // Toast element not found, skip
     toast.style.display = 'block';
     toast.innerHTML = `<b>${escapeHtml(title)}</b><small>${escapeHtml(msg)}</small>`;
     clearTimeout(toastTimer);
@@ -317,7 +367,8 @@
 
     while (cells.size < targetSize && frontier.length > 0) {
       const idx = Math.floor(Math.random() * frontier.length);
-      const current = frontier[idx];
+      const current = frontier.splice(idx, 1)[0];
+      let added = false;
 
       const dirs = [...HEX_DIRS].sort(() => Math.random() - 0.5);
 
@@ -331,8 +382,13 @@
 
         cells.add(k);
         frontier.push(next);
+        added = true;
 
         if (cells.size >= targetSize) break;
+      }
+
+      if (added) {
+        frontier.push(current);
       }
     }
 
@@ -368,6 +424,15 @@
   }
 
   function updateUI() {
+    if (
+      !elTurnPill || !elPhasePill || !elActivePlayer || !elActionsLeft ||
+      !elSelType || !elSelSide || !elSelHP || !elSelMove || !elSelRange ||
+      !elSelDepth || !elSelMines || !btnAttack || !btnMine || !btnDepthUp ||
+      !btnDepthDown || !btnToggleSensor
+    ) {
+      return;
+    }
+
     elTurnPill.textContent = `Tur ${turn} • ${activeSide}`;
     elPhasePill.textContent = `Fas: ${
       mode === 'order' ? 'Order' : mode === 'attack' ? 'Attack' : 'Minering'
@@ -455,162 +520,26 @@
 
 
   // =====================================================
-  // Kartgenerering: skärgårdskänsla (öar + sund)
+  // Kartgenerering: ladda från fördefinierad konfiguration
   // =====================================================
-  function generateMap(seed = Math.random() * 1e9) {
-    const rand = mulberry32(seed | 0);
-
+  function generateMap() {
+    // Load the selected map configuration
+    const mapConfig = MAP_CONFIGS[selectedMapIndex];
     map = [];
     mines = new Map();
-
-    // Generera öar
-    const islands = [];
-    const islandCount = 10 + Math.floor(rand() * 6);
-    for (let i = 0; i < islandCount; i++) {
-      islands.push({
-        q: Math.floor(rand() * GRID_W),
-        r: Math.floor(rand() * GRID_H),
-        radius: 1.2 + rand() * 2.8,
+    minefields = [];
+    
+    // Copy cells from the map configuration
+    for (const cell of mapConfig.cells) {
+      map.push({
+        q: cell.q,
+        r: cell.r,
+        land: cell.land,
+        isSkerry: cell.isSkerry,
+        depth: cell.depth,
+        depthNormalized: cell.depthNormalized
       });
     }
-
-    // Skapa cellerna baserat på öarna
-    for (let r = 0; r < GRID_H; r++) {
-      for (let q = 0; q < GRID_W; q++) {
-        let score = -0.2;
-        for (const isl of islands) {
-          const d = hexDistance({ q, r }, isl);
-          score += Math.max(0, isl.radius - d) * 0.55;
-        }
-        score += (rand() - 0.5) * 0.25;
-        const edge = Math.min(q, r, GRID_W - 1 - q, GRID_H - 1 - r);
-        score += edge < 2 ? 0.25 : 0;
-        const land = score > 0.65;
-        map.push({ q, r, land, depth: 0, depthNormalized: 0 });
-      }
-    }
-
-    // Säkerställ startzoner är vatten
-    const safe = [
-      { q: 1, r: 2 },
-      { q: 1, r: 5 },
-      { q: 2, r: 8 },
-      { q: 3, r: 6 },
-      { q: 2, r: 3 },
-      { q: GRID_W - 2, r: 2 },
-      { q: GRID_W - 2, r: 5 },
-      { q: GRID_W - 3, r: 8 },
-      { q: GRID_W - 4, r: 6 },
-      { q: GRID_W - 3, r: 3 },
-    ];
-    for (const h of safe) {
-      if (inBounds(h)) {
-        getCell(h.q, h.r).land = false;
-      }
-    }
-
-    // Skapa ett sund genom mitten
-    for (let r = 0; r < GRID_H; r++) {
-      const q = Math.floor((GRID_W - 1) * (r / (GRID_H - 1)));
-      for (let dq = -1; dq <= 1; dq++) {
-        const qq = q + dq;
-        if (qq >= 0 && qq < GRID_W) {
-          getCell(qq, r).land = false;
-        }
-      }
-    }
-
-    // Beräkna 'djup' för vattenrutor
-    const landCells = map.filter((c) => c.land);
-    let maxDist = 0;
-    const SHALLOW_ZONE = 2; // Direkt nära land = alltid grunt
-
-    // Först: beräkna basdjup från avstånd till land
-    for (const cell of map) {
-      if (cell.land) {
-        cell.depth = 0;
-        continue;
-      }
-      let minD = Infinity;
-      for (const l of landCells) {
-        const d = hexDistance({ q: cell.q, r: cell.r }, { q: l.q, r: l.r });
-        if (d < minD) {
-          minD = d;
-        }
-      }
-      if (!isFinite(minD)) {
-        minD = Math.max(GRID_W, GRID_H);
-      }
-      cell.baseDistance = minD;
-      cell.depth = Math.min(minD, SHALLOW_ZONE);
-      if (minD > maxDist) {
-        maxDist = minD;
-      }
-    }
-
-    // Lägg till pseudo-random variationer på djupare vatten
-    const depthRand = mulberry32(seed | 0);
-    for (const cell of map) {
-      if (!cell.land) {
-        if (cell.baseDistance > SHALLOW_ZONE) {
-          const variation = (depthRand() - 0.5) * 1.5 * cell.depth;
-          cell.depth = Math.max(SHALLOW_ZONE + 0.1, cell.depth + variation);
-        } else {
-          depthRand(); // Keep RNG in sync
-        }
-      }
-    }
-
-    // Normalisera depthNormalized
-    maxDist = Math.max(...map.filter((c) => !c.land).map((c) => c.depth));
-    for (const cell of map) {
-      cell.depthNormalized = cell.land ? 0 : maxDist ? cell.depth / maxDist : 0;
-    }
-
-    // Identifiera kobbar (små isolerade landöar med 1-2 hexagoner)
-    const visitedLand = new Set();
-    for (const cell of map) {
-      if (!cell.land) continue;
-      const key = keyOf(cell.q, cell.r);
-      if (visitedLand.has(key)) continue;
-
-      // Flood fill för att hitta alla anslutna landceller
-      const group = [];
-      const queue = [cell];
-      while (queue.length) {
-        const curr = queue.shift();
-        const currKey = keyOf(curr.q, curr.r);
-        if (visitedLand.has(currKey)) continue;
-        visitedLand.add(currKey);
-        group.push(curr);
-        for (const dir of HEX_DIRS) {
-          const nh = { q: curr.q + dir.q, r: curr.r + dir.r };
-          if (!inBounds(nh)) continue;
-          const nCell = getCell(nh.q, nh.r);
-          if (!nCell.land) continue;
-          const nKey = keyOf(nh.q, nh.r);
-          if (!visitedLand.has(nKey)) {
-            queue.push(nCell);
-          }
-        }
-      }
-
-      // Markera små grupper (1-2 hexagoner) som kobbar
-      if (group.length <= 2) {
-        for (const gCell of group) {
-          gCell.isSkerry = true;
-        }
-      }
-    }
-  }
-
-  function mulberry32(a) {
-    return function () {
-      let t = (a += 0x6d2b79f5);
-      t = Math.imul(t ^ (t >>> 15), t | 1);
-      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-      return (((t ^ (t >>> 14)) >>> 0) / 4294967296);
-    };
   }
 
   // =====================================================
@@ -658,92 +587,138 @@
   }
 
   // Find a suitable water hex for spawning a unit for the given side.
-  // We prefer the left half for Blue and the right half for Red so
-  // starting positions are reasonably separated. The function ensures
-  // the chosen hex is in-bounds, not land and not already occupied.
+  // Uses predefined start positions from the map configuration.
+  let blueSpawnIndex = 0;
+  let redSpawnIndex = 0;
+  let loadedMapIndex = -1; // Track which map is currently loaded
+
+  function ensureMapLoaded(mapIndex) {
+    console.log('    [ensureMapLoaded] Called with mapIndex:', mapIndex);
+    console.log('    [ensureMapLoaded] Current loadedMapIndex:', loadedMapIndex);
+    
+    // Only load map once
+    if (loadedMapIndex === mapIndex) {
+      console.log('    [ensureMapLoaded] Map already loaded, returning');
+      return;
+    }
+    
+    // Generate this specific map if not already generated
+    console.log('    [ensureMapLoaded] Checking if map cells exist:', MAP_CONFIGS[mapIndex].cells.length);
+    if (MAP_CONFIGS[mapIndex].cells.length === 0) {
+      console.log('    [ensureMapLoaded] MAP IS EMPTY! Generating map', mapIndex + 1);
+      console.log('    [ensureMapLoaded] Calling generateMapWithSeed with seed:', MAP_CONFIGS[mapIndex].seed);
+      const cells = generateMapWithSeed(MAP_CONFIGS[mapIndex].seed, GRID_W, GRID_H);
+      console.log('    [ensureMapLoaded] generateMapWithSeed returned with', cells.length, 'cells');
+      MAP_CONFIGS[mapIndex].cells = cells;
+      console.log('    [ensureMapLoaded] Map cells assigned');
+    } else {
+      console.log('    [ensureMapLoaded] Map already has', MAP_CONFIGS[mapIndex].cells.length, 'cells');
+    }
+    
+    loadedMapIndex = mapIndex;
+    console.log('    [ensureMapLoaded] loadedMapIndex set to:', loadedMapIndex);
+    console.log('    [ensureMapLoaded] COMPLETE');
+  }
+
   function findStartHex(side) {
-    const mid = Math.floor(GRID_W / 2);
-    const minQ = side === Side.BLUE ? 0 : mid;
-    const maxQ = side === Side.BLUE ? Math.max(0, mid - 1) : GRID_W - 1;
-    const attempts = 500;
-    for (let i = 0; i < attempts; i++) {
-      const q = Math.floor(Math.random() * (maxQ - minQ + 1)) + minQ;
-      const r = Math.floor(Math.random() * GRID_H);
-      if (!inBounds({ q, r })) continue;
-      const cell = getCell(q, r);
-      if (!cell || cell.land) continue;
-      if (unitAt(q, r)) continue;
-      return { q, r };
-    }
-
-    // Fallback: scan for any free water hex in the preferred half
-    for (let r = 0; r < GRID_H; r++) {
-      for (let q = minQ; q <= maxQ; q++) {
-        if (!inBounds({ q, r })) continue;
-        const cell = getCell(q, r);
-        if (!cell || cell.land) continue;
-        if (unitAt(q, r)) continue;
-        return { q, r };
+    const mapConfig = MAP_CONFIGS[selectedMapIndex];
+    
+    if (side === Side.BLUE) {
+      const positions = mapConfig.blueStartPositions;
+      if (blueSpawnIndex < positions.length) {
+        return positions[blueSpawnIndex++];
+      }
+    } else {
+      const positions = mapConfig.redStartPositions;
+      if (redSpawnIndex < positions.length) {
+        return positions[redSpawnIndex++];
       }
     }
-
-    // Final fallback: any free water hex on the map
-    for (let r = 0; r < GRID_H; r++) {
-      for (let q = 0; q < GRID_W; q++) {
-        const cell = getCell(q, r);
-        if (!cell || cell.land) continue;
-        if (unitAt(q, r)) continue;
-        return { q, r };
-      }
-    }
-
-    // If everything fails (very unlikely), return a safe default
-    return { q: 0, r: 0 };
+    
+    // Fallback if we run out of predefined positions
+    return { q: side === Side.BLUE ? 5 : 14, r: 10 };
   }
 
 
   //////////////
 
   function resetGame() {
-    nextId = 1;
-    turn = 1;
-    activeSide = Side.BLUE;
-    actionsLeft = ACTIONS_PER_TURN;
-    selectedId = null;
-    mode = 'order';
-    generateMap();
-    units = [];
-    // Randomize start positions per side but ensure no unit spawns on land
-    // Blue: 1 Fregatt, 2 Stealth-korvett, 1 Ubåt, 2 UAV, 2 USV, 2 UUV, 1 Ubåtsjakthelikopter
-    const blueUnits = [
-      UnitType.FRIGATE,
-      UnitType.STEALTH_CORVETTE, UnitType.STEALTH_CORVETTE,
-      UnitType.SUBMARINE,
-      UnitType.UAV, UnitType.UAV,
-      UnitType.USV, UnitType.USV,
-      UnitType.UUV, UnitType.UUV,
-      UnitType.SUBMARINE_HUNTER,
-    ];
-    for (const t of blueUnits) {
-      const h = findStartHex(Side.BLUE);
-      spawn(Side.BLUE, t, h.q, h.r);
-    }
+    try {
+      console.log('====== BUTTON CLICKED: resetGame() STARTING ======');
+      console.log('selectedMapIndex:', selectedMapIndex);
+      
+      console.log('Step A: Calling ensureMapLoaded...');
+      ensureMapLoaded(selectedMapIndex);
+      console.log('Step B: ensureMapLoaded completed');
+      
+      console.log('Step C: Resetting game state...');
+      nextId = 1;
+      turn = 1;
+      activeSide = Side.BLUE;
+      actionsLeft = ACTIONS_PER_TURN;
+      selectedId = null;
+      mode = 'order';
+      blueSpawnIndex = 0;
+      redSpawnIndex = 0;
+      console.log('Step D: Game state reset');
+      
+      console.log('Step E: Calling generateMap...');
+      generateMap();
+      console.log('Step F: generateMap completed, map length:', map.length);
+      
+      console.log('Step G: Clearing units, preparing to spawn...');
+      units = [];
+      
+      console.log('Step H: Spawning blue units...');
+      const blueUnits = [
+        UnitType.FRIGATE,
+        UnitType.STEALTH_CORVETTE, UnitType.STEALTH_CORVETTE,
+        UnitType.SUBMARINE,
+        UnitType.UAV, UnitType.UAV,
+        UnitType.USV, UnitType.USV,
+        UnitType.UUV, UnitType.UUV,
+        UnitType.SUBMARINE_HUNTER,
+      ];
+      for (const t of blueUnits) {
+        const h = findStartHex(Side.BLUE);
+        spawn(Side.BLUE, t, h.q, h.r);
+      }
+      console.log('Step I: Blue units spawned, total units:', units.length);
 
-    // Red: 2 Konventionell korvett, 1 Ubåt, 2 Okontrollerbar mina, 2 Kontrollerbar mina
-    const redUnits = [
-      UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
-      UnitType.SUBMARINE,
-      UnitType.UNCONTROL_MINE, UnitType.UNCONTROL_MINE,
-      UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
-    ];
-    for (const t of redUnits) {
-      const h = findStartHex(Side.RED);
-      spawn(Side.RED, t, h.q, h.r);
+      console.log('Step J: Spawning red units...');
+      const redUnits = [
+        UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
+        UnitType.SUBMARINE,
+        UnitType.UNCONTROL_MINE, UnitType.UNCONTROL_MINE,
+        UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
+      ];
+      for (const t of redUnits) {
+        const h = findStartHex(Side.RED);
+        spawn(Side.RED, t, h.q, h.r);
+      }
+      console.log('Step K: Red units spawned, total units:', units.length);
+      
+      console.log('Step L: Showing toast message...');
+      showToast('Nytt slag', `${MAP_CONFIGS[selectedMapIndex].name} är vald. Blå börjar.`);
+      console.log('Step M: Toast shown');
+      
+      console.log('Step N: Calling updateUI...');
+      updateUI();
+      console.log('Step O: updateUI completed');
+      
+      console.log('Step P: Calling resize...');
+      resize();
+      console.log('Step Q: resize completed');
+      
+      console.log('Step R: Calling draw...');
+      draw();
+      console.log('Step S: draw completed');
+      
+      console.log('====== resetGame() COMPLETED SUCCESSFULLY ======');
+    } catch (e) {
+      console.error('ERROR in resetGame:', e.message);
+      console.error('Stack trace:', e.stack);
     }
-
-    showToast('Nytt slag', 'Skärgården är genererad. Blå börjar.');
-    updateUI();
-    draw();
   }
 
   // =====================================================
@@ -980,9 +955,154 @@ function applyMineTrigger(q, r, enteringSide) {
   // =====================================================
   // Knappar
   // =====================================================
-  btnEndTurn.addEventListener('click', () => {
-    endTurn();
-  });
+  console.log('Step 7: Setting up button event listeners...');
+  
+  // Map selection buttons - optional, may not exist in all implementations
+  try {
+    if (btnMap1) {
+      console.log('Step 7a: Attaching btnMap1 listener...');
+      btnMap1.addEventListener('click', () => {
+        console.log('>>> [CLICK EVENT] Map 1 clicked');
+        console.log('>>> [CLICK EVENT] Setting selectedMapIndex to 0');
+        selectedMapIndex = 0;
+        console.log('>>> [CLICK EVENT] selectedMapIndex set. Calling resetGame...');
+        resetGame();
+        console.log('>>> [CLICK EVENT] resetGame returned');
+      });
+    }
+
+    if (btnMap2) {
+      console.log('Step 7b: Attaching btnMap2 listener...');
+      btnMap2.addEventListener('click', () => {
+        console.log('>>> [CLICK EVENT] Map 2 clicked');
+        console.log('>>> [CLICK EVENT] Setting selectedMapIndex to 1');
+        selectedMapIndex = 1;
+        console.log('>>> [CLICK EVENT] selectedMapIndex set. Calling resetGame...');
+        resetGame();
+        console.log('>>> [CLICK EVENT] resetGame returned');
+      });
+    }
+
+    if (btnMap3) {
+      console.log('Step 7c: Attaching btnMap3 listener...');
+      btnMap3.addEventListener('click', () => {
+        console.log('>>> [CLICK EVENT] Map 3 clicked');
+        console.log('>>> [CLICK EVENT] Setting selectedMapIndex to 2');
+        selectedMapIndex = 2;
+        console.log('>>> [CLICK EVENT] selectedMapIndex set. Calling resetGame...');
+        resetGame();
+        console.log('>>> [CLICK EVENT] resetGame returned');
+      });
+    }
+
+    if (btnMap4) {
+      console.log('Step 7d: Attaching btnMap4 listener...');
+      btnMap4.addEventListener('click', () => {
+        console.log('>>> [CLICK EVENT] Map 4 clicked');
+        console.log('>>> [CLICK EVENT] Setting selectedMapIndex to 3');
+        selectedMapIndex = 3;
+        console.log('>>> [CLICK EVENT] selectedMapIndex set. Calling resetGame...');
+        resetGame();
+        console.log('>>> [CLICK EVENT] resetGame returned');
+      });
+    }
+    
+    if (btnMap1 && btnMap2 && btnMap3 && btnMap4) {
+      console.log('Step 7e: All map buttons initialized successfully');
+    } else {
+      console.warn('Note: Not all map buttons found, but game can still run');
+    }
+  } catch(e) {
+    console.error('Error initializing map buttons:', e);
+  }
+
+  // Other buttons
+  if (btnEndTurn) {
+    btnEndTurn.addEventListener('click', () => {
+      endTurn();
+    });
+  }
+  
+  if (btnReset) {
+    btnReset.addEventListener('click', () => {
+      resetGame();
+    });
+  }
+  
+  if (btnHelp) {
+    btnHelp.addEventListener('click', () => {
+      showToast(
+        'Hjälp',
+        'Välj en enhet, flytta/attackera/minera.',
+        'Minor sänker enhet direkt vid utlösning.',
+        'Minor utlöses när en enhet rör sig över dem.'
+
+      );
+    });
+  }
+  
+  if (btnAttack) {
+    btnAttack.addEventListener('click', () => {
+      const sel = selectedId ? getUnit(selectedId) : null;
+      if (!sel || sel.side !== activeSide) return;
+      mode = 'attack';
+      updateUI();
+      draw();
+    });
+  }
+  
+  if (btnMine) {
+    btnMine.addEventListener('click', () => {
+      const sel = selectedId ? getUnit(selectedId) : null;
+      if (!sel || sel.side !== activeSide) return;
+      if (sel.minesLeft <= 0) return;
+      mode = 'mine';
+      updateUI();
+      draw();
+    });
+  }
+  
+  if (btnDepthUp) {
+    btnDepthUp.addEventListener('click', () => {
+      const sel = selectedId ? getUnit(selectedId) : null;
+      if (!sel || sel.side !== activeSide) return;
+      if (!SUBMARINE_TYPES.has(sel.type)) return;
+      if (actionsLeft <= 0) return;
+      // Cannot go deeper than water depth at this hex
+      const cell = getCell(sel.q, sel.r);
+      const maxDepth = Math.ceil(cell.depthNormalized * MAX_DEPTH);
+      if (sel.depth >= maxDepth) return;
+      sel.depth += 1;
+      actionsLeft -= 1;
+      updateUI();
+      draw();
+    });
+  }
+
+  if (btnDepthDown) {
+    btnDepthDown.addEventListener('click', () => {
+      const sel = selectedId ? getUnit(selectedId) : null;
+      if (!sel || sel.side !== activeSide) return;
+      if (!SUBMARINE_TYPES.has(sel.type)) return;
+      if (sel.depth <= 0) return;
+      if (actionsLeft <= 0) return;
+      sel.depth -= 1;
+      actionsLeft -= 1;
+      updateUI();
+      draw();
+    });
+  }
+
+  if (btnToggleSensor) {
+    btnToggleSensor.addEventListener('click', () => {
+      const sel = selectedId ? getUnit(selectedId) : null;
+      if (!sel || sel.side !== activeSide) return;
+      if (!SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type) return;
+      sel.sensorActive = !sel.sensorActive;
+      updateUI();
+      draw();
+    });
+  }
 
   function endTurn() {
     selectedId = null;
@@ -1004,73 +1124,6 @@ function applyMineTrigger(q, r, enteringSide) {
 
     if (activeSide === Side.RED) runSimpleAI();
   }
-
-  btnReset.addEventListener('click', () => {
-    resetGame();
-  });
-
-  btnHelp.addEventListener('click', () => {
-    showToast(
-      'Hjälp',
-      'Välj en enhet, flytta/attackera/minera.',
-      'Minor sänker enhet direkt vid utlösning.',
-      'Minor utlöses när en enhet rör sig över dem.'
-
-    );
-  });
-
-  btnAttack.addEventListener('click', () => {
-    const sel = selectedId ? getUnit(selectedId) : null;
-    if (!sel || sel.side !== activeSide) return;
-    mode = 'attack';
-    updateUI();
-    draw();
-  });
-
-  btnMine.addEventListener('click', () => {
-    const sel = selectedId ? getUnit(selectedId) : null;
-    if (!sel || sel.side !== activeSide) return;
-    if (sel.minesLeft <= 0) return;
-    mode = 'mine';
-    updateUI();
-    draw();
-  });
-
-  btnDepthUp.addEventListener('click', () => {
-    const sel = selectedId ? getUnit(selectedId) : null;
-    if (!sel || sel.side !== activeSide) return;
-    if (!SUBMARINE_TYPES.has(sel.type)) return;
-    if (actionsLeft <= 0) return;
-    // Cannot go deeper than water depth at this hex
-    const cell = getCell(sel.q, sel.r);
-    const maxDepth = Math.ceil(cell.depthNormalized * MAX_DEPTH);
-    if (sel.depth >= maxDepth) return;
-    sel.depth += 1;
-    actionsLeft -= 1;
-    updateUI();
-    draw();
-  });
-
-  btnDepthDown.addEventListener('click', () => {
-    const sel = selectedId ? getUnit(selectedId) : null;
-    if (!sel || sel.side !== activeSide) return;
-    if (!SUBMARINE_TYPES.has(sel.type)) return;
-    if (sel.depth <= 0) return;
-    if (actionsLeft <= 0) return;
-    sel.depth -= 1;
-    actionsLeft -= 1;
-    updateUI();
-    draw();
-  });
-
-  btnToggleSensor.addEventListener('click', () => {
-    const sel = selectedId ? getUnit(selectedId) : null;
-    if (!sel || sel.side !== activeSide) return;
-    if (!SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type) return;
-    sel.sensorActive = !sel.sensorActive;
-    updateUI();
-    draw();
-  });
 
   // =====================================================
   // Enkel AI för röd spelare
@@ -1198,6 +1251,14 @@ function applyMineTrigger(q, r, enteringSide) {
   }
 
   function draw() {
+    if (!map || map.length === 0) {
+      // Map not loaded yet, just clear canvas
+      if (!canvas.width || !canvas.height) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      return;
+    }
+    
     if (!canvas.width || !canvas.height) return;
     const rect = canvas.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
@@ -1379,6 +1440,7 @@ function applyMineTrigger(q, r, enteringSide) {
   // =====================================================
   // Inmatningshantering (Canvas click)
   // =====================================================
+  console.log('Step 8: Attaching canvas click listener...');
   canvas.addEventListener('click', (ev) => {
     const h = worldToHex(ev);
     if (!inBounds(h)) return;
@@ -1508,14 +1570,23 @@ function applyMineTrigger(q, r, enteringSide) {
   // =====================================================
   // Initiering
   // =====================================================
-  resetGame();
-  resize();
+  console.log('========================================');
+  console.log('Step 9: GAME INITIALIZATION COMPLETE');
+  console.log('========================================');
+  console.log('Game initialized. Waiting for user to select a map...');
+  console.log('Setting up welcome toast in 450ms...');
   setTimeout(
-    () =>
+    () => {
+      console.log('Showing welcome toast now');
       showToast(
-        'Tips',
-        'Välj din enhet (Blå) och flytta/attackera/minera. Röd styrs av enkel AI.'
-      ),
+        'Välj karta',
+        'Klicka på en kartknapp för att starta spelet.'
+      );
+    },
     450
   );
+  } catch(e) {
+    console.error('FATAL ERROR during script initialization:', e.message, e.stack);
+    alert('Fatal error starting game: ' + e.message);
+  }
 })();

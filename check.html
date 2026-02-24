@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Final System Check</title>
+  <style>
+    body { font-family: monospace; background: #1a1a1a; color: #0f0; padding: 20px; }
+    .check { padding: 8px; margin: 5px 0; border-left: 3px solid #0f0; }
+    .check.fail { border-left-color: #f00; color: #f00; }
+    .check.warn { border-left-color: #ff0; color: #ff0; }
+    button { padding: 10px 20px; margin: 10px 0; background: #0f0; color: #000; border: none; cursor: pointer; font-size: 14px; font-weight: bold; }
+    button:hover { background: #00ff00; }
+  </style>
+</head>
+<body>
+  <h1>Skärgårdskrig - System Check</h1>
+  
+  <div id="checks"></div>
+  
+  <div style="margin-top: 30px; padding: 20px; background: #222; border: 1px solid #0f0; border-radius: 5px;">
+    <h2>Game Files Available:</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li><strong>✓ index.html</strong> - Recommended starting point</li>
+      <li><strong>✓ game.html</strong> - Main game with debug console</li>
+      <li><strong>✓ simple-test.html</strong> - Game with visible console</li>
+      <li><strong>✓ marint_hex_kriegsspel_prototyp.html</strong> - Original</li>
+    </ul>
+    
+    <h2 style="margin-top: 30px;">How to Play:</h2>
+    <ol>
+      <li>Click a map button to select which map to play</li>
+      <li>Click a blue unit to select it</li>
+      <li>Click water hex to move selected unit</li>
+      <li>Click "Attackera" then click enemy to attack</li>
+      <li>Click "Avsluta tur" to end your turn</li>
+    </ol>
+    
+    <button onclick="startGame('game.html')">▶ Play Main Game</button>
+    <button onclick="startGame('simple-test.html')">▶ Play with Debug Console</button>
+    <button onclick="startGame('index.html')">▶ Back to Menu</button>
+  </div>
+  
+  <script>
+    const checksDiv = document.getElementById('checks');
+    
+    function addCheck(name, result, details = '') {
+      const check = document.createElement('div');
+      check.className = 'check ' + (result ? 'pass' : result === null ? 'warn' : 'fail');
+      check.textContent = (result ? '✓' : result === null ? '⚠' : '✗') + ' ' + name + (details ? ': ' + details : '');
+      checksDiv.appendChild(check);
+    }
+    
+    addCheck('JavaScript', typeof window !== 'undefined' ? true : false);
+    addCheck('DOM Access', typeof document !== 'undefined' ? true : false);
+    addCheck('Canvas Support', () => { try { document.createElement('canvas').getContext('2d'); return true; } catch(e) { return false; } }());
+    addCheck('Local Storage', typeof localStorage !== 'undefined' ? true : false);
+    addCheck('Fetch API', typeof fetch !== 'undefined' ? true : false);
+    
+    // Check files
+    const files = ['map_config.js', 'script.js', 'styles.css'];
+    files.forEach(f => {
+      fetch(f, { method: 'HEAD' })
+        .then(r => addCheck('File: ' + f, r.ok, r.ok ? 'Found' : 'Not found (HTTP ' + r.status + ')'))
+        .catch(() => addCheck('File: ' + f, false, 'Error accessing'));
+    });
+    
+    function startGame(file) {
+      window.location.href = file;
+    }
+  </script>
+</body>
+</html>

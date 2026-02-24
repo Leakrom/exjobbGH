@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Skärgårdskrig - Debug Console</title>
+  <style>
+    body { font-family: monospace; background: #222; color: #0f0; padding: 20px; }
+    pre { background: #111; padding: 10px; border: 1px solid #0f0; max-height: 500px; overflow-y: auto; }
+    .error { color: #f00; }
+    .warn { color: #ff0; }
+    .ok { color: #0f0; }
+    button { padding: 8px 16px; margin: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Skärgårdskrig - Debug Console</h1>
+  <div>
+    <button onclick="location.href='marint_hex_kriegsspel_prototyp.html'">Open Main Game</button>
+    <button onclick="clearLog()">Clear Log</button>
+  </div>
+  <pre id="output"></pre>
+  
+  <script>
+    // Capture console output
+    const output = document.getElementById('output');
+    const lines = [];
+    
+    function log(msg, type = 'normal') {
+      const cls = type === 'error' ? 'error' : type === 'warn' ? 'warn' : 'ok';
+      lines.push(`<span class="${cls}">[${new Date().toLocaleTimeString()}] ${msg}</span>`);
+      output.innerHTML = lines.join('<br>');
+      output.scrollTop = output.scrollHeight;
+    }
+    
+    function clearLog() {
+      lines.length = 0;
+      output.innerHTML = '';
+    }
+    
+    // Override console methods
+    const originalLog = console.log;
+    const originalError = console.error;
+    const originalWarn = console.warn;
+    
+    console.log = function(...args) {
+      const msg = args.join(' ');
+      log(msg, 'normal');
+      originalLog.apply(console, args);
+    };
+    
+    console.error = function(...args) {
+      const msg = args.join(' ');
+      log(msg, 'error');
+      originalError.apply(console, args);
+    };
+    
+    console.warn = function(...args) {
+      const msg = args.join(' ');
+      log(msg, 'warn');
+      originalWarn.apply(console, args);
+    };
+    
+    log('=== Debug Console Started ===', 'ok');
+    log('Loading script.js...', 'normal');
+  </script>
+  
+  <script src="map_config.js"></script>
+  <script src="script.js"></script>
+  
+  <script>
+    log('✓ All scripts loaded', 'ok');
+    log('Click "Open Main Game" to start the game', 'ok');
+    
+    // Test if globals are available
+    setTimeout(() => {
+      log('MAP_CONFIGS available: ' + (typeof MAP_CONFIGS !== 'undefined' ? 'YES' : 'NO'), 
+          typeof MAP_CONFIGS !== 'undefined' ? 'ok' : 'error');
+    }, 100);
+  </script>
+</body>
+</html>

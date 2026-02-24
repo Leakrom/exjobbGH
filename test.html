@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debug Test</title>
+  <style>
+    body { font-family: monospace; background: #222; color: #0f0; padding: 20px; }
+    pre { background: #111; padding: 10px; border: 1px solid #0f0; }
+    .error { color: #f00; }
+  </style>
+</head>
+<body>
+  <h1>Debug Test - MAP_CONFIGS Initialization</h1>
+  <pre id="output"></pre>
+  
+  <script src="map_config.js"></script>
+  <script>
+    const output = document.getElementById('output');
+    const lines = [];
+    
+    function log(msg) {
+      lines.push(msg);
+      output.textContent = lines.join('\n');
+    }
+    
+    try {
+      log('Step 1: Checking if MAP_CONFIGS is defined...');
+      if (typeof MAP_CONFIGS === 'undefined') {
+        log('ERROR: MAP_CONFIGS is not defined!');
+      } else {
+        log('✓ MAP_CONFIGS is defined');
+        log('  Length: ' + MAP_CONFIGS.length);
+        log('  MAP_CONFIGS[0].name: ' + MAP_CONFIGS[0].name);
+        log('  MAP_CONFIGS[0].cells.length: ' + MAP_CONFIGS[0].cells.length);
+        
+        log('\nStep 2: Checking initializeMapConfigs function...');
+        if (typeof initializeMapConfigs === 'undefined') {
+          log('ERROR: initializeMapConfigs is not defined!');
+        } else {
+          log('✓ initializeMapConfigs function exists');
+          
+          log('\nStep 3: Simulating GRID_W and GRID_H...');
+          const GRID_W = 20;
+          const GRID_H = 20;
+          
+          log('Step 4: Calling initializeMapConfigs...');
+          initializeMapConfigs(GRID_W, GRID_H);
+          
+          log('✓ initializeMapConfigs completed');
+          log('  MAP_CONFIGS[0].cells.length after init: ' + MAP_CONFIGS[0].cells.length);
+          
+          if (MAP_CONFIGS[0].cells.length > 0) {
+            log('  First cell: ' + JSON.stringify(MAP_CONFIGS[0].cells[0]));
+          }
+        }
+      }
+    } catch(e) {
+      log('\n<span class="error">EXCEPTION: ' + e.message + '</span>');
+      log(e.stack);
+    }
+  </script>
+</body>
+</html>
+

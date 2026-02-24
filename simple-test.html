@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Minimal Test</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #333; margin: 0; padding: 10px; font-family: monospace; color: #0f0; }
+    #stageWrap { width: 600px; height: 600px; background: #222; border: 1px solid #0f0; position: relative; }
+    #c { display: block; width: 100%; height: 100%; }
+    #console { background: #111; border: 1px solid #0f0; padding: 10px; margin-top: 10px; max-height: 200px; overflow-y: auto; font-size: 12px; }
+    #controls { margin-top: 10px; }
+    button { padding: 8px 16px; margin: 5px 5px 5px 0; }
+    .toast { position: absolute; bottom: 10px; left: 10px; background: #000; color: #fff; padding: 10px; border-radius: 5px; display: none; z-index: 1000; }
+  </style>
+</head>
+<body>
+  <h1>Game Test with All Elements</h1>
+  
+  <div id="stageWrap">
+    <canvas id="c" width="600" height="600"></canvas>
+    <div class="toast" id="toast"></div>
+  </div>
+  
+  <div id="controls">
+    <div><strong>Map Selection:</strong></div>
+    <button id="btnMap1">Karta 1</button>
+    <button id="btnMap2">Karta 2</button>
+    <button id="btnMap3">Karta 3</button>
+    <button id="btnMap4">Karta 4</button>
+    <button id="btnReset">Nytt slag</button>
+    <button id="btnEndTurn">Avsluta tur</button>
+    <button id="btnHelp">Hjälp</button>
+  </div>
+  
+  <div id="console"></div>
+  
+  <script>
+    const consoleDiv = document.getElementById('console');
+    
+    const originalLog = console.log;
+    const originalError = console.error;
+    
+    console.log = function(...args) {
+      const msg = args.join(' ');
+      const line = document.createElement('div');
+      line.textContent = '[LOG] ' + msg;
+      line.style.color = '#0f0';
+      consoleDiv.appendChild(line);
+      consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      originalLog.apply(console, args);
+    };
+    
+    console.error = function(...args) {
+      const msg = args.join(' ');
+      const line = document.createElement('div');
+      line.style.color = '#f00';
+      line.textContent = '[ERROR] ' + msg;
+      consoleDiv.appendChild(line);
+      consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      originalError.apply(console, args);
+    };
+    
+    window.onerror = function(msg, url, line, col, err) {
+      console.error('Unhandled error: ' + msg);
+      return true;
+    };
+    
+    console.log('Test page loaded');
+    console.log('Canvas element: ' + (document.getElementById('c') ? 'FOUND' : 'NOT FOUND'));
+    console.log('StageWrap element: ' + (document.getElementById('stageWrap') ? 'FOUND' : 'NOT FOUND'));
+    console.log('Toast element: ' + (document.getElementById('toast') ? 'FOUND' : 'NOT FOUND'));
+    console.log('btnMap1: ' + (document.getElementById('btnMap1') ? 'FOUND' : 'NOT FOUND'));
+  </script>
+  
+  <script src="map_config.js"></script>
+  <script>console.log('map_config.js loaded');</script>
+  
+  <script src="script.js"></script>
+  <script>console.log('script.js loaded successfully');</script>
+</body>
+</html>
