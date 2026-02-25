@@ -288,10 +288,14 @@
   const toast = document.getElementById('toast');
   let toastTimer = null;
 
-  function showToast(title, msg) {
+  function showToast(title, msg, msg2, msg3) {
     if (!toast) return; // Toast element not found, skip
+    if (msg2 == undefined) msg2 = '';
+    if (msg3 == undefined) msg3 = '';
     toast.style.display = 'block';
-    toast.innerHTML = `<b>${escapeHtml(title)}</b><small>${escapeHtml(msg)}</small>`;
+    toast.innerHTML = `<b>${escapeHtml(title)}</b>
+                      <small>${escapeHtml(msg)}<br>
+                      ${escapeHtml(msg2)}<br>${escapeHtml(msg3)}</small>`;
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toast.style.display = 'none';
