@@ -288,6 +288,188 @@
   const toast = document.getElementById('toast');
   let toastTimer = null;
 
+  // Sessionlogg
+  let sessionLogBuffer = '';
+  const sessionStartedAt = new Date();
+  const sessionId = `session-${sessionStartedAt.toISOString()}`;
+  const AUTO_LOG_DIR = 'C:\\Users\\linene\\exjobbGH\\loggfiler';
+  let sessionHeaderWritten = false;
+  let logStatusWrapEl = null;
+  let logStatusEl = null;
+
+  function ensureLogStatusElement() {
+    if (logStatusEl) return logStatusEl;
+
+    logStatusWrapEl = document.createElement('div');
+    logStatusWrapEl.style.marginTop = '10px';
+    logStatusWrapEl.style.display = 'flex';
+    logStatusWrapEl.style.alignItems = 'center';
+    logStatusWrapEl.style.gap = '8px';
+
+    logStatusEl = document.createElement('div');
+    logStatusEl.id = 'logStatus';
+    logStatusEl.style.padding = '4px 8px';
+    logStatusEl.style.borderRadius = '8px';
+    logStatusEl.style.border = '1px solid rgba(255,255,255,.14)';
+    logStatusEl.style.background = 'rgba(15, 23, 42, .30)';
+    logStatusEl.style.color = 'rgba(248,250,252,.9)';
+    logStatusEl.style.font = '11px system-ui, -apple-system, Segoe UI, Roboto, Arial';
+    logStatusEl.textContent = 'Logg: automatisk lagring';
+    logStatusEl.title = `Sparas i: ${AUTO_LOG_DIR}`;
+
+    logStatusWrapEl.appendChild(logStatusEl);
+
+    const targetPanel = btnEndTurn && btnEndTurn.closest('.panel');
+    if (targetPanel) {
+      targetPanel.appendChild(logStatusWrapEl);
+    } else {
+      document.body.appendChild(logStatusWrapEl);
+    }
+
+    return logStatusEl;
+  }
+
+  function setLogStatus(text) {
+    ensureLogStatusElement();
+    logStatusEl.textContent = `Logg: ${text}`;
+  }
+
+  function getTimestamp() {
+    return new Date().toISOString();
+  }
+
+  function logEvent(text) {
+    const line = `[${getTimestamp()}] ${text}`;
+    sessionLogBuffer += `${line}\n`;
+    console.log('[GAME LOG]', line);
+  }
+
+  async function flushSessionLogToFile() {
+    if (!sessionLogBuffer) return;
+
+    setLogStatus('sparar...');
+
+    const content = sessionLogBuffer;
+
+    try {
+      const response = await fetch('/api/log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId,
+          content,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Loggservern svarade ${response.status}`);
+      }
+
+      sessionLogBuffer = '';
+      setLogStatus(`sparad ${new Date().toLocaleTimeString()}`);
+    } catch (e) {
+      console.error('Kunde inte spara sessionslogg:', e);
+      setLogStatus('sparfel (starta server.js)');
+      throw e;
+    }
+  }
+
+  function showBlueTurnReflectionPopup() {
+    return new Promise((resolve) => {
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.inset = '0';
+      overlay.style.background = 'rgba(0,0,0,.55)';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.zIndex = '9999';
+
+      const dialog = document.createElement('div');
+      dialog.style.width = 'min(92vw, 620px)';
+      dialog.style.background = '#0f172a';
+      dialog.style.color = '#f8fafc';
+      dialog.style.border = '1px solid rgba(255,255,255,.2)';
+      dialog.style.borderRadius = '10px';
+      dialog.style.padding = '14px';
+      dialog.style.boxSizing = 'border-box';
+
+      const heading = document.createElement('h3');
+      heading.textContent = 'Avsluta tur';
+      heading.style.margin = '0 0 10px 0';
+      heading.style.fontSize = '16px';
+      dialog.appendChild(heading);
+
+      const l1 = document.createElement('label');
+      l1.textContent = 'Varför gjorde du det här draget?';
+      l1.style.display = 'block';
+      l1.style.marginBottom = '6px';
+      dialog.appendChild(l1);
+
+      const t1 = document.createElement('textarea');
+      t1.rows = 3;
+      t1.style.width = '100%';
+      t1.style.boxSizing = 'border-box';
+      t1.style.borderRadius = '6px';
+      t1.style.marginBottom = '10px';
+      dialog.appendChild(t1);
+
+      const l2 = document.createElement('label');
+      l2.textContent = 'Vad tänker du att det ska få för resultat?';
+      l2.style.display = 'block';
+      l2.style.marginBottom = '6px';
+      dialog.appendChild(l2);
+
+      const t2 = document.createElement('textarea');
+      t2.rows = 3;
+      t2.style.width = '100%';
+      t2.style.boxSizing = 'border-box';
+      t2.style.borderRadius = '6px';
+      t2.style.marginBottom = '12px';
+      dialog.appendChild(t2);
+
+      const actions = document.createElement('div');
+      actions.style.display = 'flex';
+      actions.style.justifyContent = 'flex-end';
+      actions.style.gap = '8px';
+
+      const cancelBtn = document.createElement('button');
+      cancelBtn.type = 'button';
+      cancelBtn.textContent = 'Avbryt';
+
+      const saveBtn = document.createElement('button');
+      saveBtn.type = 'button';
+      saveBtn.textContent = 'Spara svar';
+
+      actions.appendChild(cancelBtn);
+      actions.appendChild(saveBtn);
+      dialog.appendChild(actions);
+
+      overlay.appendChild(dialog);
+      document.body.appendChild(overlay);
+      t1.focus();
+
+      function cleanup() {
+        overlay.remove();
+      }
+
+      cancelBtn.addEventListener('click', () => {
+        cleanup();
+        resolve(null);
+      });
+
+      saveBtn.addEventListener('click', async () => {
+        const answer1 = t1.value.trim();
+        const answer2 = t2.value.trim();
+
+        cleanup();
+        resolve({ answer1, answer2 });
+      });
+    });
+  }
+
   function showToast(title, msg, msg2, msg3) {
     if (!toast) return; // Toast element not found, skip
     if (msg2 == undefined) msg2 = '';
@@ -295,7 +477,8 @@
     toast.style.display = 'block';
     toast.innerHTML = `<b>${escapeHtml(title)}</b>
                       <small>${escapeHtml(msg)}<br>
-                      ${escapeHtml(msg2)}<br>${escapeHtml(msg3)}</small>`;
+                             ${escapeHtml(msg2)}<br>
+                             ${escapeHtml(msg3)}</small>`;
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toast.style.display = 'none';
@@ -679,6 +862,13 @@
     try {
       console.log('====== BUTTON CLICKED: resetGame() STARTING ======');
       console.log('selectedMapIndex:', selectedMapIndex);
+
+      if (!sessionHeaderWritten) {
+        sessionHeaderWritten = true;
+        logEvent('============================================================');
+        logEvent(`Spelsession startad: ${sessionId}`);
+      }
+      logEvent(`Nytt slag initieras, karta: ${MAP_CONFIGS[selectedMapIndex].name}`);
       
       console.log('Step A: Calling ensureMapLoaded...');
       ensureMapLoaded(selectedMapIndex);
@@ -822,6 +1012,8 @@ function applyMineTrigger(q, r, enteringSide) {
   const u = unitAt(q, r);
   if (!u) return false;
 
+  logEvent(`Minträff: ${u.side} ${u.type} på (${q},${r}) sänks`);
+
   showToast('💥 Mina!', `${u.type} träffade en mina och sänks!`);
 
   // Ta bort minan och minfältet från mines-Map och minefields-arrayen
@@ -964,6 +1156,7 @@ function applyMineTrigger(q, r, enteringSide) {
     target.hp -= dmg;
     actionsLeft -= 1;
     showToast('Träff', `${attacker.type} träffar ${target.type} för ${dmg} skada.`);
+    logEvent(`${attacker.side} attackerar: ${attacker.type} -> ${target.type}, skada=${dmg}, återstående HP mål=${Math.max(0, target.hp)}`);
 
     if (attacker.side === Side.RED && target.side === Side.BLUE) {
       if (target.hp <= 0) {
@@ -977,6 +1170,7 @@ function applyMineTrigger(q, r, enteringSide) {
       units = units.filter((u) => u.id !== target.id);
       if (selectedId === target.id) selectedId = null;
       showToast('Sänkt!', `${target.type} sjunker.`);
+      logEvent(`${target.side} enhet sänkt: ${target.type}`);
     }
 
     mode = 'order';
@@ -1051,7 +1245,29 @@ function applyMineTrigger(q, r, enteringSide) {
 
   // Other buttons
   if (btnEndTurn) {
-    btnEndTurn.addEventListener('click', () => {
+    btnEndTurn.addEventListener('click', async () => {
+      if (activeSide === Side.BLUE) {
+        const answers = await showBlueTurnReflectionPopup();
+        if (!answers) return;
+
+        logEvent('BLÅ REFLEKTION');
+        logEvent('Fråga: Varför gjorde du det här draget?');
+        logEvent(`Svar: ${answers.answer1 || '(tomt svar)'}`);
+        logEvent('Fråga: Vad tänker du att det ska få för resultat?');
+        logEvent(`Svar: ${answers.answer2 || '(tomt svar)'}`);
+        logEvent(`${activeSide} avslutar sin tur`);
+
+        try {
+          await flushSessionLogToFile();
+        } catch (e) {
+          console.error('Kunde inte spara sessionslogg:', e);
+          setLogStatus('fel vid sparning');
+          showToast('Loggning misslyckades', 'Kunde inte skriva till textfilen.');
+          return;
+        }
+      } else {
+        logEvent(`${activeSide} avslutar sin tur`);
+      }
       endTurn();
     });
   }
@@ -1107,6 +1323,7 @@ function applyMineTrigger(q, r, enteringSide) {
       if (sel.depth >= maxDepth) return;
       sel.depth += 1;
       actionsLeft -= 1;
+      logEvent(`${sel.side} ändrar djup upp: ${sel.type} till djup ${sel.depth}`);
       updateUI();
       draw();
     });
@@ -1121,6 +1338,7 @@ function applyMineTrigger(q, r, enteringSide) {
       if (actionsLeft <= 0) return;
       sel.depth -= 1;
       actionsLeft -= 1;
+      logEvent(`${sel.side} ändrar djup ned: ${sel.type} till djup ${sel.depth}`);
       updateUI();
       draw();
     });
@@ -1132,15 +1350,18 @@ function applyMineTrigger(q, r, enteringSide) {
       if (!sel || sel.side !== activeSide) return;
       if (!SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type) return;
       sel.sensorActive = !sel.sensorActive;
+      logEvent(`${sel.side} växlar sensorläge: ${sel.type} -> ${sel.sensorActive ? 'Aktiv' : 'Passiv'}`);
       updateUI();
       draw();
     });
   }
 
   function endTurn() {
+    const nextSide = activeSide === Side.BLUE ? Side.RED : Side.BLUE;
+    logEvent(`Turbyte: ${activeSide} -> ${nextSide}`);
     selectedId = null;
     mode = 'order';
-    activeSide = activeSide === Side.BLUE ? Side.RED : Side.BLUE;
+    activeSide = nextSide;
     if (activeSide === Side.BLUE) turn += 1;
     actionsLeft = ACTIONS_PER_TURN;
 
@@ -1222,9 +1443,11 @@ function applyMineTrigger(q, r, enteringSide) {
       const dest = moves[0];
       selectedId = mover.id;
       mode = 'order';
+      const from = { q: mover.q, r: mover.r };
       mover.q = dest.q;
       mover.r = dest.r;
       actionsLeft -= 1;
+      logEvent(`${mover.side} flyttar: ${mover.type} (${from.q},${from.r}) -> (${dest.q},${dest.r})`);
       if (mines.has(keyOf(dest.q, dest.r))) {
         applyMineTrigger(dest.q, dest.r, mover.side);
       }
@@ -1506,6 +1729,7 @@ function applyMineTrigger(q, r, enteringSide) {
     }
 
     if (mode === 'order') {
+      const from = { q: sel.q, r: sel.r };
       const moves = legalMoves(sel);
       if (!moves.some((m) => hexEq(m, h))) {
         showToast('Ogiltigt drag', 'Du kan bara flytta till markerade vattenhexar.');
@@ -1561,6 +1785,7 @@ function applyMineTrigger(q, r, enteringSide) {
         sel.q = stopQ;
         sel.r = stopR;
         actionsLeft -= 1;
+        logEvent(`${sel.side} flyttar (mina utlöst): ${sel.type} (${from.q},${from.r}) -> (${stopQ},${stopR})`);
         applyMineTrigger(stopQ, stopR, sel.side);
         console.log(`Blue unit ends at (${sel.q},${sel.r})`);
         updateUI();
@@ -1572,6 +1797,7 @@ function applyMineTrigger(q, r, enteringSide) {
       sel.q = h.q;
       sel.r = h.r;
       actionsLeft -= 1;
+      logEvent(`${sel.side} flyttar: ${sel.type} (${from.q},${from.r}) -> (${h.q},${h.r})`);
       console.log(`Blue unit ends at (${sel.q},${sel.r})`);
       updateUI();
       draw();
@@ -1593,6 +1819,7 @@ function applyMineTrigger(q, r, enteringSide) {
       sel.minesLeft -= 1;
       actionsLeft -= 1;
       mode = 'order';
+      logEvent(`${sel.side} lägger mina: ${sel.type} på (${h.q},${h.r})`);
       showToast('Mina utlagd', 'Ett sund är nu minerat.');
       updateUI();
       draw();
@@ -1611,6 +1838,10 @@ function applyMineTrigger(q, r, enteringSide) {
   setTimeout(
     () => {
       console.log('Showing welcome toast now');
+      ensureLogStatusElement();
+      if (location.protocol === 'file:') {
+        setLogStatus('starta via server.js');
+      }
       showToast(
         'Välj karta',
         'Klicka på en kartknapp för att starta spelet.'

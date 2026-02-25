@@ -1,0 +1,36 @@
+[2026-02-25T10:20:43.775Z] ============================================================
+[2026-02-25T10:20:43.775Z] Spelsession startad: session-2026-02-25T10:20:34.621Z
+[2026-02-25T10:20:43.775Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:20:46.014Z] Blå flyttar: UUV (4,2) -> (6,2)
+[2026-02-25T10:20:46.774Z] Blå flyttar: UUV (6,2) -> (6,1)
+[2026-02-25T10:20:51.254Z] BLÅ REFLEKTION
+[2026-02-25T10:20:51.254Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:20:51.254Z] Svar: sdad
+[2026-02-25T10:20:51.254Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:20:51.254Z] Svar: sdf
+[2026-02-25T10:20:51.254Z] Blå avslutar sin tur
+[2026-02-25T10:20:51.278Z] Turbyte: Blå -> Röd
+[2026-02-25T10:20:51.736Z] Röd flyttar: Konventionell korvett (18,5) -> (16,5)
+[2026-02-25T10:20:52.619Z] Röd flyttar: Ubåt (17,8) -> (14,8)
+[2026-02-25T10:20:52.629Z] Turbyte: Röd -> Blå
+[2026-02-25T10:21:10.206Z] Blå flyttar: Ubåt (3,6) -> (4,6)
+[2026-02-25T10:21:10.638Z] Blå flyttar: Ubåt (4,6) -> (5,6)
+[2026-02-25T10:21:12.510Z] Blå flyttar: Ubåt (5,6) -> (6,5)
+[2026-02-25T10:21:19.574Z] BLÅ REFLEKTION
+[2026-02-25T10:21:19.574Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:21:19.574Z] Svar: ret
+[2026-02-25T10:21:19.574Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:21:19.574Z] Svar: t45
+[2026-02-25T10:21:19.574Z] Blå avslutar sin tur
+[2026-02-25T10:21:19.584Z] Turbyte: Blå -> Röd
+[2026-02-25T10:21:20.556Z] Röd flyttar: Ubåt (14,8) -> (11,8)
+[2026-02-25T10:21:20.564Z] Turbyte: Röd -> Blå
+[2026-02-25T10:21:40.454Z] Blå ändrar djup ned: Ubåt till djup 1
+[2026-02-25T10:21:41.982Z] Blå ändrar djup ned: Ubåt till djup 0
+[2026-02-25T10:21:45.598Z] Blå flyttar: Ubåt (6,5) -> (8,4)
+[2026-02-25T10:21:53.950Z] BLÅ REFLEKTION
+[2026-02-25T10:21:53.950Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:21:53.950Z] Svar: uuu
+[2026-02-25T10:21:53.950Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:21:53.950Z] Svar: yyy
+[2026-02-25T10:21:53.950Z] Blå avslutar sin tur
