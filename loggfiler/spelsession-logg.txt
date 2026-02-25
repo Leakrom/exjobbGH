@@ -34,3 +34,159 @@
 [2026-02-25T10:21:53.950Z] Fråga: Vad tänker du att det ska få för resultat?
 [2026-02-25T10:21:53.950Z] Svar: yyy
 [2026-02-25T10:21:53.950Z] Blå avslutar sin tur
+[2026-02-25T10:26:11.422Z] ============================================================
+[2026-02-25T10:26:11.422Z] Spelsession startad: session-2026-02-25T10:25:59.504Z
+[2026-02-25T10:26:11.422Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:26:13.302Z] Blå flyttar: UUV (4,2) -> (6,2)
+[2026-02-25T10:26:13.805Z] Blå flyttar: UUV (6,2) -> (7,1)
+[2026-02-25T10:26:14.270Z] Blå flyttar: UUV (7,1) -> (8,2)
+[2026-02-25T10:26:23.478Z] BLÅ REFLEKTION
+[2026-02-25T10:26:23.478Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:26:23.478Z] Svar: etery
+[2026-02-25T10:26:23.478Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:26:23.478Z] Svar: tyutyu
+[2026-02-25T10:26:23.478Z] Blå avslutar sin tur
+[2026-02-25T10:26:23.501Z] Turbyte: Blå -> Röd
+[2026-02-25T10:26:24.214Z] Röd flyttar: Ubåt (17,8) -> (14,8)
+[2026-02-25T10:26:24.576Z] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-02-25T10:26:24.586Z] Turbyte: Röd -> Blå
+[2026-02-25T10:26:57.742Z] Nytt slag initieras, karta: Karta 2
+[2026-02-25T10:27:00.157Z] Blå flyttar: Ubåt (4,5) -> (7,5)
+[2026-02-25T10:27:00.605Z] Blå flyttar: Ubåt (7,5) -> (8,5)
+[2026-02-25T10:27:00.982Z] Blå flyttar: Ubåt (8,5) -> (10,5)
+[2026-02-25T10:27:04.550Z] BLÅ REFLEKTION
+[2026-02-25T10:27:04.550Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:27:04.550Z] Svar: gfsdg
+[2026-02-25T10:27:04.550Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:27:04.550Z] Svar: fgdfg
+[2026-02-25T10:27:04.550Z] Blå avslutar sin tur
+[2026-02-25T10:33:33.922Z] ============================================================
+[2026-02-25T10:33:33.922Z] Spelsession startad: session-2026-02-25T10:33:31.625Z
+[2026-02-25T10:33:33.922Z] 
+
+[2026-02-25T10:33:33.922Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:33:36.089Z] Blå flyttar: UUV (4,2) -> (6,2)
+[2026-02-25T10:33:36.977Z] Blå flyttar: UUV (6,2) -> (7,3)
+[2026-02-25T10:33:40.057Z] 
+
+[2026-02-25T10:33:40.057Z] Nytt slag initieras, karta: Karta 2
+[2026-02-25T10:33:43.345Z] Blå flyttar: Ubåt (4,5) -> (6,5)
+[2026-02-25T10:33:43.673Z] Blå flyttar: Ubåt (6,5) -> (7,6)
+[2026-02-25T10:33:47.089Z] BLÅ REFLEKTION
+[2026-02-25T10:33:47.089Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:33:47.089Z] Svar: dfgsdg
+[2026-02-25T10:33:47.089Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:33:47.089Z] Svar: dfgdfg
+[2026-02-25T10:33:47.089Z] Blå avslutar sin tur
+[2026-02-25T10:35:01.681Z] ============================================================
+[2026-02-25T10:35:01.681Z] Spelsession startad: session-2026-02-25T10:34:59.652Z
+[2026-02-25T10:35:01.681Z] 
+[2026-02-25T10:35:01.681Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:35:03.361Z] Blå flyttar: UUV (4,2) -> (5,3)
+[2026-02-25T10:35:03.737Z] Blå flyttar: UUV (5,3) -> (6,2)
+[2026-02-25T10:35:05.441Z] 
+[2026-02-25T10:35:05.441Z] Nytt slag initieras, karta: Karta 2
+[2026-02-25T10:35:07.609Z] Blå flyttar: Ubåt (4,5) -> (6,6)
+[2026-02-25T10:35:08.081Z] Blå flyttar: Ubåt (6,6) -> (8,6)
+[2026-02-25T10:35:12.393Z] BLÅ REFLEKTION
+[2026-02-25T10:35:12.393Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:35:12.393Z] Svar: sdsd
+[2026-02-25T10:35:12.393Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:35:12.393Z] Svar: ssd
+[2026-02-25T10:35:12.393Z] Blå avslutar sin tur
+[2026-02-25T10:36:00.305Z] ============================================================
+[2026-02-25T10:36:00.305Z] Spelsession startad: session-2026-02-25T10:35:58.690Z
+[2026-02-25T10:36:00.305Z] 
+Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:36:02.505Z] Blå flyttar: USV (3,4) -> (5,2)
+[2026-02-25T10:36:02.904Z] Blå flyttar: USV (5,2) -> (6,3)
+[2026-02-25T10:36:04.048Z] 
+Nytt slag initieras, karta: Karta 2
+[2026-02-25T10:36:05.712Z] Blå flyttar: Ubåt (4,5) -> (6,6)
+[2026-02-25T10:36:06.552Z] Blå flyttar: Ubåt (6,6) -> (7,7)
+[2026-02-25T10:36:17.192Z] BLÅ REFLEKTION
+[2026-02-25T10:36:17.193Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:36:17.193Z] Svar: fefrwe
+[2026-02-25T10:36:17.193Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:36:17.193Z] Svar: ewrwer
+[2026-02-25T10:36:17.193Z] Blå avslutar sin tur
+[2026-02-25T10:43:28.743Z] BLÅ REFLEKTION
+[2026-02-25T10:43:28.743Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:43:28.743Z] Svar: dd
+[2026-02-25T10:43:28.744Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:43:28.744Z] Svar: dd
+[2026-02-25T10:43:28.744Z] Blå avslutar sin tur
+[2026-02-25T10:43:51.800Z] BLÅ REFLEKTION
+[2026-02-25T10:43:51.800Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:43:51.800Z] Svar: ss
+[2026-02-25T10:43:51.800Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:43:51.800Z] Svar: ss
+[2026-02-25T10:43:51.800Z] Blå avslutar sin tur
+[2026-02-25T10:44:10.968Z] ============================================================
+[2026-02-25T10:44:10.968Z] Spelsession startad: session-2026-02-25T10:44:08.829Z
+[2026-02-25T10:44:10.968Z] 
+
+[2026-02-25T10:44:10.968Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:44:12.959Z] Blå flyttar: USV (3,4) -> (4,5)
+[2026-02-25T10:44:18.279Z] BLÅ REFLEKTION
+[2026-02-25T10:44:18.279Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:44:18.279Z] Svar: qq
+[2026-02-25T10:44:18.279Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:44:18.280Z] Svar: qq
+[2026-02-25T10:44:18.280Z] Blå avslutar sin tur
+[2026-02-25T10:44:43.383Z] BLÅ REFLEKTION
+[2026-02-25T10:44:43.383Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:44:43.383Z] Svar: ww
+[2026-02-25T10:44:43.383Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:44:43.383Z] Svar: ww
+[2026-02-25T10:44:43.383Z] Blå avslutar sin tur
+[2026-02-25T10:44:55.503Z] ============================================================
+[2026-02-25T10:44:55.503Z] Spelsession startad: session-2026-02-25T10:44:53.987Z
+[2026-02-25T10:44:55.503Z] 
+
+[2026-02-25T10:44:55.503Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:44:56.727Z] 
+
+[2026-02-25T10:44:56.727Z] Nytt slag initieras, karta: Karta 2
+[2026-02-25T10:44:57.319Z] 
+
+[2026-02-25T10:44:57.319Z] Nytt slag initieras, karta: Karta 3
+[2026-02-25T10:44:57.815Z] 
+
+[2026-02-25T10:44:57.815Z] Nytt slag initieras, karta: Karta 4
+[2026-02-25T10:45:01.127Z] BLÅ REFLEKTION
+[2026-02-25T10:45:01.127Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:45:01.127Z] Svar: ss
+[2026-02-25T10:45:01.127Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:45:01.127Z] Svar: ss
+[2026-02-25T10:45:01.127Z] Blå avslutar sin tur
+[2026-02-25T10:45:35.455Z] ============================================================
+[2026-02-25T10:45:35.455Z] Spelsession startad: session-2026-02-25T10:45:34.407Z
+[2026-02-25T10:45:35.455Z] 
+
+[2026-02-25T10:45:35.455Z] Nytt slag initieras, karta: Karta 4
+[2026-02-25T10:45:36.359Z] 
+
+[2026-02-25T10:45:36.359Z] Nytt slag initieras, karta: Karta 3
+[2026-02-25T10:45:36.687Z] 
+
+[2026-02-25T10:45:36.687Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:45:39.055Z] BLÅ REFLEKTION
+[2026-02-25T10:45:39.055Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:45:39.055Z] Svar: ss
+[2026-02-25T10:45:39.055Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:45:39.055Z] Svar: ss
+[2026-02-25T10:45:39.055Z] Blå avslutar sin tur
+[2026-02-25T10:47:59.568Z] ============================================================
+[2026-02-25T10:47:59.568Z] Spelsession startad: session-2026-02-25T10:47:51.528Z
+[2026-02-25T10:47:59.568Z] 
+
+[2026-02-25T10:47:59.568Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T10:48:02.008Z] Blå flyttar: UUV (4,2) -> (6,2)
+[2026-02-25T10:48:02.559Z] Blå flyttar: UUV (6,2) -> (8,1)
+[2026-02-25T10:48:05.576Z] BLÅ REFLEKTION
+[2026-02-25T10:48:05.576Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T10:48:05.576Z] Svar: dd
+[2026-02-25T10:48:05.576Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T10:48:05.576Z] Svar: dd
+[2026-02-25T10:48:05.576Z] Blå avslutar sin tur

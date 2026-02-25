@@ -868,6 +868,7 @@
         logEvent('============================================================');
         logEvent(`Spelsession startad: ${sessionId}`);
       }
+      logEvent(`\n`);
       logEvent(`Nytt slag initieras, karta: ${MAP_CONFIGS[selectedMapIndex].name}`);
       
       console.log('Step A: Calling ensureMapLoaded...');
