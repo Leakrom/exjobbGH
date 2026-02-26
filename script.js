@@ -501,11 +501,51 @@
     return true;
   }
 
+  function showEndGameResultPopup(winner) {
+    return new Promise((resolve) => {
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.inset = '0';
+      overlay.style.background = 'rgba(0,0,0,.55)';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.zIndex = '10000';
+
+      const dialog = document.createElement('div');
+      dialog.style.width = 'min(92vw, 620px)';
+      dialog.style.background = '#0f172a';
+      dialog.style.color = '#f8fafc';
+      dialog.style.border = '1px solid rgba(255,255,255,.2)';
+      dialog.style.borderRadius = '10px';
+      dialog.style.padding = '18px';
+      dialog.style.boxSizing = 'border-box';
+      dialog.style.textAlign = 'center';
+
+      const message = document.createElement('div');
+      message.style.fontSize = '22px';
+      message.style.fontWeight = '700';
+      message.textContent = winner === Side.BLUE
+        ? 'Grattis, du vann!'
+        : 'Tyvärr, röd vann den här omgången.';
+
+      dialog.appendChild(message);
+      overlay.appendChild(dialog);
+      document.body.appendChild(overlay);
+
+      setTimeout(() => {
+        overlay.remove();
+        resolve();
+      }, 5000);
+    });
+  }
+
   function handleEndGameReflectionIfNeeded(winner) {
     if (ASK_BLUE_REFLECTION_EACH_TURN || endGameReflectionHandled) return;
     endGameReflectionHandled = true;
 
     (async () => {
+      await showEndGameResultPopup(winner);
       const ok = await collectBlueReflection(`BLÅ REFLEKTION (efter spelavslut, vinnare: ${winner})`);
       if (!ok) {
         console.warn('Slutreflektion hoppades över eller kunde inte sparas.');
