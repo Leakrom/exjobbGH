@@ -190,3 +190,117 @@ Nytt slag initieras, karta: Karta 2
 [2026-02-25T10:48:05.576Z] Fråga: Vad tänker du att det ska få för resultat?
 [2026-02-25T10:48:05.576Z] Svar: dd
 [2026-02-25T10:48:05.576Z] Blå avslutar sin tur
+[2026-02-25T12:34:58.581Z] ============================================================
+[2026-02-25T12:34:58.581Z] Spelsession startad: session-2026-02-25T12:34:53.558Z
+[2026-02-25T12:34:58.581Z] 
+
+[2026-02-25T12:34:58.581Z] Nytt slag initieras, karta: Karta 1
+[2026-02-25T12:35:00.188Z] Blå flyttar: UAV (2,3) -> (5,3)
+[2026-02-25T12:35:00.708Z] Blå flyttar: UAV (5,3) -> (7,3)
+[2026-02-25T12:35:06.700Z] BLÅ REFLEKTION
+[2026-02-25T12:35:06.700Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:35:06.700Z] Svar: ffdf
+[2026-02-25T12:35:06.700Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:35:06.700Z] Svar: dfsdff
+[2026-02-25T12:35:06.700Z] Blå avslutar sin tur
+[2026-02-25T12:35:06.725Z] Turbyte: Blå -> Röd
+[2026-02-25T12:35:07.198Z] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-02-25T12:35:10.109Z] Röd flyttar: Konventionell korvett (18,5) -> (18,3)
+[2026-02-25T12:35:10.117Z] Turbyte: Röd -> Blå
+[2026-02-25T12:36:30.796Z] BLÅ REFLEKTION
+[2026-02-25T12:36:30.796Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:36:30.796Z] Svar: (tomt svar)
+[2026-02-25T12:36:30.796Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:36:30.796Z] Svar: (tomt svar)
+[2026-02-25T12:36:30.796Z] Blå avslutar sin tur
+[2026-02-25T12:36:30.806Z] Turbyte: Blå -> Röd
+[2026-02-25T12:36:31.261Z] Röd flyttar: Ubåt (17,8) -> (14,8)
+[2026-02-25T12:36:32.646Z] Röd flyttar: Konventionell korvett (16,2) -> (14,3)
+[2026-02-25T12:36:32.654Z] Turbyte: Röd -> Blå
+[2026-02-25T12:36:39.492Z] BLÅ REFLEKTION
+[2026-02-25T12:36:39.492Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:36:39.492Z] Svar: (tomt svar)
+[2026-02-25T12:36:39.492Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:36:39.492Z] Svar: (tomt svar)
+[2026-02-25T12:36:39.492Z] Blå avslutar sin tur
+[2026-02-25T12:36:39.502Z] Turbyte: Blå -> Röd
+[2026-02-25T12:36:40.225Z] Röd flyttar: Konventionell korvett (18,3) -> (17,2)
+[2026-02-25T12:36:40.591Z] Röd flyttar: Ubåt (14,8) -> (11,8)
+[2026-02-25T12:36:40.599Z] Turbyte: Röd -> Blå
+[2026-02-25T12:36:48.764Z] BLÅ REFLEKTION
+[2026-02-25T12:36:48.764Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:36:48.764Z] Svar: (tomt svar)
+[2026-02-25T12:36:48.764Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:36:48.764Z] Svar: (tomt svar)
+[2026-02-25T12:36:48.764Z] Blå avslutar sin tur
+[2026-02-25T12:36:48.774Z] Turbyte: Blå -> Röd
+[2026-02-25T12:36:49.740Z] Röd flyttar: Ubåt (11,8) -> (8,8)
+[2026-02-25T12:36:49.748Z] Turbyte: Röd -> Blå
+[2026-02-25T12:41:43.267Z] Blå växlar sensorläge: UAV -> Aktiv
+[2026-02-25T12:41:44.363Z] Blå växlar sensorläge: UAV -> Passiv
+[2026-02-25T12:41:46.699Z] BLÅ REFLEKTION
+[2026-02-25T12:41:46.699Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:41:46.700Z] Svar: (tomt svar)
+[2026-02-25T12:41:46.700Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:41:46.700Z] Svar: (tomt svar)
+[2026-02-25T12:41:46.700Z] Blå avslutar sin tur
+[2026-02-25T12:41:46.710Z] Turbyte: Blå -> Röd
+[2026-02-25T12:41:47.676Z] Röd flyttar: Konventionell korvett (17,2) -> (15,3)
+[2026-02-25T12:41:47.683Z] Turbyte: Röd -> Blå
+[2026-02-25T12:43:21.547Z] Blå flyttar: UAV (7,3) -> (7,6)
+[2026-02-25T12:43:42.379Z] Blå flyttar: UAV (7,6) -> (6,7)
+[2026-02-25T12:43:48.843Z] BLÅ REFLEKTION
+[2026-02-25T12:43:48.843Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:43:48.844Z] Svar: (tomt svar)
+[2026-02-25T12:43:48.844Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:43:48.844Z] Svar: (tomt svar)
+[2026-02-25T12:43:48.844Z] Blå avslutar sin tur55
+[2026-02-25T12:43:48.854Z] Turbyte: Blå -> Röd
+[2026-02-25T12:43:49.573Z] Röd flyttar: Ubåt (8,8) -> (7,7)
+[2026-02-25T12:43:49.952Z] Röd attackerar: Ubåt -> UAV, skada=2, återstående HP mål=0
+[2026-02-25T12:43:49.953Z] Blå enhet sänkt: UAV
+[2026-02-25T12:43:49.965Z] Turbyte: Röd -> Blå
+[2026-02-25T12:44:26.571Z] BLÅ REFLEKTION
+[2026-02-25T12:44:26.571Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:44:26.571Z] Svar: d
+[2026-02-25T12:44:26.571Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:44:26.571Z] Svar: (tomt svar)
+[2026-02-25T12:44:26.571Z] Blå avslutar sin tur
+[2026-02-25T12:44:26.581Z] Turbyte: Blå -> Röd
+[2026-02-25T12:44:27.555Z] Röd flyttar: Konventionell korvett (15,3) -> (13,4)
+[2026-02-25T12:44:27.562Z] Turbyte: Röd -> Blå
+[2026-02-25T12:45:11.915Z] Blå flyttar: Ubåt (3,6) -> (5,5)
+[2026-02-25T12:45:12.539Z] Blå flyttar: Ubåt (5,5) -> (7,3)
+[2026-02-25T12:45:13.203Z] Blå flyttar: Ubåt (7,3) -> (9,2)
+[2026-02-25T12:45:16.882Z] BLÅ REFLEKTION
+[2026-02-25T12:45:16.882Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:45:16.882Z] Svar: (tomt svar)
+[2026-02-25T12:45:16.882Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:45:16.882Z] Svar: (tomt svar)
+[2026-02-25T12:45:16.883Z] Blå avslutar sin tur
+[2026-02-25T12:45:16.892Z] Turbyte: Blå -> Röd
+[2026-02-25T12:45:18.381Z] Röd flyttar: Ubåt (7,7) -> (4,7)
+[2026-02-25T12:45:18.388Z] Turbyte: Röd -> Blå
+[2026-02-25T12:49:24.239Z] Blå attackerar: UAV -> Ubåt, skada=1, återstående HP mål=2
+[2026-02-25T12:49:30.031Z] Blå attackerar: UAV -> Ubåt, skada=1, återstående HP mål=1
+[2026-02-25T12:49:34.039Z] Blå attackerar: UAV -> Ubåt, skada=1, återstående HP mål=0
+[2026-02-25T12:49:34.039Z] Röd enhet sänkt: Ubåt
+[2026-02-25T12:49:43.623Z] BLÅ REFLEKTION
+[2026-02-25T12:49:43.623Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:49:43.623Z] Svar: (tomt svar)
+[2026-02-25T12:49:43.623Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:49:43.623Z] Svar: (tomt svar)
+[2026-02-25T12:49:43.623Z] Blå avslutar sin tur
+[2026-02-25T12:49:43.633Z] Turbyte: Blå -> Röd
+[2026-02-25T12:49:44.344Z] Röd flyttar: Konventionell korvett (14,3) -> (13,2)
+[2026-02-25T12:49:44.961Z] Röd flyttar: Konventionell korvett (13,4) -> (12,3)
+[2026-02-25T12:49:44.968Z] Turbyte: Röd -> Blå
+[2026-02-25T12:50:01.366Z] Blå flyttar: Ubåt (9,2) -> (11,2)
+[2026-02-25T12:50:14.486Z] Blå flyttar: Ubåt (11,2) -> (12,2)
+[2026-02-25T12:50:19.223Z] Blå attackerar: Ubåt -> Konventionell korvett, skada=2, återstående HP mål=2
+[2026-02-25T12:50:24.999Z] BLÅ REFLEKTION
+[2026-02-25T12:50:24.999Z] Fråga: Varför gjorde du det här draget?
+[2026-02-25T12:50:24.999Z] Svar: (tomt svar)
+[2026-02-25T12:50:24.999Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-25T12:50:24.999Z] Svar: (tomt svar)
+[2026-02-25T12:50:24.999Z] Blå avslutar sin tur

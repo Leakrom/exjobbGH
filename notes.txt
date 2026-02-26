@@ -9,6 +9,7 @@ Just nu: Blå vinner om alla röda enheter förutom minorna är sänkta.
 
 
 Kvar att fixa:
+
 Minfält ser ut som hej kom och hjälp mig. Fixa om nödvändigt, annars är det kanske festligt diffust nu.
 //Jag bygger ett spel om sjöstrid med två spelare där röd spelas av datorn och blå av en människa. 
 //Det ska vara synligt vilket område som är minerat genom att skapa en röd boarder runt en område av hexagoner. 
@@ -16,6 +17,8 @@ Minfält ser ut som hej kom och hjälp mig. Fixa om nödvändigt, annars är det
 
 Minfältet ändras när man laddar samma karta igen, måste vara fixerat sen när det är bestämt var
 alla minor ska ligga.
+
+Man ska inte kunna se stats på röd spelare sen.
 
 
 

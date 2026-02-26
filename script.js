@@ -409,7 +409,7 @@
       dialog.appendChild(l1);
 
       const t1 = document.createElement('textarea');
-      t1.rows = 3;
+      t1.rows = 5;
       t1.style.width = '100%';
       t1.style.boxSizing = 'border-box';
       t1.style.borderRadius = '6px';
@@ -423,7 +423,7 @@
       dialog.appendChild(l2);
 
       const t2 = document.createElement('textarea');
-      t2.rows = 3;
+      t2.rows = 5;
       t2.style.width = '100%';
       t2.style.boxSizing = 'border-box';
       t2.style.borderRadius = '6px';
