@@ -16,6 +16,7 @@
     const GRID_H = 20;
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
+    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -244,6 +245,8 @@
   let turn = 1;
   let activeSide = Side.BLUE;
   let actionsLeft = ACTIONS_PER_TURN;
+  let gameOver = false;
+  let endGameReflectionHandled = false;
 
   let selectedId = null;
   let mode = 'order'; // 'order' | 'attack' | 'mine'
@@ -376,7 +379,13 @@
     }
   }
 
-  function showBlueTurnReflectionPopup() {
+  function showBlueTurnReflectionPopup(options = {}) {
+    const {
+      title = 'Avsluta tur',
+      saveButtonText = 'Spara svar',
+      cancelButtonText = 'Avbryt',
+    } = options;
+
     return new Promise((resolve) => {
       const overlay = document.createElement('div');
       overlay.style.position = 'fixed';
@@ -397,7 +406,7 @@
       dialog.style.boxSizing = 'border-box';
 
       const heading = document.createElement('h3');
-      heading.textContent = 'Avsluta tur';
+      heading.textContent = title;
       heading.style.margin = '0 0 10px 0';
       heading.style.fontSize = '16px';
       dialog.appendChild(heading);
@@ -437,11 +446,11 @@
 
       const cancelBtn = document.createElement('button');
       cancelBtn.type = 'button';
-      cancelBtn.textContent = 'Avbryt';
+      cancelBtn.textContent = cancelButtonText;
 
       const saveBtn = document.createElement('button');
       saveBtn.type = 'button';
-      saveBtn.textContent = 'Spara svar';
+      saveBtn.textContent = saveButtonText;
 
       actions.appendChild(cancelBtn);
       actions.appendChild(saveBtn);
@@ -468,6 +477,40 @@
         resolve({ answer1, answer2 });
       });
     });
+  }
+
+  async function collectBlueReflection(contextLabel) {
+    const answers = await showBlueTurnReflectionPopup();
+    if (!answers) return false;
+
+    logEvent(contextLabel);
+    logEvent('Fråga: Varför gjorde du det här draget?');
+    logEvent(`Svar: ${answers.answer1 || '(tomt svar)'}`);
+    logEvent('Fråga: Vad tänker du att det ska få för resultat?');
+    logEvent(`Svar: ${answers.answer2 || '(tomt svar)'}`);
+
+    try {
+      await flushSessionLogToFile();
+    } catch (e) {
+      console.error('Kunde inte spara sessionslogg:', e);
+      setLogStatus('fel vid sparning');
+      showToast('Loggning misslyckades', 'Kunde inte skriva till textfilen.');
+      return false;
+    }
+
+    return true;
+  }
+
+  function handleEndGameReflectionIfNeeded(winner) {
+    if (ASK_BLUE_REFLECTION_EACH_TURN || endGameReflectionHandled) return;
+    endGameReflectionHandled = true;
+
+    (async () => {
+      const ok = await collectBlueReflection(`BLÅ REFLEKTION (efter spelavslut, vinnare: ${winner})`);
+      if (!ok) {
+        console.warn('Slutreflektion hoppades över eller kunde inte sparas.');
+      }
+    })();
   }
 
   function showToast(title, msg, msg2, msg3) {
@@ -880,6 +923,8 @@
       turn = 1;
       activeSide = Side.BLUE;
       actionsLeft = ACTIONS_PER_TURN;
+      gameOver = false;
+      endGameReflectionHandled = false;
       selectedId = null;
       mode = 'order';
       blueSpawnIndex = 0;
@@ -1043,10 +1088,12 @@ function applyMineTrigger(q, r, enteringSide) {
     );
     if (!blue || !red) {
       const winner = blue ? Side.BLUE : Side.RED;
+      gameOver = true;
       showToast(
         'Spelet är slut',
         `${winner} vinner! Tryck "Nytt slag" för att spela igen.`
       );
+      handleEndGameReflectionIfNeeded(winner);
       return true;
     }
     return false;
@@ -1247,28 +1294,12 @@ function applyMineTrigger(q, r, enteringSide) {
   // Other buttons
   if (btnEndTurn) {
     btnEndTurn.addEventListener('click', async () => {
-      if (activeSide === Side.BLUE) {
-        const answers = await showBlueTurnReflectionPopup();
-        if (!answers) return;
-
-        logEvent('BLÅ REFLEKTION');
-        logEvent('Fråga: Varför gjorde du det här draget?');
-        logEvent(`Svar: ${answers.answer1 || '(tomt svar)'}`);
-        logEvent('Fråga: Vad tänker du att det ska få för resultat?');
-        logEvent(`Svar: ${answers.answer2 || '(tomt svar)'}`);
-        logEvent(`${activeSide} avslutar sin tur`);
-
-        try {
-          await flushSessionLogToFile();
-        } catch (e) {
-          console.error('Kunde inte spara sessionslogg:', e);
-          setLogStatus('fel vid sparning');
-          showToast('Loggning misslyckades', 'Kunde inte skriva till textfilen.');
-          return;
-        }
-      } else {
-        logEvent(`${activeSide} avslutar sin tur`);
+      if (activeSide === Side.BLUE && ASK_BLUE_REFLECTION_EACH_TURN) {
+        const ok = await collectBlueReflection('BLÅ REFLEKTION');
+        if (!ok) return;
       }
+
+      logEvent(`${activeSide} avslutar sin tur`);
       endTurn();
     });
   }
@@ -1358,6 +1389,7 @@ function applyMineTrigger(q, r, enteringSide) {
   }
 
   function endTurn() {
+    if (gameOver) return;
     const nextSide = activeSide === Side.BLUE ? Side.RED : Side.BLUE;
     logEvent(`Turbyte: ${activeSide} -> ${nextSide}`);
     selectedId = null;
