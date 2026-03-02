@@ -16,7 +16,8 @@
     const GRID_H = 20;
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
-    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
+    const BLUE_ACTIONS_UNLIMITED = true;
+    const ASK_BLUE_REFLECTION_EACH_TURN = true; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -411,6 +412,13 @@
       heading.style.fontSize = '16px';
       dialog.appendChild(heading);
 
+      const note = document.createElement('div');
+      note.textContent = 'Turen går vidare även om loggningen misslyckas.';
+      note.style.margin = '0 0 12px 0';
+      note.style.opacity = '0.8';
+      note.style.fontSize = '12px';
+      dialog.appendChild(note);
+
       const l1 = document.createElement('label');
       l1.textContent = 'Varför gjorde du det här draget?';
       l1.style.display = 'block';
@@ -495,7 +503,6 @@
       console.error('Kunde inte spara sessionslogg:', e);
       setLogStatus('fel vid sparning');
       showToast('Loggning misslyckades', 'Kunde inte skriva till textfilen.');
-      return false;
     }
 
     return true;
@@ -709,7 +716,8 @@
     }`;
 
     elActivePlayer.textContent = activeSide;
-    elActionsLeft.textContent = String(actionsLeft);
+    elActionsLeft.textContent =
+      actionsLeft === Number.POSITIVE_INFINITY ? 'Obegränsat' : String(actionsLeft);
 
     const sel = selectedId ? getUnit(selectedId) : null;
     if (!sel) {
@@ -738,13 +746,14 @@
     elSelMines.textContent = String(sel.minesLeft);
 
     const isOwn = sel.side === activeSide;
-    btnAttack.disabled = !isOwn || actionsLeft <= 0;
-    btnMine.disabled = !isOwn || actionsLeft <= 0 || sel.minesLeft <= 0;
+    const hasActions = hasActionsFor(activeSide);
+    btnAttack.disabled = !isOwn || !hasActions;
+    btnMine.disabled = !isOwn || !hasActions || sel.minesLeft <= 0;
     // Depth buttons only for submarines and if own unit
     const cell = sel.q !== undefined ? getCell(sel.q, sel.r) : null;
     const maxDepthAtHex = cell ? Math.ceil(cell.depthNormalized * MAX_DEPTH) : MAX_DEPTH;
-    btnDepthUp.disabled = !isOwn || actionsLeft <= 0 || !SUBMARINE_TYPES.has(sel.type) || sel.depth >= maxDepthAtHex;
-    btnDepthDown.disabled = !isOwn || actionsLeft <= 0 || !SUBMARINE_TYPES.has(sel.type) || sel.depth <= 0;
+    btnDepthUp.disabled = !isOwn || !hasActions || !SUBMARINE_TYPES.has(sel.type) || sel.depth >= maxDepthAtHex;
+    btnDepthDown.disabled = !isOwn || !hasActions || !SUBMARINE_TYPES.has(sel.type) || sel.depth <= 0;
     // Sensor toggle only for blue units with sensors
     btnToggleSensor.disabled = !isOwn || !SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type;
     if (!btnToggleSensor.disabled) {
@@ -835,6 +844,7 @@
       depth,
       hp: st.hp,
       minesLeft: st.mines,
+      movedThisTurn: false,
     };
     // Blue units: add sensor mode (false = passive, true = active)
     if (side === Side.BLUE) {
@@ -962,7 +972,7 @@
       nextId = 1;
       turn = 1;
       activeSide = Side.BLUE;
-      actionsLeft = ACTIONS_PER_TURN;
+      actionsLeft = BLUE_ACTIONS_UNLIMITED ? Number.POSITIVE_INFINITY : ACTIONS_PER_TURN;
       gameOver = false;
       endGameReflectionHandled = false;
       selectedId = null;
@@ -1006,6 +1016,8 @@
         spawn(Side.RED, t, h.q, h.r);
       }
       console.log('Step K: Red units spawned, total units:', units.length);
+
+      resetBlueMoves();
       
       console.log('Step L: Showing toast message...');
       showToast('Nytt slag', `${MAP_CONFIGS[selectedMapIndex].name} är vald. Blå börjar.`);
@@ -1043,6 +1055,7 @@
   }
 
   function legalMoves(u) {
+    if (u.side === Side.BLUE && u.movedThisTurn) return [];
     const st = UNIT_STATS[u.type];
     const origin = { q: u.q, r: u.r };
     const res = [];
@@ -1224,7 +1237,7 @@ function applyMineTrigger(q, r, enteringSide) {
   }
 
   function tryAttack(attacker, target) {
-    if (actionsLeft <= 0) {
+    if (!hasActionsFor(attacker.side)) {
       showToast('Inga åtgärder kvar', 'Avsluta tur för att fortsätta.');
       return;
     }
@@ -1242,7 +1255,7 @@ function applyMineTrigger(q, r, enteringSide) {
     if (attacker.type === UnitType.SUBMARINE && d === 1) dmg = 2;
 
     target.hp -= dmg;
-    actionsLeft -= 1;
+    spendActionFor(attacker.side);
     showToast('Träff', `${attacker.type} träffar ${target.type} för ${dmg} skada.`);
     logEvent(`${attacker.side} attackerar: ${attacker.type} -> ${target.type}, skada=${dmg}, återstående HP mål=${Math.max(0, target.hp)}`);
 
@@ -1388,13 +1401,13 @@ function applyMineTrigger(q, r, enteringSide) {
       const sel = selectedId ? getUnit(selectedId) : null;
       if (!sel || sel.side !== activeSide) return;
       if (!SUBMARINE_TYPES.has(sel.type)) return;
-      if (actionsLeft <= 0) return;
+      if (!hasActionsFor(sel.side)) return;
       // Cannot go deeper than water depth at this hex
       const cell = getCell(sel.q, sel.r);
       const maxDepth = Math.ceil(cell.depthNormalized * MAX_DEPTH);
       if (sel.depth >= maxDepth) return;
       sel.depth += 1;
-      actionsLeft -= 1;
+      spendActionFor(sel.side);
       logEvent(`${sel.side} ändrar djup upp: ${sel.type} till djup ${sel.depth}`);
       updateUI();
       draw();
@@ -1407,9 +1420,9 @@ function applyMineTrigger(q, r, enteringSide) {
       if (!sel || sel.side !== activeSide) return;
       if (!SUBMARINE_TYPES.has(sel.type)) return;
       if (sel.depth <= 0) return;
-      if (actionsLeft <= 0) return;
+      if (!hasActionsFor(sel.side)) return;
       sel.depth -= 1;
-      actionsLeft -= 1;
+      spendActionFor(sel.side);
       logEvent(`${sel.side} ändrar djup ned: ${sel.type} till djup ${sel.depth}`);
       updateUI();
       draw();
@@ -1436,7 +1449,12 @@ function applyMineTrigger(q, r, enteringSide) {
     mode = 'order';
     activeSide = nextSide;
     if (activeSide === Side.BLUE) turn += 1;
-    actionsLeft = ACTIONS_PER_TURN;
+    actionsLeft =
+      activeSide === Side.BLUE && BLUE_ACTIONS_UNLIMITED
+        ? Number.POSITIVE_INFINITY
+        : ACTIONS_PER_TURN;
+
+    if (activeSide === Side.BLUE) resetBlueMoves();
 
     // Clear redMoves only at the start of Red's next turn
     if (activeSide === Side.RED && turn !== redMovesLastRedTurn) {
@@ -1519,7 +1537,7 @@ function applyMineTrigger(q, r, enteringSide) {
       const from = { q: mover.q, r: mover.r };
       mover.q = dest.q;
       mover.r = dest.r;
-      actionsLeft -= 1;
+      spendActionFor(mover.side);
       logEvent(`${mover.side} flyttar: ${mover.type} (${from.q},${from.r}) -> (${dest.q},${dest.r})`);
       if (mines.has(keyOf(dest.q, dest.r))) {
         applyMineTrigger(dest.q, dest.r, mover.side);
@@ -1796,12 +1814,16 @@ function applyMineTrigger(q, r, enteringSide) {
     const sel = selectedId ? getUnit(selectedId) : null;
     if (!sel) return;
     if (sel.side !== activeSide) return;
-    if (actionsLeft <= 0) {
+    if (!hasActionsFor(sel.side)) {
       showToast('Inga åtgärder kvar', 'Avsluta tur för att fortsätta.');
       return;
     }
 
     if (mode === 'order') {
+      if (sel.side === Side.BLUE && sel.movedThisTurn) {
+        showToast('Redan flyttad', 'Varje enhet kan bara förflytta sig en gång per tur.');
+        return;
+      }
       const from = { q: sel.q, r: sel.r };
       const moves = legalMoves(sel);
       if (!moves.some((m) => hexEq(m, h))) {
@@ -1857,7 +1879,8 @@ function applyMineTrigger(q, r, enteringSide) {
       if (mineTriggered) {
         sel.q = stopQ;
         sel.r = stopR;
-        actionsLeft -= 1;
+        spendActionFor(sel.side);
+        if (sel.side === Side.BLUE) sel.movedThisTurn = true;
         logEvent(`${sel.side} flyttar (mina utlöst): ${sel.type} (${from.q},${from.r}) -> (${stopQ},${stopR})`);
         applyMineTrigger(stopQ, stopR, sel.side);
         console.log(`Blue unit ends at (${sel.q},${sel.r})`);
@@ -1869,7 +1892,8 @@ function applyMineTrigger(q, r, enteringSide) {
       // No mine encountered, move normally
       sel.q = h.q;
       sel.r = h.r;
-      actionsLeft -= 1;
+      spendActionFor(sel.side);
+      if (sel.side === Side.BLUE) sel.movedThisTurn = true;
       logEvent(`${sel.side} flyttar: ${sel.type} (${from.q},${from.r}) -> (${h.q},${h.r})`);
       console.log(`Blue unit ends at (${sel.q},${sel.r})`);
       updateUI();
@@ -1890,7 +1914,7 @@ function applyMineTrigger(q, r, enteringSide) {
       }
       placeMine(h.q, h.r, sel.side);
       sel.minesLeft -= 1;
-      actionsLeft -= 1;
+      spendActionFor(sel.side);
       mode = 'order';
       logEvent(`${sel.side} lägger mina: ${sel.type} på (${h.q},${h.r})`);
       showToast('Mina utlagd', 'Ett sund är nu minerat.');
@@ -1899,6 +1923,21 @@ function applyMineTrigger(q, r, enteringSide) {
       return;
     }
   });
+
+  function hasActionsFor(side) {
+    return side === Side.BLUE && BLUE_ACTIONS_UNLIMITED ? true : actionsLeft > 0;
+  }
+
+  function spendActionFor(side) {
+    if (side === Side.BLUE && BLUE_ACTIONS_UNLIMITED) return;
+    actionsLeft -= 1;
+  }
+
+  function resetBlueMoves() {
+    for (const u of units) {
+      if (u.side === Side.BLUE) u.movedThisTurn = false;
+    }
+  }
 
   // =====================================================
   // Initiering
