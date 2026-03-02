@@ -34,18 +34,18 @@
       CONTROL_MINE: 'Kontrollerbar mina',
     };
 
-  // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay)
+  // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay), ammo (total shots)
   const UNIT_STATS = {
-    [UnitType.FRIGATE]: { hp: 4, move: 2, range: 3, mines: 0 },
-    [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 2, mines: 0 },
-    [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 1, mines: 0 },
-    [UnitType.UAV]: { hp: 1, move: 4, range: 1, mines: 0 },
-    [UnitType.USV]: { hp: 2, move: 2, range: 1, mines: 0 },
-    [UnitType.UUV]: { hp: 1, move: 2, range: 2, mines: 0 },
-    [UnitType.SUBMARINE_HUNTER]: { hp: 2, move: 3, range: 3, mines: 0 },
-    [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 2, mines: 0 },
-    [UnitType.UNCONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0 },
-    [UnitType.CONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0 },
+    [UnitType.FRIGATE]: { hp: 4, move: 2, range: 3, mines: 0, ammo: 12 },
+    [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 2, mines: 0, ammo: 10 },
+    [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 1, mines: 0, ammo: 10 },
+    [UnitType.UAV]: { hp: 1, move: 4, range: 1, mines: 0, ammo: 0 },
+    [UnitType.USV]: { hp: 2, move: 2, range: 1, mines: 0, ammo: 1 },
+    [UnitType.UUV]: { hp: 1, move: 2, range: 2, mines: 0, ammo: 0 },
+    [UnitType.SUBMARINE_HUNTER]: { hp: 2, move: 3, range: 3, mines: 0, ammo: 0 },
+    [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 2, mines: 0, ammo: 10 },
+    [UnitType.UNCONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0, ammo: 0 },
+    [UnitType.CONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0, ammo: 0 },
   };
 
   const Side = { BLUE: 'Blå', RED: 'Röd' };
@@ -266,6 +266,7 @@
   const elSelRange = document.getElementById('selRange');
   const elSelDepth = document.getElementById('selDepth');
   const elSelMines = document.getElementById('selMines');
+  const elSelAmmo = document.getElementById('selAmmo');
 
   const elActivePlayer = document.getElementById('activePlayer');
   const elActionsLeft = document.getElementById('actionsLeft');
@@ -704,7 +705,7 @@
     if (
       !elTurnPill || !elPhasePill || !elActivePlayer || !elActionsLeft ||
       !elSelType || !elSelSide || !elSelHP || !elSelMove || !elSelRange ||
-      !elSelDepth || !elSelMines || !btnAttack || !btnMine || !btnDepthUp ||
+      !elSelDepth || !elSelMines || !elSelAmmo || !btnAttack || !btnMine || !btnDepthUp ||
       !btnDepthDown || !btnToggleSensor
     ) {
       return;
@@ -728,6 +729,7 @@
       elSelRange.textContent = '–';
       elSelDepth.textContent = '–';
       elSelMines.textContent = '–';
+      elSelAmmo.textContent = '0/0';
       btnAttack.disabled = true;
       btnMine.disabled = true;
       btnDepthUp.disabled = true;
@@ -744,10 +746,11 @@
     elSelRange.textContent = String(st.range);
     elSelDepth.textContent = `${sel.depth}/${MAX_DEPTH}`;
     elSelMines.textContent = String(sel.minesLeft);
+    elSelAmmo.textContent = `${sel.ammoLeft}/${st.ammo}`;
 
     const isOwn = sel.side === activeSide;
     const hasActions = hasActionsFor(activeSide);
-    btnAttack.disabled = !isOwn || !hasActions;
+    btnAttack.disabled = !isOwn || !hasActions || sel.ammoLeft <= 0;
     btnMine.disabled = !isOwn || !hasActions || sel.minesLeft <= 0;
     // Depth buttons only for submarines and if own unit
     const cell = sel.q !== undefined ? getCell(sel.q, sel.r) : null;
@@ -844,6 +847,7 @@
       depth,
       hp: st.hp,
       minesLeft: st.mines,
+      ammoLeft: st.ammo,
       movedThisTurn: false,
     };
     // Blue units: add sensor mode (false = passive, true = active)
@@ -1241,6 +1245,10 @@ function applyMineTrigger(q, r, enteringSide) {
       showToast('Inga åtgärder kvar', 'Avsluta tur för att fortsätta.');
       return;
     }
+    if (attacker.ammoLeft <= 0) {
+      showToast('Slut på skott', 'Den här enheten har inga skott kvar.');
+      return;
+    }
     const st = UNIT_STATS[attacker.type];
     const d = hexDistance(
       { q: attacker.q, r: attacker.r },
@@ -1255,6 +1263,7 @@ function applyMineTrigger(q, r, enteringSide) {
     if (attacker.type === UnitType.SUBMARINE && d === 1) dmg = 2;
 
     target.hp -= dmg;
+    attacker.ammoLeft -= 1;
     spendActionFor(attacker.side);
     showToast('Träff', `${attacker.type} träffar ${target.type} för ${dmg} skada.`);
     logEvent(`${attacker.side} attackerar: ${attacker.type} -> ${target.type}, skada=${dmg}, återstående HP mål=${Math.max(0, target.hp)}`);
