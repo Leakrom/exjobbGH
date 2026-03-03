@@ -6,7 +6,7 @@ Just nu: Blå vinner om alla röda enheter förutom minorna är sänkta.
 
 
 
-
+-------------
 
 Kvar att fixa:
 
@@ -22,7 +22,7 @@ Man ska inte kunna se stats på röd spelare sen.
 
 
 
-
+-------------
 
 
 
@@ -32,10 +32,10 @@ Ska sensorväxling vara ett drag? Nej.
 Röd ska ha lättare att upptäcka blå när blå är i aktivt sensorläge. Fixa eller skrota? 
 Istället göra så att blå får gå kortare i aktivt sensorläge för prototypen?
 
+Ska post-game frågorna vara samma oavsett om man fått in-game debriefingen eller inte? 
 
 
-
-
+-------------
 
 
 Motiveringar:

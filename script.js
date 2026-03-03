@@ -387,7 +387,7 @@
 
   function showBlueTurnReflectionPopup(options = {}) {
     const {
-      title = 'Avsluta tur',
+      title = 'Reflektera över följande frågor',
       saveButtonText = 'Spara svar',
       cancelButtonText = 'Avbryt',
     } = options;
@@ -417,16 +417,16 @@
       heading.style.fontSize = '16px';
       dialog.appendChild(heading);
 
-      const note = document.createElement('div');
+      /*const note = document.createElement('div');
       note.textContent = 'Turen går vidare även om loggningen misslyckas.';
       note.style.margin = '0 0 12px 0';
       note.style.opacity = '0.8';
       note.style.fontSize = '12px';
       dialog.appendChild(note);
-
+*/
       const l1 = document.createElement('label');
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
-        l1.textContent = 'Vilka drag gjorde du?';
+        l1.textContent = 'Beskriv vilka drag du gjorde.';
       } else {
         l1.textContent = 'Redogör för din övergripande strategi och vad som hände i spelet.';
       }
@@ -435,7 +435,7 @@
       dialog.appendChild(l1);
 
       const t1 = document.createElement('textarea');
-      t1.rows = 5;
+      t1.rows = 7;
       t1.style.width = '100%';
       t1.style.boxSizing = 'border-box';
       t1.style.borderRadius = '6px';
@@ -444,7 +444,7 @@
 
       const l2 = document.createElement('label');
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
-        l2.textContent = 'Var det lätt att ta beslut om att göra dessa drag?';
+        l2.textContent = 'Var det lätt att ta beslut om att göra dessa drag? Varför valde du att göra just dessa drag? Vad tänkte du att de skulle leda till?';
       } else {
         l2.textContent = 'Berätta om hur det kändes att spela spelet. Var det roligt/enkelt/realistiskt/utmanande etc.';
       }
@@ -453,13 +453,12 @@
       dialog.appendChild(l2);
 
       const t2 = document.createElement('textarea');
-      t2.rows = 5;
+      t2.rows = 7;
       t2.style.width = '100%';
       t2.style.boxSizing = 'border-box';
       t2.style.borderRadius = '6px';
       t2.style.marginBottom = '12px';
       dialog.appendChild(t2);
-
       
       const l3 = document.createElement('label');
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
@@ -472,7 +471,7 @@
       dialog.appendChild(l3);
 
       const t3 = document.createElement('textarea');
-      t3.rows = 5;
+      t3.rows = 7;
       t3.style.width = '100%';
       t3.style.boxSizing = 'border-box';
       t3.style.borderRadius = '6px';
@@ -481,7 +480,7 @@
 
       const l4 = document.createElement('label');
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
-        l4.textContent = 'Vad tror du hade hänt om du gjort de andra dragen?';
+        l4.textContent = 'Vad tror du hade hänt om du hade gjort de andra dragen?';
       } else {
         l4.textContent = 'Hade du kunnat nå samma, eller bättre, resultat genom att göra på något annat sätt, i så fall hur?';
       }
@@ -490,7 +489,7 @@
       dialog.appendChild(l4);
 
       const t4 = document.createElement('textarea');
-      t4.rows = 5;
+      t4.rows = 7;
       t4.style.width = '100%';
       t4.style.boxSizing = 'border-box';
       t4.style.borderRadius = '6px';
