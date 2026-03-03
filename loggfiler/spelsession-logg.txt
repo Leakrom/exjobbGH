@@ -482,3 +482,296 @@ Nytt slag initieras, karta: Karta 2
 [2026-02-26T08:36:22.141Z] Svar: rer
 [2026-02-26T08:36:22.141Z] Fråga: Vad tänker du att det ska få för resultat?
 [2026-02-26T08:36:22.141Z] Svar: wertwet
+[2026-02-26T08:57:31.997Z] ============================================================
+[2026-02-26T08:57:31.997Z] Spelsession startad: session-2026-02-26T08:57:28.841Z
+[2026-02-26T08:57:31.997Z] 
+
+[2026-02-26T08:57:31.997Z] Nytt slag initieras, karta: Karta 1
+[2026-02-26T08:57:37.180Z] Blå ändrar djup ned: UUV till djup 2
+[2026-02-26T08:57:37.396Z] Blå ändrar djup ned: UUV till djup 1
+[2026-02-26T08:57:37.621Z] Blå ändrar djup ned: UUV till djup 0
+[2026-02-26T08:57:42.556Z] Blå avslutar sin tur
+[2026-02-26T08:57:42.556Z] Turbyte: Blå -> Röd
+[2026-02-26T08:57:43.015Z] Röd flyttar: Ubåt (17,8) -> (14,8)
+[2026-02-26T08:57:43.382Z] Röd flyttar: Ubåt (14,8) -> (11,8)
+[2026-02-26T08:57:44.249Z] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-02-26T08:57:44.257Z] Turbyte: Röd -> Blå
+[2026-02-26T08:57:44.965Z] Blå flyttar: UUV (4,2) -> (5,3)
+[2026-02-26T08:57:45.500Z] Blå flyttar: UUV (5,3) -> (6,4)
+[2026-02-26T08:57:46.364Z] Blå flyttar: UUV (6,4) -> (6,6)
+[2026-02-26T08:57:47.564Z] Blå avslutar sin tur
+[2026-02-26T08:57:47.564Z] Turbyte: Blå -> Röd
+[2026-02-26T08:57:48.020Z] Röd flyttar: Ubåt (11,8) -> (8,8)
+[2026-02-26T08:57:51.186Z] Röd flyttar: Konventionell korvett (16,2) -> (14,3)
+[2026-02-26T08:57:51.193Z] Turbyte: Röd -> Blå
+[2026-02-26T08:57:52.924Z] Blå flyttar: Ubåt (3,6) -> (5,7)
+[2026-02-26T08:57:54.124Z] Blå flyttar: Ubåt (5,7) -> (7,7)
+[2026-02-26T08:58:31.180Z] Blå avslutar sin tur
+[2026-02-26T08:58:31.180Z] Turbyte: Blå -> Röd
+[2026-02-26T08:58:31.640Z] Röd flyttar: Ubåt (8,8) -> (8,7)
+[2026-02-26T08:58:32.019Z] Röd attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=1
+[2026-02-26T08:58:32.385Z] Röd attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=0
+[2026-02-26T08:58:32.386Z] Blå enhet sänkt: Ubåt
+[2026-02-26T08:58:32.393Z] Turbyte: Röd -> Blå
+[2026-02-26T08:58:38.644Z] Blå flyttar: UUV (6,6) -> (7,7)
+[2026-02-26T08:58:41.260Z] Blå attackerar: UUV -> Ubåt, skada=1, återstående HP mål=2
+[2026-02-26T08:58:47.292Z] Blå attackerar: UUV -> Ubåt, skada=1, återstående HP mål=1
+[2026-02-26T08:58:49.492Z] Blå avslutar sin tur
+[2026-02-26T08:58:49.492Z] Turbyte: Blå -> Röd
+[2026-02-26T08:58:49.955Z] Röd attackerar: Ubåt -> UUV, skada=2, återstående HP mål=0
+[2026-02-26T08:58:49.955Z] Blå enhet sänkt: UUV
+[2026-02-26T08:58:50.321Z] Röd flyttar: Ubåt (8,7) -> (5,7)
+[2026-02-26T08:58:50.690Z] Röd flyttar: Konventionell korvett (14,3) -> (12,4)
+[2026-02-26T08:58:50.696Z] Turbyte: Röd -> Blå
+[2026-02-26T08:58:56.772Z] Blå flyttar: UAV (3,8) -> (5,8)
+[2026-02-26T08:58:58.796Z] Blå attackerar: UAV -> Ubåt, skada=1, återstående HP mål=0
+[2026-02-26T08:58:58.796Z] Röd enhet sänkt: Ubåt
+[2026-02-26T08:59:00.732Z] Blå flyttar: UAV (5,8) -> (9,4)
+[2026-02-26T08:59:02.979Z] Blå avslutar sin tur
+[2026-02-26T08:59:02.980Z] Turbyte: Blå -> Röd
+[2026-02-26T08:59:04.462Z] Röd flyttar: Konventionell korvett (18,5) -> (17,4)
+[2026-02-26T08:59:04.470Z] Turbyte: Röd -> Blå
+[2026-02-26T08:59:09.460Z] Blå flyttar: UAV (9,4) -> (10,4)
+[2026-02-26T08:59:13.580Z] Blå flyttar: UAV (10,4) -> (11,4)
+[2026-02-26T08:59:15.332Z] Blå attackerar: UAV -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-02-26T08:59:17.140Z] Blå avslutar sin tur
+[2026-02-26T08:59:17.140Z] Turbyte: Blå -> Röd
+[2026-02-26T08:59:17.603Z] Röd attackerar: Konventionell korvett -> UAV, skada=1, återstående HP mål=0
+[2026-02-26T08:59:17.604Z] Blå enhet sänkt: UAV
+[2026-02-26T08:59:18.476Z] Röd flyttar: Konventionell korvett (12,4) -> (11,4)
+[2026-02-26T08:59:18.483Z] Turbyte: Röd -> Blå
+[2026-02-26T08:59:20.204Z] Blå flyttar: USV (3,4) -> (5,3)
+[2026-02-26T08:59:20.820Z] Blå flyttar: USV (5,3) -> (7,3)
+[2026-02-26T08:59:21.508Z] Blå flyttar: USV (7,3) -> (9,3)
+[2026-02-26T08:59:22.939Z] Blå avslutar sin tur
+[2026-02-26T08:59:22.940Z] Turbyte: Blå -> Röd
+[2026-02-26T08:59:23.397Z] Röd flyttar: Konventionell korvett (11,4) -> (10,3)
+[2026-02-26T08:59:23.773Z] Röd attackerar: Konventionell korvett -> USV, skada=1, återstående HP mål=1
+[2026-02-26T08:59:24.139Z] Röd attackerar: Konventionell korvett -> USV, skada=1, återstående HP mål=0
+[2026-02-26T08:59:24.139Z] Blå enhet sänkt: USV
+[2026-02-26T08:59:24.146Z] Turbyte: Röd -> Blå
+[2026-02-26T08:59:25.980Z] Blå flyttar: UAV (2,3) -> (6,3)
+[2026-02-26T08:59:26.724Z] Blå flyttar: UAV (6,3) -> (9,3)
+[2026-02-26T08:59:28.860Z] Blå attackerar: UAV -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-02-26T08:59:30.044Z] Blå avslutar sin tur
+[2026-02-26T08:59:30.044Z] Turbyte: Blå -> Röd
+[2026-02-26T08:59:30.515Z] Röd attackerar: Konventionell korvett -> UAV, skada=1, återstående HP mål=0
+[2026-02-26T08:59:30.515Z] Blå enhet sänkt: UAV
+[2026-02-26T08:59:30.876Z] Röd flyttar: Konventionell korvett (10,3) -> (8,3)
+[2026-02-26T08:59:31.743Z] Röd flyttar: Konventionell korvett (17,4) -> (15,4)
+[2026-02-26T08:59:31.750Z] Turbyte: Röd -> Blå
+[2026-02-26T08:59:32.596Z] Blå flyttar: Fregatt (1,2) -> (3,1)
+[2026-02-26T08:59:33.268Z] Blå flyttar: Fregatt (3,1) -> (5,1)
+[2026-02-26T08:59:33.948Z] Blå flyttar: Fregatt (5,1) -> (7,1)
+[2026-02-26T08:59:35.124Z] Blå avslutar sin tur
+[2026-02-26T08:59:35.124Z] Turbyte: Blå -> Röd
+[2026-02-26T08:59:37.363Z] Röd flyttar: Konventionell korvett (8,3) -> (8,1)
+[2026-02-26T08:59:37.370Z] Turbyte: Röd -> Blå
+[2026-02-26T08:59:41.788Z] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-02-26T08:59:43.620Z] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-02-26T08:59:43.620Z] Röd enhet sänkt: Konventionell korvett
+[2026-02-26T08:59:45.772Z] Blå flyttar: Fregatt (7,1) -> (9,1)
+[2026-02-26T08:59:46.924Z] Blå avslutar sin tur
+[2026-02-26T08:59:46.924Z] Turbyte: Blå -> Röd
+[2026-02-26T08:59:48.410Z] Röd flyttar: Konventionell korvett (15,4) -> (14,3)
+[2026-02-26T08:59:48.417Z] Turbyte: Röd -> Blå
+[2026-02-26T08:59:50.316Z] Blå flyttar: Fregatt (9,1) -> (11,1)
+[2026-02-26T08:59:51.587Z] Blå flyttar: Fregatt (11,1) -> (13,1)
+[2026-02-26T08:59:53.507Z] Blå flyttar: Fregatt (13,1) -> (14,2)
+[2026-02-26T08:59:54.643Z] Blå avslutar sin tur
+[2026-02-26T08:59:54.643Z] Turbyte: Blå -> Röd
+[2026-02-26T08:59:55.106Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=3
+[2026-02-26T08:59:55.470Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=2
+[2026-02-26T08:59:55.834Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=1
+[2026-02-26T08:59:55.842Z] Turbyte: Röd -> Blå
+[2026-02-26T08:59:58.811Z] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-02-26T09:00:00.915Z] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-02-26T09:00:03.075Z] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-02-26T09:00:06.787Z] Blå avslutar sin tur
+[2026-02-26T09:00:06.787Z] Turbyte: Blå -> Röd
+[2026-02-26T09:00:07.249Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=0
+[2026-02-26T09:00:07.250Z] Blå enhet sänkt: Fregatt
+[2026-02-26T09:00:07.608Z] Röd flyttar: Konventionell korvett (14,3) -> (12,4)
+[2026-02-26T09:00:10.789Z] Röd flyttar: Konventionell korvett (12,4) -> (11,4)
+[2026-02-26T09:00:10.796Z] Turbyte: Röd -> Blå
+[2026-02-26T09:00:11.659Z] Blå flyttar: Stealth-korvett (1,5) -> (4,5)
+[2026-02-26T09:00:12.395Z] Blå flyttar: Stealth-korvett (4,5) -> (7,5)
+[2026-02-26T09:00:13.187Z] Blå flyttar: Stealth-korvett (7,5) -> (10,4)
+[2026-02-26T09:00:14.451Z] Blå avslutar sin tur
+[2026-02-26T09:00:14.451Z] Turbyte: Blå -> Röd
+[2026-02-26T09:00:14.915Z] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=1
+[2026-02-26T09:00:15.282Z] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=0
+[2026-02-26T09:00:15.283Z] Blå enhet sänkt: Stealth-korvett
+[2026-02-26T09:00:18.184Z] Röd flyttar: Konventionell korvett (11,4) -> (12,4)
+[2026-02-26T09:00:18.187Z] Turbyte: Röd -> Blå
+[2026-02-26T09:00:20.275Z] Blå flyttar: Stealth-korvett (2,8) -> (5,5)
+[2026-02-26T09:00:21.907Z] Blå flyttar: Stealth-korvett (5,5) -> (8,5)
+[2026-02-26T09:00:24.187Z] Blå flyttar: USV (4,12) -> (6,11)
+[2026-02-26T09:00:26.659Z] Blå avslutar sin tur
+[2026-02-26T09:00:26.659Z] Turbyte: Blå -> Röd
+[2026-02-26T09:00:27.372Z] Röd flyttar: Konventionell korvett (12,4) -> (10,4)
+[2026-02-26T09:00:27.738Z] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=1
+[2026-02-26T09:00:27.745Z] Turbyte: Röd -> Blå
+[2026-02-26T09:00:31.700Z] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-02-26T09:00:31.700Z] Röd enhet sänkt: Konventionell korvett
+[2026-02-26T09:02:32.203Z] Blå flyttar: Stealth-korvett (8,5) -> (10,4)
+[2026-02-26T09:02:32.763Z] Blå flyttar: Stealth-korvett (10,4) -> (11,4)
+[2026-02-26T09:02:37.659Z] 
+
+[2026-02-26T09:02:37.659Z] Nytt slag initieras, karta: Karta 2
+[2026-02-26T09:02:47.979Z] Blå ändrar djup ned: Ubåt till djup 1
+[2026-02-26T09:02:48.195Z] Blå ändrar djup ned: Ubåt till djup 0
+[2026-02-26T09:02:50.083Z] Blå flyttar: Ubåt (4,5) -> (7,5)
+[2026-02-26T09:02:51.675Z] Blå avslutar sin tur
+[2026-02-26T09:02:51.675Z] Turbyte: Blå -> Röd
+[2026-02-26T09:02:53.652Z] Röd flyttar: Konventionell korvett (16,3) -> (14,3)
+[2026-02-26T09:02:53.659Z] Turbyte: Röd -> Blå
+[2026-02-26T09:02:55.387Z] Blå flyttar: Ubåt (7,5) -> (10,5)
+[2026-02-26T09:02:59.243Z] Blå flyttar: Ubåt (10,5) -> (13,5)
+[2026-02-26T09:03:02.523Z] Blå flyttar: Ubåt (13,5) -> (14,5)
+[2026-02-26T09:03:03.507Z] Blå avslutar sin tur
+[2026-02-26T09:03:03.507Z] Turbyte: Blå -> Röd
+[2026-02-26T09:03:03.969Z] Röd attackerar: Konventionell korvett -> Ubåt, skada=1, återstående HP mål=2
+[2026-02-26T09:03:04.345Z] Röd attackerar: Konventionell korvett -> Ubåt, skada=1, återstående HP mål=1
+[2026-02-26T09:03:04.714Z] Röd attackerar: Konventionell korvett -> Ubåt, skada=1, återstående HP mål=0
+[2026-02-26T09:03:04.715Z] Blå enhet sänkt: Ubåt
+[2026-02-26T09:03:04.722Z] Turbyte: Röd -> Blå
+[2026-02-26T09:03:06.675Z] Blå flyttar: Stealth-korvett (3,3) -> (5,4)
+[2026-02-26T09:03:07.395Z] Blå flyttar: Stealth-korvett (5,4) -> (7,5)
+[2026-02-26T09:03:08.043Z] Blå flyttar: Stealth-korvett (7,5) -> (10,5)
+[2026-02-26T09:03:09.811Z] Blå avslutar sin tur
+[2026-02-26T09:03:09.811Z] Turbyte: Blå -> Röd
+[2026-02-26T09:03:10.517Z] Röd flyttar: Konventionell korvett (14,3) -> (12,3)
+[2026-02-26T09:03:10.883Z] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=1
+[2026-02-26T09:03:10.890Z] Turbyte: Röd -> Blå
+[2026-02-26T09:03:13.187Z] Blå flyttar: Stealth-korvett (10,5) -> (13,5)
+[2026-02-26T09:03:14.603Z] Blå flyttar: Stealth-korvett (13,5) -> (14,5)
+[2026-02-26T09:03:15.331Z] Blå flyttar (mina utlöst): Stealth-korvett (14,5) -> (15,5)
+[2026-02-26T09:03:15.331Z] Minträff: Blå Stealth-korvett på (15,5) sänks
+[2026-02-26T09:03:20.747Z] Blå avslutar sin tur
+[2026-02-26T09:03:20.747Z] Turbyte: Blå -> Röd
+[2026-02-26T09:03:21.204Z] Röd flyttar: Konventionell korvett (12,3) -> (10,4)
+[2026-02-26T09:03:22.594Z] Röd flyttar: Konventionell korvett (17,1) -> (15,1)
+[2026-02-26T09:03:22.602Z] Turbyte: Röd -> Blå
+[2026-02-26T09:03:24.187Z] Blå flyttar: Stealth-korvett (2,7) -> (5,7)
+[2026-02-26T09:03:24.971Z] Blå flyttar: Stealth-korvett (5,7) -> (8,5)
+[2026-02-26T09:03:29.747Z] Blå flyttar: Fregatt (2,1) -> (2,3)
+[2026-02-26T09:03:30.787Z] Blå avslutar sin tur
+[2026-02-26T09:03:30.787Z] Turbyte: Blå -> Röd
+[2026-02-26T09:03:31.257Z] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=1
+[2026-02-26T09:03:31.621Z] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=0
+[2026-02-26T09:03:31.621Z] Blå enhet sänkt: Stealth-korvett
+[2026-02-26T09:03:32.241Z] Röd flyttar: Konventionell korvett (10,4) -> (8,6)
+[2026-02-26T09:03:32.248Z] Turbyte: Röd -> Blå
+[2026-02-26T09:03:34.139Z] Blå flyttar: Fregatt (2,3) -> (2,5)
+[2026-02-26T09:03:35.307Z] Blå flyttar: Fregatt (2,5) -> (2,7)
+[2026-02-26T09:03:36.051Z] Blå flyttar: Fregatt (2,7) -> (4,7)
+[2026-02-26T09:03:36.907Z] Blå avslutar sin tur
+[2026-02-26T09:03:36.907Z] Turbyte: Blå -> Röd
+[2026-02-26T09:03:37.874Z] Röd flyttar: Konventionell korvett (15,1) -> (13,1)
+[2026-02-26T09:03:37.882Z] Turbyte: Röd -> Blå
+[2026-02-26T09:03:41.323Z] Blå flyttar: Ubåtsjakthelikopter (3,18) -> (6,15)
+[2026-02-26T09:03:42.739Z] Blå flyttar: Ubåtsjakthelikopter (6,15) -> (9,13)
+[2026-02-26T09:03:43.715Z] Blå flyttar: Ubåtsjakthelikopter (9,13) -> (12,13)
+[2026-02-26T09:03:45.171Z] Blå avslutar sin tur
+[2026-02-26T09:03:45.171Z] Turbyte: Blå -> Röd
+[2026-02-26T09:03:46.388Z] Röd flyttar: Konventionell korvett (8,6) -> (6,6)
+[2026-02-26T09:03:46.395Z] Turbyte: Röd -> Blå
+[2026-02-26T09:03:48.195Z] Blå flyttar: Ubåtsjakthelikopter (12,13) -> (15,11)
+[2026-02-26T09:03:48.979Z] Blå flyttar (mina utlöst): Ubåtsjakthelikopter (15,11) -> (16,11)
+[2026-02-26T09:03:48.979Z] Minträff: Blå Ubåtsjakthelikopter på (16,11) sänks
+[2026-02-26T09:03:51.579Z] Blå flyttar: UUV (1,17) -> (3,15)
+[2026-02-26T09:03:53.435Z] Blå avslutar sin tur
+[2026-02-26T09:03:53.435Z] Turbyte: Blå -> Röd
+[2026-02-26T09:03:53.895Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=3
+[2026-02-26T09:03:54.261Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=2
+[2026-02-26T09:03:54.625Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=1
+[2026-02-26T09:03:54.631Z] Turbyte: Röd -> Blå
+[2026-02-26T09:03:59.251Z] Blå ändrar djup ned: UUV till djup 1
+[2026-02-26T09:03:59.419Z] Blå ändrar djup ned: UUV till djup 0
+[2026-02-26T09:04:01.771Z] Blå flyttar: UUV (3,15) -> (5,15)
+[2026-02-26T09:04:02.723Z] Blå avslutar sin tur
+[2026-02-26T09:04:02.723Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:03.187Z] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=0
+[2026-02-26T09:04:03.187Z] Blå enhet sänkt: Fregatt
+[2026-02-26T09:04:03.546Z] Röd flyttar: Konventionell korvett (13,1) -> (11,3)
+[2026-02-26T09:04:03.909Z] Röd flyttar: Konventionell korvett (6,6) -> (4,7)
+[2026-02-26T09:04:03.917Z] Turbyte: Röd -> Blå
+[2026-02-26T09:04:05.579Z] Blå flyttar: UUV (5,15) -> (7,15)
+[2026-02-26T09:04:06.203Z] Blå flyttar: UUV (7,15) -> (9,15)
+[2026-02-26T09:04:07.459Z] Blå flyttar: UUV (9,15) -> (11,13)
+[2026-02-26T09:04:08.523Z] Blå avslutar sin tur
+[2026-02-26T09:04:08.523Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:08.987Z] Röd attackerar: Konventionell korvett -> UAV, skada=1, återstående HP mål=0
+[2026-02-26T09:04:08.987Z] Blå enhet sänkt: UAV
+[2026-02-26T09:04:09.348Z] Röd flyttar: Konventionell korvett (11,3) -> (9,5)
+[2026-02-26T09:04:09.966Z] Röd flyttar: Konventionell korvett (4,7) -> (3,9)
+[2026-02-26T09:04:09.974Z] Turbyte: Röd -> Blå
+[2026-02-26T09:04:12.539Z] Blå flyttar: UUV (11,13) -> (13,13)
+[2026-02-26T09:04:13.371Z] Blå flyttar: UUV (13,13) -> (15,11)
+[2026-02-26T09:04:15.419Z] Blå flyttar: UUV (15,11) -> (16,11)
+[2026-02-26T09:04:16.379Z] Blå avslutar sin tur
+[2026-02-26T09:04:16.379Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:16.839Z] Röd attackerar: Konventionell korvett -> USV, skada=1, återstående HP mål=1
+[2026-02-26T09:04:17.212Z] Röd attackerar: Konventionell korvett -> USV, skada=1, återstående HP mål=0
+[2026-02-26T09:04:17.213Z] Blå enhet sänkt: USV
+[2026-02-26T09:04:18.105Z] Röd flyttar: Konventionell korvett (3,9) -> (1,11)
+[2026-02-26T09:04:18.112Z] Turbyte: Röd -> Blå
+[2026-02-26T09:04:20.635Z] Blå flyttar: UUV (16,11) -> (18,10)
+[2026-02-26T09:04:21.539Z] Blå flyttar: UUV (18,10) -> (19,8)
+[2026-02-26T09:04:23.610Z] Blå flyttar: UUV (19,8) -> (19,9)
+[2026-02-26T09:04:25.731Z] Blå avslutar sin tur
+[2026-02-26T09:04:25.731Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:26.194Z] Röd attackerar: Konventionell korvett -> UAV, skada=1, återstående HP mål=0
+[2026-02-26T09:04:26.194Z] Blå enhet sänkt: UAV
+[2026-02-26T09:04:27.067Z] Röd flyttar: Konventionell korvett (9,5) -> (7,7)
+[2026-02-26T09:04:27.073Z] Turbyte: Röd -> Blå
+[2026-02-26T09:04:28.491Z] Blå flyttar: UUV (19,9) -> (19,8)
+[2026-02-26T09:04:29.355Z] Blå flyttar: UUV (19,8) -> (18,10)
+[2026-02-26T09:04:32.779Z] Blå flyttar: UUV (18,10) -> (17,12)
+[2026-02-26T09:04:33.859Z] Blå avslutar sin tur
+[2026-02-26T09:04:33.859Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:34.572Z] Röd flyttar: Konventionell korvett (7,7) -> (5,9)
+[2026-02-26T09:04:35.453Z] Röd flyttar: Konventionell korvett (1,11) -> (2,12)
+[2026-02-26T09:04:35.459Z] Turbyte: Röd -> Blå
+[2026-02-26T09:04:38.547Z] Blå flyttar: UUV (17,12) -> (18,11)
+[2026-02-26T09:04:39.899Z] Blå flyttar: UUV (18,11) -> (19,12)
+[2026-02-26T09:04:41.722Z] Blå avslutar sin tur
+[2026-02-26T09:04:41.722Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:42.180Z] Röd flyttar: Konventionell korvett (5,9) -> (3,11)
+[2026-02-26T09:04:42.540Z] Röd flyttar: Konventionell korvett (2,12) -> (2,14)
+[2026-02-26T09:04:42.916Z] Röd attackerar: Konventionell korvett -> UUV, skada=1, återstående HP mål=0
+[2026-02-26T09:04:42.916Z] Blå enhet sänkt: UUV
+[2026-02-26T09:04:42.924Z] Turbyte: Röd -> Blå
+[2026-02-26T09:04:49.259Z] Blå avslutar sin tur
+[2026-02-26T09:04:49.259Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:49.722Z] Röd attackerar: Konventionell korvett -> USV, skada=1, återstående HP mål=1
+[2026-02-26T09:04:50.090Z] Röd attackerar: Konventionell korvett -> USV, skada=1, återstående HP mål=0
+[2026-02-26T09:04:50.090Z] Blå enhet sänkt: USV
+[2026-02-26T09:04:52.004Z] Röd flyttar: Konventionell korvett (2,14) -> (4,14)
+[2026-02-26T09:04:52.011Z] Turbyte: Röd -> Blå
+[2026-02-26T09:04:55.211Z] Blå flyttar: UUV (19,12) -> (18,14)
+[2026-02-26T09:04:56.011Z] Blå flyttar: UUV (18,14) -> (17,16)
+[2026-02-26T09:04:56.779Z] Blå flyttar: UUV (17,16) -> (15,16)
+[2026-02-26T09:04:57.803Z] Blå avslutar sin tur
+[2026-02-26T09:04:57.803Z] Turbyte: Blå -> Röd
+[2026-02-26T09:04:59.292Z] Röd flyttar: Konventionell korvett (4,14) -> (5,15)
+[2026-02-26T09:04:59.299Z] Turbyte: Röd -> Blå
+[2026-02-26T09:05:00.763Z] Blå flyttar: UUV (15,16) -> (14,15)
+[2026-02-26T09:05:01.475Z] Blå flyttar: UUV (14,15) -> (13,14)
+[2026-02-26T09:05:02.307Z] Blå flyttar: UUV (13,14) -> (11,14)
+[2026-02-26T09:05:03.467Z] Blå avslutar sin tur
+[2026-02-26T09:05:03.467Z] Turbyte: Blå -> Röd
+[2026-02-26T09:05:04.433Z] Röd flyttar: Konventionell korvett (5,15) -> (7,15)
+[2026-02-26T09:05:04.440Z] Turbyte: Röd -> Blå
+[2026-02-26T09:05:05.731Z] Blå flyttar: UUV (11,14) -> (9,16)
+[2026-02-26T09:05:06.507Z] Blå flyttar: UUV (9,16) -> (8,16)
+[2026-02-26T09:05:07.531Z] Blå avslutar sin tur
+[2026-02-26T09:05:07.531Z] Turbyte: Blå -> Röd
+[2026-02-26T09:05:07.993Z] Röd attackerar: Konventionell korvett -> UUV, skada=1, återstående HP mål=0
+[2026-02-26T09:05:07.993Z] Blå enhet sänkt: UUV
+[2026-02-26T09:05:19.243Z] BLÅ REFLEKTION (efter spelavslut, vinnare: Röd)
+[2026-02-26T09:05:19.243Z] Fråga: Varför gjorde du det här draget?
+[2026-02-26T09:05:19.243Z] Svar: (tomt svar)
+[2026-02-26T09:05:19.243Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-02-26T09:05:19.243Z] Svar: (tomt svar)

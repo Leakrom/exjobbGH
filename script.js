@@ -544,7 +544,7 @@
       setTimeout(() => {
         overlay.remove();
         resolve();
-      }, 5000);
+      }, 3000);
     });
   }
 
