@@ -1,3 +1,6 @@
+//<script import="./milsymbols.js"></script>
+
+
 (() => {
   try {
     console.log('=== Script.js loading START ===');
@@ -421,7 +424,11 @@
       dialog.appendChild(note);
 
       const l1 = document.createElement('label');
-      l1.textContent = 'Varför gjorde du det här draget?';
+      if (ASK_BLUE_REFLECTION_EACH_TURN) {
+        l1.textContent = 'Vilka drag gjorde du?';
+      } else {
+        l1.textContent = 'Redogör för din övergripande strategi och vad som hände i spelet.';
+      }
       l1.style.display = 'block';
       l1.style.marginBottom = '6px';
       dialog.appendChild(l1);
@@ -435,7 +442,11 @@
       dialog.appendChild(t1);
 
       const l2 = document.createElement('label');
-      l2.textContent = 'Vad tänker du att det ska få för resultat?';
+      if (ASK_BLUE_REFLECTION_EACH_TURN) {
+        l2.textContent = 'Var det lätt att ta beslut om att göra dessa drag?';
+      } else {
+        l2.textContent = 'Berätta om hur det kändes att spela spelet. Var det roligt/enkelt/realistiskt/utmanande etc.';
+      }
       l2.style.display = 'block';
       l2.style.marginBottom = '6px';
       dialog.appendChild(l2);
@@ -447,6 +458,43 @@
       t2.style.borderRadius = '6px';
       t2.style.marginBottom = '12px';
       dialog.appendChild(t2);
+
+      
+      const l3 = document.createElement('label');
+      if (ASK_BLUE_REFLECTION_EACH_TURN) {
+        l3.textContent = 'Vilka andra drag kunde du ha gjort, och varför valde du bort dem?';
+      } else {
+        l3.textContent = 'Är du nöjd med utfallet? Utveckla gärna ditt svar.';
+      }
+      l3.style.display = 'block';
+      l3.style.marginBottom = '6px';
+      dialog.appendChild(l3);
+
+      const t3 = document.createElement('textarea');
+      t3.rows = 5;
+      t3.style.width = '100%';
+      t3.style.boxSizing = 'border-box';
+      t3.style.borderRadius = '6px';
+      t3.style.marginBottom = '10px';
+      dialog.appendChild(t3);
+
+      const l4 = document.createElement('label');
+      if (ASK_BLUE_REFLECTION_EACH_TURN) {
+        l4.textContent = 'Vad tror du hade hänt om du gjort de andra dragen?';
+      } else {
+        l4.textContent = 'Hade du kunnat nå samma, eller bättre, resultat genom att göra på något annat sätt, i så fall hur?';
+      }
+      l4.style.display = 'block';
+      l4.style.marginBottom = '6px';
+      dialog.appendChild(l4);
+
+      const t4 = document.createElement('textarea');
+      t4.rows = 5;
+      t4.style.width = '100%';
+      t4.style.boxSizing = 'border-box';
+      t4.style.borderRadius = '6px';
+      t4.style.marginBottom = '12px';
+      dialog.appendChild(t4);
 
       const actions = document.createElement('div');
       actions.style.display = 'flex';
@@ -544,12 +592,13 @@
       setTimeout(() => {
         overlay.remove();
         resolve();
-      }, 3000);
+      }, 2000);
     });
   }
 
   function handleEndGameReflectionIfNeeded(winner) {
-    if (ASK_BLUE_REFLECTION_EACH_TURN || endGameReflectionHandled) return;
+    //if (ASK_BLUE_REFLECTION_EACH_TURN || endGameReflectionHandled) return;
+    if (endGameReflectionHandled) return;
     endGameReflectionHandled = true;
 
     (async () => {
