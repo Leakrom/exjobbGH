@@ -1788,19 +1788,28 @@ function applyMineTrigger(q, r, enteringSide) {
         : isRedUnknown
           ? LEGEND_COLORS.mine
           : LEGEND_COLORS.unitRed;
+      const symbolCanvas = !isRedUnknown ? getUnitSymbolCanvas(u.type, u.side) : null;
+      const iconSize = symbolCanvas ? getUnitSymbolSize(u.type) : 0;
+      const iconOffsetY = symbolCanvas ? getUnitSymbolOffsetY(u.type, u.side) : 0;
+      const unitCenterY = y + iconOffsetY;
+      const unitStrokeRadius = symbolCanvas ? Math.ceil(iconSize * 0.72) + 1 : 12;
 
       // Unit circle (dimmer if not identified)
-      ctx.beginPath();
-      ctx.arc(x, y, 12, 0, Math.PI * 2);
-      ctx.fillStyle = col;
-      if (isRedUnknown) {
-        // Detected but not identified: dimmer
-        ctx.globalAlpha = 1.0; //Om du vill ha dimmer så sänk till 0.5 eller liknande
+      if (!symbolCanvas) {
+        ctx.beginPath();
+        ctx.arc(x, unitCenterY, 12, 0, Math.PI * 2);
+        ctx.fillStyle = col;
+        if (isRedUnknown) {
+          // Detected but not identified: dimmer
+          ctx.globalAlpha = 1.0; //Om du vill ha dimmer så sänk till 0.5 eller liknande
+        }
+        ctx.fill();
       }
-      ctx.fill();
       ctx.globalAlpha = 1.0;
+      ctx.beginPath();
+      ctx.arc(x, unitCenterY, unitStrokeRadius, 0, Math.PI * 2);
       ctx.strokeStyle = u.sensorActive ? 'orange' : 'rgba(255,255,255,.35)';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = symbolCanvas ? 2.5 : 2;
       ctx.stroke();
 
       // Type glyph or question mark
@@ -1811,10 +1820,7 @@ function applyMineTrigger(q, r, enteringSide) {
       if (isRedUnknown) {
         ctx.fillText('?', x, y); // Question mark for detected but not identified
       } else {
-        const symbolCanvas = getUnitSymbolCanvas(u.type, u.side);
         if (symbolCanvas) {
-          const iconSize = getUnitSymbolSize(u.type);
-          const iconOffsetY = getUnitSymbolOffsetY(u.type, u.side);
           ctx.drawImage(symbolCanvas, x - iconSize / 2, y - iconSize / 2 + iconOffsetY, iconSize, iconSize);
         } else {
           ctx.fillText(typeGlyph(u.type), x, y); // Bokstavsglyf fallback
@@ -1836,7 +1842,8 @@ function applyMineTrigger(q, r, enteringSide) {
       // Selection ring
       if (selectedId === u.id) {
         ctx.beginPath();
-        ctx.arc(x, y, 18, 0, Math.PI * 2);
+        const selectionRadius = symbolCanvas ? unitStrokeRadius + 4 : 18;
+        ctx.arc(x, unitCenterY, selectionRadius, 0, Math.PI * 2);
         ctx.strokeStyle = 'rgba(255,255,255,.65)';
         ctx.lineWidth = 2;
         ctx.stroke();
