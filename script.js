@@ -1,4 +1,4 @@
-//<script import="./milsymbols.js"></script>
+
 
 
 (() => {
@@ -1795,7 +1795,7 @@ function applyMineTrigger(q, r, enteringSide) {
       ctx.fillStyle = col;
       if (isRedUnknown) {
         // Detected but not identified: dimmer
-        ctx.globalAlpha = 1.0;
+        ctx.globalAlpha = 1.0; //Om du vill ha dimmer så sänk till 0.5 eller liknande
       }
       ctx.fill();
       ctx.globalAlpha = 1.0;
@@ -1811,7 +1811,14 @@ function applyMineTrigger(q, r, enteringSide) {
       if (isRedUnknown) {
         ctx.fillText('?', x, y); // Question mark for detected but not identified
       } else {
-        ctx.fillText(typeGlyph(u.type), x, y);
+        const symbolCanvas = getUnitSymbolCanvas(u.type, u.side);
+        if (symbolCanvas) {
+          const iconSize = getUnitSymbolSize(u.type);
+          const iconOffsetY = getUnitSymbolOffsetY(u.type, u.side);
+          ctx.drawImage(symbolCanvas, x - iconSize / 2, y - iconSize / 2 + iconOffsetY, iconSize, iconSize);
+        } else {
+          ctx.fillText(typeGlyph(u.type), x, y); // Bokstavsglyf fallback
+        }
       }
 
       // HP-bar (only show if identified or our own unit)
@@ -1837,6 +1844,104 @@ function applyMineTrigger(q, r, enteringSide) {
     }
 
     updateUI();
+  }
+
+  //Importera symbol från milsymbol.com för att använda som ikon för kontrollerbara minor
+  let ms_FRIGATE = null;
+  let ms_STEALTH_CORVETTE = null;
+  let ms_SUBMARINE = null;
+  let ms_UAV = null;
+  let ms_USV = null;
+  let ms_UUV = null;
+  let ms_SUBMARINE_HUNTER = null;
+  let ms_CONVENTIONAL_CORVETTE = null;
+  let ms_UNCONTROL_MINE = null;
+  let ms_CONTROL_MINE = null;
+
+  // Röda symboler (lägg in egna SIDC-koder här när du har dem)
+  let ms_RED_FRIGATE = null;
+  let ms_RED_STEALTH_CORVETTE = null;
+  let ms_RED_SUBMARINE = null;
+  let ms_RED_UAV = null;
+  let ms_RED_USV = null;
+  let ms_RED_UUV = null;
+  let ms_RED_SUBMARINE_HUNTER = null;
+  let ms_RED_CONVENTIONAL_CORVETTE = null;
+  let ms_RED_UNCONTROL_MINE = null;
+  let ms_RED_CONTROL_MINE = null;
+
+  if (window.ms && typeof window.ms.Symbol === 'function') {
+    try {
+      ms_FRIGATE = new window.ms.Symbol('130330000012020400000000000000', { size: 28 }).asCanvas();
+      ms_STEALTH_CORVETTE = new window.ms.Symbol('130330000012020500000000000000', { size: 28 }).asCanvas();
+      ms_SUBMARINE = new window.ms.Symbol('130335000011010000000000000000', { size: 28 }).asCanvas();
+      ms_UAV = new window.ms.Symbol('130301000011030000000000000000', { size: 28 }).asCanvas();
+      ms_USV = new window.ms.Symbol('130330000012070000000000000000', { size: 28 }).asCanvas();
+      ms_UUV = new window.ms.Symbol('130335000011040000000000000000', { size: 28 }).asCanvas();
+      ms_SUBMARINE_HUNTER = new window.ms.Symbol('130301000011020000000000000000', { size: 28 }).asCanvas();
+      ms_CONVENTIONAL_CORVETTE = new window.ms.Symbol('130330000012020500000000000000', { size: 28 }).asCanvas();
+      ms_UNCONTROL_MINE = new window.ms.Symbol('130336000011000000000000000000', { size: 28 }).asCanvas();
+      ms_CONTROL_MINE = new window.ms.Symbol('130336000011000000000000000000', { size: 28 }).asCanvas();
+
+      // TODO: Ersätt SIDC-strängarna nedan med dina röda enhetssymboler
+      // ms_RED_FRIGATE = new window.ms.Symbol('REPLACE_RED_FRIGATE_SIDC', { size: 28 }).asCanvas();
+      // ms_RED_STEALTH_CORVETTE = new window.ms.Symbol('130630000012020500000000000000', { size: 28 }).asCanvas();
+      ms_RED_SUBMARINE = new window.ms.Symbol('130635000011010000000000000000', { size: 28 }).asCanvas();
+      // ms_RED_UAV = new window.ms.Symbol('REPLACE_RED_UAV_SIDC', { size: 28 }).asCanvas();
+      // ms_RED_USV = new window.ms.Symbol('REPLACE_RED_USV_SIDC', { size: 28 }).asCanvas();
+      // ms_RED_UUV = new window.ms.Symbol('REPLACE_RED_UUV_SIDC', { size: 28 }).asCanvas();
+      // ms_RED_SUBMARINE_HUNTER = new window.ms.Symbol('REPLACE_RED_SUBMARINE_HUNTER_SIDC', { size: 28 }).asCanvas();
+      ms_RED_CONVENTIONAL_CORVETTE = new window.ms.Symbol('130630000012020500000000000000', { size: 28 }).asCanvas();
+      ms_RED_UNCONTROL_MINE = new window.ms.Symbol('130636000011000000000000000000', { size: 28 }).asCanvas();
+      ms_RED_CONTROL_MINE = new window.ms.Symbol('130636000011000000000000000000', { size: 28 }).asCanvas();
+    } catch (e) {
+      console.warn('Kunde inte skapa milsymboler', e);
+    }
+  }
+
+  function getUnitSymbolCanvas(unitType, side) {
+    const useRed = side === Side.RED;
+
+    if (unitType === UnitType.FRIGATE) return useRed ? (ms_RED_FRIGATE || ms_FRIGATE) : ms_FRIGATE;
+    if (unitType === UnitType.STEALTH_CORVETTE) return useRed ? (ms_RED_STEALTH_CORVETTE || ms_STEALTH_CORVETTE) : ms_STEALTH_CORVETTE;
+    if (unitType === UnitType.SUBMARINE) return useRed ? (ms_RED_SUBMARINE || ms_SUBMARINE) : ms_SUBMARINE;
+    if (unitType === UnitType.UAV) return useRed ? (ms_RED_UAV || ms_UAV) : ms_UAV;
+    if (unitType === UnitType.USV) return useRed ? (ms_RED_USV || ms_USV) : ms_USV;
+    if (unitType === UnitType.UUV) return useRed ? (ms_RED_UUV || ms_UUV) : ms_UUV;
+    if (unitType === UnitType.SUBMARINE_HUNTER) return useRed ? (ms_RED_SUBMARINE_HUNTER || ms_SUBMARINE_HUNTER) : ms_SUBMARINE_HUNTER;
+    if (unitType === UnitType.CONVENTIONAL_CORVETTE) return useRed ? (ms_RED_CONVENTIONAL_CORVETTE || ms_CONVENTIONAL_CORVETTE) : ms_CONVENTIONAL_CORVETTE;
+    if (unitType === UnitType.UNCONTROL_MINE) return useRed ? (ms_RED_UNCONTROL_MINE || ms_UNCONTROL_MINE) : ms_UNCONTROL_MINE;
+    if (unitType === UnitType.CONTROL_MINE) return useRed ? (ms_RED_CONTROL_MINE || ms_CONTROL_MINE) : ms_CONTROL_MINE;
+    return null;
+  }
+
+  function getUnitSymbolSize(unitType) {
+    if (unitType === UnitType.FRIGATE) return 26;
+    if (unitType === UnitType.CONVENTIONAL_CORVETTE) return 26;
+    if (unitType === UnitType.STEALTH_CORVETTE) return 24;
+    if (unitType === UnitType.SUBMARINE) return 24;
+    if (unitType === UnitType.SUBMARINE_HUNTER) return 23;
+    if (unitType === UnitType.USV) return 21;
+    if (unitType === UnitType.UAV) return 20;
+    if (unitType === UnitType.UUV) return 20;
+    if (unitType === UnitType.UNCONTROL_MINE) return 18;
+    if (unitType === UnitType.CONTROL_MINE) return 18;
+    return 22;
+  }
+
+  function getUnitSymbolOffsetY(unitType, side) {
+    const isRed = side === Side.RED;
+    if (unitType === UnitType.FRIGATE) return isRed ? -1 : -1;
+    if (unitType === UnitType.CONVENTIONAL_CORVETTE) return isRed ? -1 : -1;
+    if (unitType === UnitType.STEALTH_CORVETTE) return isRed ? 0 : 0;
+    if (unitType === UnitType.SUBMARINE) return isRed ? 1 : 1;
+    if (unitType === UnitType.SUBMARINE_HUNTER) return isRed ? 0 : 0;
+    if (unitType === UnitType.USV) return isRed ? 0 : 0;
+    if (unitType === UnitType.UAV) return isRed ? -1 : -1;
+    if (unitType === UnitType.UUV) return isRed ? 1 : 1;
+    if (unitType === UnitType.UNCONTROL_MINE) return isRed ? 1 : 1;
+    if (unitType === UnitType.CONTROL_MINE) return isRed ? 1 : 1;
+    return 0;
   }
 
   function typeGlyph(t) {
