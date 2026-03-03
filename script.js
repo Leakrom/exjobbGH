@@ -28,13 +28,15 @@
       FRIGATE: 'Fregatt',
       STEALTH_CORVETTE: 'Stealth-korvett',
       SUBMARINE: 'Ubåt',
-      UAV: 'UAV',
-      USV: 'USV',
-      UUV: 'UUV',
+      UAV: 'UAV - obemannad flygenhet',
+      USV: 'USV - obemannad ytenhet',
+      UUV: 'UUV - obemannad undervattensenhet',
       SUBMARINE_HUNTER: 'Ubåtsjakthelikopter',
       CONVENTIONAL_CORVETTE: 'Konventionell korvett',
-      UNCONTROL_MINE: 'Okontrollerbar mina',
-      CONTROL_MINE: 'Kontrollerbar mina',
+      //UNCONTROL_MINE: 'Okontrollerbar mina',
+      //CONTROL_MINE: 'Kontrollerbar mina',
+      UNCONTROL_MINE: 'Mina',
+      CONTROL_MINE: 'Mina',
     };
 
   // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay), ammo (total shots)
@@ -1931,8 +1933,8 @@ function applyMineTrigger(q, r, enteringSide) {
     if (unitType === UnitType.USV) return 21;
     if (unitType === UnitType.UAV) return 20;
     if (unitType === UnitType.UUV) return 20;
-    if (unitType === UnitType.UNCONTROL_MINE) return 18;
-    if (unitType === UnitType.CONTROL_MINE) return 18;
+    if (unitType === UnitType.UNCONTROL_MINE) return 20;
+    if (unitType === UnitType.CONTROL_MINE) return 20;
     return 22;
   }
 
