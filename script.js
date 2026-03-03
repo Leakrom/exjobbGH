@@ -39,7 +39,7 @@
 
   // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay), ammo (total shots)
   const UNIT_STATS = {
-    [UnitType.FRIGATE]: { hp: 4, move: 10, range: 6, mines: 0, ammo: 12 },
+    [UnitType.FRIGATE]: { hp: 4, move: 7, range: 6, mines: 0, ammo: 12 },
     [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 4, mines: 0, ammo: 10 },
     [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 4, mines: 0, ammo: 10 },
     [UnitType.UAV]: { hp: 1, move: 4, range: 10, mines: 0, ammo: 0 },
@@ -1782,15 +1782,20 @@ function applyMineTrigger(q, r, enteringSide) {
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
       const y = origin.y + p.y;
-      const col = u.side === Side.BLUE ? LEGEND_COLORS.unitBlue : LEGEND_COLORS.unitRed;
+      const isRedUnknown = u.side === Side.RED && u.detected && !u.identified;
+      const col = u.side === Side.BLUE
+        ? LEGEND_COLORS.unitBlue
+        : isRedUnknown
+          ? LEGEND_COLORS.mine
+          : LEGEND_COLORS.unitRed;
 
       // Unit circle (dimmer if not identified)
       ctx.beginPath();
       ctx.arc(x, y, 12, 0, Math.PI * 2);
       ctx.fillStyle = col;
-      if (u.side === Side.RED && u.detected && !u.identified) {
+      if (isRedUnknown) {
         // Detected but not identified: dimmer
-        ctx.globalAlpha = 0.5;
+        ctx.globalAlpha = 0.8;
       }
       ctx.fill();
       ctx.globalAlpha = 1.0;
@@ -1803,7 +1808,7 @@ function applyMineTrigger(q, r, enteringSide) {
       ctx.font = 'bold 10px system-ui, -apple-system, Segoe UI, Roboto, Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      if (u.side === Side.RED && u.detected && !u.identified) {
+      if (isRedUnknown) {
         ctx.fillText('?', x, y); // Question mark for detected but not identified
       } else {
         ctx.fillText(typeGlyph(u.type), x, y);
