@@ -1795,7 +1795,7 @@ function applyMineTrigger(q, r, enteringSide) {
       ctx.fillStyle = col;
       if (isRedUnknown) {
         // Detected but not identified: dimmer
-        ctx.globalAlpha = 0.8;
+        ctx.globalAlpha = 1.0;
       }
       ctx.fill();
       ctx.globalAlpha = 1.0;
