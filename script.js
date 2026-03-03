@@ -957,9 +957,9 @@
   function findStartHex(side) {
     const mapConfig = MAP_CONFIGS[selectedMapIndex];
 
-    function findNearestWater(start) {
+    function findNearestUnitHex(start) {
       if (!inBounds(start)) return null;
-      if (isWater(start.q, start.r)) return start;
+      if (isUnitPlacableHex(start.q, start.r)) return start;
 
       const visited = new Set([keyOf(start.q, start.r)]);
       const queue = [start];
@@ -971,7 +971,7 @@
           if (!inBounds(next)) continue;
           const k = keyOf(next.q, next.r);
           if (visited.has(k)) continue;
-          if (isWater(next.q, next.r)) return next;
+          if (isUnitPlacableHex(next.q, next.r)) return next;
           visited.add(k);
           queue.push(next);
         }
@@ -984,20 +984,20 @@
       const positions = mapConfig.blueStartPositions;
       if (blueSpawnIndex < positions.length) {
         const pos = positions[blueSpawnIndex++];
-        const waterPos = findNearestWater(pos); //onödigt, hårdkoda i map_configs istället
+        const waterPos = findNearestUnitHex(pos); //onödigt, hårdkoda i map_configs istället
         if (waterPos) return waterPos;
       }
     } else {
       const positions = mapConfig.redStartPositions;
       if (redSpawnIndex < positions.length) {
         const pos = positions[redSpawnIndex++];
-        const waterPos = findNearestWater(pos); //onödigt, hårdkoda i map_configs istället
+        const waterPos = findNearestUnitHex(pos); //onödigt, hårdkoda i map_configs istället
         if (waterPos) return waterPos;
       }
     }
     
     // Fallback if we run out of predefined positions
-    return findNearestWater({ q: side === Side.BLUE ? 5 : 14, r: 10 }) ||
+    return findNearestUnitHex({ q: side === Side.BLUE ? 5 : 14, r: 10 }) ||
       { q: side === Side.BLUE ? 5 : 14, r: 10 };
   }
 
@@ -1103,6 +1103,12 @@
     return !getCell(q, r).land;
   }
 
+  function isUnitPlacableHex(q, r) {
+    if (!inBounds({ q, r })) return false;
+    const cell = getCell(q, r);
+    return !cell.land && !cell.isSkerry;
+  }
+
   function canSelect(u) {
     return u.side === activeSide;
   }
@@ -1123,7 +1129,7 @@
 
         const k = keyOf(nh.q, nh.r);
         if (visited.has(k)) continue;
-        if (!isWater(nh.q, nh.r)) continue;
+        if (!isUnitPlacableHex(nh.q, nh.r)) continue;
         if (unitAt(nh.q, nh.r)) continue;
 
         const nd = d + 1;

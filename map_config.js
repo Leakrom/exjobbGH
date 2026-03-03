@@ -26,7 +26,7 @@ const MAP_CONFIGS = [
     seed: MAP_SEEDS[1],
     cells: [],
     blueStartPositions: [
-      { q: 2, r: 1 }, { q: 3, r: 3 }, { q: 1, r: 7 },
+      { q: 2, r: 1 }, { q: 3, r: 4 }, { q: 1, r: 7 },
       { q: 4, r: 5 }, { q: 2, r: 9 }, { q: 1, r: 12 },
       { q: 3, r: 11 }, { q: 2, r: 15 }, { q: 4, r: 13 },
       { q: 1, r: 17 }, { q: 3, r: 18 }
