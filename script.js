@@ -1510,7 +1510,8 @@ function applyMineTrigger(q, r, enteringSide) {
   function endTurn() {
     if (gameOver) return;
     const nextSide = activeSide === Side.BLUE ? Side.RED : Side.BLUE;
-    logEvent(`Turbyte: ${activeSide} -> ${nextSide}`);
+    const nextTurn = nextSide === Side.BLUE ? turn + 1 : turn;
+    logEvent(`Turbyte: ${activeSide} -> ${nextSide} (tur ${nextTurn})`);
     selectedId = null;
     mode = 'order';
     activeSide = nextSide;

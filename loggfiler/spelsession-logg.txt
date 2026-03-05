@@ -775,3 +775,40 @@ Nytt slag initieras, karta: Karta 2
 [2026-02-26T09:05:19.243Z] Svar: (tomt svar)
 [2026-02-26T09:05:19.243Z] Fråga: Vad tänker du att det ska få för resultat?
 [2026-02-26T09:05:19.243Z] Svar: (tomt svar)
+[2026-03-05T07:49:38.748Z] ============================================================
+[2026-03-05T07:49:38.748Z] Spelsession startad: session-2026-03-05T07:49:27.051Z
+[2026-03-05T07:49:38.748Z] 
+
+[2026-03-05T07:49:38.748Z] Nytt slag initieras, karta: Karta 1
+[2026-03-05T07:51:41.962Z] Blå flyttar: UAV - obemannad flygenhet (2,3) -> (5,3)
+[2026-03-05T07:51:43.937Z] Blå flyttar: USV - obemannad ytenhet (3,4) -> (4,5)
+[2026-03-05T07:51:45.593Z] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (7,7)
+[2026-03-05T07:52:09.246Z] Blå flyttar: Ubåtsjakthelikopter (2,16) -> (5,13)
+[2026-03-05T07:52:28.350Z] BLÅ REFLEKTION
+[2026-03-05T07:52:28.350Z] Fråga: Varför gjorde du det här draget?
+[2026-03-05T07:52:28.350Z] Svar: (tomt svar)
+[2026-03-05T07:52:28.350Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T07:52:28.350Z] Svar: (tomt svar)
+[2026-03-05T07:55:08.921Z] ============================================================
+[2026-03-05T07:55:08.922Z] Spelsession startad: session-2026-03-05T07:55:05.812Z
+[2026-03-05T07:55:08.922Z] 
+
+[2026-03-05T07:55:08.922Z] Nytt slag initieras, karta: Karta 1
+[2026-03-05T07:55:11.082Z] Blå flyttar: UUV - obemannad undervattensenhet (4,2) -> (6,2)
+[2026-03-05T07:55:13.945Z] BLÅ REFLEKTION
+[2026-03-05T07:55:13.945Z] Fråga: Varför gjorde du det här draget?
+[2026-03-05T07:55:13.945Z] Svar: (tomt svar)
+[2026-03-05T07:55:13.945Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T07:55:13.945Z] Svar: (tomt svar)
+[2026-03-05T07:55:13.956Z] Blå avslutar sin tur
+[2026-03-05T07:55:13.956Z] Turbyte: Blå -> Röd (tur 1)
+[2026-03-05T07:55:14.419Z] Röd flyttar: Konventionell korvett (18,5) -> (16,5)
+[2026-03-05T07:55:14.780Z] Röd flyttar: Konventionell korvett (16,5) -> (14,5)
+[2026-03-05T07:55:15.394Z] Röd flyttar: Ubåt (17,8) -> (14,8)
+[2026-03-05T07:55:15.402Z] Turbyte: Röd -> Blå (tur 2)
+[2026-03-05T07:55:16.633Z] Blå flyttar: UUV - obemannad undervattensenhet (6,2) -> (7,3)
+[2026-03-05T07:55:18.417Z] BLÅ REFLEKTION
+[2026-03-05T07:55:18.417Z] Fråga: Varför gjorde du det här draget?
+[2026-03-05T07:55:18.417Z] Svar: (tomt svar)
+[2026-03-05T07:55:18.417Z] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T07:55:18.417Z] Svar: (tomt svar)
