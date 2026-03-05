@@ -302,7 +302,7 @@
   // Sessionlogg
   let sessionLogBuffer = '';
   const sessionStartedAt = new Date();
-  const sessionId = `session-${sessionStartedAt.toISOString()}`;
+  const sessionId = `session-${getTimestamp().replace(/[:+]/g, '-')}`;
   const AUTO_LOG_DIR = 'C:\\Users\\linene\\exjobbGH\\loggfiler';
   let sessionHeaderWritten = false;
   let logStatusWrapEl = null;
@@ -346,7 +346,39 @@
   }
 
   function getTimestamp() {
-    return new Date().toISOString();
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat('sv-SE', {
+      timeZone: 'Europe/Stockholm',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    }).formatToParts(now);
+
+    const get = (type) => parts.find((p) => p.type === type)?.value || '00';
+    const ms = String(now.getMilliseconds()).padStart(3, '0');
+    const tzName = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Europe/Stockholm',
+      timeZoneName: 'shortOffset',
+    }).formatToParts(now).find((p) => p.type === 'timeZoneName')?.value || 'GMT+1';
+    const offsetHoursRaw = Number((tzName.match(/GMT([+-]\d{1,2})/) || [])[1] || 1);
+    const sign = offsetHoursRaw >= 0 ? '+' : '-';
+    const offsetHours = String(Math.abs(offsetHoursRaw)).padStart(2, '0');
+
+    return `${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}:${get('second')}.${ms}${sign}${offsetHours}:00`;
+  }
+
+  function getSwedishTimeString() {
+    return new Intl.DateTimeFormat('sv-SE', {
+      timeZone: 'Europe/Stockholm',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    }).format(new Date());
   }
 
   function logEvent(text) {
@@ -379,7 +411,7 @@
       }
 
       sessionLogBuffer = '';
-      setLogStatus(`sparad ${new Date().toLocaleTimeString()}`);
+      setLogStatus(`sparad ${getSwedishTimeString()}`);
     } catch (e) {
       console.error('Kunde inte spara sessionslogg:', e);
       setLogStatus('sparfel (starta server.js)');

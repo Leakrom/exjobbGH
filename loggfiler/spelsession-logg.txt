@@ -812,3 +812,24 @@ Nytt slag initieras, karta: Karta 2
 [2026-03-05T07:55:18.417Z] Svar: (tomt svar)
 [2026-03-05T07:55:18.417Z] Fråga: Vad tänker du att det ska få för resultat?
 [2026-03-05T07:55:18.417Z] Svar: (tomt svar)
+[2026-03-05T09:29:23.429+01:00] ============================================================
+[2026-03-05T09:29:23.430+01:00] Spelsession startad: session-2026-03-05T09-29-21.220-01-00
+[2026-03-05T09:29:23.430+01:00] 
+
+[2026-03-05T09:29:23.430+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-05T09:29:25.133+01:00] Blå flyttar: Ubåt (3,6) -> (5,6)
+[2026-03-05T09:29:28.141+01:00] BLÅ REFLEKTION
+[2026-03-05T09:29:28.141+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:29:28.141+01:00] Svar: (tomt svar)
+[2026-03-05T09:29:28.142+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:29:28.142+01:00] Svar: (tomt svar)
+[2026-03-05T09:29:28.152+01:00] Blå avslutar sin tur
+[2026-03-05T09:29:28.153+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-05T09:29:29.390+01:00] Röd flyttar: Konventionell korvett (18,5) -> (16,5)
+[2026-03-05T09:29:29.399+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-05T09:29:30.148+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (6,7)
+[2026-03-05T09:29:33.837+01:00] BLÅ REFLEKTION
+[2026-03-05T09:29:33.837+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:29:33.838+01:00] Svar: (tomt svar)
+[2026-03-05T09:29:33.838+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:29:33.838+01:00] Svar: (tomt svar)
