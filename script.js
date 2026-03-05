@@ -1348,6 +1348,11 @@ function applyMineTrigger(q, r, enteringSide) {
       return;
     }
 
+    if (attacker.side === Side.RED && target.side === Side.BLUE) {
+      attacker.detected = true;
+      attacker.identified = true;
+    }
+
     let dmg = 1;
     if (attacker.type === UnitType.SUBMARINE && d === 1) dmg = 2;
 
@@ -1717,13 +1722,13 @@ function applyMineTrigger(q, r, enteringSide) {
     const origin = getMapOrigin();
     const sel = selectedId ? getUnit(selectedId) : null;
     const moveSet =
-      sel && sel.side === activeSide && mode === 'order' ? legalMoves(sel) : [];
+      sel && sel.side === Side.BLUE && mode === 'order' ? legalMoves(sel) : [];
     const attackSet =
-      sel && sel.side === activeSide && mode === 'attack'
+      sel && sel.side === Side.BLUE && mode === 'attack'
         ? enemiesInRange(sel).map((u) => ({ q: u.q, r: u.r }))
         : [];
     const mineSet =
-      sel && sel.side === activeSide && mode === 'mine'
+      sel && sel.side === Side.BLUE && mode === 'mine'
         ? adjacentWaterHexes(sel)
         : [];
 
@@ -1747,7 +1752,7 @@ function applyMineTrigger(q, r, enteringSide) {
         ctx.fillText(`${q},${r}`, x, y - HEX_SIZE * 0.45);
         ctx.restore();
 
-        if (sel && sel.q === q && sel.r === r) {
+        if (sel && sel.side === Side.BLUE && sel.q === q && sel.r === r) {
           drawHex(x, y, 'rgba(255,255,255,.08)', 'rgba(255,255,255,.45)', 2);
         }
         if (moveSet.some((h) => h.q === q && h.r === r)) {
@@ -1809,10 +1814,10 @@ function applyMineTrigger(q, r, enteringSide) {
         continue; // Skip rendering
       }*/
 
-      /*// Hide red units unless detected
-      if (u.side === Side.RED && !u.detected) {
+      // Hide red units unless detected or identified
+      if (u.side === Side.RED && !u.detected && !u.identified) {
         continue; // Skip rendering
-      }*/
+      }
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
@@ -1875,7 +1880,7 @@ function applyMineTrigger(q, r, enteringSide) {
       }
 
       // Selection ring
-      if (selectedId === u.id) {
+      if (selectedId === u.id && u.side === Side.BLUE) {
         ctx.beginPath();
         const selectionRadius = symbolCanvas ? unitStrokeRadius + 4 : 18;
         ctx.arc(x, unitCenterY, selectionRadius, 0, Math.PI * 2);

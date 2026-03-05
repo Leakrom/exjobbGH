@@ -833,3 +833,89 @@ Nytt slag initieras, karta: Karta 2
 [2026-03-05T09:29:33.838+01:00] Svar: (tomt svar)
 [2026-03-05T09:29:33.838+01:00] Fråga: Vad tänker du att det ska få för resultat?
 [2026-03-05T09:29:33.838+01:00] Svar: (tomt svar)
+[2026-03-05T09:42:41.807+01:00] ============================================================
+[2026-03-05T09:42:41.807+01:00] Spelsession startad: session-2026-03-05T09-42-38.205-01-00
+[2026-03-05T09:42:41.808+01:00] 
+
+[2026-03-05T09:42:41.808+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-05T09:42:48.726+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-05T09:42:49.606+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,2) -> (6,1)
+[2026-03-05T09:42:54.526+01:00] Blå flyttar: Ubåt (3,6) -> (6,6)
+[2026-03-05T09:43:10.062+01:00] Blå flyttar: UAV - obemannad flygenhet (2,3) -> (6,3)
+[2026-03-05T09:43:16.926+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (7,7)
+[2026-03-05T09:43:18.622+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-05T09:43:20.686+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-05T09:43:33.734+01:00] Blå flyttar: UUV - obemannad undervattensenhet (2,14) -> (4,14)
+[2026-03-05T09:43:42.118+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-05T09:43:48.950+01:00] Blå flyttar: Ubåtsjakthelikopter (2,16) -> (5,15)
+[2026-03-05T09:43:51.726+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Aktiv
+[2026-03-05T09:43:54.622+01:00] Blå flyttar: Stealth-korvett (2,8) -> (5,7)
+[2026-03-05T09:43:56.806+01:00] Blå flyttar: Fregatt (1,2) -> (5,2)
+[2026-03-05T09:43:58.822+01:00] Blå flyttar: Stealth-korvett (1,5) -> (4,5)
+[2026-03-05T09:44:06.126+01:00] Blå flyttar: USV - obemannad ytenhet (3,4) -> (5,3)
+[2026-03-05T09:44:13.422+01:00] BLÅ REFLEKTION
+[2026-03-05T09:44:13.423+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:44:13.423+01:00] Svar: (tomt svar)
+[2026-03-05T09:44:13.423+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:44:13.424+01:00] Svar: (tomt svar)
+[2026-03-05T09:44:13.435+01:00] Blå avslutar sin tur
+[2026-03-05T09:44:13.435+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-05T09:44:13.893+01:00] Röd flyttar: Ubåt (17,8) -> (15,7)
+[2026-03-05T09:44:14.264+01:00] Röd flyttar: Ubåt (15,7) -> (12,7)
+[2026-03-05T09:44:14.630+01:00] Röd flyttar: Ubåt (12,7) -> (9,8)
+[2026-03-05T09:44:14.639+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-05T09:44:25.726+01:00] Blå flyttar: UUV - obemannad undervattensenhet (6,1) -> (8,1)
+[2026-03-05T09:44:27.102+01:00] Blå flyttar: UAV - obemannad flygenhet (7,7) -> (9,9)
+[2026-03-05T09:44:29.062+01:00] Blå flyttar: UAV - obemannad flygenhet (6,3) -> (9,4)
+[2026-03-05T09:44:32.086+01:00] Blå flyttar: Ubåtsjakthelikopter (5,15) -> (8,13)
+[2026-03-05T09:44:33.550+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,14) -> (6,12)
+[2026-03-05T09:44:35.374+01:00] Blå flyttar: USV - obemannad ytenhet (4,12) -> (6,11)
+[2026-03-05T09:44:37.702+01:00] BLÅ REFLEKTION
+[2026-03-05T09:44:37.703+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:44:37.703+01:00] Svar: (tomt svar)
+[2026-03-05T09:44:37.703+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:44:37.704+01:00] Svar: (tomt svar)
+[2026-03-05T09:52:24.126+01:00] ============================================================
+[2026-03-05T09:52:24.127+01:00] Spelsession startad: session-2026-03-05T09-52-22.718-01-00
+[2026-03-05T09:52:24.127+01:00] 
+
+[2026-03-05T09:52:24.127+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-05T09:52:26.150+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,2) -> (6,2)
+[2026-03-05T09:52:28.358+01:00] BLÅ REFLEKTION
+[2026-03-05T09:52:28.358+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:52:28.359+01:00] Svar: (tomt svar)
+[2026-03-05T09:52:28.359+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:52:28.359+01:00] Svar: (tomt svar)
+[2026-03-05T09:52:28.368+01:00] Blå avslutar sin tur
+[2026-03-05T09:52:28.369+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-05T09:52:28.824+01:00] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-03-05T09:52:29.194+01:00] Röd flyttar: Konventionell korvett (18,5) -> (16,5)
+[2026-03-05T09:52:30.330+01:00] Röd flyttar: Ubåt (17,8) -> (14,8)
+[2026-03-05T09:52:30.338+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-05T09:52:32.238+01:00] Blå flyttar: UUV - obemannad undervattensenhet (6,2) -> (8,2)
+[2026-03-05T09:52:34.294+01:00] BLÅ REFLEKTION
+[2026-03-05T09:52:34.294+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:52:34.295+01:00] Svar: (tomt svar)
+[2026-03-05T09:52:34.295+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:52:34.295+01:00] Svar: (tomt svar)
+[2026-03-05T09:53:24.269+01:00] ============================================================
+[2026-03-05T09:53:24.270+01:00] Spelsession startad: session-2026-03-05T09-53-22.781-01-00
+[2026-03-05T09:53:24.270+01:00] 
+
+[2026-03-05T09:53:24.271+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-05T09:53:28.613+01:00] Blå flyttar: USV - obemannad ytenhet (3,4) -> (4,5)
+[2026-03-05T09:53:30.445+01:00] BLÅ REFLEKTION
+[2026-03-05T09:53:30.445+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:53:30.446+01:00] Svar: (tomt svar)
+[2026-03-05T09:53:30.446+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:53:30.446+01:00] Svar: (tomt svar)
+[2026-03-05T09:53:30.456+01:00] Blå avslutar sin tur
+[2026-03-05T09:53:30.456+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-05T09:53:31.422+01:00] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-03-05T09:53:31.431+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-05T09:53:34.061+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (7,7)
+[2026-03-05T09:53:35.685+01:00] BLÅ REFLEKTION
+[2026-03-05T09:53:35.685+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-05T09:53:35.686+01:00] Svar: (tomt svar)
+[2026-03-05T09:53:35.686+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-05T09:53:35.686+01:00] Svar: (tomt svar)
