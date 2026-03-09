@@ -85,7 +85,7 @@ const MAP_CONFIGS = [
       { q: 3, r: 7 }, // 5 UAV
       { q: 3, r: 11 }, // 6 USV
       { q: 5, r: 16 }, // 7 USV
-      { q: 4, r: 13 }, // 8 UUV
+      { q: 4, r: 9 }, // 8 UUV
       { q: 1, r: 17 }, // 9 UUV
       { q: 3, r: 18 }, // 10 Ubåtsjakthelikopter
     ],

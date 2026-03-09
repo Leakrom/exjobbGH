@@ -41,14 +41,14 @@
 
   // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay), ammo (total shots)
   const UNIT_STATS = {
-    [UnitType.FRIGATE]: { hp: 4, move: 7, range: 6, mines: 0, ammo: 12 },
-    [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 4, mines: 0, ammo: 10 },
-    [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 4, mines: 0, ammo: 10 },
+    [UnitType.FRIGATE]: { hp: 4, move: 7, range: 6, mines: 0, ammo: 10 },
+    [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 4, mines: 0, ammo: 8 },
+    [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 4, mines: 0, ammo: 8 },
     [UnitType.UAV]: { hp: 1, move: 4, range: 10, mines: 0, ammo: 0 },
     [UnitType.USV]: { hp: 2, move: 2, range: 4, mines: 0, ammo: 1 },
     [UnitType.UUV]: { hp: 1, move: 2, range: 6, mines: 0, ammo: 0 },
     [UnitType.SUBMARINE_HUNTER]: { hp: 2, move: 3, range: 3, mines: 0, ammo: 0 },
-    [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 2, mines: 0, ammo: 10 },
+    [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 2, mines: 0, ammo: 8 },
     [UnitType.UNCONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0, ammo: 0 },
     [UnitType.CONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0, ammo: 0 },
   };
@@ -891,6 +891,24 @@
 
     const sel = selectedId ? getUnit(selectedId) : null;
     if (!sel) {
+      elSelType.textContent = '–';
+      elSelSide.textContent = '–';
+      elSelHP.textContent = '–';
+      elSelMove.textContent = '–';
+      elSelRange.textContent = '–';
+      elSelDepth.textContent = '–';
+      elSelMines.textContent = '–';
+      elSelAmmo.textContent = '–';
+      if (elSelSensor) elSelSensor.textContent = '–';
+      btnAttack.disabled = true;
+      btnMine.disabled = true;
+      btnDepthUp.disabled = true;
+      btnDepthDown.disabled = true;
+      btnToggleSensor.disabled = true;
+      return;
+    }
+
+    if (sel.side === Side.RED && sel.detected && !sel.identified) {
       elSelType.textContent = '–';
       elSelSide.textContent = '–';
       elSelHP.textContent = '–';
