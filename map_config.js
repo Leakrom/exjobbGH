@@ -31,27 +31,34 @@ const MAP_CONFIGS = [
     name: 'Karta 1',
     seed: MAP_SEEDS[0],
     cells: [],
+    skerryStartPositions: [
+      { q: 10, r: 2 },
+      { q: 12, r: 8 },
+      { q: 11, r: 9 },
+      { q: 12, r: 11 },
+      { q: 13, r: 3 },
+    ],
     blueStartPositions: [
       { q: 1, r: 2 },  // 0 Fregatt
       { q: 1, r: 5 },  // 1 Stealth-korvett
-      { q: 2, r: 8 },  // 2 Stealth-korvett
-      { q: 3, r: 6 },  // 3 Ubåt
+      { q: 1, r: 16 },  // 2 Stealth-korvett
+      { q: 4, r: 14 },  // 3 Ubåt
       { q: 2, r: 3 },  // 4 UAV
-      { q: 1, r: 10 }, // 5 UAV
-      { q: 2, r: 12 }, // 6 USV
+      { q: 3, r: 8 }, // 5 UAV
+      { q: 4, r: 12 }, // 6 USV
       { q: 3, r: 4 },  // 7 USV
       { q: 1, r: 14 }, // 8 UUV
       { q: 4, r: 2 },  // 9 UUV
-      { q: 2, r: 16 }, // 10 Ubåtsjakthelikopter
+      { q: 3, r: 18 }, // 10 Ubåtsjakthelikopter
     ],
     redStartPositions: [
       { q: 18, r: 2 },  // 0 Konventionell korvett
       { q: 18, r: 5 },  // 1 Konventionell korvett
-      { q: 17, r: 8 },  // 2 Ubåt
-      { q: 16, r: 6 },  // 3 Mina (okontrollerbar)
-      { q: 17, r: 3 },  // 4 Mina (okontrollerbar)
-      { q: 18, r: 10 }, // 5 Mina (kontrollerbar)
-      { q: 17, r: 12 }, // 6 Mina (kontrollerbar)
+      { q: 16, r: 16 },  // 2 Ubåt
+      { q: 14, r: 8 },  // 3 Mina (okontrollerbar)
+      { q: 13, r: 4 },  // 4 Mina (okontrollerbar)
+      { q: 12, r: 13 }, // 5 Mina (kontrollerbar)
+      { q: 11, r: 1 }, // 6 Mina (kontrollerbar)
       { q: 16, r: 4 },
       { q: 18, r: 14 },
       { q: 15, r: 2 },
@@ -62,21 +69,28 @@ const MAP_CONFIGS = [
     name: 'Karta 2',
     seed: MAP_SEEDS[1],
     cells: [],
+    skerryStartPositions: [
+      { q: 7, r: 7 },
+      { q: 9, r: 9 },
+      { q: 10, r: 11 },
+      { q: 10, r: 12 },
+      { q: 11, r: 14 },
+    ],
     blueStartPositions: [
-      { q: 2, r: 1 },  // 0 Fregatt
+      { q: 0, r: 11 },  // 0 Fregatt
       { q: 3, r: 4 },  // 1 Stealth-korvett
-      { q: 1, r: 7 },  // 2 Stealth-korvett
+      { q: 2, r: 14 },  // 2 Stealth-korvett
       { q: 4, r: 5 },  // 3 Ubåt
       { q: 2, r: 9 },  // 4 UAV
-      { q: 1, r: 12 }, // 5 UAV
+      { q: 3, r: 7 }, // 5 UAV
       { q: 3, r: 11 }, // 6 USV
-      { q: 2, r: 15 }, // 7 USV
+      { q: 5, r: 16 }, // 7 USV
       { q: 4, r: 13 }, // 8 UUV
       { q: 1, r: 17 }, // 9 UUV
       { q: 3, r: 18 }, // 10 Ubåtsjakthelikopter
     ],
     redStartPositions: [
-      { q: 17, r: 1 },  // 0 Konventionell korvett
+      { q: 17, r: 11 },  // 0 Konventionell korvett
       { q: 16, r: 3 },  // 1 Konventionell korvett
       { q: 18, r: 5 },  // 2 Ubåt
       { q: 12, r: 5 },  // 3 Mina (okontrollerbar)
@@ -93,14 +107,21 @@ const MAP_CONFIGS = [
     name: 'Karta 3',
     seed: MAP_SEEDS[2],
     cells: [],
+    skerryStartPositions: [
+      { q: 13, r: 3 },
+      { q: 10, r: 7 },
+      { q: 11, r: 9 },
+      { q: 12, r: 11 },
+      { q: 10, r: 14 },
+    ],
     blueStartPositions: [
       { q: 1, r: 1 },  // 0 Fregatt
-      { q: 2, r: 4 },  // 1 Stealth-korvett
+      { q: 2, r: 14 },  // 1 Stealth-korvett
       { q: 3, r: 7 },  // 2 Stealth-korvett
       { q: 1, r: 9 },  // 3 Ubåt
-      { q: 2, r: 12 }, // 4 UAV
+      { q: 2, r: 3 }, // 4 UAV
       { q: 4, r: 10 }, // 5 UAV
-      { q: 1, r: 15 }, // 6 USV
+      { q: 5, r: 5 }, // 6 USV
       { q: 3, r: 17 }, // 7 USV
       { q: 2, r: 19 }, // 8 UUV
       { q: 4, r: 14 }, // 9 UUV
@@ -108,12 +129,12 @@ const MAP_CONFIGS = [
     ],
     redStartPositions: [
       { q: 18, r: 1 },  // 0 Konventionell korvett
-      { q: 17, r: 4 },  // 1 Konventionell korvett
-      { q: 16, r: 7 },  // 2 Ubåt
-      { q: 18, r: 9 },  // 3 Mina (okontrollerbar)
-      { q: 17, r: 12 }, // 4 Mina (okontrollerbar)
-      { q: 15, r: 10 }, // 5 Mina (kontrollerbar)
-      { q: 18, r: 15 }, // 6 Mina (kontrollerbar)
+      { q: 16, r: 17 },  // 1 Konventionell korvett
+      { q: 17, r: 13 },  // 2 Ubåt
+      { q: 12, r: 7 },  // 3 Mina (okontrollerbar)
+      { q: 14, r: 14 }, // 4 Mina (okontrollerbar)
+      { q: 12, r: 10 }, // 5 Mina (kontrollerbar)
+      { q: 10, r: 0 }, // 6 Mina (kontrollerbar)
       { q: 16, r: 17 },
       { q: 17, r: 19 },
       { q: 15, r: 14 },
@@ -124,27 +145,34 @@ const MAP_CONFIGS = [
     name: 'Karta 4',
     seed: MAP_SEEDS[3],
     cells: [],
+    skerryStartPositions: [
+      { q: 11, r: 1 },
+      { q: 12, r: 2 },
+      { q: 11, r: 10 },
+      { q: 13, r: 11 },
+      { q: 11, r: 13 },
+    ],
     blueStartPositions: [
-      { q: 2, r: 2 },  // 0 Fregatt
-      { q: 1, r: 4 },  // 1 Stealth-korvett
-      { q: 3, r: 6 },  // 2 Stealth-korvett
-      { q: 2, r: 8 },  // 3 Ubåt
-      { q: 4, r: 7 },  // 4 UAV
-      { q: 1, r: 11 }, // 5 UAV
-      { q: 3, r: 13 }, // 6 USV
-      { q: 2, r: 15 }, // 7 USV
-      { q: 4, r: 16 }, // 8 UUV
-      { q: 1, r: 18 }, // 9 UUV
-      { q: 3, r: 10 }, // 10 Ubåtsjakthelikopter
+      { q: 1, r: 2 },  // 0 Fregatt
+      { q: 1, r: 5 },  // 1 Stealth-korvett
+      { q: 1, r: 16 },  // 2 Stealth-korvett
+      { q: 4, r: 14 },  // 3 Ubåt
+      { q: 2, r: 3 },  // 4 UAV
+      { q: 3, r: 8 }, // 5 UAV
+      { q: 4, r: 12 }, // 6 USV
+      { q: 3, r: 4 },  // 7 USV
+      { q: 1, r: 14 }, // 8 UUV
+      { q: 4, r: 2 },  // 9 UUV
+      { q: 3, r: 18 }, // 10 Ubåtsjakthelikopter
     ],
     redStartPositions: [
-      { q: 17, r: 2 },  // 0 Konventionell korvett
-      { q: 18, r: 4 },  // 1 Konventionell korvett
-      { q: 16, r: 6 },  // 2 Ubåt
-      { q: 17, r: 8 },  // 3 Mina (okontrollerbar)
-      { q: 15, r: 7 },  // 4 Mina (okontrollerbar)
-      { q: 18, r: 11 }, // 5 Mina (kontrollerbar)
-      { q: 18, r: 16 }, // 6 Mina (kontrollerbar)
+      { q: 18, r: 2 },  // 0 Konventionell korvett
+      { q: 17, r: 18 },  // 1 Konventionell korvett
+      { q: 16, r: 16 },  // 2 Ubåt
+      { q: 11, r: 8 },  // 3 Mina (okontrollerbar)
+      { q: 12, r: 4 },  // 4 Mina (okontrollerbar)
+      { q: 12, r: 14 }, // 5 Mina (kontrollerbar)
+      { q: 10, r: 11 }, // 6 Mina (kontrollerbar)
       { q: 17, r: 15 },
       { q: 15, r: 16 },
       { q: 18, r: 18 },
@@ -397,6 +425,27 @@ function generateMapWithSeed(seed, GRID_W, GRID_H) {
         cell.isSkerry = true;
         waterSkeryAdded++;
       }
+    }
+  }
+
+  // Om skerryStartPositions är definierade för kartan, använd exakt dessa vattenkobbar.
+  const mapConfig = MAP_CONFIGS.find((cfg) => cfg.seed === seed);
+  const configuredSkerries = mapConfig && Array.isArray(mapConfig.skerryStartPositions)
+    ? mapConfig.skerryStartPositions
+    : [];
+
+  if (configuredSkerries.length > 0) {
+    // Behåll ev. land-kobbar från ö-grupper, men ersätt slumpade vattenkobbar.
+    for (const cell of map) {
+      if (!cell.land) cell.isSkerry = false;
+    }
+
+    for (const pos of configuredSkerries) {
+      if (!pos || typeof pos.q !== 'number' || typeof pos.r !== 'number') continue;
+      if (pos.q < 0 || pos.q >= GRID_W || pos.r < 0 || pos.r >= GRID_H) continue;
+      const cell = map[pos.r * GRID_W + pos.q];
+      if (!cell || cell.land) continue;
+      cell.isSkerry = true;
     }
   }
 

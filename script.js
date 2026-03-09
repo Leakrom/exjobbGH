@@ -718,7 +718,37 @@
     createMinefieldArea(q, r);
   }
 
+  function createSeededRng(seed) {
+    let s = seed >>> 0;
+    return function next() {
+      s += 0x6d2b79f5;
+      let t = s;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function getMinefieldSeed(centerQ, centerR) {
+    const mapSeed = (MAP_CONFIGS[selectedMapIndex] && MAP_CONFIGS[selectedMapIndex].seed) || 0;
+    const mixed =
+      (mapSeed ^ ((centerQ + 1) * 73856093) ^ ((centerR + 1) * 19349663)) >>> 0;
+    return mixed || 0x9e3779b9;
+  }
+
+  function shuffledHexDirs(rng) {
+    const dirs = [...HEX_DIRS];
+    for (let i = dirs.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      const tmp = dirs[i];
+      dirs[i] = dirs[j];
+      dirs[j] = tmp;
+    }
+    return dirs;
+  }
+
   function createMinefieldArea(centerQ, centerR) {
+    const rng = createSeededRng(getMinefieldSeed(centerQ, centerR));
     const targetSize = 12;
     const start = { q: centerQ, r: centerR };
 
@@ -728,11 +758,11 @@
     cells.add(keyOf(start.q, start.r));
 
     while (cells.size < targetSize && frontier.length > 0) {
-      const idx = Math.floor(Math.random() * frontier.length);
+      const idx = Math.floor(rng() * frontier.length);
       const current = frontier.splice(idx, 1)[0];
       let added = false;
 
-      const dirs = [...HEX_DIRS].sort(() => Math.random() - 0.5);
+      const dirs = shuffledHexDirs(rng);
 
       for (const dir of dirs) {
         const next = { q: current.q + dir.q, r: current.r + dir.r };
