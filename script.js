@@ -20,7 +20,7 @@
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
     const BLUE_ACTIONS_UNLIMITED = true;
-    const ASK_BLUE_REFLECTION_EACH_TURN = true; // true = efter varje blå tur, false = först vid spelavslut
+    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -273,6 +273,7 @@
   const elSelDepth = document.getElementById('selDepth');
   const elSelMines = document.getElementById('selMines');
   const elSelAmmo = document.getElementById('selAmmo');
+  const elSelSensor = document.getElementById('selSensor');
 
   const elActivePlayer = document.getElementById('activePlayer');
   const elActionsLeft = document.getElementById('actionsLeft');
@@ -812,7 +813,8 @@
       elSelRange.textContent = '–';
       elSelDepth.textContent = '–';
       elSelMines.textContent = '–';
-      elSelAmmo.textContent = '0/0';
+      elSelAmmo.textContent = '–';
+      if (elSelSensor) elSelSensor.textContent = '–';
       btnAttack.disabled = true;
       btnMine.disabled = true;
       btnDepthUp.disabled = true;
@@ -822,6 +824,7 @@
     }
 
     const st = UNIT_STATS[sel.type];
+    const sensorCfg = SENSOR_CONFIG[sel.type];
     elSelType.textContent = sel.type;
     elSelSide.textContent = sel.side;
     elSelHP.textContent = `${sel.hp}/${st.hp}`;
@@ -830,6 +833,7 @@
     elSelDepth.textContent = `${sel.depth}/${MAX_DEPTH}`;
     elSelMines.textContent = String(sel.minesLeft);
     elSelAmmo.textContent = `${sel.ammoLeft}/${st.ammo}`;
+    if (elSelSensor) elSelSensor.textContent = sensorCfg && sensorCfg.type ? sensorCfg.type : 'Ingen';
 
     const isOwn = sel.side === activeSide;
     const hasActions = hasActionsFor(activeSide);
@@ -1814,10 +1818,10 @@ function applyMineTrigger(q, r, enteringSide) {
         continue; // Skip rendering
       }*/
 
-      // Hide red units unless detected or identified
+     /* // Hide red units unless detected or identified
       if (u.side === Side.RED && !u.detected && !u.identified) {
         continue; // Skip rendering
-      }
+      }*/
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
