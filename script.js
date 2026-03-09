@@ -264,6 +264,7 @@
   const elTurnPill = document.getElementById('turnPill');
   const elPhasePill = document.getElementById('phasePill');
   const elHintPill = document.getElementById('hintPill');
+  const elMapPill = document.getElementById('mapPill');
 
   const elSelType = document.getElementById('selType');
   const elSelSide = document.getElementById('selSide');
@@ -882,8 +883,9 @@
 
     elTurnPill.textContent = `Tur ${turn} • ${activeSide}`;
     elPhasePill.textContent = `Fas: ${
-      mode === 'order' ? 'Order' : mode === 'attack' ? 'Attack' : 'Minering'
+      mode === 'order' ? 'Förflyttning' : mode === 'attack' ? 'Attack' : 'Minering'
     }`;
+    elMapPill.textContent = `Karta: ${loadedMapIndex+1}`;
 
     elActivePlayer.textContent = activeSide;
     elActionsLeft.textContent =

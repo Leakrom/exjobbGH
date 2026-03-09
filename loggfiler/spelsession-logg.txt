@@ -2144,3 +2144,45 @@ Nytt slag initieras, karta: Karta 2
 [2026-03-09T15:09:58.551+01:00] Svar: (tomt svar)
 [2026-03-09T15:09:58.552+01:00] Fråga: Vad tänker du att det ska få för resultat?
 [2026-03-09T15:09:58.552+01:00] Svar: (tomt svar)
+[2026-03-09T15:25:05.766+01:00] ============================================================
+[2026-03-09T15:25:05.767+01:00] Spelsession startad: session-2026-03-09T15-25-04.530-01-00
+[2026-03-09T15:25:05.767+01:00] 
+
+[2026-03-09T15:25:05.768+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-09T15:25:07.238+01:00] 
+
+[2026-03-09T15:25:07.238+01:00] Nytt slag initieras, karta: Karta 2
+[2026-03-09T15:25:07.941+01:00] 
+
+[2026-03-09T15:25:07.942+01:00] Nytt slag initieras, karta: Karta 4
+[2026-03-09T15:25:08.750+01:00] 
+
+[2026-03-09T15:25:08.750+01:00] Nytt slag initieras, karta: Karta 3
+[2026-03-09T15:25:10.654+01:00] 
+
+[2026-03-09T15:25:10.654+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-09T15:25:14.309+01:00] 
+
+[2026-03-09T15:25:14.310+01:00] Nytt slag initieras, karta: Karta 2
+[2026-03-09T15:25:15.645+01:00] 
+
+[2026-03-09T15:25:15.646+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-09T15:25:18.182+01:00] Blå flyttar: USV - obemannad ytenhet (4,12) -> (6,11)
+[2026-03-09T15:25:20.726+01:00] BLÅ REFLEKTION
+[2026-03-09T15:25:20.726+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:25:20.727+01:00] Svar: (tomt svar)
+[2026-03-09T15:25:20.727+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:25:20.727+01:00] Svar: (tomt svar)
+[2026-03-09T15:25:20.737+01:00] Blå avslutar sin tur
+[2026-03-09T15:25:20.737+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-09T15:25:21.199+01:00] Röd flyttar: Ubåt (16,16) -> (13,16)
+[2026-03-09T15:25:21.558+01:00] Röd flyttar: Konventionell korvett (18,5) -> (16,5)
+[2026-03-09T15:25:21.927+01:00] Röd flyttar: Ubåt (13,16) -> (12,17)
+[2026-03-09T15:25:21.935+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-09T15:25:23.365+01:00] Blå flyttar: USV - obemannad ytenhet (6,11) -> (8,10)
+[2026-03-09T15:25:25.829+01:00] Blå flyttar: Ubåt (4,14) -> (6,12)
+[2026-03-09T15:25:28.261+01:00] BLÅ REFLEKTION
+[2026-03-09T15:25:28.262+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:25:28.262+01:00] Svar: (tomt svar)
+[2026-03-09T15:25:28.262+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:25:28.263+01:00] Svar: (tomt svar)
