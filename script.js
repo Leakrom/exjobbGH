@@ -20,7 +20,7 @@
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
     const BLUE_ACTIONS_UNLIMITED = true;
-    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
+    const ASK_BLUE_REFLECTION_EACH_TURN = true; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -852,9 +852,17 @@
   }
 
   function isAdjacentToBlueUnit(q, r) {
-    return units.some(
-      (u) => u.side === Side.BLUE && hexDistance({ q: u.q, r: u.r }, { q, r }) === 1
-    );
+    const mineCenter = hexToPixel(q, r);
+    // Match "bredvid" by rendered hex-center distance so it aligns with what the player sees.
+    const neighborDistance = HEX_SIZE * 1.8;
+    return units.some((u) => {
+      if (u.side !== Side.BLUE) return false;
+      const unitCenter = hexToPixel(u.q, u.r);
+      const dx = unitCenter.x - mineCenter.x;
+      const dy = unitCenter.y - mineCenter.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      return dist <= neighborDistance;
+    });
   }
 
   function isMineVisibleToBlue(q, r, mineSide) {
@@ -1357,6 +1365,10 @@ function applyMineTrigger(q, r, enteringSide) {
       const range = blue.sensorActive ? sensor.activeRange : sensor.passiveRange;
 
       for (const red of units.filter((u) => u.side === Side.RED)) {
+        // Mines must never be detected by sensors.
+        // They are discovered/identified only by adjacency rules.
+        if (isMineType(red.type)) continue;
+
         // Skip if already known
         if (red.detected && red.identified) continue;
 
