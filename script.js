@@ -1339,7 +1339,7 @@ function applyMineTrigger(q, r, enteringSide) {
       return;
     }
     if (attacker.ammoLeft <= 0) {
-      showToast('Slut på skott', 'Den här enheten har inga skott kvar.');
+      showToast('Slut på ammunition', 'Den här enheten har inga skott kvar.');
       return;
     }
     const st = UNIT_STATS[attacker.type];
@@ -1594,7 +1594,10 @@ function applyMineTrigger(q, r, enteringSide) {
 
       const reds = units.filter((u) => u.side === Side.RED);
       const blues = units.filter((u) => u.side === Side.BLUE);
-      if (!reds.length || !blues.length) return;
+      if (!reds.length || !blues.length) {
+        endTurn();
+        return;
+      }
 
       // Attackera om möjligt
       for (const u of reds) {
@@ -1617,7 +1620,9 @@ function applyMineTrigger(q, r, enteringSide) {
       }
 
       // Flytta mot närmaste fiende
-      const mover = reds[Math.floor(Math.random() * reds.length)];
+      const mobileReds = reds.filter((u) => UNIT_STATS[u.type] && UNIT_STATS[u.type].move > 0);
+      const moverPool = mobileReds.length ? mobileReds : reds;
+      const mover = moverPool[Math.floor(Math.random() * moverPool.length)];
       const target = blues.reduce(
         (best, b) => {
           const d = hexDistance({ q: mover.q, r: mover.r }, { q: b.q, r: b.r });
@@ -1629,7 +1634,11 @@ function applyMineTrigger(q, r, enteringSide) {
       const moves = legalMoves(mover);
       if (!moves.length) {
         steps++;
-        setTimeout(tick, 250);
+        if (steps >= ACTIONS_PER_TURN) {
+          endTurn();
+        } else {
+          setTimeout(tick, 250);
+        }
         return;
       }
 
@@ -1818,10 +1827,10 @@ function applyMineTrigger(q, r, enteringSide) {
         continue; // Skip rendering
       }*/
 
-     /* // Hide red units unless detected or identified
+      // Hide red units unless detected or identified
       if (u.side === Side.RED && !u.detected && !u.identified) {
         continue; // Skip rendering
-      }*/
+      }
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
