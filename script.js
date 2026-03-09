@@ -1808,15 +1808,6 @@ function applyMineTrigger(q, r, enteringSide) {
 
     // ===== RITA MINFÄLT-BORDER =====
     for (const field of minefields) {
-      const centerQ = field.center.q;
-      const centerR = field.center.r;
-      const centerMapMine = mines.get(keyOf(centerQ, centerR));
-      const centerUnitMine = units.find(
-        (u) => u.q === centerQ && u.r === centerR && isMineType(u.type)
-      );
-      const mineSide = centerUnitMine ? centerUnitMine.side : centerMapMine ? centerMapMine.side : null;
-      if (!isMineVisibleToBlue(centerQ, centerR, mineSide)) continue;
-
       for (const key of field.cells) {
         const [q, r] = key.split(',').map(Number);
 
