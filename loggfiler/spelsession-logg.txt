@@ -1266,3 +1266,10 @@ Nytt slag initieras, karta: Karta 2
 [2026-03-09T10:24:13.564+01:00] Svar: (tomt svar)
 [2026-03-09T10:24:13.564+01:00] Fråga: Vad tänker du att det ska få för resultat?
 [2026-03-09T10:24:13.565+01:00] Svar: (tomt svar)
+[2026-03-09T13:04:46.360+01:00] ============================================================
+[2026-03-09T13:04:46.360+01:00] Spelsession startad: session-2026-03-09T13-04-44.975-01-00
+[2026-03-09T13:04:46.361+01:00] 
+
+[2026-03-09T13:04:46.361+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-09T13:04:53.432+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (5,7)
+[2026-03-09T13:04:56.639+01:00] Blå avslutar sin tur

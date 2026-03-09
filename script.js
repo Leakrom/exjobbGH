@@ -74,7 +74,7 @@
     [UnitType.UAV]: { type: SensorType.RADAR, passiveRange: 5, activeRange: 8 },
     [UnitType.USV]: { type: SensorType.RADAR, passiveRange: 2, activeRange: 4 },
     [UnitType.UUV]: { type: SensorType.SONAR, passiveRange: 2, activeRange: 4 },
-    [UnitType.SUBMARINE_HUNTER]: { type: SensorType.RADAR, passiveRange: 4, activeRange: 6 },
+    [UnitType.SUBMARINE_HUNTER]: { type: SensorType.SONAR, passiveRange: 4, activeRange: 6 },
     [UnitType.CONVENTIONAL_CORVETTE]: { type: SensorType.RADAR, passiveRange: 3, activeRange: 5 },
     [UnitType.UNCONTROL_MINE]: { type: null, passiveRange: 0, activeRange: 0 },
     [UnitType.CONTROL_MINE]: { type: null, passiveRange: 0, activeRange: 0 },
@@ -1537,6 +1537,19 @@ function applyMineTrigger(q, r, enteringSide) {
       }
 
       logEvent(`${activeSide} avslutar sin tur`);
+
+      // Spara alltid logghändelser när Blå avslutar sin tur,
+      // även om reflektion bara samlas in vid spelavslut.
+      if (activeSide === Side.BLUE && !ASK_BLUE_REFLECTION_EACH_TURN) {
+        try {
+          await flushSessionLogToFile();
+        } catch (e) {
+          console.error('Kunde inte spara sessionslogg vid turavslut:', e);
+          setLogStatus('fel vid sparning');
+          showToast('Loggning misslyckades', 'Kunde inte skriva till textfilen.');
+        }
+      }
+
       endTurn();
     });
   }
