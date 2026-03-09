@@ -3,22 +3,59 @@
 
 const MAP_SEEDS = [12345, 54321, 99999, 11111]; // Different seed for each map
 
+// Startpositionerna nedan matchas mot spawnordningen i script.js (resetGame).
+// Blå index -> enhet:
+// 0 Fregatt
+// 1 Stealth-korvett
+// 2 Stealth-korvett
+// 3 Ubåt
+// 4 UAV
+// 5 UAV
+// 6 USV
+// 7 USV
+// 8 UUV
+// 9 UUV
+// 10 Ubåtsjakthelikopter
+// Röd index -> enhet:
+// 0 Konventionell korvett
+// 1 Konventionell korvett
+// 2 Ubåt
+// 3 Mina (okontrollerbar)
+// 4 Mina (okontrollerbar)
+// 5 Mina (kontrollerbar)
+// 6 Mina (kontrollerbar)
+// OBS: Endast index 0..6 används just nu av redUnits i script.js.
+
 const MAP_CONFIGS = [
   {
     name: 'Karta 1',
     seed: MAP_SEEDS[0],
     cells: [],
     blueStartPositions: [
-      { q: 1, r: 2 }, { q: 1, r: 5 }, { q: 2, r: 8 },
-      { q: 3, r: 6 }, { q: 2, r: 3 }, { q: 1, r: 10 },
-      { q: 2, r: 12 }, { q: 3, r: 4 }, { q: 1, r: 14 },
-      { q: 4, r: 2 }, { q: 2, r: 16 }
+      { q: 1, r: 2 },  // 0 Fregatt
+      { q: 1, r: 5 },  // 1 Stealth-korvett
+      { q: 2, r: 8 },  // 2 Stealth-korvett
+      { q: 3, r: 6 },  // 3 Ubåt
+      { q: 2, r: 3 },  // 4 UAV
+      { q: 1, r: 10 }, // 5 UAV
+      { q: 2, r: 12 }, // 6 USV
+      { q: 3, r: 4 },  // 7 USV
+      { q: 1, r: 14 }, // 8 UUV
+      { q: 4, r: 2 },  // 9 UUV
+      { q: 2, r: 16 }, // 10 Ubåtsjakthelikopter
     ],
     redStartPositions: [
-      { q: 18, r: 2 }, { q: 18, r: 5 }, { q: 17, r: 8 },
-      { q: 16, r: 6 }, { q: 17, r: 3 }, { q: 18, r: 10 },
-      { q: 17, r: 12 }, { q: 16, r: 4 }, { q: 18, r: 14 },
-      { q: 15, r: 2 }, { q: 17, r: 16 }
+      { q: 18, r: 2 },  // 0 Konventionell korvett
+      { q: 18, r: 5 },  // 1 Konventionell korvett
+      { q: 17, r: 8 },  // 2 Ubåt
+      { q: 16, r: 6 },  // 3 Mina (okontrollerbar)
+      { q: 17, r: 3 },  // 4 Mina (okontrollerbar)
+      { q: 18, r: 10 }, // 5 Mina (kontrollerbar)
+      { q: 17, r: 12 }, // 6 Mina (kontrollerbar)
+      { q: 16, r: 4 },
+      { q: 18, r: 14 },
+      { q: 15, r: 2 },
+      { q: 17, r: 16 },
     ]
   },
   {
@@ -26,16 +63,30 @@ const MAP_CONFIGS = [
     seed: MAP_SEEDS[1],
     cells: [],
     blueStartPositions: [
-      { q: 2, r: 1 }, { q: 3, r: 4 }, { q: 1, r: 7 },
-      { q: 4, r: 5 }, { q: 2, r: 9 }, { q: 1, r: 12 },
-      { q: 3, r: 11 }, { q: 2, r: 15 }, { q: 4, r: 13 },
-      { q: 1, r: 17 }, { q: 3, r: 18 }
+      { q: 2, r: 1 },  // 0 Fregatt
+      { q: 3, r: 4 },  // 1 Stealth-korvett
+      { q: 1, r: 7 },  // 2 Stealth-korvett
+      { q: 4, r: 5 },  // 3 Ubåt
+      { q: 2, r: 9 },  // 4 UAV
+      { q: 1, r: 12 }, // 5 UAV
+      { q: 3, r: 11 }, // 6 USV
+      { q: 2, r: 15 }, // 7 USV
+      { q: 4, r: 13 }, // 8 UUV
+      { q: 1, r: 17 }, // 9 UUV
+      { q: 3, r: 18 }, // 10 Ubåtsjakthelikopter
     ],
     redStartPositions: [
-      { q: 17, r: 1 }, { q: 16, r: 3 }, { q: 18, r: 7 },
-      { q: 15, r: 5 }, { q: 17, r: 9 }, { q: 18, r: 12 },
-      { q: 16, r: 11 }, { q: 17, r: 15 }, { q: 15, r: 13 },
-      { q: 18, r: 17 }, { q: 16, r: 18 }
+      { q: 17, r: 1 },  // 0 Konventionell korvett
+      { q: 16, r: 3 },  // 1 Konventionell korvett
+      { q: 18, r: 5 },  // 2 Ubåt
+      { q: 12, r: 5 },  // 3 Mina (okontrollerbar)
+      { q: 13, r: 14 }, // 4 Mina (okontrollerbar)
+      { q: 12, r: 18 }, // 5 Mina (kontrollerbar)
+      { q: 12, r: 11 }, // 6 Mina (kontrollerbar)
+      { q: 17, r: 15 },
+      { q: 15, r: 13 },
+      { q: 18, r: 17 },
+      { q: 16, r: 18 },
     ]
   },
   {
@@ -43,16 +94,30 @@ const MAP_CONFIGS = [
     seed: MAP_SEEDS[2],
     cells: [],
     blueStartPositions: [
-      { q: 1, r: 1 }, { q: 2, r: 4 }, { q: 3, r: 7 },
-      { q: 1, r: 9 }, { q: 2, r: 12 }, { q: 4, r: 10 },
-      { q: 1, r: 15 }, { q: 3, r: 17 }, { q: 2, r: 19 },
-      { q: 4, r: 14 }, { q: 3, r: 2 }
+      { q: 1, r: 1 },  // 0 Fregatt
+      { q: 2, r: 4 },  // 1 Stealth-korvett
+      { q: 3, r: 7 },  // 2 Stealth-korvett
+      { q: 1, r: 9 },  // 3 Ubåt
+      { q: 2, r: 12 }, // 4 UAV
+      { q: 4, r: 10 }, // 5 UAV
+      { q: 1, r: 15 }, // 6 USV
+      { q: 3, r: 17 }, // 7 USV
+      { q: 2, r: 19 }, // 8 UUV
+      { q: 4, r: 14 }, // 9 UUV
+      { q: 3, r: 2 },  // 10 Ubåtsjakthelikopter
     ],
     redStartPositions: [
-      { q: 18, r: 1 }, { q: 17, r: 4 }, { q: 16, r: 7 },
-      { q: 18, r: 9 }, { q: 17, r: 12 }, { q: 15, r: 10 },
-      { q: 18, r: 15 }, { q: 16, r: 17 }, { q: 17, r: 19 },
-      { q: 15, r: 14 }, { q: 16, r: 2 }
+      { q: 18, r: 1 },  // 0 Konventionell korvett
+      { q: 17, r: 4 },  // 1 Konventionell korvett
+      { q: 16, r: 7 },  // 2 Ubåt
+      { q: 18, r: 9 },  // 3 Mina (okontrollerbar)
+      { q: 17, r: 12 }, // 4 Mina (okontrollerbar)
+      { q: 15, r: 10 }, // 5 Mina (kontrollerbar)
+      { q: 18, r: 15 }, // 6 Mina (kontrollerbar)
+      { q: 16, r: 17 },
+      { q: 17, r: 19 },
+      { q: 15, r: 14 },
+      { q: 16, r: 2 },
     ]
   },
   {
@@ -60,16 +125,30 @@ const MAP_CONFIGS = [
     seed: MAP_SEEDS[3],
     cells: [],
     blueStartPositions: [
-      { q: 2, r: 2 }, { q: 1, r: 4 }, { q: 3, r: 6 },
-      { q: 2, r: 8 }, { q: 4, r: 7 }, { q: 1, r: 11 },
-      { q: 3, r: 13 }, { q: 2, r: 15 }, { q: 4, r: 16 },
-      { q: 1, r: 18 }, { q: 3, r: 10 }
+      { q: 2, r: 2 },  // 0 Fregatt
+      { q: 1, r: 4 },  // 1 Stealth-korvett
+      { q: 3, r: 6 },  // 2 Stealth-korvett
+      { q: 2, r: 8 },  // 3 Ubåt
+      { q: 4, r: 7 },  // 4 UAV
+      { q: 1, r: 11 }, // 5 UAV
+      { q: 3, r: 13 }, // 6 USV
+      { q: 2, r: 15 }, // 7 USV
+      { q: 4, r: 16 }, // 8 UUV
+      { q: 1, r: 18 }, // 9 UUV
+      { q: 3, r: 10 }, // 10 Ubåtsjakthelikopter
     ],
     redStartPositions: [
-      { q: 17, r: 2 }, { q: 18, r: 4 }, { q: 16, r: 6 },
-      { q: 17, r: 8 }, { q: 15, r: 7 }, { q: 18, r: 11 },
-      { q: 18, r: 16}, { q: 17, r: 15 }, { q: 15, r: 16 },
-      { q: 18, r: 18 }, { q: 16, r: 10 }
+      { q: 17, r: 2 },  // 0 Konventionell korvett
+      { q: 18, r: 4 },  // 1 Konventionell korvett
+      { q: 16, r: 6 },  // 2 Ubåt
+      { q: 17, r: 8 },  // 3 Mina (okontrollerbar)
+      { q: 15, r: 7 },  // 4 Mina (okontrollerbar)
+      { q: 18, r: 11 }, // 5 Mina (kontrollerbar)
+      { q: 18, r: 16 }, // 6 Mina (kontrollerbar)
+      { q: 17, r: 15 },
+      { q: 15, r: 16 },
+      { q: 18, r: 18 },
+      { q: 16, r: 10 },
     ]
   }
 ];

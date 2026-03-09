@@ -1841,16 +1841,19 @@ function applyMineTrigger(q, r, enteringSide) {
       if (u.side === Side.RED && !u.detected && activeSide !== Side.RED) {
         continue; // Skip rendering
       }*/
-
+      
+      /*
       const isRedMine = u.side === Side.RED && isMineType(u.type);
       if (isRedMine && !isMineVisibleToBlue(u.q, u.r, u.side)) {
         continue;
       }
-
+      
+      
       // Hide non-mine red units unless detected or identified
       if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
       }
+        */
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
