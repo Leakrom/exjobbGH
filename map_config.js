@@ -55,10 +55,10 @@ const MAP_CONFIGS = [
       { q: 18, r: 2 },  // 0 Konventionell korvett
       { q: 18, r: 5 },  // 1 Konventionell korvett
       { q: 16, r: 16 },  // 2 Ubåt
-      { q: 14, r: 8 },  // 3 Mina (okontrollerbar)
+      { q: 12, r: 10 },  // 3 Mina (okontrollerbar)
       { q: 13, r: 4 },  // 4 Mina (okontrollerbar)
-      { q: 12, r: 13 }, // 5 Mina (kontrollerbar)
-      { q: 11, r: 1 }, // 6 Mina (kontrollerbar)
+      { q: 11, r: 8 }, // 5 Mina (kontrollerbar)
+      { q: 10, r: 1 }, // 6 Mina (kontrollerbar)
       { q: 16, r: 4 },
       { q: 18, r: 14 },
       { q: 15, r: 2 },

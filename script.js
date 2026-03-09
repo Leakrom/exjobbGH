@@ -292,6 +292,7 @@
   const btnMap2 = document.getElementById('btnMap2');
   const btnMap3 = document.getElementById('btnMap3');
   const btnMap4 = document.getElementById('btnMap4');
+  const redMovesWrap = document.getElementById('redMovesWrap');
 
   const elRedMove1 = document.getElementById('redMove1');
   const elRedMove2 = document.getElementById('redMove2');
@@ -299,6 +300,36 @@
 
   const toast = document.getElementById('toast');
   let toastTimer = null;
+  let toastPlacedUnderRedMoves = false;
+
+  function ensureToastPlacement() {
+    if (!toast) return;
+
+    if (toast.parentElement !== document.body) {
+      document.body.appendChild(toast);
+    }
+
+    // Keep toast directly below and within the same horizontal area as "Röda drag".
+    const panelRect = redMovesWrap ? redMovesWrap.getBoundingClientRect() : null;
+    const top = panelRect
+      ? Math.min(window.innerHeight - 90, Math.max(12, Math.round(panelRect.bottom + 10)))
+      : Math.round(window.innerHeight * 0.72);
+
+    toast.style.position = 'fixed';
+    toast.style.left = panelRect ? `${Math.round(panelRect.left)}px` : '16px';
+    toast.style.top = `${top}px`;
+    toast.style.transform = 'none';
+    toast.style.marginTop = '0';
+    toast.style.width = panelRect
+      ? `${Math.max(220, Math.round(panelRect.width))}px`
+      : 'min(680px, calc(100vw - 32px))';
+    toast.style.maxWidth = panelRect
+      ? `${Math.max(220, Math.round(panelRect.width))}px`
+      : 'min(680px, calc(100vw - 32px))';
+    toast.style.zIndex = '3';
+
+    toastPlacedUnderRedMoves = true;
+  }
 
   // Sessionlogg
   let sessionLogBuffer = '';
@@ -646,6 +677,7 @@
   }
 
   function showToast(title, msg, msg2, msg3) {
+    ensureToastPlacement();
     if (!toast) return; // Toast element not found, skip
     if (msg2 == undefined) msg2 = '';
     if (msg3 == undefined) msg3 = '';
@@ -714,7 +746,7 @@
   }
 
   function placeMine(q, r, side) {
-    mines.set(keyOf(q, r), { side });
+    mines.set(keyOf(q, r), { side, identified: false });
     createMinefieldArea(q, r);
   }
 
@@ -1824,7 +1856,15 @@ function applyMineTrigger(q, r, enteringSide) {
         }
 
         const m = mines.get(keyOf(q, r));
-        if (m && isMineVisibleToBlue(q, r, m.side)) {
+        if (m) {
+          const mineVisibleNow = isMineVisibleToBlue(q, r, m.side);
+          if (mineVisibleNow) {
+            m.identified = true;
+          }
+          if (!mineVisibleNow && !m.identified) {
+            continue;
+          }
+
           ctx.beginPath();
           ctx.arc(x, y, 5.5, 0, Math.PI * 2);
           ctx.fillStyle = LEGEND_COLORS.mine;
@@ -1872,10 +1912,16 @@ function applyMineTrigger(q, r, enteringSide) {
         continue; // Skip rendering
       }*/
       
-      /*
+      
       const isRedMine = u.side === Side.RED && isMineType(u.type);
-      if (isRedMine && !isMineVisibleToBlue(u.q, u.r, u.side)) {
+      if (isRedMine && !u.identified && !isMineVisibleToBlue(u.q, u.r, u.side)) {
         continue;
+      }
+
+      // Once a mine has been identified, it stays identified.
+      if (isRedMine && isMineVisibleToBlue(u.q, u.r, u.side)) {
+        u.detected = true;
+        u.identified = true;
       }
       
       
@@ -1883,12 +1929,12 @@ function applyMineTrigger(q, r, enteringSide) {
       if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
       }
-        */
+        
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
       const y = origin.y + p.y;
-      const isRedUnknown = u.side === Side.RED && u.detected && !u.identified;
+      const isRedUnknown = u.side === Side.RED && !isRedMine && u.detected && !u.identified;
       const col = u.side === Side.BLUE
         ? LEGEND_COLORS.unitBlue
         : isRedUnknown
@@ -1920,7 +1966,9 @@ function applyMineTrigger(q, r, enteringSide) {
 
       // Type glyph or question mark
       ctx.fillStyle = '#0b1220';
-      ctx.font = 'bold 10px system-ui, -apple-system, Segoe UI, Roboto, Arial';
+      ctx.font = isRedUnknown
+        ? 'bold 16px system-ui, -apple-system, Segoe UI, Roboto, Arial'
+        : 'bold 10px system-ui, -apple-system, Segoe UI, Roboto, Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       if (isRedUnknown) {
