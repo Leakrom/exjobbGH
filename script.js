@@ -785,6 +785,21 @@
     return units.find((u) => u.id === id) || null;
   }
 
+  function isMineType(type) {
+    return type === UnitType.UNCONTROL_MINE || type === UnitType.CONTROL_MINE;
+  }
+
+  function isAdjacentToBlueUnit(q, r) {
+    return units.some(
+      (u) => u.side === Side.BLUE && hexDistance({ q: u.q, r: u.r }, { q, r }) === 1
+    );
+  }
+
+  function isMineVisibleToBlue(q, r, mineSide) {
+    if (mineSide === Side.BLUE) return true;
+    return isAdjacentToBlueUnit(q, r);
+  }
+
   function updateUI() {
     if (
       !elTurnPill || !elPhasePill || !elActivePlayer || !elActionsLeft ||
@@ -1779,7 +1794,7 @@ function applyMineTrigger(q, r, enteringSide) {
         }
 
         const m = mines.get(keyOf(q, r));
-        if (m) {
+        if (m && isMineVisibleToBlue(q, r, m.side)) {
           ctx.beginPath();
           ctx.arc(x, y, 5.5, 0, Math.PI * 2);
           ctx.fillStyle = LEGEND_COLORS.mine;
@@ -1793,6 +1808,15 @@ function applyMineTrigger(q, r, enteringSide) {
 
     // ===== RITA MINFÄLT-BORDER =====
     for (const field of minefields) {
+      const centerQ = field.center.q;
+      const centerR = field.center.r;
+      const centerMapMine = mines.get(keyOf(centerQ, centerR));
+      const centerUnitMine = units.find(
+        (u) => u.q === centerQ && u.r === centerR && isMineType(u.type)
+      );
+      const mineSide = centerUnitMine ? centerUnitMine.side : centerMapMine ? centerMapMine.side : null;
+      if (!isMineVisibleToBlue(centerQ, centerR, mineSide)) continue;
+
       for (const key of field.cells) {
         const [q, r] = key.split(',').map(Number);
 
@@ -1827,8 +1851,13 @@ function applyMineTrigger(q, r, enteringSide) {
         continue; // Skip rendering
       }*/
 
-      // Hide red units unless detected or identified
-      if (u.side === Side.RED && !u.detected && !u.identified) {
+      const isRedMine = u.side === Side.RED && isMineType(u.type);
+      if (isRedMine && !isMineVisibleToBlue(u.q, u.r, u.side)) {
+        continue;
+      }
+
+      // Hide non-mine red units unless detected or identified
+      if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
       }
 
