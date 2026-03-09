@@ -66,6 +66,12 @@
     UnitType.CONTROL_MINE
   ]);
 
+   // Determine if a unit type is airborne
+  const AIRBORNE_TYPES = new Set([
+    UnitType.UAV,
+    UnitType.SUBMARINE_HUNTER
+  ]);
+
   // Sensor system configuration
   const SENSOR_CONFIG = {
     [UnitType.FRIGATE]: { type: SensorType.RADAR, passiveRange: 4, activeRange: 6 },
@@ -858,6 +864,7 @@
     const neighborDistance = HEX_SIZE * 1.8;
     return units.some((u) => {
       if (u.side !== Side.BLUE) return false;
+      if (AIRBORNE_TYPES.has(u.type)) return false;
       const unitCenter = hexToPixel(u.q, u.r);
       const dx = unitCenter.x - mineCenter.x;
       const dy = unitCenter.y - mineCenter.y;
@@ -968,7 +975,11 @@
     }
   }
 
-  function mineAt(q, r, enteringSide) {
+  function mineAt(q, r, enteringSide, enteringType = null) {
+  if (enteringType && AIRBORNE_TYPES.has(enteringType)) {
+    return null;
+  }
+
   // Mina från mines-Map
   const mapMine = mines.get(keyOf(q, r));
   if (mapMine && mapMine.side !== enteringSide) {
@@ -1778,7 +1789,7 @@ function applyMineTrigger(q, r, enteringSide) {
       mover.r = dest.r;
       spendActionFor(mover.side);
       logEvent(`${mover.side} flyttar: ${mover.type} (${from.q},${from.r}) -> (${dest.q},${dest.r})`);
-      if (mines.has(keyOf(dest.q, dest.r))) {
+      if (!AIRBORNE_TYPES.has(mover.type) && mines.has(keyOf(dest.q, dest.r))) {
         applyMineTrigger(dest.q, dest.r, mover.side);
       }
       updateUI();
@@ -2220,54 +2231,56 @@ function applyMineTrigger(q, r, enteringSide) {
         }
       }
 
-      // --- BEGIN: Mine trigger for passing over or touching any mine cell along the true line ---
-      // Use hex line interpolation (lerp + hexRound) to get all cells the line passes through
-      const start = { q: sel.q, r: sel.r };
-      const end = { q: h.q, r: h.r };
-      const dist = hexDistance(start, end);
-      let mineTriggered = false;
-      let stopQ = sel.q;
-      let stopR = sel.r;
-      console.log(`Blue unit starts at (${sel.q},${sel.r})`);
-      for (let i = 1; i <= dist; i++) {
-        const t = i / dist;
-        const qf = sel.q + (h.q - sel.q) * t;
-        const rf = sel.r + (h.r - sel.r) * t;
-        const hex = hexRound(qf, rf);
-        // Only check in-bounds
-        if (!inBounds(hex)) continue;
-        console.log(`Checking hex (${hex.q},${hex.r}) for mine, i=${i}, dist=${dist}`);
-        const foundMine = mineAt(hex.q, hex.r, sel.side);
-        if (foundMine) {
-          stopQ = hex.q;
-          stopR = hex.r;
-          mineTriggered = true;
+      if (!AIRBORNE_TYPES.has(sel.type)) {
+        // --- BEGIN: Mine trigger for passing over or touching any mine cell along the true line ---
+        // Use hex line interpolation (lerp + hexRound) to get all cells the line passes through
+        const start = { q: sel.q, r: sel.r };
+        const end = { q: h.q, r: h.r };
+        const dist = hexDistance(start, end);
+        let mineTriggered = false;
+        let stopQ = sel.q;
+        let stopR = sel.r;
+        console.log(`Blue unit starts at (${sel.q},${sel.r})`);
+        for (let i = 1; i <= dist; i++) {
+          const t = i / dist;
+          const qf = sel.q + (h.q - sel.q) * t;
+          const rf = sel.r + (h.r - sel.r) * t;
+          const hex = hexRound(qf, rf);
+          // Only check in-bounds
+          if (!inBounds(hex)) continue;
+          console.log(`Checking hex (${hex.q},${hex.r}) for mine, i=${i}, dist=${dist}`);
+          const foundMine = mineAt(hex.q, hex.r, sel.side, sel.type);
+          if (foundMine) {
+            stopQ = hex.q;
+            stopR = hex.r;
+            mineTriggered = true;
 
-          // Ta bort minan direkt
-          if (foundMine.type === 'map') {
-            mines.delete(keyOf(hex.q, hex.r));
+            // Ta bort minan direkt
+            if (foundMine.type === 'map') {
+              mines.delete(keyOf(hex.q, hex.r));
+            }
+
+            if (foundMine.type === 'unit') {
+              units = units.filter((u) => u.id !== foundMine.unit.id);
+            }
+
+            break;
           }
 
-          if (foundMine.type === 'unit') {
-            units = units.filter((u) => u.id !== foundMine.unit.id);
-          }
-
-          break;
         }
-
-      }
-      if (mineTriggered) {
-        sel.q = stopQ;
-        sel.r = stopR;
-        spendActionFor(sel.side);
-        if (sel.side === Side.BLUE) sel.movedThisTurn = true;
-        logEvent(`${sel.side} flyttar (mina utlöst): ${sel.type} (${from.q},${from.r}) -> (${stopQ},${stopR})`);
-        applyMineTrigger(stopQ, stopR, sel.side);
-        console.log(`Blue unit ends at (${sel.q},${sel.r})`);
-        updateUI();
-        draw();
-        checkWin();
-        return;
+        if (mineTriggered) {
+          sel.q = stopQ;
+          sel.r = stopR;
+          spendActionFor(sel.side);
+          if (sel.side === Side.BLUE) sel.movedThisTurn = true;
+          logEvent(`${sel.side} flyttar (mina utlöst): ${sel.type} (${from.q},${from.r}) -> (${stopQ},${stopR})`);
+          applyMineTrigger(stopQ, stopR, sel.side);
+          console.log(`Blue unit ends at (${sel.q},${sel.r})`);
+          updateUI();
+          draw();
+          checkWin();
+          return;
+        }
       }
       // No mine encountered, move normally
       sel.q = h.q;

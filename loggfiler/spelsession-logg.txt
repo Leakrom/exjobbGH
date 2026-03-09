@@ -2186,3 +2186,368 @@ Nytt slag initieras, karta: Karta 2
 [2026-03-09T15:25:28.262+01:00] Svar: (tomt svar)
 [2026-03-09T15:25:28.262+01:00] Fråga: Vad tänker du att det ska få för resultat?
 [2026-03-09T15:25:28.263+01:00] Svar: (tomt svar)
+[2026-03-09T15:25:28.272+01:00] Blå avslutar sin tur
+[2026-03-09T15:25:28.272+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-09T15:25:28.740+01:00] Röd flyttar: Konventionell korvett (16,5) -> (14,5)
+[2026-03-09T15:25:29.112+01:00] Röd flyttar: Ubåt (12,17) -> (12,18)
+[2026-03-09T15:25:29.470+01:00] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-03-09T15:25:29.479+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-09T15:26:26.165+01:00] 
+
+[2026-03-09T15:26:26.166+01:00] Nytt slag initieras, karta: Karta 3
+[2026-03-09T15:26:30.653+01:00] Blå flyttar: USV - obemannad ytenhet (5,5) -> (6,5)
+[2026-03-09T15:26:31.909+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Aktiv
+[2026-03-09T15:26:34.589+01:00] Blå flyttar: UAV - obemannad flygenhet (2,3) -> (6,1)
+[2026-03-09T15:26:35.989+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-09T15:26:37.733+01:00] Blå flyttar: UAV - obemannad flygenhet (4,10) -> (8,10)
+[2026-03-09T15:26:39.005+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-09T15:26:40.949+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,14) -> (6,14)
+[2026-03-09T15:26:42.357+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-09T15:26:44.013+01:00] Blå flyttar: USV - obemannad ytenhet (5,17) -> (7,17)
+[2026-03-09T15:26:45.701+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Aktiv
+[2026-03-09T15:26:47.981+01:00] Blå flyttar: UUV - obemannad undervattensenhet (3,19) -> (5,17)
+[2026-03-09T15:26:49.685+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-09T15:26:58.086+01:00] Blå flyttar: Ubåtsjakthelikopter (3,2) -> (6,0)
+[2026-03-09T15:26:59.237+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Aktiv
+[2026-03-09T15:27:02.781+01:00] Blå flyttar: Fregatt (1,1) -> (4,3)
+[2026-03-09T15:27:10.085+01:00] Blå flyttar: Ubåt (1,9) -> (3,10)
+[2026-03-09T15:27:11.869+01:00] Blå flyttar: Stealth-korvett (2,14) -> (4,14)
+[2026-03-09T15:27:14.853+01:00] Blå flyttar: Stealth-korvett (3,6) -> (4,5)
+[2026-03-09T15:27:22.925+01:00] BLÅ REFLEKTION
+[2026-03-09T15:27:22.926+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:27:22.926+01:00] Svar: (tomt svar)
+[2026-03-09T15:27:22.926+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:27:22.927+01:00] Svar: (tomt svar)
+[2026-03-09T15:27:22.936+01:00] Blå avslutar sin tur
+[2026-03-09T15:27:22.937+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-09T15:27:23.405+01:00] Röd flyttar: Ubåt (17,13) -> (14,13)
+[2026-03-09T15:27:23.778+01:00] Röd flyttar: Konventionell korvett (16,17) -> (15,16)
+[2026-03-09T15:27:24.142+01:00] Röd flyttar: Ubåt (14,13) -> (11,14)
+[2026-03-09T15:27:24.147+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-09T15:27:31.686+01:00] Blå flyttar: UAV - obemannad flygenhet (6,1) -> (8,0)
+[2026-03-09T15:27:38.725+01:00] Blå flyttar: UAV - obemannad flygenhet (8,10) -> (10,10)
+[2026-03-09T15:27:41.189+01:00] Blå flyttar: USV - obemannad ytenhet (6,5) -> (6,7)
+[2026-03-09T15:27:42.757+01:00] Blå flyttar: USV - obemannad ytenhet (7,17) -> (9,17)
+[2026-03-09T15:27:45.485+01:00] Blå flyttar: UUV - obemannad undervattensenhet (5,17) -> (7,17)
+[2026-03-09T15:27:51.733+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 1
+[2026-03-09T15:27:52.133+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 0
+[2026-03-09T15:27:53.285+01:00] Blå flyttar: UUV - obemannad undervattensenhet (6,14) -> (8,12)
+[2026-03-09T15:27:55.277+01:00] Blå flyttar: Stealth-korvett (4,14) -> (6,14)
+[2026-03-09T15:27:56.653+01:00] Blå flyttar: Ubåt (3,10) -> (6,10)
+[2026-03-09T15:27:58.525+01:00] Blå flyttar: Stealth-korvett (4,5) -> (6,5)
+[2026-03-09T15:28:02.677+01:00] Blå flyttar: Fregatt (4,3) -> (5,1)
+[2026-03-09T15:28:07.117+01:00] BLÅ REFLEKTION
+[2026-03-09T15:28:07.118+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:28:07.118+01:00] Svar: (tomt svar)
+[2026-03-09T15:28:07.118+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:28:07.119+01:00] Svar: (tomt svar)
+[2026-03-09T15:28:07.130+01:00] Blå avslutar sin tur
+[2026-03-09T15:28:07.131+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-09T15:28:07.605+01:00] Röd attackerar: Ubåt -> UUV - obemannad undervattensenhet, skada=1, återstående HP mål=0
+[2026-03-09T15:28:07.607+01:00] Blå enhet sänkt: UUV - obemannad undervattensenhet
+[2026-03-09T15:28:07.975+01:00] Röd attackerar: Ubåt -> USV - obemannad ytenhet, skada=1, återstående HP mål=1
+[2026-03-09T15:28:08.348+01:00] Röd attackerar: Ubåt -> USV - obemannad ytenhet, skada=1, återstående HP mål=0
+[2026-03-09T15:28:08.350+01:00] Blå enhet sänkt: USV - obemannad ytenhet
+[2026-03-09T15:28:08.358+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-09T15:28:12.829+01:00] Blå flyttar: Stealth-korvett (6,14) -> (8,15)
+[2026-03-09T15:28:14.981+01:00] Blå attackerar: Stealth-korvett -> Ubåt, skada=1, återstående HP mål=2
+[2026-03-09T15:28:16.813+01:00] Blå attackerar: Stealth-korvett -> Ubåt, skada=1, återstående HP mål=1
+[2026-03-09T15:28:19.821+01:00] Blå attackerar: Stealth-korvett -> Ubåt, skada=1, återstående HP mål=0
+[2026-03-09T15:28:19.822+01:00] Röd enhet sänkt: Ubåt
+[2026-03-09T15:28:28.981+01:00] Blå flyttar: UAV - obemannad flygenhet (10,10) -> (11,10)
+[2026-03-09T15:28:30.885+01:00] Blå flyttar: UAV - obemannad flygenhet (8,0) -> (9,0)
+[2026-03-09T15:28:35.677+01:00] Blå flyttar: USV - obemannad ytenhet (6,7) -> (8,7)
+[2026-03-09T15:28:40.461+01:00] Blå flyttar: Ubåt (6,10) -> (9,10)
+[2026-03-09T15:28:42.685+01:00] Blå attackerar: Ubåt -> Mina, skada=1, återstående HP mål=0
+[2026-03-09T15:28:42.686+01:00] Röd enhet sänkt: Mina
+[2026-03-09T15:28:47.005+01:00] Blå attackerar: Fregatt -> Mina, skada=1, återstående HP mål=0
+[2026-03-09T15:28:47.006+01:00] Röd enhet sänkt: Mina
+[2026-03-09T15:28:52.301+01:00] Blå flyttar: Fregatt (5,1) -> (8,0)
+[2026-03-09T15:29:01.781+01:00] Blå flyttar: UUV - obemannad undervattensenhet (8,12) -> (10,10)
+[2026-03-09T15:29:06.573+01:00] BLÅ REFLEKTION
+[2026-03-09T15:29:06.574+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:29:06.574+01:00] Svar: (tomt svar)
+[2026-03-09T15:29:06.575+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:29:06.575+01:00] Svar: (tomt svar)
+[2026-03-09T15:29:06.584+01:00] Blå avslutar sin tur
+[2026-03-09T15:29:06.585+01:00] Turbyte: Blå -> Röd (tur 3)
+[2026-03-09T15:29:07.047+01:00] Röd flyttar: Konventionell korvett (15,16) -> (14,15)
+[2026-03-09T15:29:07.418+01:00] Röd flyttar: Konventionell korvett (18,1) -> (16,3)
+[2026-03-09T15:29:07.787+01:00] Röd flyttar: Konventionell korvett (16,3) -> (14,5)
+[2026-03-09T15:29:07.794+01:00] Turbyte: Röd -> Blå (tur 4)
+[2026-03-09T15:29:12.269+01:00] Blå växlar sensorläge: Stealth-korvett -> Aktiv
+[2026-03-09T15:29:13.669+01:00] Blå flyttar: Stealth-korvett (8,15) -> (11,15)
+[2026-03-09T15:29:17.549+01:00] Blå flyttar: UAV - obemannad flygenhet (11,10) -> (12,10)
+[2026-03-09T15:29:19.694+01:00] Blå flyttar: UUV - obemannad undervattensenhet (10,10) -> (10,9)
+[2026-03-09T15:29:31.397+01:00] Blå flyttar: USV - obemannad ytenhet (8,7) -> (9,8)
+[2026-03-09T15:29:33.837+01:00] Blå flyttar: UAV - obemannad flygenhet (9,0) -> (10,0)
+[2026-03-09T15:29:37.005+01:00] Blå flyttar: Fregatt (8,0) -> (9,0)
+[2026-03-09T15:29:39.261+01:00] Blå flyttar: Stealth-korvett (6,5) -> (7,7)
+[2026-03-09T15:29:43.565+01:00] BLÅ REFLEKTION
+[2026-03-09T15:29:43.566+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:29:43.566+01:00] Svar: (tomt svar)
+[2026-03-09T15:29:43.567+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:29:43.567+01:00] Svar: (tomt svar)
+[2026-03-09T15:29:43.576+01:00] Blå avslutar sin tur
+[2026-03-09T15:29:43.576+01:00] Turbyte: Blå -> Röd (tur 4)
+[2026-03-09T15:29:44.030+01:00] Röd flyttar: Konventionell korvett (14,5) -> (13,6)
+[2026-03-09T15:29:44.390+01:00] Röd flyttar: Konventionell korvett (14,15) -> (12,15)
+[2026-03-09T15:29:44.761+01:00] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=1
+[2026-03-09T15:29:44.768+01:00] Turbyte: Röd -> Blå (tur 5)
+[2026-03-09T15:29:49.021+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-09T15:29:50.989+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-09T15:29:53.573+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-09T15:29:55.573+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-09T15:29:55.574+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-09T15:30:02.309+01:00] Blå flyttar: Ubåt (9,10) -> (9,9)
+[2026-03-09T15:30:04.149+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-09T15:30:07.061+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-09T15:30:08.829+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-09T15:30:10.765+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-09T15:30:10.766+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-09T15:32:28.014+01:00] 
+
+[2026-03-09T15:32:28.014+01:00] Nytt slag initieras, karta: Karta 4
+[2026-03-09T15:32:36.973+01:00] Blå flyttar: UUV - obemannad undervattensenhet (3,2) -> (4,3)
+[2026-03-09T15:32:38.629+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-09T15:32:41.037+01:00] Blå flyttar: UAV - obemannad flygenhet (2,3) -> (3,3)
+[2026-03-09T15:32:42.373+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-09T15:32:43.870+01:00] Blå flyttar: USV - obemannad ytenhet (3,4) -> (4,5)
+[2026-03-09T15:32:44.845+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Aktiv
+[2026-03-09T15:32:48.645+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (6,9)
+[2026-03-09T15:32:50.109+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-09T15:32:51.869+01:00] Blå flyttar: USV - obemannad ytenhet (4,12) -> (6,12)
+[2026-03-09T15:32:53.117+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Aktiv
+[2026-03-09T15:32:54.741+01:00] Blå flyttar: UUV - obemannad undervattensenhet (3,14) -> (4,15)
+[2026-03-09T15:32:56.157+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-09T15:32:58.829+01:00] Blå flyttar: Ubåtsjakthelikopter (3,18) -> (6,17)
+[2026-03-09T15:33:00.189+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Aktiv
+[2026-03-09T15:33:07.189+01:00] Blå flyttar: Stealth-korvett (1,16) -> (4,13)
+[2026-03-09T15:33:10.885+01:00] Blå flyttar: Stealth-korvett (1,5) -> (3,6)
+[2026-03-09T15:33:13.133+01:00] Blå flyttar: Fregatt (1,2) -> (4,4)
+[2026-03-09T15:33:18.605+01:00] BLÅ REFLEKTION
+[2026-03-09T15:33:18.606+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:33:18.606+01:00] Svar: (tomt svar)
+[2026-03-09T15:33:18.606+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:33:18.607+01:00] Svar: (tomt svar)
+[2026-03-09T15:33:18.617+01:00] Blå avslutar sin tur
+[2026-03-09T15:33:18.617+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-09T15:33:19.086+01:00] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-03-09T15:33:19.456+01:00] Röd flyttar: Konventionell korvett (16,2) -> (14,2)
+[2026-03-09T15:33:19.824+01:00] Röd flyttar: Ubåt (16,16) -> (14,17)
+[2026-03-09T15:33:19.831+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-09T15:33:25.533+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,3) -> (6,3)
+[2026-03-09T15:33:27.421+01:00] Blå flyttar: UAV - obemannad flygenhet (3,3) -> (5,5)
+[2026-03-09T15:33:29.917+01:00] Blå flyttar: UAV - obemannad flygenhet (6,9) -> (8,10)
+[2026-03-09T15:33:31.693+01:00] Blå flyttar: USV - obemannad ytenhet (6,12) -> (8,12)
+[2026-03-09T15:33:34.301+01:00] Blå flyttar: Ubåtsjakthelikopter (6,17) -> (9,15)
+[2026-03-09T15:33:36.157+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,15) -> (6,13)
+[2026-03-09T15:33:37.701+01:00] Blå flyttar: Stealth-korvett (4,13) -> (5,11)
+[2026-03-09T15:33:39.085+01:00] Blå flyttar: Ubåt (4,14) -> (6,15)
+[2026-03-09T15:33:41.445+01:00] Blå flyttar: Stealth-korvett (3,6) -> (4,7)
+[2026-03-09T15:33:45.429+01:00] Blå flyttar: USV - obemannad ytenhet (4,5) -> (6,4)
+[2026-03-09T15:33:48.750+01:00] Blå flyttar: Fregatt (4,4) -> (5,4)
+[2026-03-09T15:33:50.869+01:00] BLÅ REFLEKTION
+[2026-03-09T15:33:50.870+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:33:50.870+01:00] Svar: (tomt svar)
+[2026-03-09T15:33:50.871+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:33:50.871+01:00] Svar: (tomt svar)
+[2026-03-09T15:33:50.880+01:00] Blå avslutar sin tur
+[2026-03-09T15:33:50.881+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-09T15:33:51.346+01:00] Röd flyttar: Konventionell korvett (14,2) -> (13,4)
+[2026-03-09T15:33:51.717+01:00] Röd flyttar: Konventionell korvett (13,4) -> (11,6)
+[2026-03-09T15:33:52.085+01:00] Röd flyttar: Konventionell korvett (17,18) -> (17,16)
+[2026-03-09T15:33:52.092+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-09T15:33:56.413+01:00] Blå flyttar: UUV - obemannad undervattensenhet (6,3) -> (8,2)
+[2026-03-09T15:33:58.357+01:00] Blå flyttar: USV - obemannad ytenhet (6,4) -> (8,3)
+[2026-03-09T15:34:02.413+01:00] Blå flyttar: Stealth-korvett (5,11) -> (8,8)
+[2026-03-09T15:34:05.021+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-09T15:34:07.213+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-09T15:34:11.197+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-09T15:34:13.181+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-09T15:34:13.182+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-09T15:34:17.261+01:00] Blå flyttar: UUV - obemannad undervattensenhet (6,13) -> (8,13)
+[2026-03-09T15:34:22.013+01:00] Blå flyttar: UAV - obemannad flygenhet (5,5) -> (7,4)
+[2026-03-09T15:34:26.061+01:00] Blå flyttar: Stealth-korvett (4,7) -> (7,7)
+[2026-03-09T15:34:30.573+01:00] Blå flyttar: Ubåt (6,15) -> (9,14)
+[2026-03-09T15:34:32.805+01:00] BLÅ REFLEKTION
+[2026-03-09T15:34:32.806+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:34:32.806+01:00] Svar: (tomt svar)
+[2026-03-09T15:34:32.806+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:34:32.807+01:00] Svar: (tomt svar)
+[2026-03-09T15:34:32.816+01:00] Blå avslutar sin tur
+[2026-03-09T15:34:32.817+01:00] Turbyte: Blå -> Röd (tur 3)
+[2026-03-09T15:34:33.282+01:00] Röd flyttar: Konventionell korvett (17,16) -> (16,15)
+[2026-03-09T15:34:33.646+01:00] Röd flyttar: Konventionell korvett (16,15) -> (14,15)
+[2026-03-09T15:34:34.015+01:00] Röd flyttar: Ubåt (14,17) -> (11,18)
+[2026-03-09T15:34:34.024+01:00] Turbyte: Röd -> Blå (tur 4)
+[2026-03-09T15:34:37.829+01:00] Blå flyttar: UAV - obemannad flygenhet (8,10) -> (9,10)
+[2026-03-09T15:34:41.389+01:00] Blå flyttar: UUV - obemannad undervattensenhet (8,13) -> (10,13)
+[2026-03-09T15:34:47.733+01:00] Blå flyttar: Ubåtsjakthelikopter (9,15) -> (10,15)
+[2026-03-09T15:34:50.557+01:00] Blå flyttar: UUV - obemannad undervattensenhet (8,2) -> (9,1)
+[2026-03-09T15:35:00.998+01:00] BLÅ REFLEKTION
+[2026-03-09T15:35:00.998+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:35:00.998+01:00] Svar: (tomt svar)
+[2026-03-09T15:35:00.999+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:35:00.999+01:00] Svar: (tomt svar)
+[2026-03-09T15:35:01.009+01:00] Blå avslutar sin tur
+[2026-03-09T15:35:01.009+01:00] Turbyte: Blå -> Röd (tur 4)
+[2026-03-09T15:35:01.477+01:00] Röd attackerar: Ubåt -> Ubåtsjakthelikopter, skada=1, återstående HP mål=1
+[2026-03-09T15:35:01.846+01:00] Röd attackerar: Ubåt -> Ubåtsjakthelikopter, skada=1, återstående HP mål=0
+[2026-03-09T15:35:01.847+01:00] Blå enhet sänkt: Ubåtsjakthelikopter
+[2026-03-09T15:35:02.208+01:00] Röd flyttar: Ubåt (11,18) -> (10,16)
+[2026-03-09T15:35:02.216+01:00] Turbyte: Röd -> Blå (tur 5)
+[2026-03-09T15:35:06.621+01:00] Blå attackerar: Ubåt -> Ubåt, skada=1, återstående HP mål=2
+[2026-03-09T15:35:08.821+01:00] Blå attackerar: Ubåt -> Ubåt, skada=1, återstående HP mål=1
+[2026-03-09T15:35:11.373+01:00] Blå attackerar: Ubåt -> Ubåt, skada=1, återstående HP mål=0
+[2026-03-09T15:35:11.374+01:00] Röd enhet sänkt: Ubåt
+[2026-03-09T15:35:19.325+01:00] Blå flyttar: UAV - obemannad flygenhet (9,10) -> (9,9)
+[2026-03-09T15:35:21.253+01:00] Blå flyttar: USV - obemannad ytenhet (8,12) -> (9,11)
+[2026-03-09T15:35:26.693+01:00] Blå flyttar: UUV - obemannad undervattensenhet (9,1) -> (10,1)
+[2026-03-09T15:35:28.165+01:00] Blå flyttar: USV - obemannad ytenhet (8,3) -> (10,3)
+[2026-03-09T15:35:30.285+01:00] Blå flyttar: UAV - obemannad flygenhet (7,4) -> (9,3)
+[2026-03-09T15:35:33.477+01:00] BLÅ REFLEKTION
+[2026-03-09T15:35:33.478+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:35:33.478+01:00] Svar: (tomt svar)
+[2026-03-09T15:35:33.478+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:35:33.479+01:00] Svar: (tomt svar)
+[2026-03-09T15:35:33.488+01:00] Blå avslutar sin tur
+[2026-03-09T15:35:33.489+01:00] Turbyte: Blå -> Röd (tur 5)
+[2026-03-09T15:35:33.953+01:00] Röd flyttar: Konventionell korvett (14,15) -> (13,14)
+[2026-03-09T15:35:34.322+01:00] Röd flyttar: Konventionell korvett (13,14) -> (12,13)
+[2026-03-09T15:35:34.692+01:00] Röd attackerar: Konventionell korvett -> UUV - obemannad undervattensenhet, skada=1, återstående HP mål=0
+[2026-03-09T15:35:34.694+01:00] Blå enhet sänkt: UUV - obemannad undervattensenhet
+[2026-03-09T15:35:34.701+01:00] Turbyte: Röd -> Blå (tur 6)
+[2026-03-09T15:35:42.333+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-09T15:35:45.117+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-09T15:35:47.229+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-09T15:35:49.285+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-09T15:35:49.286+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-09T15:35:55.870+01:00] BLÅ REFLEKTION (efter spelavslut, vinnare: Blå)
+[2026-03-09T15:35:55.870+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:35:55.871+01:00] Svar: (tomt svar)
+[2026-03-09T15:35:55.871+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:35:55.871+01:00] Svar: (tomt svar)
+[2026-03-09T15:47:53.545+01:00] ============================================================
+[2026-03-09T15:47:53.546+01:00] Spelsession startad: session-2026-03-09T15-47-51.759-01-00
+[2026-03-09T15:47:53.547+01:00] 
+
+[2026-03-09T15:47:53.547+01:00] Nytt slag initieras, karta: Karta 4
+[2026-03-09T15:47:57.337+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (6,9)
+[2026-03-09T15:47:59.769+01:00] BLÅ REFLEKTION
+[2026-03-09T15:47:59.769+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:47:59.770+01:00] Svar: (tomt svar)
+[2026-03-09T15:47:59.770+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:47:59.770+01:00] Svar: (tomt svar)
+[2026-03-09T15:47:59.780+01:00] Blå avslutar sin tur
+[2026-03-09T15:47:59.780+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-09T15:48:00.250+01:00] Röd flyttar: Ubåt (16,16) -> (13,18)
+[2026-03-09T15:48:00.609+01:00] Röd flyttar: Konventionell korvett (17,18) -> (15,18)
+[2026-03-09T15:48:00.968+01:00] Röd flyttar: Konventionell korvett (15,18) -> (14,18)
+[2026-03-09T15:48:00.976+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-09T15:48:02.625+01:00] Blå flyttar: UAV - obemannad flygenhet (6,9) -> (9,10)
+[2026-03-09T15:48:04.593+01:00] BLÅ REFLEKTION
+[2026-03-09T15:48:04.594+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:48:04.594+01:00] Svar: (tomt svar)
+[2026-03-09T15:48:04.594+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:48:04.594+01:00] Svar: (tomt svar)
+[2026-03-09T15:48:29.697+01:00] ============================================================
+[2026-03-09T15:48:29.697+01:00] Spelsession startad: session-2026-03-09T15-48-27.796-01-00
+[2026-03-09T15:48:29.698+01:00] 
+
+[2026-03-09T15:48:29.698+01:00] Nytt slag initieras, karta: Karta 4
+[2026-03-09T15:48:32.481+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (6,9)
+[2026-03-09T15:48:34.721+01:00] BLÅ REFLEKTION
+[2026-03-09T15:48:34.721+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:48:34.722+01:00] Svar: (tomt svar)
+[2026-03-09T15:48:34.722+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:48:34.722+01:00] Svar: (tomt svar)
+[2026-03-09T15:48:34.732+01:00] Blå avslutar sin tur
+[2026-03-09T15:48:34.732+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-09T15:48:35.194+01:00] Röd flyttar: Konventionell korvett (17,18) -> (15,18)
+[2026-03-09T15:48:35.564+01:00] Röd flyttar: Ubåt (16,16) -> (13,18)
+[2026-03-09T15:48:35.925+01:00] Röd flyttar: Konventionell korvett (15,18) -> (14,18)
+[2026-03-09T15:48:35.933+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-09T15:48:38.945+01:00] Blå flyttar: UAV - obemannad flygenhet (6,9) -> (9,10)
+[2026-03-09T15:48:41.457+01:00] BLÅ REFLEKTION
+[2026-03-09T15:48:41.457+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:48:41.458+01:00] Svar: (tomt svar)
+[2026-03-09T15:48:41.458+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:48:41.458+01:00] Svar: (tomt svar)
+[2026-03-09T15:48:41.467+01:00] Blå avslutar sin tur
+[2026-03-09T15:48:41.467+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-09T15:48:41.921+01:00] Röd flyttar: Konventionell korvett (14,18) -> (12,19)
+[2026-03-09T15:48:42.288+01:00] Röd flyttar: Konventionell korvett (12,19) -> (11,18)
+[2026-03-09T15:48:42.649+01:00] Röd flyttar: Ubåt (13,18) -> (10,19)
+[2026-03-09T15:48:42.657+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-09T15:48:45.448+01:00] Blå flyttar: UAV - obemannad flygenhet (9,10) -> (12,10)
+[2026-03-09T15:48:48.327+01:00] BLÅ REFLEKTION
+[2026-03-09T15:48:48.328+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:48:48.328+01:00] Svar: (tomt svar)
+[2026-03-09T15:48:48.328+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:48:48.328+01:00] Svar: (tomt svar)
+[2026-03-09T15:52:48.338+01:00] ============================================================
+[2026-03-09T15:52:48.338+01:00] Spelsession startad: session-2026-03-09T15-52-46.837-01-00
+[2026-03-09T15:52:48.339+01:00] 
+
+[2026-03-09T15:52:48.339+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-09T15:52:50.609+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (7,7)
+[2026-03-09T15:52:52.777+01:00] BLÅ REFLEKTION
+[2026-03-09T15:52:52.778+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T15:52:52.778+01:00] Svar: (tomt svar)
+[2026-03-09T15:52:52.778+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T15:52:52.779+01:00] Svar: (tomt svar)
+[2026-03-09T16:01:18.451+01:00] ============================================================
+[2026-03-09T16:01:18.451+01:00] Spelsession startad: session-2026-03-09T16-01-17.179-01-00
+[2026-03-09T16:01:18.452+01:00] 
+
+[2026-03-09T16:01:18.452+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-09T16:01:20.418+01:00] Blå flyttar: UAV - obemannad flygenhet (3,8) -> (7,7)
+[2026-03-09T16:01:22.562+01:00] BLÅ REFLEKTION
+[2026-03-09T16:01:22.562+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T16:01:22.563+01:00] Svar: (tomt svar)
+[2026-03-09T16:01:22.563+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T16:01:22.563+01:00] Svar: (tomt svar)
+[2026-03-09T16:01:22.572+01:00] Blå avslutar sin tur
+[2026-03-09T16:01:22.572+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-09T16:01:23.027+01:00] Röd flyttar: Ubåt (16,16) -> (13,16)
+[2026-03-09T16:01:23.387+01:00] Röd flyttar: Konventionell korvett (18,5) -> (16,5)
+[2026-03-09T16:01:23.747+01:00] Röd flyttar: Ubåt (13,16) -> (12,17)
+[2026-03-09T16:01:23.755+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-09T16:01:28.105+01:00] Blå flyttar: UAV - obemannad flygenhet (7,7) -> (9,8)
+[2026-03-09T16:01:30.666+01:00] BLÅ REFLEKTION
+[2026-03-09T16:01:30.666+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T16:01:30.667+01:00] Svar: (tomt svar)
+[2026-03-09T16:01:30.667+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T16:01:30.667+01:00] Svar: (tomt svar)
+[2026-03-09T16:01:30.677+01:00] Blå avslutar sin tur
+[2026-03-09T16:01:30.677+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-09T16:01:31.139+01:00] Röd flyttar: Konventionell korvett (18,2) -> (16,2)
+[2026-03-09T16:01:31.509+01:00] Röd flyttar: Ubåt (12,17) -> (12,18)
+[2026-03-09T16:01:31.874+01:00] Röd flyttar: Konventionell korvett (16,2) -> (14,3)
+[2026-03-09T16:01:31.882+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-09T16:01:35.170+01:00] Blå flyttar: UAV - obemannad flygenhet (9,8) -> (11,7)
+[2026-03-09T16:01:38.170+01:00] BLÅ REFLEKTION
+[2026-03-09T16:01:38.170+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T16:01:38.171+01:00] Svar: (tomt svar)
+[2026-03-09T16:01:38.171+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T16:01:38.171+01:00] Svar: (tomt svar)
+[2026-03-09T16:01:38.184+01:00] Blå avslutar sin tur
+[2026-03-09T16:01:38.184+01:00] Turbyte: Blå -> Röd (tur 3)
+[2026-03-09T16:01:38.646+01:00] Röd flyttar: Konventionell korvett (14,3) -> (13,5)
+[2026-03-09T16:01:39.019+01:00] Röd attackerar: Konventionell korvett -> UAV - obemannad flygenhet, skada=1, återstående HP mål=0
+[2026-03-09T16:01:39.021+01:00] Blå enhet sänkt: UAV - obemannad flygenhet
+[2026-03-09T16:01:39.380+01:00] Röd flyttar: Konventionell korvett (13,5) -> (11,7)
+[2026-03-09T16:01:39.387+01:00] Turbyte: Röd -> Blå (tur 4)
+[2026-03-09T16:01:55.186+01:00] Blå flyttar: UUV - obemannad undervattensenhet (2,14) -> (4,13)
+[2026-03-09T16:02:21.681+01:00] Blå flyttar: Ubåt (4,14) -> (7,11)
+[2026-03-09T16:02:25.137+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-09T16:02:27.409+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-09T16:02:29.425+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-09T16:02:31.793+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-09T16:02:31.794+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-09T16:02:37.185+01:00] BLÅ REFLEKTION
+[2026-03-09T16:02:37.186+01:00] Fråga: Varför gjorde du det här draget?
+[2026-03-09T16:02:37.186+01:00] Svar: (tomt svar)
+[2026-03-09T16:02:37.187+01:00] Fråga: Vad tänker du att det ska få för resultat?
+[2026-03-09T16:02:37.187+01:00] Svar: (tomt svar)
