@@ -473,6 +473,8 @@
     }
   }
 
+
+
   function showBlueTurnReflectionPopup(options = {}) {
     const {
       title = 'Reflektera över följande frågor',
@@ -617,9 +619,11 @@
       saveBtn.addEventListener('click', async () => {
         const answer1 = t1.value.trim();
         const answer2 = t2.value.trim();
+        const answer3 = t3.value.trim();
+        const answer4 = t4.value.trim();
 
         cleanup();
-        resolve({ answer1, answer2 });
+        resolve({ answer1, answer2, answer3, answer4 });
       });
     });
   }
@@ -629,10 +633,14 @@
     if (!answers) return false;
 
     logEvent(contextLabel);
-    logEvent('Fråga: Varför gjorde du det här draget?');
+    logEvent('Fråga 1');
     logEvent(`Svar: ${answers.answer1 || '(tomt svar)'}`);
-    logEvent('Fråga: Vad tänker du att det ska få för resultat?');
+    logEvent('Fråga 2');
     logEvent(`Svar: ${answers.answer2 || '(tomt svar)'}`);
+    logEvent('Fråga 3');
+    logEvent(`Svar: ${answers.answer3 || '(tomt svar)'}`);
+    logEvent('Fråga 4');
+    logEvent(`Svar: ${answers.answer4 || '(tomt svar)'}`);
 
     try {
       await flushSessionLogToFile();
@@ -660,6 +668,12 @@
 
   function showEndGameResultPopup(winner) {
     return new Promise((resolve) => {
+      logEvent(winner === Side.BLUE ? 'BLÅ VANN' : 'RÖD VANN');
+      flushSessionLogToFile().catch((e) => {
+        console.error('Kunde inte spara sessionslogg vid spelavslut:', e);
+        setLogStatus('fel vid sparning');
+      });
+
       const overlay = document.createElement('div');
       overlay.style.position = 'fixed';
       overlay.style.inset = '0';
@@ -1949,7 +1963,7 @@ function applyMineTrigger(q, r, enteringSide) {
         const fill = c.isSkerry ? LEGEND_COLORS.skerry : c.land ? LEGEND_COLORS.land : waterColor(c.depthNormalized);
         drawHex(x, y, fill, 'rgba(255,255,255,.08)', 1);
 
-        // Draw coordinate label
+       /* // Draw coordinate label
         ctx.save();
         ctx.fillStyle = '#fff';
         ctx.font = '10px monospace';
@@ -1957,7 +1971,7 @@ function applyMineTrigger(q, r, enteringSide) {
         ctx.textBaseline = 'middle';
         ctx.globalAlpha = 0.85;
         ctx.fillText(`${q},${r}`, x, y - HEX_SIZE * 0.45);
-        ctx.restore();
+        ctx.restore();*/
 
         if (sel && sel.side === Side.BLUE && sel.q === q && sel.r === r) {
           drawHex(x, y, 'rgba(255,255,255,.08)', 'rgba(255,255,255,.45)', 2);

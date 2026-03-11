@@ -32,7 +32,7 @@ function sendJson(res, statusCode, data) {
 
 function sanitizePath(urlPath) {
   const decoded = decodeURIComponent((urlPath || '/').split('?')[0]);
-  const requested = decoded === '/' ? '/game.html' : decoded;
+  const requested = decoded === '/' ? '/marint_hex_krigsspel_prototyp.html' : decoded;
   const resolved = path.resolve(ROOT_DIR, `.${requested}`);
   if (!resolved.startsWith(ROOT_DIR)) return null;
   return resolved;
@@ -112,6 +112,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}/game.html`);
+  console.log(`Server running at http://${HOST}:${PORT}/marint_hex_krigsspel_prototyp.html`);
   console.log(`Log file: ${LOG_FILE}`);
 });
