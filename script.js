@@ -86,6 +86,20 @@
     [UnitType.CONTROL_MINE]: { type: null, passiveRange: 0, activeRange: 0 },
   };
 
+  // Separate attack ranges so they can be tuned independently from sensors.
+  const ATTACK_RANGE_CONFIG = {
+    [UnitType.FRIGATE]: 4,
+    [UnitType.STEALTH_CORVETTE]: 3,
+    [UnitType.SUBMARINE]: 3,
+    [UnitType.UAV]: 7,
+    [UnitType.USV]: 2,
+    [UnitType.UUV]: 2,
+    [UnitType.SUBMARINE_HUNTER]: 4,
+    [UnitType.CONVENTIONAL_CORVETTE]: 3,
+    [UnitType.UNCONTROL_MINE]: 0,
+    [UnitType.CONTROL_MINE]: 0,
+  };
+
   // Max depths: 0 = surface, 1-3 = various depths
   const MAX_DEPTH = 3;
 
@@ -277,6 +291,7 @@
   const elSelHP = document.getElementById('selHP');
   const elSelMove = document.getElementById('selMove');
   const elSelRange = document.getElementById('selRange');
+  const elSelAttackRange = document.getElementById('selAttackRange');
   const elSelDepth = document.getElementById('selDepth');
   const elSelMines = document.getElementById('selMines');
   const elSelAmmo = document.getElementById('selAmmo');
@@ -905,6 +920,7 @@
       elSelHP.textContent = '–';
       elSelMove.textContent = '–';
       elSelRange.textContent = '–';
+      if (elSelAttackRange) elSelAttackRange.textContent = '–';
       elSelDepth.textContent = '–';
       elSelMines.textContent = '–';
       elSelAmmo.textContent = '–';
@@ -923,6 +939,7 @@
       elSelHP.textContent = '–';
       elSelMove.textContent = '–';
       elSelRange.textContent = '–';
+      if (elSelAttackRange) elSelAttackRange.textContent = '–';
       elSelDepth.textContent = '–';
       elSelMines.textContent = '–';
       elSelAmmo.textContent = '–';
@@ -937,6 +954,7 @@
 
     const st = UNIT_STATS[sel.type];
     const sensorCfg = SENSOR_CONFIG[sel.type];
+    const attackRange = ATTACK_RANGE_CONFIG[sel.type] ?? st.range;
     const hasSensor = !!(sensorCfg && sensorCfg.type);
     const effectiveSensorRange = hasSensor
       ? (sel.sensorActive ? sensorCfg.activeRange : sensorCfg.passiveRange)
@@ -949,6 +967,9 @@
     elSelRange.textContent = effectiveSensorRange !== null
       ? String(effectiveSensorRange)
       : String(st.range);
+    if (elSelAttackRange) {
+      elSelAttackRange.textContent = st.ammo <= 0 ? '–' : String(attackRange);
+    }
     elSelDepth.textContent = `${sel.depth}/${MAX_DEPTH}`;
     elSelMines.textContent = String(sel.minesLeft);
     elSelAmmo.textContent = `${sel.ammoLeft}/${st.ammo}`;
@@ -980,6 +1001,11 @@
     if (mode === 'mine') {
       elHintPill.textContent = 'Klicka en vattenhex intill för att lägga mina';
     }
+  }
+
+  function getAttackRangeForUnit(u) {
+    const st = UNIT_STATS[u.type] || { range: 0 };
+    return ATTACK_RANGE_CONFIG[u.type] ?? st.range;
   }
 
   function mineAt(q, r, enteringSide, enteringType = null) {
@@ -1305,12 +1331,27 @@
   }
 
   function enemiesInRange(u) {
-    const st = UNIT_STATS[u.type];
+    const attackRange = getAttackRangeForUnit(u);
     return units.filter(
       (o) =>
         o.side !== u.side &&
-        hexDistance({ q: u.q, r: u.r }, { q: o.q, r: o.r }) <= st.range
+        hexDistance({ q: u.q, r: u.r }, { q: o.q, r: o.r }) <= attackRange
     );
+  }
+
+  function attackRangeHexes(u) {
+    const range = getAttackRangeForUnit(u);
+    const origin = { q: u.q, r: u.r };
+    const res = [];
+    for (let r = 0; r < GRID_H; r++) {
+      for (let q = 0; q < GRID_W; q++) {
+        if (q === origin.q && r === origin.r) continue;
+        if (hexDistance(origin, { q, r }) <= range) {
+          res.push({ q, r });
+        }
+      }
+    }
+    return res;
   }
 
   function adjacentWaterHexes(u) {
@@ -1469,12 +1510,12 @@ function applyMineTrigger(q, r, enteringSide) {
       showToast('Slut på ammunition', 'Den här enheten har inga skott kvar.');
       return;
     }
-    const st = UNIT_STATS[attacker.type];
+    const attackRange = getAttackRangeForUnit(attacker);
     const d = hexDistance(
       { q: attacker.q, r: attacker.r },
       { q: target.q, r: target.r }
     );
-    if (d > st.range) {
+    if (d > attackRange) {
       showToast('För långt bort', 'Målet är utanför räckvidd.');
       return;
     }
@@ -1878,7 +1919,7 @@ function applyMineTrigger(q, r, enteringSide) {
       sel && sel.side === Side.BLUE && mode === 'order' ? legalMoves(sel) : [];
     const attackSet =
       sel && sel.side === Side.BLUE && mode === 'attack'
-        ? enemiesInRange(sel).map((u) => ({ q: u.q, r: u.r }))
+        ? attackRangeHexes(sel)
         : [];
     const mineSet =
       sel && sel.side === Side.BLUE && mode === 'mine'
@@ -1912,7 +1953,7 @@ function applyMineTrigger(q, r, enteringSide) {
           drawHex(x, y, 'rgba(255,255,255,.06)', 'rgba(255,255,255,.18)', 2);
         }
         if (attackSet.some((h) => h.q === q && h.r === r)) {
-          drawHex(x, y, 'rgba(255,58,92,.10)', 'rgba(255,58,92,.40)', 2);
+          drawHex(x, y, 'rgba(168,85,247,.12)', 'rgba(168,85,247,.75)', 2);
         }
         if (mineSet.some((h) => h.q === q && h.r === r)) {
           drawHex(x, y, 'rgba(255,213,74,.08)', 'rgba(255,213,74,.40)', 2);
