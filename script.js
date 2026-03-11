@@ -534,9 +534,9 @@
 
       const l2 = document.createElement('label');
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
-        l2.textContent = 'Var det lätt att ta beslut om att göra dessa drag? Varför valde du att göra just dessa drag? Vad tänkte du att de skulle leda till?';
+        l2.textContent = 'Var det lätt att ta beslut om att göra dessa drag?';
       } else {
-        l2.textContent = 'Berätta om hur det kändes att spela spelet. Var det roligt/enkelt/realistiskt/utmanande etc.';
+        l2.textContent = 'Berätta om din upplevelse av att spela spelet. Är du nöjd med utfallet och den strategi du valde? Var det roligt/enkelt/realistiskt/utmanande etc.';
       }
       l2.style.display = 'block';
       l2.style.marginBottom = '6px';
@@ -552,9 +552,9 @@
       
       const l3 = document.createElement('label');
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
-        l3.textContent = 'Vilka andra drag kunde du ha gjort, och varför valde du bort dem?';
+        l3.textContent = 'Varför valde du att göra just dessa drag? Vad tänkte du att de skulle leda till? Vilka andra drag kunde du ha gjort, och varför valde du bort dem?';
       } else {
-        l3.textContent = 'Är du nöjd med utfallet? Utveckla gärna ditt svar.';
+        l3.textContent = 'Var din strategi den bästa möjliga? Hade du kunnat nå samma, eller bättre, resultat genom att göra på något annat sätt, i så fall hur?';
       }
       l3.style.display = 'block';
       l3.style.marginBottom = '6px';
@@ -570,9 +570,9 @@
 
       const l4 = document.createElement('label');
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
-        l4.textContent = 'Vad tror du hade hänt om du hade gjort de andra dragen?';
+        l4.textContent = 'Hur planerar du att fortsätta i nästa tur?';
       } else {
-        l4.textContent = 'Hade du kunnat nå samma, eller bättre, resultat genom att göra på något annat sätt, i så fall hur?';
+        l4.textContent = 'Skulle du kunna tänka dig att spela en omgång till, och i så fall vad skulle du vilja ändra på i spelet eller i ditt sätt att spela?';
       }
       l4.style.display = 'block';
       l4.style.marginBottom = '6px';
