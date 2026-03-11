@@ -937,11 +937,18 @@
 
     const st = UNIT_STATS[sel.type];
     const sensorCfg = SENSOR_CONFIG[sel.type];
+    const hasSensor = !!(sensorCfg && sensorCfg.type);
+    const effectiveSensorRange = hasSensor
+      ? (sel.sensorActive ? sensorCfg.activeRange : sensorCfg.passiveRange)
+      : null;
     elSelType.textContent = sel.type;
     elSelSide.textContent = sel.side;
     elSelHP.textContent = `${sel.hp}/${st.hp}`;
     elSelMove.textContent = String(st.move);
-    elSelRange.textContent = String(st.range);
+    // Show sensor-based range in panel when the unit has sensors.
+    elSelRange.textContent = effectiveSensorRange !== null
+      ? String(effectiveSensorRange)
+      : String(st.range);
     elSelDepth.textContent = `${sel.depth}/${MAX_DEPTH}`;
     elSelMines.textContent = String(sel.minesLeft);
     elSelAmmo.textContent = `${sel.ammoLeft}/${st.ammo}`;
