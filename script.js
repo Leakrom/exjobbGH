@@ -41,14 +41,14 @@
 
   // Unit stats: hp, move (in hexes), range, mines (mines this unit can lay), ammo (total shots)
   const UNIT_STATS = {
-    [UnitType.FRIGATE]: { hp: 4, move: 7, range: 6, mines: 0, ammo: 10 },
-    [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 4, mines: 0, ammo: 8 },
-    [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 4, mines: 0, ammo: 8 },
-    [UnitType.UAV]: { hp: 1, move: 4, range: 10, mines: 0, ammo: 0 },
-    [UnitType.USV]: { hp: 2, move: 2, range: 4, mines: 0, ammo: 1 },
-    [UnitType.UUV]: { hp: 1, move: 2, range: 6, mines: 0, ammo: 0 },
-    [UnitType.SUBMARINE_HUNTER]: { hp: 2, move: 3, range: 3, mines: 0, ammo: 0 },
-    [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 2, mines: 0, ammo: 8 },
+    [UnitType.FRIGATE]: { hp: 4, move: 4, range: 4, mines: 0, ammo: 10 },
+    [UnitType.STEALTH_CORVETTE]: { hp: 2, move: 3, range: 3, mines: 0, ammo: 8 },
+    [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 3, mines: 0, ammo: 8 },
+    [UnitType.UAV]: { hp: 1, move: 7, range: 7, mines: 0, ammo: 0 },
+    [UnitType.USV]: { hp: 2, move: 2, range: 2, mines: 0, ammo: 1 },
+    [UnitType.UUV]: { hp: 1, move: 4, range: 2, mines: 0, ammo: 0 },
+    [UnitType.SUBMARINE_HUNTER]: { hp: 2, move: 3, range: 4, mines: 0, ammo: 0 },
+    [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 3, mines: 0, ammo: 8 },
     [UnitType.UNCONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0, ammo: 0 },
     [UnitType.CONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0, ammo: 0 },
   };
@@ -77,7 +77,7 @@
     [UnitType.FRIGATE]: { type: SensorType.RADAR, passiveRange: 4, activeRange: 6 },
     [UnitType.STEALTH_CORVETTE]: { type: SensorType.RADAR, passiveRange: 3, activeRange: 5 },
     [UnitType.SUBMARINE]: { type: SensorType.SONAR, passiveRange: 3, activeRange: 5 },
-    [UnitType.UAV]: { type: SensorType.RADAR, passiveRange: 5, activeRange: 8 },
+    [UnitType.UAV]: { type: SensorType.RADAR, passiveRange: 7, activeRange: 10 },
     [UnitType.USV]: { type: SensorType.RADAR, passiveRange: 2, activeRange: 4 },
     [UnitType.UUV]: { type: SensorType.SONAR, passiveRange: 2, activeRange: 4 },
     [UnitType.SUBMARINE_HUNTER]: { type: SensorType.SONAR, passiveRange: 4, activeRange: 6 },
