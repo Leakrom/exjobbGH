@@ -645,6 +645,19 @@
     return true;
   }
 
+  function isReflectionDisabledForCurrentMap() {
+    // Karta 1 is a dedicated test map: never show reflection prompts.
+    return selectedMapIndex === 0;
+  }
+
+  function shouldAskBlueTurnReflection() {
+    return !isReflectionDisabledForCurrentMap() && ASK_BLUE_REFLECTION_EACH_TURN;
+  }
+
+  function shouldAskBlueEndGameReflection() {
+    return !isReflectionDisabledForCurrentMap() && !ASK_BLUE_REFLECTION_EACH_TURN;
+  }
+
   function showEndGameResultPopup(winner) {
     return new Promise((resolve) => {
       const overlay = document.createElement('div');
@@ -685,12 +698,12 @@
   }
 
   function handleEndGameReflectionIfNeeded(winner) {
-    //if (ASK_BLUE_REFLECTION_EACH_TURN || endGameReflectionHandled) return;
     if (endGameReflectionHandled) return;
     endGameReflectionHandled = true;
 
     (async () => {
       await showEndGameResultPopup(winner);
+      if (!shouldAskBlueEndGameReflection()) return;
       const ok = await collectBlueReflection(`BLÅ REFLEKTION (efter spelavslut, vinnare: ${winner})`);
       if (!ok) {
         console.warn('Slutreflektion hoppades över eller kunde inte sparas.');
@@ -1622,7 +1635,7 @@ function applyMineTrigger(q, r, enteringSide) {
   // Other buttons
   if (btnEndTurn) {
     btnEndTurn.addEventListener('click', async () => {
-      if (activeSide === Side.BLUE && ASK_BLUE_REFLECTION_EACH_TURN) {
+      if (activeSide === Side.BLUE && shouldAskBlueTurnReflection()) {
         const ok = await collectBlueReflection('BLÅ REFLEKTION');
         if (!ok) return;
       }
