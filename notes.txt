@@ -15,10 +15,8 @@ Minfält ser ut som hej kom och hjälp mig. Fixa om nödvändigt, annars är det
 //Det ska vara synligt vilket område som är minerat genom att skapa en röd boarder runt en område av hexagoner. 
 //Området ska bestå av 12 hexagoner och dras slumpmässigt runt omkring en mina. Minan ska alltså inte alltid befinna sig i mitten av området utan kan också befinna sig i kanten av området.
 
-Minfältet ändras när man laddar samma karta igen, måste vara fixerat sen när det är bestämt var
-alla minor ska ligga.
 
-Man ska inte kunna se stats på röd spelare sen.
+
 
 
 
@@ -27,12 +25,14 @@ Man ska inte kunna se stats på röd spelare sen.
 
 
 Funderingar:
-Ska sensorväxling vara ett drag? Nej.
 
 Röd ska ha lättare att upptäcka blå när blå är i aktivt sensorläge. Fixa eller skrota? 
 Istället göra så att blå får gå kortare i aktivt sensorläge för prototypen?
 
 Ska post-game frågorna vara samma oavsett om man fått in-game debriefingen eller inte? 
+
+
+Kontrollera upptäckt och identifiering endast i början av varje tur?
 
 
 -------------
@@ -41,3 +41,10 @@ Ska post-game frågorna vara samma oavsett om man fått in-game debriefingen ell
 Motiveringar:
 Vill inte att minfältet tas bort när minan sprängts för att man inte ska 
 veta hur många minor som ligger ute.
+
+
+Planering under tidspress.
+Metod som används i försvarsmakten
+Peter Thunholm.
+
+Viktor Lindholm

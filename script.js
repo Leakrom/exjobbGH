@@ -1469,14 +1469,14 @@ function applyMineTrigger(q, r, enteringSide) {
 
         // Check distance and randomness
         const dist = hexDistance({ q: blue.q, r: blue.r }, { q: red.q, r: red.r });
-        const randFactor = Math.floor(Math.random() * 10) + 1;
+        const randFactor = Math.floor(Math.random() * 5) + 1;
         if (dist + randFactor > range) continue;
 
         // Detected!
         red.detected = true;
 
         // Check identification: randFactor - 5 > 0
-        const identRand = Math.floor(Math.random() * 10) + 1;
+        const identRand = Math.floor(Math.random() * 5) + 1;
         if (identRand - 5 > 0) {
           red.identified = true;
         }
