@@ -744,6 +744,7 @@
   // Red moves history (most recent first)
   let redMoves = [];
   let redMovesLastRedTurn = 0;
+  let redAiLastHexByUnit = new Map();
   function pushRedMove(txt) {
     // If a new Red turn, clear moves
     if (activeSide === Side.RED && turn !== redMovesLastRedTurn) {
@@ -1246,6 +1247,7 @@
       mode = 'order';
       blueSpawnIndex = 0;
       redSpawnIndex = 0;
+      redAiLastHexByUnit = new Map();
       console.log('Step D: Game state reset');
       
       console.log('Step E: Calling generateMap...');
@@ -1531,11 +1533,11 @@ function applyMineTrigger(q, r, enteringSide) {
   function tryAttack(attacker, target) {
     if (!hasActionsFor(attacker.side)) {
       showToast('Inga åtgärder kvar', 'Avsluta tur för att fortsätta.');
-      return;
+      return false;
     }
     if (attacker.ammoLeft <= 0) {
       showToast('Slut på ammunition', 'Den här enheten har inga skott kvar.');
-      return;
+      return false;
     }
     const attackRange = getAttackRangeForUnit(attacker);
     const d = hexDistance(
@@ -1544,7 +1546,7 @@ function applyMineTrigger(q, r, enteringSide) {
     );
     if (d > attackRange) {
       showToast('För långt bort', 'Målet är utanför räckvidd.');
-      return;
+      return false;
     }
 
     if (attacker.side === Side.RED && target.side === Side.BLUE) {
@@ -1580,6 +1582,7 @@ function applyMineTrigger(q, r, enteringSide) {
     updateUI();
     draw();
     checkWin();
+    return true;
   }
 
   // =====================================================
@@ -1809,6 +1812,7 @@ function applyMineTrigger(q, r, enteringSide) {
 
       // Attackera om möjligt
       for (const u of reds) {
+        if (u.ammoLeft <= 0) continue;
         const inR = enemiesInRange(u);
         if (inR.length) {
           inR.sort((a, b) => a.hp - b.hp);
@@ -1816,31 +1820,27 @@ function applyMineTrigger(q, r, enteringSide) {
           mode = 'attack';
           updateUI();
           draw();
-          tryAttack(u, inR[0]);
-          steps++;
-          if (steps >= ACTIONS_PER_TURN) {
-            endTurn();
-          } else {
-            setTimeout(tick, 350);
+          const attacked = tryAttack(u, inR[0]);
+          if (attacked) {
+            steps++;
+            if (steps >= ACTIONS_PER_TURN) {
+              endTurn();
+            } else {
+              setTimeout(tick, 350);
+            }
+            return;
           }
-          return;
         }
       }
 
       // Flytta mot närmaste fiende
       const mobileReds = reds.filter((u) => UNIT_STATS[u.type] && UNIT_STATS[u.type].move > 0);
       const moverPool = mobileReds.length ? mobileReds : reds;
-      const mover = moverPool[Math.floor(Math.random() * moverPool.length)];
-      const target = blues.reduce(
-        (best, b) => {
-          const d = hexDistance({ q: mover.q, r: mover.r }, { q: b.q, r: b.r });
-          return !best || d < best.d ? { b, d } : best;
-        },
-        null
-      ).b;
+      const moverCandidates = moverPool
+        .map((u) => ({ u, moves: legalMoves(u) }))
+        .filter((entry) => entry.moves.length > 0);
 
-      const moves = legalMoves(mover);
-      if (!moves.length) {
+      if (!moverCandidates.length) {
         steps++;
         if (steps >= ACTIONS_PER_TURN) {
           endTurn();
@@ -1850,18 +1850,83 @@ function applyMineTrigger(q, r, enteringSide) {
         return;
       }
 
-      moves.sort(
+      const moversWithAmmo = moverCandidates.filter((entry) => entry.u.ammoLeft > 0);
+      const prioritizedMoverCandidates = moversWithAmmo.length ? moversWithAmmo : moverCandidates;
+
+      // Build obstacle-aware distance field from all blue positions.
+      // This helps red route around land instead of using only straight-line distance.
+      const bluePathDist = new Map();
+      const bfsQueue = [];
+      for (const b of blues) {
+        const k = keyOf(b.q, b.r);
+        if (bluePathDist.has(k)) continue;
+        bluePathDist.set(k, 0);
+        bfsQueue.push({ q: b.q, r: b.r });
+      }
+      while (bfsQueue.length) {
+        const cur = bfsQueue.shift();
+        const curKey = keyOf(cur.q, cur.r);
+        const curDist = bluePathDist.get(curKey);
+        for (const dir of HEX_DIRS) {
+          const nh = { q: cur.q + dir.q, r: cur.r + dir.r };
+          if (!inBounds(nh)) continue;
+          if (!isUnitPlacableHex(nh.q, nh.r)) continue;
+          const nk = keyOf(nh.q, nh.r);
+          if (bluePathDist.has(nk)) continue;
+          bluePathDist.set(nk, curDist + 1);
+          bfsQueue.push(nh);
+        }
+      }
+
+      const getBluePathDist = (pos) => {
+        const d = bluePathDist.get(keyOf(pos.q, pos.r));
+        return d == null ? Number.POSITIVE_INFINITY : d;
+      };
+
+      const scoredMoverCandidates = prioritizedMoverCandidates.map((entry) => {
+        const currentDist = getBluePathDist({ q: entry.u.q, r: entry.u.r });
+        const prevHex = redAiLastHexByUnit.get(entry.u.id);
+        const bestMove = entry.moves.reduce((best, m) => {
+          const d = getBluePathDist(m);
+          const isImmediateBacktrack = !!prevHex && prevHex.q === m.q && prevHex.r === m.r;
+          const effectiveDist = d + (isImmediateBacktrack ? 0.25 : 0);
+          if (!best) return { move: m, dist: d, effectiveDist };
+          if (effectiveDist < best.effectiveDist) return { move: m, dist: d, effectiveDist };
+          if (
+            effectiveDist === best.effectiveDist &&
+            (m.q < best.move.q || (m.q === best.move.q && m.r < best.move.r))
+          ) {
+            return { move: m, dist: d, effectiveDist };
+          }
+          return best;
+        }, null);
+        return {
+          entry,
+          bestMove: bestMove.move,
+          bestDist: bestMove.dist,
+          bestEffectiveDist: bestMove.effectiveDist,
+          currentDist,
+          improvement: currentDist - bestMove.dist,
+        };
+      });
+
+      scoredMoverCandidates.sort(
         (a, b) =>
-          hexDistance(a, { q: target.q, r: target.r }) -
-          hexDistance(b, { q: target.q, r: target.r })
+          b.improvement - a.improvement ||
+          a.bestEffectiveDist - b.bestEffectiveDist ||
+          a.bestDist - b.bestDist ||
+          String(a.entry.u.id).localeCompare(String(b.entry.u.id))
       );
 
-      const dest = moves[0];
+      const chosen = scoredMoverCandidates[0];
+      const mover = chosen.entry.u;
+      const dest = chosen.bestMove;
       selectedId = mover.id;
       mode = 'order';
       const from = { q: mover.q, r: mover.r };
       mover.q = dest.q;
       mover.r = dest.r;
+      redAiLastHexByUnit.set(mover.id, from);
       spendActionFor(mover.side);
       logEvent(`${mover.side} flyttar: ${mover.type} (${from.q},${from.r}) -> (${dest.q},${dest.r})`);
       if (!AIRBORNE_TYPES.has(mover.type) && mines.has(keyOf(dest.q, dest.r))) {
