@@ -1298,10 +1298,11 @@
       //Spawn red units
       console.log('Step J: Spawning red units...');
       const redUnits = [
-        UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
-        UnitType.SUBMARINE,
+        UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
+        UnitType.SUBMARINE, UnitType.SUBMARINE,
         UnitType.UNCONTROL_MINE, UnitType.UNCONTROL_MINE,
         UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
+
       ];
       for (const t of redUnits) {
         const h = findStartHex(Side.RED, t);
@@ -2137,7 +2138,7 @@ function applyMineTrigger(q, r, enteringSide) {
         continue; // Skip rendering
       }*/
       
-      
+       
       const isRedMine = u.side === Side.RED && isMineType(u.type);
       if (isRedMine && !u.identified && !isMineVisibleToBlue(u.q, u.r, u.side)) {
         continue;
@@ -2149,12 +2150,12 @@ function applyMineTrigger(q, r, enteringSide) {
         u.identified = true;
       }
       
-      
+     
       // Hide non-mine red units unless detected or identified
       if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
       }
-        
+       
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
