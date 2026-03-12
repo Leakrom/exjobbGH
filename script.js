@@ -1266,7 +1266,9 @@
       console.log('Step G: Clearing units, preparing to spawn...');
       units = [];
       
+      //Spawn blue units
       console.log('Step H: Spawning blue units...');
+      /*
       const blueUnits = [
         UnitType.FRIGATE,
         UnitType.STEALTH_CORVETTE, UnitType.STEALTH_CORVETTE,
@@ -1276,12 +1278,24 @@
         UnitType.UUV, UnitType.UUV,
         UnitType.SUBMARINE_HUNTER,
       ];
+      */
+
+      const blueUnits = [
+        UnitType.FRIGATE,
+        UnitType.STEALTH_CORVETTE,
+        UnitType.SUBMARINE,
+        UnitType.UAV,
+        UnitType.USV,
+        UnitType.UUV,
+        UnitType.SUBMARINE_HUNTER,
+      ];      
       for (const t of blueUnits) {
         const h = findStartHex(Side.BLUE, t);
         spawn(Side.BLUE, t, h.q, h.r);
       }
       console.log('Step I: Blue units spawned, total units:', units.length);
 
+      //Spawn red units
       console.log('Step J: Spawning red units...');
       const redUnits = [
         UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
