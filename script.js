@@ -1178,12 +1178,12 @@
     console.log('    [ensureMapLoaded] COMPLETE');
   }
 
-  function findStartHex(side) {
+  function findStartHex(side, unitType = null) {
     const mapConfig = MAP_CONFIGS[selectedMapIndex];
 
     function findNearestUnitHex(start) {
       if (!inBounds(start)) return null;
-      if (isUnitPlacableHex(start.q, start.r)) return start;
+      if (isUnitPlacableHex(start.q, start.r, unitType)) return start;
 
       const visited = new Set([keyOf(start.q, start.r)]);
       const queue = [start];
@@ -1195,7 +1195,7 @@
           if (!inBounds(next)) continue;
           const k = keyOf(next.q, next.r);
           if (visited.has(k)) continue;
-          if (isUnitPlacableHex(next.q, next.r)) return next;
+          if (isUnitPlacableHex(next.q, next.r, unitType)) return next;
           visited.add(k);
           queue.push(next);
         }
@@ -1277,7 +1277,7 @@
         UnitType.SUBMARINE_HUNTER,
       ];
       for (const t of blueUnits) {
-        const h = findStartHex(Side.BLUE);
+        const h = findStartHex(Side.BLUE, t);
         spawn(Side.BLUE, t, h.q, h.r);
       }
       console.log('Step I: Blue units spawned, total units:', units.length);
@@ -1290,7 +1290,7 @@
         UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
       ];
       for (const t of redUnits) {
-        const h = findStartHex(Side.RED);
+        const h = findStartHex(Side.RED, t);
         spawn(Side.RED, t, h.q, h.r);
       }
       console.log('Step K: Red units spawned, total units:', units.length);
@@ -1328,8 +1328,9 @@
     return !getCell(q, r).land;
   }
 
-  function isUnitPlacableHex(q, r) {
+  function isUnitPlacableHex(q, r, unitType = null) {
     if (!inBounds({ q, r })) return false;
+    if (unitType && AIRBORNE_TYPES.has(unitType)) return true;
     const cell = getCell(q, r);
     return !cell.land && !cell.isSkerry;
   }
@@ -1354,7 +1355,7 @@
 
         const k = keyOf(nh.q, nh.r);
         if (visited.has(k)) continue;
-        if (!isUnitPlacableHex(nh.q, nh.r)) continue;
+        if (!isUnitPlacableHex(nh.q, nh.r, u.type)) continue;
         if (unitAt(nh.q, nh.r)) continue;
 
         const nd = d + 1;
@@ -2372,7 +2373,7 @@ function applyMineTrigger(q, r, enteringSide) {
       const from = { q: sel.q, r: sel.r };
       const moves = legalMoves(sel);
       if (!moves.some((m) => hexEq(m, h))) {
-        showToast('Ogiltigt drag', 'Du kan bara flytta till markerade vattenhexar.');
+        showToast('Ogiltigt drag', 'Du kan bara flytta till markerade hexar.');
         return;
       }
       // Check if submarine is too deep for destination hex
