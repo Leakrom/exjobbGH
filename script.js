@@ -1298,11 +1298,12 @@
       //Spawn red units
       console.log('Step J: Spawning red units...');
       const redUnits = [
-        UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
-        UnitType.SUBMARINE, UnitType.SUBMARINE,
+        UnitType.CONVENTIONAL_CORVETTE, 
+        UnitType.SUBMARINE, 
         UnitType.UNCONTROL_MINE, UnitType.UNCONTROL_MINE,
         UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
-
+        UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
+        UnitType.SUBMARINE
       ];
       for (const t of redUnits) {
         const h = findStartHex(Side.RED, t);
@@ -2058,7 +2059,7 @@ function applyMineTrigger(q, r, enteringSide) {
         const fill = c.isSkerry ? LEGEND_COLORS.skerry : c.land ? LEGEND_COLORS.land : waterColor(c.depthNormalized);
         drawHex(x, y, fill, 'rgba(255,255,255,.08)', 1);
 
-       /* // Draw coordinate label
+        // Draw coordinate label
         ctx.save();
         ctx.fillStyle = '#fff';
         ctx.font = '10px monospace';
@@ -2066,7 +2067,7 @@ function applyMineTrigger(q, r, enteringSide) {
         ctx.textBaseline = 'middle';
         ctx.globalAlpha = 0.85;
         ctx.fillText(`${q},${r}`, x, y - HEX_SIZE * 0.45);
-        ctx.restore();*/
+        ctx.restore();
 
         if (sel && sel.side === Side.BLUE && sel.q === q && sel.r === r) {
           drawHex(x, y, 'rgba(255,255,255,.08)', 'rgba(255,255,255,.45)', 2);
@@ -2150,12 +2151,13 @@ function applyMineTrigger(q, r, enteringSide) {
         u.identified = true;
       }
       
-     
+      /*
       // Hide non-mine red units unless detected or identified
       if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
-      }
+      }*/
        
+
 
       const p = hexToPixel(u.q, u.r);
       const x = origin.x + p.x;
