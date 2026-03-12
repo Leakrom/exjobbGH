@@ -47,6 +47,7 @@
         <div class="btnRow" style="margin-top:10px;">
           <button class="btn2" id="btnAttack" disabled>Attackera</button>
           <button class="btn2" id="btnMine" disabled>Lägg mina</button>
+          
         </div>
         <div class="btnRow" style="margin-top:10px;">
           <button class="btn2" id="btnDepthUp" disabled>Gå djupare</button>
@@ -61,7 +62,7 @@
           <button class="btn2" id="btnMap1">Karta 1</button>
           <button class="btn2" id="btnMap2">Karta 2</button>
         </div>
-        <div class="btnRow">
+        <div class="btnRow" style="margin-top:10px;">
           <button class="btn2" id="btnMap3">Karta 3</button>
           <button class="btn2" id="btnMap4">Karta 4</button>
         </div>
@@ -70,12 +71,12 @@
       <div class="panel">
         <h2>Turkontroll</h2>
         <div class="row"><small>Aktiv spelare</small><b id="activePlayer">Blå</b></div>
-        <div class="row"><small>Åtgärder kvar</small><b id="actionsLeft">3</b></div>
+        <div class="row"><small>Åtgärder kvar</small><b id="actionsLeft">Obegränsat</b></div>
         <button id="btnEndTurn">Avsluta tur</button>
-        <div class="btnRow" style="margin-top:10px;">
+        <!--<div class="btnRow" style="margin-top:10px;">
           <button class="btn2" id="btnReset">Nytt slag</button>
           <button class="btn2" id="btnHelp">Hjälp</button>
-        </div>
+        </div>-->
       </div>
 
       <div class="panel">
@@ -100,10 +101,10 @@
         <div style="font-size:12px; line-height:1.45; opacity:.92;">
           <div>• <span class="kbd">Klicka</span> på en enhet för att välja.</div>
           <div>• <span class="kbd">Klicka</span> på markerad hex för att flytta.</div>
-          <div>• <span class="kbd">Attackera</span>: klicka fiende inom räckvidd.</div>
+          <div>• <span class="kbd">Attackera</span>: klicka på fiende inom räckvidd.</div>
           <!--<div>• <span class="kbd">Lägg mina</span>: klicka vattenhex intill.</div>-->
           <div>• <span class="kbd">Avsluta tur</span> byter spelare.</div>
-          <div style="margin-top:8px; opacity:.85;">Mål: sänk alla fiendens fartyg.</div>
+          <div style="margin-top:8px; opacity:.85;">Mål: sänk fiendens alla mobila enheter.</div>
         </div>
       </div>
     </aside>

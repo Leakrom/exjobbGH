@@ -46,7 +46,7 @@
     [UnitType.SUBMARINE]: { hp: 3, move: 3, range: 3, mines: 0, ammo: 8 },
     [UnitType.UAV]: { hp: 1, move: 7, range: 7, mines: 0, ammo: 0 },
     [UnitType.USV]: { hp: 2, move: 2, range: 2, mines: 0, ammo: 1 },
-    [UnitType.UUV]: { hp: 1, move: 4, range: 2, mines: 0, ammo: 0 },
+    [UnitType.UUV]: { hp: 1, move: 2, range: 2, mines: 0, ammo: 0 },
     [UnitType.SUBMARINE_HUNTER]: { hp: 2, move: 3, range: 4, mines: 0, ammo: 0 },
     [UnitType.CONVENTIONAL_CORVETTE]: { hp: 4, move: 2, range: 3, mines: 0, ammo: 8 },
     [UnitType.UNCONTROL_MINE]: { hp: 1, move: 0, range: 0, mines: 0, ammo: 0 },
@@ -922,6 +922,15 @@
   }
 
   function updateUI() {
+    /*if (
+      !elTurnPill || !elPhasePill || !elActivePlayer || !elActionsLeft ||
+      !elSelType || !elSelSide || !elSelHP || !elSelMove || !elSelRange ||
+      !elSelDepth || !elSelMines || !elSelAmmo || !btnAttack || !btnMine || !btnDepthUp ||
+      !btnDepthDown || !btnToggleSensor
+    ) {
+      return;
+    }*/
+
     if (
       !elTurnPill || !elPhasePill || !elActivePlayer || !elActionsLeft ||
       !elSelType || !elSelSide || !elSelHP || !elSelMove || !elSelRange ||
@@ -1574,8 +1583,13 @@ function applyMineTrigger(q, r, enteringSide) {
     if (target.hp <= 0) {
       units = units.filter((u) => u.id !== target.id);
       if (selectedId === target.id) selectedId = null;
-      showToast('Sänkt!', `${target.type} sjunker.`);
-      logEvent(`${target.side} enhet sänkt: ${target.type}`);
+      if( target.type === UnitType.CONTROL_MINE || target.type === UnitType.UNCONTROL_MINE) {
+        showToast('Sänkt!', `${target.type} röjd.`);
+        logEvent(`${target.side} enhet sänkt: ${target.type}`);
+      } else {
+        showToast('Sänkt!', `${target.type} sjunker!`);
+        logEvent(`${target.side} enhet sänkt: ${target.type}`);
+      }
     }
 
     mode = 'order';
