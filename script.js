@@ -1308,7 +1308,7 @@
         UnitType.SUBMARINE, 
         UnitType.UNCONTROL_MINE, UnitType.UNCONTROL_MINE,
         UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
-        UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
+        UnitType.CONVENTIONAL_CORVETTE,
         UnitType.SUBMARINE
       ];
       for (const t of redUnits) {
@@ -2166,12 +2166,12 @@ function applyMineTrigger(q, r, enteringSide) {
         u.identified = true;
       }
       
-      
+      /*
       // Hide non-mine red units unless detected or identified
       if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
       }
-       
+       */
 
 
       const p = hexToPixel(u.q, u.r);
