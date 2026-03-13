@@ -473,6 +473,16 @@
     }
   }
 
+  function positionDialogOverMap(dialog) {
+    const rect = canvas.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    dialog.style.position = 'fixed';
+    dialog.style.left = `${Math.round(centerX)}px`;
+    dialog.style.top = `${Math.round(centerY)}px`;
+    dialog.style.transform = 'translate(-50%, -50%)';
+  }
+
 
 
   function showBlueTurnReflectionPopup(options = {}) {
@@ -487,9 +497,6 @@
       overlay.style.position = 'fixed';
       overlay.style.inset = '0';
       overlay.style.background = 'rgba(0,0,0,.55)';
-      overlay.style.display = 'flex';
-      overlay.style.alignItems = 'center';
-      overlay.style.justifyContent = 'center';
       overlay.style.zIndex = '9999';
 
       const dialog = document.createElement('div');
@@ -500,6 +507,7 @@
       dialog.style.borderRadius = '10px';
       dialog.style.padding = '14px';
       dialog.style.boxSizing = 'border-box';
+      positionDialogOverMap(dialog);
 
       const heading = document.createElement('h3');
       heading.textContent = title;
@@ -678,9 +686,6 @@
       overlay.style.position = 'fixed';
       overlay.style.inset = '0';
       overlay.style.background = 'rgba(0,0,0,.55)';
-      overlay.style.display = 'flex';
-      overlay.style.alignItems = 'center';
-      overlay.style.justifyContent = 'center';
       overlay.style.zIndex = '10000';
 
       const dialog = document.createElement('div');
@@ -692,6 +697,7 @@
       dialog.style.padding = '18px';
       dialog.style.boxSizing = 'border-box';
       dialog.style.textAlign = 'center';
+      positionDialogOverMap(dialog);
 
       const message = document.createElement('div');
       message.style.fontSize = '22px';
