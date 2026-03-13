@@ -20,7 +20,7 @@
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
     const BLUE_ACTIONS_UNLIMITED = true;
-    const ASK_BLUE_REFLECTION_EACH_TURN = true; // true = efter varje blå tur, false = först vid spelavslut
+    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -717,7 +717,7 @@
 
     (async () => {
       await showEndGameResultPopup(winner);
-      if (!shouldAskBlueEndGameReflection()) return;
+      //if (!shouldAskBlueEndGameReflection()) return;
       const ok = await collectBlueReflection(`BLÅ REFLEKTION (efter spelavslut, vinnare: ${winner})`);
       if (!ok) {
         console.warn('Slutreflektion hoppades över eller kunde inte sparas.');
@@ -1372,12 +1372,21 @@
         const k = keyOf(nh.q, nh.r);
         if (visited.has(k)) continue;
         if (!isUnitPlacableHex(nh.q, nh.r, u.type)) continue;
-        if (unitAt(nh.q, nh.r)) continue;
+        const occupyingUnit = unitAt(nh.q, nh.r);
+        const canLandOnHex =
+          !occupyingUnit ||
+          (
+            !AIRBORNE_TYPES.has(u.type) &&
+            occupyingUnit.side !== u.side &&
+            isMineType(occupyingUnit.type)
+          );
 
         const nd = d + 1;
         if (nd <= st.move) {
           visited.add(k);
-          res.push(nh);
+          if (canLandOnHex) {
+            res.push(nh);
+          }
           queue.push({ h: nh, d: nd });
         }
       }
@@ -2059,7 +2068,7 @@ function applyMineTrigger(q, r, enteringSide) {
         const fill = c.isSkerry ? LEGEND_COLORS.skerry : c.land ? LEGEND_COLORS.land : waterColor(c.depthNormalized);
         drawHex(x, y, fill, 'rgba(255,255,255,.08)', 1);
 
-        // Draw coordinate label
+        /*// Draw coordinate label
         ctx.save();
         ctx.fillStyle = '#fff';
         ctx.font = '10px monospace';
@@ -2067,7 +2076,7 @@ function applyMineTrigger(q, r, enteringSide) {
         ctx.textBaseline = 'middle';
         ctx.globalAlpha = 0.85;
         ctx.fillText(`${q},${r}`, x, y - HEX_SIZE * 0.45);
-        ctx.restore();
+        ctx.restore();*/
 
         if (sel && sel.side === Side.BLUE && sel.q === q && sel.r === r) {
           drawHex(x, y, 'rgba(255,255,255,.08)', 'rgba(255,255,255,.45)', 2);
@@ -2151,11 +2160,11 @@ function applyMineTrigger(q, r, enteringSide) {
         u.identified = true;
       }
       
-      /*
+      
       // Hide non-mine red units unless detected or identified
       if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
-      }*/
+      }
        
 
 
@@ -2357,6 +2366,7 @@ function applyMineTrigger(q, r, enteringSide) {
 
     const clickedUnit = unitAt(h.q, h.r);
     if (clickedUnit) {
+      const selectedUnit = selectedId ? getUnit(selectedId) : null;
       const sel = selectedId ? getUnit(selectedId) : null;
       if (
         mode === 'attack' &&
@@ -2367,11 +2377,22 @@ function applyMineTrigger(q, r, enteringSide) {
         tryAttack(sel, clickedUnit);
         return;
       }
+      const isMoveAttemptIntoEnemyMine =
+        mode === 'order' &&
+        selectedUnit &&
+        selectedUnit.side === activeSide &&
+        clickedUnit.side !== activeSide &&
+        isMineType(clickedUnit.type);
+
+      if (isMoveAttemptIntoEnemyMine) {
+        // Fall through so the normal move handling can trigger mine detonation.
+      } else {
       selectedId = clickedUnit.id;
       mode = 'order';
       updateUI();
       draw();
       return;
+      }
     }
 
     const sel = selectedId ? getUnit(selectedId) : null;
