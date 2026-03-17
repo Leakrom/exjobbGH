@@ -42,6 +42,8 @@ Motiveringar:
 Vill inte att minfältet tas bort när minan sprängts för att man inte ska 
 veta hur många minor som ligger ute.
 
+När man får IG-frågorna så får man dem inte på slutet, pga, om det är röd som vinner så har man inte hunnit göra några drag.
+
 
 Planering under tidspress.
 Metod som används i försvarsmakten
