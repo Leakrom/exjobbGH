@@ -20,7 +20,7 @@
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
     const BLUE_ACTIONS_UNLIMITED = true;
-    const ASK_BLUE_REFLECTION_EACH_TURN = true; // true = efter varje blå tur, false = först vid spelavslut
+    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -544,7 +544,7 @@
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
         l2.textContent = 'Var det lätt att ta beslut om att göra dessa drag?';
       } else {
-        l2.textContent = 'Berätta om din upplevelse av att spela spelet. Är du nöjd med utfallet och den strategi du valde? Var det roligt/enkelt/realistiskt/utmanande etc.';
+        l2.textContent = 'Är du nöjd med utfallet och den strategi du valde?';
       }
       l2.style.display = 'block';
       l2.style.marginBottom = '6px';
@@ -562,7 +562,7 @@
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
         l3.textContent = 'Varför valde du att göra just dessa drag? Vad tänkte du att de skulle leda till? Vilka andra drag kunde du ha gjort, och varför valde du bort dem?';
       } else {
-        l3.textContent = 'Var din strategi den bästa möjliga? Hade du kunnat nå samma, eller bättre, resultat genom att göra på något annat sätt, i så fall hur?';
+        l3.textContent = 'Varför valde du den strategi du gjorde? Vilka andra drag kunde du ha gjort, och varför valde du bort dem?';
       }
       l3.style.display = 'block';
       l3.style.marginBottom = '6px';
@@ -580,7 +580,7 @@
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
         l4.textContent = 'Hur planerar du att fortsätta i nästa tur?';
       } else {
-        l4.textContent = 'Skulle du kunna tänka dig att spela en omgång till, och i så fall vad skulle du vilja ändra på i spelet eller i ditt sätt att spela?';
+        l4.textContent = 'Om du skulle spela en omgång till; hur skulle du lägga upp din strategi då? Finns det något du vilja ändra på i ditt sätt att spela?';
       }
       l4.style.display = 'block';
       l4.style.marginBottom = '6px';
@@ -723,7 +723,7 @@
 
     (async () => {
       await showEndGameResultPopup(winner);
-      //if (!shouldAskBlueEndGameReflection()) return;
+      if (!shouldAskBlueEndGameReflection()) return;
       const ok = await collectBlueReflection(`BLÅ REFLEKTION (efter spelavslut, vinnare: ${winner})`);
       if (!ok) {
         console.warn('Slutreflektion hoppades över eller kunde inte sparas.');
@@ -1547,7 +1547,7 @@ function applyMineTrigger(q, r, enteringSide) {
 
         // Check identification: randFactor - 5 > 0
         const identRand = Math.floor(Math.random() * 5) + 1;
-        if (identRand - 5 > 0) {
+        if (identRand - 3 > 0) {
           red.identified = true;
         }
       }
