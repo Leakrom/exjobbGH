@@ -274,8 +274,10 @@
   let actionsLeft = ACTIONS_PER_TURN;
   let gameOver = false;
   let endGameReflectionHandled = false;
+  let detectionDirty = true;
 
   let selectedId = null;
+  let selectedByUser = false;
   let mode = 'order'; // 'order' | 'attack' | 'mine'
 
   // =====================================================
@@ -544,7 +546,7 @@
       if (ASK_BLUE_REFLECTION_EACH_TURN) {
         l2.textContent = 'Var det lätt att ta beslut om att göra dessa drag?';
       } else {
-        l2.textContent = 'Är du nöjd med utfallet och den strategi du valde?';
+        l2.textContent = 'Är du nöjd med utfallet och den strategi du valde? Utveckla gärna';
       }
       l2.style.display = 'block';
       l2.style.marginBottom = '6px';
@@ -976,7 +978,7 @@
       return;
     }
 
-    if (sel.side === Side.RED && sel.detected && !sel.identified) {
+    if (sel.side === Side.RED && (!selectedByUser || !sel.identified)) {
       elSelType.textContent = '–';
       elSelSide.textContent = '–';
       elSelHP.textContent = '–';
@@ -1259,6 +1261,8 @@
       gameOver = false;
       endGameReflectionHandled = false;
       selectedId = null;
+      selectedByUser = false;
+      detectionDirty = true;
       mode = 'order';
       blueSpawnIndex = 0;
       redSpawnIndex = 0;
@@ -1455,6 +1459,7 @@ function applyMineTrigger(q, r, enteringSide) {
 
   if (selectedId === u.id) {
     selectedId = null;
+    selectedByUser = false;
   }
 
   return true;
@@ -1614,7 +1619,10 @@ function applyMineTrigger(q, r, enteringSide) {
 
     if (target.hp <= 0) {
       units = units.filter((u) => u.id !== target.id);
-      if (selectedId === target.id) selectedId = null;
+      if (selectedId === target.id) {
+        selectedId = null;
+        selectedByUser = false;
+      }
       if( target.type === UnitType.CONTROL_MINE || target.type === UnitType.UNCONTROL_MINE) {
         showToast('Sänkt!', `${target.type} röjd.`);
         logEvent(`${target.side} enhet sänkt: ${target.type}`);
@@ -1799,6 +1807,7 @@ function applyMineTrigger(q, r, enteringSide) {
       if (!sel || sel.side !== activeSide) return;
       if (!SENSOR_CONFIG[sel.type] || !SENSOR_CONFIG[sel.type].type) return;
       sel.sensorActive = !sel.sensorActive;
+      detectionDirty = true;
       logEvent(`${sel.side} växlar sensorläge: ${sel.type} -> ${sel.sensorActive ? 'Aktiv' : 'Passiv'}`);
       updateUI();
       draw();
@@ -1811,8 +1820,10 @@ function applyMineTrigger(q, r, enteringSide) {
     const nextTurn = nextSide === Side.BLUE ? turn + 1 : turn;
     logEvent(`Turbyte: ${activeSide} -> ${nextSide} (tur ${nextTurn})`);
     selectedId = null;
+    selectedByUser = false;
     mode = 'order';
     activeSide = nextSide;
+    detectionDirty = true;
     if (activeSide === Side.BLUE) turn += 1;
     actionsLeft =
       activeSide === Side.BLUE && BLUE_ACTIONS_UNLIMITED
@@ -1863,6 +1874,7 @@ function applyMineTrigger(q, r, enteringSide) {
         if (inR.length) {
           inR.sort((a, b) => a.hp - b.hp);
           selectedId = u.id;
+          selectedByUser = false;
           mode = 'attack';
           updateUI();
           draw();
@@ -1968,6 +1980,7 @@ function applyMineTrigger(q, r, enteringSide) {
       const mover = chosen.entry.u;
       const dest = chosen.bestMove;
       selectedId = mover.id;
+      selectedByUser = false;
       mode = 'order';
       const from = { q: mover.q, r: mover.r };
       mover.q = dest.q;
@@ -2046,9 +2059,10 @@ function applyMineTrigger(q, r, enteringSide) {
     const rect = canvas.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
 
-    // Update detection before rendering
-    if (activeSide === Side.BLUE) {
+    // Update detection before rendering, but only when game state has changed
+    if (activeSide === Side.BLUE && detectionDirty) {
       updateDetection();
+      detectionDirty = false;
     }
 
     const origin = getMapOrigin();
@@ -2394,6 +2408,7 @@ function applyMineTrigger(q, r, enteringSide) {
         // Fall through so the normal move handling can trigger mine detonation.
       } else {
       selectedId = clickedUnit.id;
+      selectedByUser = true;
       mode = 'order';
       updateUI();
       draw();
@@ -2521,6 +2536,7 @@ function applyMineTrigger(q, r, enteringSide) {
   }
 
   function spendActionFor(side) {
+    detectionDirty = true;
     if (side === Side.BLUE && BLUE_ACTIONS_UNLIMITED) return;
     actionsLeft -= 1;
   }
