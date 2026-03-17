@@ -1611,9 +1611,9 @@ function applyMineTrigger(q, r, enteringSide) {
 
     if (attacker.side === Side.RED && target.side === Side.BLUE) {
       if (target.hp <= 0) {
-        pushRedMove(`Röd enhet sänkte ${target.type}`);
+        pushRedMove(`${attacker.type} sänkte ${target.type}`);
       } else {
-        pushRedMove(`Röd enhet attackerade ${target.type}`);
+        pushRedMove(`${attacker.type} attackerade ${target.type}`);
       }
     }
 
