@@ -20,7 +20,7 @@
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
     const BLUE_ACTIONS_UNLIMITED = true;
-    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
+    const ASK_BLUE_REFLECTION_EACH_TURN = true; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -662,8 +662,8 @@
   }
 
   function isReflectionDisabledForCurrentMap() {
-    // Karta 1 is a dedicated test map: never show reflection prompts.
-    return selectedMapIndex === 0;
+    // Karta 1 och 4 ska inte visa reflektionsfrågor.
+    return selectedMapIndex === 0 || selectedMapIndex === 3;
   }
 
   function shouldAskBlueTurnReflection() {
@@ -1308,7 +1308,7 @@
         UnitType.SUBMARINE, 
         UnitType.UNCONTROL_MINE, UnitType.UNCONTROL_MINE,
         UnitType.CONTROL_MINE, UnitType.CONTROL_MINE,
-        UnitType.CONVENTIONAL_CORVETTE,
+        UnitType.CONVENTIONAL_CORVETTE, UnitType.CONVENTIONAL_CORVETTE,
         UnitType.SUBMARINE
       ];
       for (const t of redUnits) {
@@ -2166,12 +2166,12 @@ function applyMineTrigger(q, r, enteringSide) {
         u.identified = true;
       }
       
-      /*
+      
       // Hide non-mine red units unless detected or identified
       if (u.side === Side.RED && !isMineType(u.type) && !u.detected && !u.identified) {
         continue; // Skip rendering
       }
-       */
+       
 
 
       const p = hexToPixel(u.q, u.r);
