@@ -1,0 +1,678 @@
+[2026-03-18T08:08:43.695+01:00] Blå avslutar sin tur
+[2026-03-18T08:08:43.695+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-18T08:08:44.160+01:00] Röd flyttar: Ubåt (16,18) -> (13,18)
+[2026-03-18T08:08:44.530+01:00] Röd flyttar: Ubåt (13,18) -> (10,18)
+[2026-03-18T08:08:44.891+01:00] Röd flyttar: Ubåt (10,18) -> (7,18)
+[2026-03-18T08:08:44.893+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-18T08:08:49.355+01:00] 
+
+[2026-03-18T08:08:49.356+01:00] Nytt slag initieras, karta: Karta 1
+[2026-03-18T08:37:56.006+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,2) -> (6,2)
+[2026-03-18T08:39:21.431+01:00] Blå växlar sensorläge: Stealth-korvett -> Aktiv
+[2026-03-18T08:39:27.767+01:00] Blå växlar sensorläge: Stealth-korvett -> Passiv
+[2026-03-18T08:39:28.303+01:00] Blå växlar sensorläge: Stealth-korvett -> Aktiv
+[2026-03-18T08:39:31.327+01:00] Blå växlar sensorläge: Stealth-korvett -> Passiv
+[2026-03-18T08:44:25.899+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T08:44:27.059+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 2
+[2026-03-18T08:44:27.675+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T08:44:28.259+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 0
+[2026-03-18T08:44:28.948+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T08:44:30.371+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 2
+[2026-03-18T08:44:31.108+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T08:44:31.539+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 0
+[2026-03-18T08:44:32.596+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T08:44:40.779+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-18T08:44:41.939+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Passiv
+[2026-03-18T08:44:42.979+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-18T08:44:44.404+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Passiv
+[2026-03-18T08:44:52.595+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-18T08:44:53.307+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Passiv
+[2026-03-18T08:44:53.835+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-18T08:44:55.108+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Passiv
+[2026-03-18T08:45:47.584+01:00] Blå flyttar: UAV - obemannad flygenhet (2,3) -> (4,4)
+[2026-03-18T08:46:04.552+01:00] Blå flyttar: USV - obemannad ytenhet (4,12) -> (6,11)
+[2026-03-18T08:46:14.172+01:00] Blå flyttar: Ubåt (4,14) -> (7,13)
+[2026-03-18T08:46:20.524+01:00] Blå flyttar: Ubåtsjakthelikopter (3,18) -> (6,15)
+[2026-03-18T08:46:29.837+01:00] Blå flyttar: Stealth-korvett (1,5) -> (3,6)
+[2026-03-18T08:46:32.284+01:00] Blå flyttar: Fregatt (1,2) -> (4,2)
+[2026-03-18T08:46:49.757+01:00] 
+
+[2026-03-18T08:46:49.757+01:00] Nytt slag initieras, karta: Karta 2
+[2026-03-18T08:48:11.136+01:00] Blå flyttar: Ubåtsjakthelikopter (3,18) -> (6,16)
+[2026-03-18T08:48:40.725+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,9) -> (6,8)
+[2026-03-18T08:49:05.477+01:00] Blå flyttar: Stealth-korvett (3,4) -> (3,7)
+[2026-03-18T08:49:52.057+01:00] Blå flyttar: Ubåt (4,5) -> (6,5)
+[2026-03-18T08:49:54.442+01:00] Blå flyttar: UAV - obemannad flygenhet (2,9) -> (8,7)
+[2026-03-18T08:50:33.382+01:00] Blå flyttar: Fregatt (0,11) -> (2,9)
+[2026-03-18T08:51:06.366+01:00] Blå flyttar: USV - obemannad ytenhet (3,11) -> (5,9)
+[2026-03-18T08:55:42.452+01:00] BLÅ REFLEKTION
+[2026-03-18T08:55:42.453+01:00] Fråga 1
+[2026-03-18T08:55:42.453+01:00] Svar: Jag förflyttade varje enhet, inte alltid maxlängd.
+[2026-03-18T08:55:42.453+01:00] Fråga 2
+[2026-03-18T08:55:42.453+01:00] Svar: Ja, det var ganska enkelt. Vet ju ej ännu var fiender befinner sig så inte så många viktiga val, ville mest komma framåt.
+[2026-03-18T08:55:42.454+01:00] Fråga 3
+[2026-03-18T08:55:42.454+01:00] Svar: Jag tänkte att jag ska ha enheter som är bra på att upptäcka längst fram, sedan de bemannade bakom. Ville även skydda en av mina luftburna som kan se långt genom att ha ett närliggande fartyg som kan attackera. Ville också hålla mig lite utspridd så att det inte är för lätt att eventuellt bli av med flera av mina enheter.
+[2026-03-18T08:55:42.454+01:00] Fråga 4
+[2026-03-18T08:55:42.454+01:00] Svar: Oklart, beror på ifall jag upptäcker någon fiende. Då ska jag försöka attackera dem. Annars tänker jag att jag rör mig mot minfälten eftersom det säkert finns flera fiender på andra sidan av minfälten.
+[2026-03-18T08:55:42.469+01:00] Blå avslutar sin tur
+[2026-03-18T08:55:42.469+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-18T08:55:42.937+01:00] Röd flyttar: Ubåt (18,5) -> (15,5)
+[2026-03-18T08:55:43.294+01:00] Röd flyttar: Ubåt (15,5) -> (12,6)
+[2026-03-18T08:55:43.653+01:00] Röd flyttar: Ubåt (12,6) -> (9,6)
+[2026-03-18T08:55:43.655+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-18T08:56:19.825+01:00] Blå flyttar: Ubåtsjakthelikopter (6,16) -> (9,15)
+[2026-03-18T08:56:28.825+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T08:56:30.457+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T08:56:34.241+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T08:56:46.121+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T08:57:31.918+01:00] Blå flyttar: UAV - obemannad flygenhet (8,7) -> (11,5)
+[2026-03-18T08:58:31.305+01:00] Blå flyttar: USV - obemannad ytenhet (5,9) -> (7,9)
+[2026-03-18T08:58:47.276+01:00] Blå flyttar: Ubåt (6,5) -> (9,5)
+[2026-03-18T08:59:08.459+01:00] Blå attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=1
+[2026-03-18T08:59:49.673+01:00] Blå flyttar: Stealth-korvett (3,7) -> (6,6)
+[2026-03-18T08:59:52.369+01:00] Blå attackerar: Stealth-korvett -> Ubåt, skada=1, återstående HP mål=0
+[2026-03-18T08:59:52.371+01:00] Röd enhet sänkt: Ubåt
+[2026-03-18T09:00:49.415+01:00] Blå flyttar: UUV - obemannad undervattensenhet (6,8) -> (8,8)
+[2026-03-18T09:01:03.207+01:00] Blå flyttar: Fregatt (2,9) -> (2,13)
+[2026-03-18T09:01:18.647+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T09:01:19.478+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T09:08:36.803+01:00] BLÅ REFLEKTION
+[2026-03-18T09:08:36.803+01:00] Fråga 1
+[2026-03-18T09:08:36.803+01:00] Svar: Jag rörde mig fram med enheter som har bra möjlighet att upptäcka fiender. Sedan rörde jag mig emot fienden. Attackerade den som jag kunde. På nedre delen av kartan vill jag också ha ett fartyg som kan attackera, så började röra mig dit med enheterna som inte var upptagna med de andra fiendeenheterna.
+[2026-03-18T09:08:36.804+01:00] Fråga 2
+[2026-03-18T09:08:36.804+01:00] Svar: Ja, när en fiendeubåt kom fram precis bredvid mitt fartyg så var prio 1 att sänka den. Sedan var det återigen att röra sig framåt, vilket också var relativt enkelt eftersom jag främst tänkte på att undvika minfält.
+[2026-03-18T09:08:36.804+01:00] Fråga 3
+[2026-03-18T09:08:36.804+01:00] Svar: För det första ville jag inte själv bli attackerad, och den enheten jag sänkte var inom räckvidd att attackera mig. Jag kunde kanske varit mer passiv, inte rört mig så långt och inte satt på aktiva sensorer.
+[2026-03-18T09:08:36.804+01:00] Fråga 4
+[2026-03-18T09:08:36.804+01:00] Svar: Jag antar att fienden kommer röra sig mot mig, så förhoppningsvis kan jag sänka den med, eftersom jag har två fartyg som skulle kunna komma inom räckvidd av den. Blir lite farligt om jag inte kan sänka den och den får två chanser att attackera min främsta enhet. Man vill ju helst vara den som kan både flytta nära och attackera, för då gör jag mer skada. Tänker också mobilisera mer på nedre delen av kartan så att jag även gör framsteg där.
+[2026-03-18T09:08:36.815+01:00] Blå avslutar sin tur
+[2026-03-18T09:08:36.816+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-18T09:08:37.280+01:00] Röd flyttar: Ubåt (16,18) -> (13,18)
+[2026-03-18T09:08:37.650+01:00] Röd flyttar: Ubåt (13,18) -> (10,18)
+[2026-03-18T09:08:38.006+01:00] Röd flyttar: Ubåt (10,18) -> (9,16)
+[2026-03-18T09:08:38.011+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-18T09:09:19.626+01:00] Blå flyttar: USV - obemannad ytenhet (7,9) -> (8,9)
+[2026-03-18T09:09:34.872+01:00] Blå flyttar: Fregatt (2,13) -> (4,15)
+[2026-03-18T09:09:56.768+01:00] Blå flyttar: Ubåtsjakthelikopter (9,15) -> (12,13)
+[2026-03-18T09:10:01.272+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Aktiv
+[2026-03-18T09:10:02.287+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Passiv
+[2026-03-18T09:10:43.892+01:00] Blå flyttar: UUV - obemannad undervattensenhet (8,8) -> (10,7)
+[2026-03-18T09:10:56.621+01:00] Blå flyttar: Stealth-korvett (6,6) -> (8,7)
+[2026-03-18T09:11:29.963+01:00] Blå flyttar: UAV - obemannad flygenhet (11,5) -> (11,11)
+[2026-03-18T09:11:32.234+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T09:11:32.834+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T09:12:12.747+01:00] Blå ändrar djup upp: Ubåt till djup 1
+[2026-03-18T09:12:14.074+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T09:12:15.746+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T09:12:19.354+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T09:12:24.034+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T09:12:58.352+01:00] Blå flyttar: Ubåt (9,5) -> (10,5)
+[2026-03-18T09:18:10.678+01:00] BLÅ REFLEKTION
+[2026-03-18T09:18:10.679+01:00] Fråga 1
+[2026-03-18T09:18:10.679+01:00] Svar: Fienden rörde sig ej. Så ville heller inte komma för nära. Det kan ju finnas fler fienden under vattnet, så höll ihop mina bemannade enheter så jag kan attackera om det behövs. Tog ett till steg in i minfältet för att eventuellt upptäcka minor.
+[2026-03-18T09:18:10.679+01:00] Fråga 2
+[2026-03-18T09:18:10.679+01:00] Svar: Ja relativt, det svåraste beslutet var om jag skulle gå emot fienden eller inte.
+[2026-03-18T09:18:10.679+01:00] Fråga 3
+[2026-03-18T09:18:10.680+01:00] Svar: Jag vill skydda mina egna enheter, och gärna ha översikt med enheter som är obemannade och har lång sensorinformation innan jag rör mig för mycket. Jag kunde som sagt mobiliserat mot fienden, men ville inte bli vulnerable med den enheten längst fram genom att vara själv och möjliggöra att fienden kom nära och kunde attackera på samma omgång.
+[2026-03-18T09:18:10.680+01:00] Fråga 4
+[2026-03-18T09:18:10.680+01:00] Svar: Oklart, jag ska i alla fall förflytta mig framåt med enheten på nedre delen, och förflytta den luftburna med långa sensorer för att eventuellt upptäcka flera ytenheter.
+[2026-03-18T09:18:10.691+01:00] Blå avslutar sin tur
+[2026-03-18T09:18:10.691+01:00] Turbyte: Blå -> Röd (tur 3)
+[2026-03-18T09:18:11.151+01:00] Röd attackerar: Ubåt -> Ubåtsjakthelikopter, skada=1, återstående HP mål=1
+[2026-03-18T09:18:11.521+01:00] Röd attackerar: Ubåt -> Ubåtsjakthelikopter, skada=1, återstående HP mål=0
+[2026-03-18T09:18:11.523+01:00] Blå enhet sänkt: Ubåtsjakthelikopter
+[2026-03-18T09:18:11.893+01:00] Röd flyttar: Ubåt (9,16) -> (10,13)
+[2026-03-18T09:18:11.896+01:00] Turbyte: Röd -> Blå (tur 4)
+[2026-03-18T09:19:44.219+01:00] Blå flyttar: Fregatt (4,15) -> (8,13)
+[2026-03-18T09:19:46.707+01:00] Blå attackerar: Fregatt -> Ubåt, skada=1, återstående HP mål=2
+[2026-03-18T09:19:48.938+01:00] Blå attackerar: Fregatt -> Ubåt, skada=1, återstående HP mål=1
+[2026-03-18T09:19:51.515+01:00] Blå attackerar: Fregatt -> Ubåt, skada=1, återstående HP mål=0
+[2026-03-18T09:19:51.516+01:00] Röd enhet sänkt: Ubåt
+[2026-03-18T09:20:13.427+01:00] Blå flyttar: UAV - obemannad flygenhet (11,11) -> (7,15)
+[2026-03-18T09:20:15.162+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T09:20:15.602+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T09:20:53.088+01:00] Blå flyttar: Ubåt (10,5) -> (11,5)
+[2026-03-18T09:21:17.529+01:00] Blå flyttar: UUV - obemannad undervattensenhet (10,7) -> (12,6)
+[2026-03-18T09:21:19.297+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T09:21:20.129+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 2
+[2026-03-18T09:21:47.647+01:00] Blå flyttar: USV - obemannad ytenhet (8,9) -> (9,10)
+[2026-03-18T09:22:01.687+01:00] Blå flyttar: Stealth-korvett (8,7) -> (11,4)
+[2026-03-18T09:27:01.678+01:00] BLÅ REFLEKTION
+[2026-03-18T09:27:01.679+01:00] Fråga 1
+[2026-03-18T09:27:01.679+01:00] Svar: Jag sänkte enheten som attackerade mig. Hade för två (?) rundor sedan glömt att jag kunde attackera flera gånger med samma fartyg. Så denna gången attackerade jag samma fienden flera gånger med samma fartyg. Förflyttade även den med långa sensorer så ingen ytenhet kommer bakifrån. Men det är endast en fiendeenehet som jag inte ännu vet var den är.
+[2026-03-18T09:27:01.679+01:00] Fråga 2
+[2026-03-18T09:27:01.679+01:00] Svar: Ja, det blev rätt reaktivt. Men var lite aktiv med att röra mig mer i minfältet och hittade en mina.
+[2026-03-18T09:27:01.679+01:00] Fråga 3
+[2026-03-18T09:27:01.680+01:00] Svar: Prio 1, sänka fiende enhet som attackerade mig för att inte bli mer attackerad nästa runda. Prio 2, ta mig närmre den översta fienden som jag vet var den är (eller var, har ju inte svar min flygenhet med långa sensorer där), men fortfarande hålla ihop så det blir svårt att sänka båda.
+[2026-03-18T09:27:01.680+01:00] Fråga 4
+[2026-03-18T09:27:01.680+01:00] Svar: Jag måste nog tillbaka med min spanenhet, så jag vet hur nära den översta fienden är. Sedan mobilisera på nedre delen av kartan också.
+[2026-03-18T09:27:01.686+01:00] Blå avslutar sin tur
+[2026-03-18T09:27:01.687+01:00] Turbyte: Blå -> Röd (tur 4)
+[2026-03-18T09:27:02.142+01:00] Röd flyttar: Konventionell korvett (16,3) -> (14,4)
+[2026-03-18T09:27:02.501+01:00] Röd attackerar: Konventionell korvett -> UUV - obemannad undervattensenhet, skada=1, återstående HP mål=0
+[2026-03-18T09:27:02.508+01:00] Blå enhet sänkt: UUV - obemannad undervattensenhet
+[2026-03-18T09:27:02.862+01:00] Röd attackerar: Konventionell korvett -> Stealth-korvett, skada=1, återstående HP mål=1
+[2026-03-18T09:27:02.864+01:00] Turbyte: Röd -> Blå (tur 5)
+[2026-03-18T09:27:49.852+01:00] Blå flyttar: Stealth-korvett (11,4) -> (12,4)
+[2026-03-18T09:27:51.844+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T09:27:54.596+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T09:27:56.420+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T09:27:58.275+01:00] Blå attackerar: Stealth-korvett -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T09:27:58.276+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T09:28:31.492+01:00] Blå flyttar: UAV - obemannad flygenhet (7,15) -> (11,10)
+[2026-03-18T09:28:33.356+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T09:28:33.843+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T09:28:50.354+01:00] Blå flyttar: USV - obemannad ytenhet (9,10) -> (11,8)
+[2026-03-18T09:28:57.690+01:00] Blå flyttar: Fregatt (8,13) -> (9,13)
+[2026-03-18T09:31:02.069+01:00] BLÅ REFLEKTION
+[2026-03-18T09:31:02.070+01:00] Fråga 1
+[2026-03-18T09:31:02.070+01:00] Svar: Attackerade synlig fiende inom räckvidd, förflyttade mig närmre andra fienden. Förflyttade spaningsflyget tillbaka lite.
+[2026-03-18T09:31:02.070+01:00] Fråga 2
+[2026-03-18T09:31:02.070+01:00] Svar: Ja, det var en ganska tydlig uppgift.
+[2026-03-18T09:31:02.070+01:00] Fråga 3
+[2026-03-18T09:31:02.071+01:00] Svar: Det tog rätt mycket ammunition. Skulle kunna gått närmre, men då tror jag att jag riskerade att åka på en mina och det var ju inte bra (såg bara en mina - den kunde jag i alla fall undvika)
+[2026-03-18T09:31:02.071+01:00] Fråga 4
+[2026-03-18T09:31:02.071+01:00] Svar: Kanske börja flytta mer aggressivt mot den sista fienden som jag ser.
+[2026-03-18T09:31:02.087+01:00] Blå avslutar sin tur
+[2026-03-18T09:31:02.087+01:00] Turbyte: Blå -> Röd (tur 5)
+[2026-03-18T09:31:02.552+01:00] Röd flyttar: Konventionell korvett (17,11) -> (15,11)
+[2026-03-18T09:31:02.910+01:00] Röd flyttar: Konventionell korvett (15,11) -> (13,11)
+[2026-03-18T09:31:03.271+01:00] Röd attackerar: Konventionell korvett -> UAV - obemannad flygenhet, skada=1, återstående HP mål=0
+[2026-03-18T09:31:03.273+01:00] Blå enhet sänkt: UAV - obemannad flygenhet
+[2026-03-18T09:31:03.275+01:00] Turbyte: Röd -> Blå (tur 6)
+[2026-03-18T09:32:40.900+01:00] Blå flyttar: Fregatt (9,13) -> (11,12)
+[2026-03-18T09:32:46.659+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T09:32:52.492+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T09:32:54.772+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T09:32:58.147+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T09:32:58.148+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T09:33:31.427+01:00] Blå flyttar: Ubåt (11,5) -> (9,7)
+[2026-03-18T09:33:36.803+01:00] Blå flyttar: Stealth-korvett (12,4) -> (9,6)
+[2026-03-18T09:33:45.834+01:00] Blå flyttar: USV - obemannad ytenhet (11,8) -> (9,10)
+[2026-03-18T09:35:37.000+01:00] BLÅ REFLEKTION
+[2026-03-18T09:35:37.000+01:00] Fråga 1
+[2026-03-18T09:35:37.000+01:00] Svar: Attackerade sista synliga. Rör mig mot mitten för att titta på annat håll.
+[2026-03-18T09:35:37.001+01:00] Fråga 2
+[2026-03-18T09:35:37.001+01:00] Svar: Ja
+[2026-03-18T09:35:37.001+01:00] Fråga 3
+[2026-03-18T09:35:37.001+01:00] Svar: Jag kunde rört mig längre åt det översta högra hörnet där fienden kom ifrån. Men det går så långsamt på grund av alla minor så flyttar till annan plats.
+[2026-03-18T09:35:37.002+01:00] Fråga 4
+[2026-03-18T09:35:37.002+01:00] Svar: Vet inte riktigt, om inget upptäcks får jag väll bara flytta mig.
+[2026-03-18T09:35:37.007+01:00] Blå avslutar sin tur
+[2026-03-18T09:35:37.008+01:00] Turbyte: Blå -> Röd (tur 6)
+[2026-03-18T09:35:37.464+01:00] Röd flyttar: Konventionell korvett (18,17) -> (16,17)
+[2026-03-18T09:35:37.820+01:00] Röd flyttar: Konventionell korvett (16,17) -> (15,16)
+[2026-03-18T09:35:38.177+01:00] Röd flyttar: Konventionell korvett (15,16) -> (14,15)
+[2026-03-18T09:35:38.179+01:00] Turbyte: Röd -> Blå (tur 7)
+[2026-03-18T09:36:03.072+01:00] Blå flyttar: USV - obemannad ytenhet (9,10) -> (11,10)
+[2026-03-18T09:36:08.263+01:00] Blå flyttar: Fregatt (11,12) -> (12,12)
+[2026-03-18T09:36:15.192+01:00] Blå attackerar: USV - obemannad ytenhet -> Mina, skada=1, återstående HP mål=0
+[2026-03-18T09:36:15.192+01:00] Röd enhet sänkt: Mina
+[2026-03-18T09:36:28.439+01:00] Blå flyttar: Ubåt (9,7) -> (8,9)
+[2026-03-18T09:36:30.544+01:00] Blå flyttar: Stealth-korvett (9,6) -> (8,8)
+[2026-03-18T09:37:53.285+01:00] BLÅ REFLEKTION
+[2026-03-18T09:37:53.285+01:00] Fråga 1
+[2026-03-18T09:37:53.286+01:00] Svar: Röjde en mina, förflyttade mig framåt på nedre delen. Centraliserade med de andra.
+[2026-03-18T09:37:53.286+01:00] Fråga 2
+[2026-03-18T09:37:53.286+01:00] Svar: Ja
+[2026-03-18T09:37:53.286+01:00] Fråga 3
+[2026-03-18T09:37:53.286+01:00] Svar: Jag hade ju tänkt att centralisera, men har inte bestämt mig vart jag ska ännu så fördröjde valet ännu mer.
+[2026-03-18T09:37:53.286+01:00] Fråga 4
+[2026-03-18T09:37:53.287+01:00] Svar: Att kanske använda mer aktiva sensorer och splittra mig lite för att upptäcka fiender.
+[2026-03-18T09:37:53.293+01:00] Blå avslutar sin tur
+[2026-03-18T09:37:53.293+01:00] Turbyte: Blå -> Röd (tur 7)
+[2026-03-18T09:37:53.759+01:00] Röd flyttar: Konventionell korvett (14,15) -> (14,13)
+[2026-03-18T09:37:54.131+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=3
+[2026-03-18T09:37:54.495+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=2
+[2026-03-18T09:37:54.497+01:00] Turbyte: Röd -> Blå (tur 8)
+[2026-03-18T09:39:22.244+01:00] Blå flyttar: Fregatt (12,12) -> (12,13)
+[2026-03-18T09:39:25.436+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T09:39:27.300+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T09:39:28.908+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T09:39:38.242+01:00] Blå flyttar: Ubåt (8,9) -> (9,11)
+[2026-03-18T09:39:40.090+01:00] Blå flyttar: Stealth-korvett (8,8) -> (8,11)
+[2026-03-18T09:39:46.554+01:00] Blå flyttar: USV - obemannad ytenhet (11,10) -> (12,11)
+[2026-03-18T09:41:21.920+01:00] BLÅ REFLEKTION
+[2026-03-18T09:41:21.921+01:00] Fråga 1
+[2026-03-18T09:41:21.921+01:00] Svar: Attackerade den som attackerade mig. Rör mig mot den med andra enheter.
+[2026-03-18T09:41:21.921+01:00] Fråga 2
+[2026-03-18T09:41:21.922+01:00] Svar: Ja
+[2026-03-18T09:41:21.922+01:00] Fråga 3
+[2026-03-18T09:41:21.922+01:00] Svar: Jag tänkte att kan kunde gå tillbaka, för att inte bli attackerad igen. Men då tror jag jag riskerade att bli sprängd av en mina eftersom jag inte vet exakt vilken sträcka fartyget tar.
+[2026-03-18T09:41:21.922+01:00] Fråga 4
+[2026-03-18T09:41:21.922+01:00] Svar: Attackera fienden om möjligt. Den kommer ju sänka min fregatt :(
+[2026-03-18T09:41:21.928+01:00] Blå avslutar sin tur
+[2026-03-18T09:41:21.928+01:00] Turbyte: Blå -> Röd (tur 8)
+[2026-03-18T09:41:22.386+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=1
+[2026-03-18T09:41:22.751+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=0
+[2026-03-18T09:41:22.752+01:00] Blå enhet sänkt: Fregatt
+[2026-03-18T09:41:23.106+01:00] Röd flyttar: Konventionell korvett (14,13) -> (12,13)
+[2026-03-18T09:41:23.108+01:00] Turbyte: Röd -> Blå (tur 9)
+[2026-03-18T09:41:32.689+01:00] Blå flyttar: Ubåt (9,11) -> (9,13)
+[2026-03-18T09:41:35.353+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T09:41:35.354+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T09:41:35.356+01:00] BLÅ VANN
+[2026-03-18T09:41:47.344+01:00] 
+
+[2026-03-18T09:41:47.344+01:00] Nytt slag initieras, karta: Karta 3
+[2026-03-18T09:42:08.031+01:00] Blå flyttar: UAV - obemannad flygenhet (2,3) -> (6,6)
+[2026-03-18T09:42:12.014+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T09:42:12.511+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T09:42:21.199+01:00] Blå flyttar: UUV - obemannad undervattensenhet (4,14) -> (5,12)
+[2026-03-18T09:42:22.927+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Aktiv
+[2026-03-18T09:42:23.359+01:00] Blå växlar sensorläge: UUV - obemannad undervattensenhet -> Passiv
+[2026-03-18T09:42:32.992+01:00] Blå flyttar: Stealth-korvett (2,14) -> (4,12)
+[2026-03-18T09:42:37.952+01:00] Blå flyttar: Ubåt (1,9) -> (2,11)
+[2026-03-18T09:42:55.870+01:00] Blå flyttar: Ubåtsjakthelikopter (3,2) -> (6,1)
+[2026-03-18T09:42:57.942+01:00] Blå flyttar: Fregatt (1,1) -> (3,3)
+[2026-03-18T09:43:55.669+01:00] BLÅ REFLEKTION
+[2026-03-18T09:43:55.670+01:00] Fråga 1
+[2026-03-18T09:43:55.670+01:00] Svar: Flyttade för att se så mycket som möjligt, höll ihop mina bemannade.
+[2026-03-18T09:43:55.670+01:00] Fråga 2
+[2026-03-18T09:43:55.671+01:00] Svar: Ja, vet ju inget ännu
+[2026-03-18T09:43:55.671+01:00] Fråga 3
+[2026-03-18T09:43:55.671+01:00] Svar: Spaning
+[2026-03-18T09:43:55.671+01:00] Fråga 4
+[2026-03-18T09:43:55.671+01:00] Svar: Mer spaning
+[2026-03-18T09:43:55.677+01:00] Blå avslutar sin tur
+[2026-03-18T09:43:55.677+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-18T09:43:56.138+01:00] Röd flyttar: Ubåt (15,14) -> (12,14)
+[2026-03-18T09:43:56.494+01:00] Röd flyttar: Ubåt (12,14) -> (9,15)
+[2026-03-18T09:43:56.853+01:00] Röd flyttar: Ubåt (9,15) -> (6,15)
+[2026-03-18T09:43:56.857+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-18T09:44:02.645+01:00] Blå flyttar: UAV - obemannad flygenhet (6,6) -> (8,10)
+[2026-03-18T09:44:03.957+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T09:44:04.421+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T09:44:16.829+01:00] Blå flyttar: UUV - obemannad undervattensenhet (5,12) -> (7,11)
+[2026-03-18T09:44:18.101+01:00] Blå flyttar: Stealth-korvett (4,12) -> (6,12)
+[2026-03-18T09:44:19.429+01:00] Blå flyttar: Ubåt (2,11) -> (5,11)
+[2026-03-18T09:44:23.813+01:00] Blå flyttar: USV - obemannad ytenhet (5,5) -> (6,6)
+[2026-03-18T09:44:26.229+01:00] Blå flyttar: Ubåtsjakthelikopter (6,1) -> (9,0)
+[2026-03-18T09:44:46.004+01:00] Blå flyttar: Fregatt (3,3) -> (5,5)
+[2026-03-18T09:46:15.242+01:00] BLÅ REFLEKTION
+[2026-03-18T09:46:15.243+01:00] Fråga 1
+[2026-03-18T09:46:15.243+01:00] Svar: Förflyttade mig mer med obemannade spaningseneheter.
+[2026-03-18T09:46:15.243+01:00] Fråga 2
+[2026-03-18T09:46:15.243+01:00] Svar: Ja, eftersom den översta ubåtsjaktshelikoptern inte så något så tog jag andra vägen med det bemannade.
+[2026-03-18T09:46:15.243+01:00] Fråga 3
+[2026-03-18T09:46:15.244+01:00] Svar: Inte så mycket alternativ
+[2026-03-18T09:46:15.244+01:00] Fråga 4
+[2026-03-18T09:46:15.244+01:00] Svar: Mer spaning, om inget annat dyker upp. Vill helst få min ubåtsjaktshelikopter ner på kartan lite
+[2026-03-18T09:46:15.250+01:00] Blå avslutar sin tur
+[2026-03-18T09:46:15.250+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-18T09:46:15.707+01:00] Röd attackerar: Ubåt -> Stealth-korvett, skada=1, återstående HP mål=1
+[2026-03-18T09:46:16.068+01:00] Röd attackerar: Ubåt -> Stealth-korvett, skada=1, återstående HP mål=0
+[2026-03-18T09:46:16.069+01:00] Blå enhet sänkt: Stealth-korvett
+[2026-03-18T09:46:16.427+01:00] Röd flyttar: Ubåt (6,15) -> (6,12)
+[2026-03-18T09:46:16.429+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-18T09:46:31.370+01:00] Blå attackerar: Ubåt -> Ubåt, skada=1, återstående HP mål=2
+[2026-03-18T09:46:33.562+01:00] Blå attackerar: Ubåt -> Ubåt, skada=1, återstående HP mål=1
+[2026-03-18T09:46:35.506+01:00] Blå attackerar: Ubåt -> Ubåt, skada=1, återstående HP mål=0
+[2026-03-18T09:46:35.507+01:00] Röd enhet sänkt: Ubåt
+[2026-03-18T09:46:43.281+01:00] Blå flyttar: Ubåtsjakthelikopter (9,0) -> (10,2)
+[2026-03-18T09:46:45.328+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Aktiv
+[2026-03-18T09:46:45.808+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Passiv
+[2026-03-18T09:46:52.896+01:00] Blå flyttar: USV - obemannad ytenhet (6,6) -> (6,7)
+[2026-03-18T09:46:55.193+01:00] Blå flyttar: Fregatt (5,5) -> (7,7)
+[2026-03-18T09:47:02.209+01:00] Blå flyttar: UAV - obemannad flygenhet (8,10) -> (13,9)
+[2026-03-18T09:47:03.601+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Aktiv
+[2026-03-18T09:47:04.008+01:00] Blå växlar sensorläge: UAV - obemannad flygenhet -> Passiv
+[2026-03-18T09:47:20.745+01:00] Blå flyttar: UUV - obemannad undervattensenhet (7,11) -> (8,10)
+[2026-03-18T09:47:26.145+01:00] Blå flyttar: Ubåt (5,11) -> (7,9)
+[2026-03-18T09:48:59.735+01:00] BLÅ REFLEKTION
+[2026-03-18T09:48:59.735+01:00] Fråga 1
+[2026-03-18T09:48:59.736+01:00] Svar: Attackerade såklart den som attackerade mig! Sedan skyddade mina bemannade så mycket som möjligt.
+[2026-03-18T09:48:59.736+01:00] Fråga 2
+[2026-03-18T09:48:59.736+01:00] Svar: Ja, det blev reaktivt.
+[2026-03-18T09:48:59.736+01:00] Fråga 3
+[2026-03-18T09:48:59.736+01:00] Svar: Baserat på fiendens handlingar, ville inte att de skulle sänka ett till fartyg. Ligger redan inte så bra till.
+[2026-03-18T09:48:59.736+01:00] Fråga 4
+[2026-03-18T09:48:59.737+01:00] Svar: Förflytta ubåtsspaningshelikoptern så mycket som möjligt
+[2026-03-18T09:48:59.744+01:00] Blå avslutar sin tur
+[2026-03-18T09:48:59.744+01:00] Turbyte: Blå -> Röd (tur 3)
+[2026-03-18T09:49:00.199+01:00] Röd flyttar: Ubåt (17,13) -> (14,13)
+[2026-03-18T09:49:00.564+01:00] Röd flyttar: Ubåt (14,13) -> (13,11)
+[2026-03-18T09:49:00.920+01:00] Röd attackerar: Ubåt -> UAV - obemannad flygenhet, skada=1, återstående HP mål=0
+[2026-03-18T09:49:00.921+01:00] Blå enhet sänkt: UAV - obemannad flygenhet
+[2026-03-18T09:49:00.922+01:00] Turbyte: Röd -> Blå (tur 4)
+[2026-03-18T09:49:09.887+01:00] Blå flyttar: Ubåtsjakthelikopter (10,2) -> (12,3)
+[2026-03-18T09:49:18.070+01:00] Blå flyttar: USV - obemannad ytenhet (6,7) -> (8,7)
+[2026-03-18T09:50:25.814+01:00] Blå flyttar: UUV - obemannad undervattensenhet (8,10) -> (10,10)
+[2026-03-18T09:50:45.613+01:00] Blå flyttar: Ubåt (7,9) -> (8,9)
+[2026-03-18T09:50:49.581+01:00] Blå flyttar: Fregatt (7,7) -> (8,8)
+[2026-03-18T09:52:01.731+01:00] BLÅ REFLEKTION
+[2026-03-18T09:52:01.732+01:00] Fråga 1
+[2026-03-18T09:52:01.732+01:00] Svar: Höll ihop mig, kollade efter minor.
+[2026-03-18T09:52:01.732+01:00] Fråga 2
+[2026-03-18T09:52:01.732+01:00] Svar: Ja, ville inte komma för nära fienden.
+[2026-03-18T09:52:01.733+01:00] Fråga 3
+[2026-03-18T09:52:01.733+01:00] Svar: Jag kunde varit mer aggresiv, men minor kommer ställa till det säkert.
+[2026-03-18T09:52:01.733+01:00] Fråga 4
+[2026-03-18T09:52:01.733+01:00] Svar: Får se om fienden flyttar sig, då måste jag attackera. Också kommer ner med helikoptern mera.
+[2026-03-18T09:52:01.738+01:00] Blå avslutar sin tur
+[2026-03-18T09:52:01.739+01:00] Turbyte: Blå -> Röd (tur 4)
+[2026-03-18T09:52:02.203+01:00] Röd flyttar: Ubåt (13,11) -> (11,10)
+[2026-03-18T09:52:02.560+01:00] Röd attackerar: Ubåt -> UUV - obemannad undervattensenhet, skada=2, återstående HP mål=0
+[2026-03-18T09:52:02.561+01:00] Blå enhet sänkt: UUV - obemannad undervattensenhet
+[2026-03-18T09:52:02.924+01:00] Röd flyttar: Ubåt (11,10) -> (8,10)
+[2026-03-18T09:52:02.926+01:00] Turbyte: Röd -> Blå (tur 5)
+[2026-03-18T09:52:09.420+01:00] Blå attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=1
+[2026-03-18T09:52:13.171+01:00] Blå attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=0
+[2026-03-18T09:52:13.173+01:00] Röd enhet sänkt: Ubåt
+[2026-03-18T09:52:16.780+01:00] Blå flyttar: Ubåtsjakthelikopter (12,3) -> (13,5)
+[2026-03-18T09:52:22.044+01:00] Blå flyttar: USV - obemannad ytenhet (8,7) -> (6,9)
+[2026-03-18T09:53:15.754+01:00] BLÅ REFLEKTION
+[2026-03-18T09:53:15.755+01:00] Fråga 1
+[2026-03-18T09:53:15.755+01:00] Svar: Attackerade den som attackerade mig.
+[2026-03-18T09:53:15.755+01:00] Fråga 2
+[2026-03-18T09:53:15.755+01:00] Svar: Ja
+[2026-03-18T09:53:15.755+01:00] Fråga 3
+[2026-03-18T09:53:15.756+01:00] Svar: För att inte bli mer attackerad.
+[2026-03-18T09:53:15.756+01:00] Fråga 4
+[2026-03-18T09:53:15.756+01:00] Svar: Nu tänker jag vänta på helikoptern innan jag rör mig för mycket.
+[2026-03-18T09:53:15.762+01:00] Blå avslutar sin tur
+[2026-03-18T09:53:15.762+01:00] Turbyte: Blå -> Röd (tur 5)
+[2026-03-18T09:53:16.220+01:00] Röd attackerar: Konventionell korvett -> Ubåtsjakthelikopter, skada=1, återstående HP mål=1
+[2026-03-18T09:53:16.584+01:00] Röd attackerar: Konventionell korvett -> Ubåtsjakthelikopter, skada=1, återstående HP mål=0
+[2026-03-18T09:53:16.585+01:00] Blå enhet sänkt: Ubåtsjakthelikopter
+[2026-03-18T09:53:16.953+01:00] Röd flyttar: Konventionell korvett (16,2) -> (14,4)
+[2026-03-18T09:53:16.955+01:00] Turbyte: Röd -> Blå (tur 6)
+[2026-03-18T09:53:36.171+01:00] Blå flyttar: USV - obemannad ytenhet (6,9) -> (6,11)
+[2026-03-18T09:54:29.770+01:00] Blå växlar sensorläge: Ubåt -> Aktiv
+[2026-03-18T09:54:31.777+01:00] Blå växlar sensorläge: Ubåt -> Passiv
+[2026-03-18T09:55:02.537+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T09:55:03.809+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T09:55:04.265+01:00] Blå ändrar djup ned: Ubåt till djup 0
+[2026-03-18T09:55:05.112+01:00] Blå ändrar djup upp: Ubåt till djup 1
+[2026-03-18T09:55:05.472+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T09:55:38.144+01:00] Blå flyttar: Ubåt (8,9) -> (7,11)
+[2026-03-18T09:55:39.520+01:00] Blå ändrar djup upp: Ubåt till djup 3
+[2026-03-18T09:55:40.649+01:00] Blå ändrar djup ned: Ubåt till djup 2
+[2026-03-18T09:55:45.609+01:00] Blå flyttar: Fregatt (8,8) -> (7,10)
+[2026-03-18T09:55:50.288+01:00] Blå växlar sensorläge: Fregatt -> Aktiv
+[2026-03-18T09:55:50.872+01:00] Blå växlar sensorläge: Fregatt -> Passiv
+[2026-03-18T09:55:53.728+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Aktiv
+[2026-03-18T09:55:54.159+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Passiv
+[2026-03-18T09:58:37.621+01:00] BLÅ REFLEKTION
+[2026-03-18T09:58:37.622+01:00] Fråga 1
+[2026-03-18T09:58:37.622+01:00] Svar: Det blev väldigt passivt, det var ju en fiende som min helikopter inte såg på ytan.
+[2026-03-18T09:58:37.622+01:00] Fråga 2
+[2026-03-18T09:58:37.622+01:00] Svar: Ja, nu måste jag skydda dem jag har, men problemet är att båda kan bli sänkta samtidigt, just nu är det inte fiender så nära men det kan ju komma snabbt. Jag måste också komma ihåg att kolla på alla djup.
+[2026-03-18T09:58:37.622+01:00] Fråga 3
+[2026-03-18T09:58:37.623+01:00] Svar: Jag kunde varit mer aggressiv, men var rädd för minor. Och om jag gick till utkanten av minfältet så var jag inom räckvidd för attack.
+[2026-03-18T09:58:37.623+01:00] Fråga 4
+[2026-03-18T09:58:37.623+01:00] Svar: Långsamt förflytta, eller attackera om fienden kommer nära.
+[2026-03-18T09:58:37.628+01:00] Blå avslutar sin tur
+[2026-03-18T09:58:37.629+01:00] Turbyte: Blå -> Röd (tur 6)
+[2026-03-18T09:58:38.085+01:00] Röd flyttar: Konventionell korvett (14,4) -> (12,6)
+[2026-03-18T09:58:38.448+01:00] Röd flyttar: Konventionell korvett (12,6) -> (10,8)
+[2026-03-18T09:58:38.815+01:00] Röd attackerar: Konventionell korvett -> Ubåt, skada=1, återstående HP mål=2
+[2026-03-18T09:58:38.817+01:00] Turbyte: Röd -> Blå (tur 7)
+[2026-03-18T09:58:51.829+01:00] Blå flyttar: Ubåt (7,11) -> (9,9)
+[2026-03-18T09:58:53.413+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=2, återstående HP mål=2
+[2026-03-18T09:58:55.389+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=2, återstående HP mål=0
+[2026-03-18T09:58:55.391+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T09:59:12.317+01:00] Blå flyttar: USV - obemannad ytenhet (6,11) -> (8,11)
+[2026-03-18T09:59:17.269+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T09:59:17.452+01:00] Blå ändrar djup ned: Ubåt till djup 0
+[2026-03-18T09:59:18.148+01:00] Blå ändrar djup upp: Ubåt till djup 1
+[2026-03-18T09:59:18.364+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T09:59:21.932+01:00] Blå flyttar: Fregatt (7,10) -> (7,9)
+[2026-03-18T09:59:25.228+01:00] Blå växlar sensorläge: Fregatt -> Aktiv
+[2026-03-18T09:59:25.460+01:00] Blå växlar sensorläge: Fregatt -> Passiv
+[2026-03-18T09:59:27.108+01:00] Blå växlar sensorläge: Ubåt -> Aktiv
+[2026-03-18T09:59:27.373+01:00] Blå växlar sensorläge: Ubåt -> Passiv
+[2026-03-18T09:59:29.533+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Aktiv
+[2026-03-18T09:59:29.724+01:00] Blå växlar sensorläge: USV - obemannad ytenhet -> Passiv
+[2026-03-18T10:00:15.964+01:00] BLÅ REFLEKTION
+[2026-03-18T10:00:15.965+01:00] Fråga 1
+[2026-03-18T10:00:15.965+01:00] Svar: Blev attack, fienden kom ju nära
+[2026-03-18T10:00:15.965+01:00] Fråga 2
+[2026-03-18T10:00:15.965+01:00] Svar: Ja
+[2026-03-18T10:00:15.966+01:00] Fråga 3
+[2026-03-18T10:00:15.966+01:00] Svar: Jag valde att gå närmre för att attackera eftersom det tar mindre ammunition
+[2026-03-18T10:00:15.966+01:00] Fråga 4
+[2026-03-18T10:00:15.966+01:00] Svar: Vara lite passiv, eventuellt kolla minor.
+[2026-03-18T10:00:15.973+01:00] Blå avslutar sin tur
+[2026-03-18T10:00:15.974+01:00] Turbyte: Blå -> Röd (tur 7)
+[2026-03-18T10:00:16.437+01:00] Röd flyttar: Konventionell korvett (18,1) -> (16,2)
+[2026-03-18T10:00:16.794+01:00] Röd flyttar: Konventionell korvett (16,2) -> (14,4)
+[2026-03-18T10:00:17.160+01:00] Röd flyttar: Konventionell korvett (14,4) -> (12,6)
+[2026-03-18T10:00:17.162+01:00] Turbyte: Röd -> Blå (tur 8)
+[2026-03-18T10:00:55.851+01:00] Blå flyttar: USV - obemannad ytenhet (8,11) -> (10,11)
+[2026-03-18T10:01:23.291+01:00] Blå flyttar: Fregatt (7,9) -> (10,9)
+[2026-03-18T10:01:26.627+01:00] Blå flyttar: Ubåt (9,9) -> (9,10)
+[2026-03-18T10:02:50.137+01:00] BLÅ REFLEKTION
+[2026-03-18T10:02:50.138+01:00] Fråga 1
+[2026-03-18T10:02:50.138+01:00] Svar: Gick framåt med den mer mer Hp, kollade minor
+[2026-03-18T10:02:50.138+01:00] Fråga 2
+[2026-03-18T10:02:50.138+01:00] Svar: Ja
+[2026-03-18T10:02:50.138+01:00] Fråga 3
+[2026-03-18T10:02:50.138+01:00] Svar: För att det kan vara två fiender kvar, och måste ha chans att sänka dem, då är det viktigt att inte båda mina sänks samtidigt, så den med mer hp borde vara längst fram. Sedan vet jag ju inte om det är "framåt" men det är i alla fall där minfältet är.
+[2026-03-18T10:02:50.139+01:00] Fråga 4
+[2026-03-18T10:02:50.139+01:00] Svar: Liknande
+[2026-03-18T10:02:50.144+01:00] Blå avslutar sin tur
+[2026-03-18T10:02:50.144+01:00] Turbyte: Blå -> Röd (tur 8)
+[2026-03-18T10:02:50.600+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=3
+[2026-03-18T10:02:50.968+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=2
+[2026-03-18T10:02:51.334+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=1
+[2026-03-18T10:02:51.336+01:00] Turbyte: Röd -> Blå (tur 9)
+[2026-03-18T10:03:06.336+01:00] Blå flyttar: Fregatt (10,9) -> (11,8)
+[2026-03-18T10:03:08.281+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T10:03:09.633+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T10:03:11.033+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T10:03:12.497+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T10:03:12.498+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T10:03:26.017+01:00] Blå flyttar: Ubåt (9,10) -> (11,10)
+[2026-03-18T10:03:32.041+01:00] Blå flyttar: USV - obemannad ytenhet (10,11) -> (11,11)
+[2026-03-18T10:03:36.049+01:00] Blå attackerar: USV - obemannad ytenhet -> Mina, skada=1, återstående HP mål=0
+[2026-03-18T10:03:36.050+01:00] Röd enhet sänkt: Mina
+[2026-03-18T10:04:19.800+01:00] BLÅ REFLEKTION
+[2026-03-18T10:04:19.801+01:00] Fråga 1
+[2026-03-18T10:04:19.801+01:00] Svar: Attackerade, röjde mina.
+[2026-03-18T10:04:19.801+01:00] Fråga 2
+[2026-03-18T10:04:19.802+01:00] Svar: Ja
+[2026-03-18T10:04:19.802+01:00] Fråga 3
+[2026-03-18T10:04:19.802+01:00] Svar: För att inte bli sänkt, och för att upptäcka och röja minor ivägen.
+[2026-03-18T10:04:19.802+01:00] Fråga 4
+[2026-03-18T10:04:19.802+01:00] Svar: Beror på ifall jag ser en fiende eller ej.
+[2026-03-18T10:04:19.812+01:00] Blå avslutar sin tur
+[2026-03-18T10:04:19.812+01:00] Turbyte: Blå -> Röd (tur 9)
+[2026-03-18T10:04:20.272+01:00] Röd flyttar: Konventionell korvett (16,17) -> (15,16)
+[2026-03-18T10:04:20.631+01:00] Röd flyttar: Konventionell korvett (15,16) -> (13,16)
+[2026-03-18T10:04:20.988+01:00] Röd flyttar: Konventionell korvett (13,16) -> (12,15)
+[2026-03-18T10:04:20.990+01:00] Turbyte: Röd -> Blå (tur 10)
+[2026-03-18T10:04:24.655+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T10:04:24.919+01:00] Blå ändrar djup ned: Ubåt till djup 0
+[2026-03-18T10:04:25.976+01:00] Blå ändrar djup upp: Ubåt till djup 1
+[2026-03-18T10:04:26.776+01:00] Blå ändrar djup ned: Ubåt till djup 0
+[2026-03-18T10:04:27.224+01:00] Blå ändrar djup upp: Ubåt till djup 1
+[2026-03-18T10:04:39.744+01:00] Blå flyttar: USV - obemannad ytenhet (11,11) -> (13,10)
+[2026-03-18T10:04:53.314+01:00] Blå flyttar: Fregatt (11,8) -> (12,8)
+[2026-03-18T10:04:59.407+01:00] Blå flyttar: Ubåt (11,10) -> (11,11)
+[2026-03-18T10:05:40.063+01:00] BLÅ REFLEKTION
+[2026-03-18T10:05:40.064+01:00] Fråga 1
+[2026-03-18T10:05:40.064+01:00] Svar: Kollade efter fler minor, höll mig lite isär så att det är mindre chans att båda sänks.
+[2026-03-18T10:05:40.064+01:00] Fråga 2
+[2026-03-18T10:05:40.064+01:00] Svar: Ja
+[2026-03-18T10:05:40.064+01:00] Fråga 3
+[2026-03-18T10:05:40.065+01:00] Svar: Har inte super mycket alternativ kände jag
+[2026-03-18T10:05:40.065+01:00] Fråga 4
+[2026-03-18T10:05:40.065+01:00] Svar: Liknande
+[2026-03-18T10:05:40.070+01:00] Blå avslutar sin tur
+[2026-03-18T10:05:40.071+01:00] Turbyte: Blå -> Röd (tur 10)
+[2026-03-18T10:05:40.527+01:00] Röd flyttar: Konventionell korvett (12,15) -> (12,13)
+[2026-03-18T10:05:40.885+01:00] Röd attackerar: Konventionell korvett -> Ubåt, skada=1, återstående HP mål=1
+[2026-03-18T10:05:41.240+01:00] Röd attackerar: Konventionell korvett -> Ubåt, skada=1, återstående HP mål=0
+[2026-03-18T10:05:41.241+01:00] Blå enhet sänkt: Ubåt
+[2026-03-18T10:05:41.243+01:00] Turbyte: Röd -> Blå (tur 11)
+[2026-03-18T10:05:52.646+01:00] Blå flyttar: Fregatt (12,8) -> (11,11)
+[2026-03-18T10:05:54.598+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T10:05:56.414+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T10:05:57.974+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T10:05:59.759+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T10:05:59.760+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T10:05:59.762+01:00] BLÅ VANN
+[2026-03-18T10:06:16.767+01:00] 
+
+[2026-03-18T10:06:16.768+01:00] Nytt slag initieras, karta: Karta 4
+[2026-03-18T10:06:50.757+01:00] Blå flyttar: Ubåtsjakthelikopter (3,18) -> (6,15)
+[2026-03-18T10:06:53.397+01:00] Blå flyttar: UAV - obemannad flygenhet (2,3) -> (4,8)
+[2026-03-18T10:07:01.790+01:00] Blå flyttar: Stealth-korvett (1,5) -> (2,7)
+[2026-03-18T10:07:03.478+01:00] Blå flyttar: Fregatt (1,2) -> (3,4)
+[2026-03-18T10:07:07.886+01:00] Blå flyttar: UUV - obemannad undervattensenhet (1,16) -> (3,16)
+[2026-03-18T10:07:10.558+01:00] Blå flyttar: Ubåt (4,14) -> (5,15)
+[2026-03-18T10:07:14.998+01:00] Blå flyttar: USV - obemannad ytenhet (4,12) -> (6,11)
+[2026-03-18T10:07:21.070+01:00] Blå avslutar sin tur
+[2026-03-18T10:07:21.071+01:00] Turbyte: Blå -> Röd (tur 1)
+[2026-03-18T10:07:21.527+01:00] Röd flyttar: Ubåt (16,10) -> (13,10)
+[2026-03-18T10:07:21.894+01:00] Röd flyttar: Ubåt (13,10) -> (10,13)
+[2026-03-18T10:07:22.252+01:00] Röd flyttar: Ubåt (10,13) -> (7,14)
+[2026-03-18T10:07:22.253+01:00] Turbyte: Röd -> Blå (tur 2)
+[2026-03-18T10:07:34.662+01:00] Blå flyttar: Ubåt (5,15) -> (6,14)
+[2026-03-18T10:07:36.774+01:00] Blå attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=1
+[2026-03-18T10:07:39.950+01:00] Blå attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=0
+[2026-03-18T10:07:39.951+01:00] Röd enhet sänkt: Ubåt
+[2026-03-18T10:07:45.925+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 2
+[2026-03-18T10:07:46.734+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T10:07:46.886+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 0
+[2026-03-18T10:07:47.669+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T10:07:47.821+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 2
+[2026-03-18T10:07:48.414+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T10:07:49.189+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 0
+[2026-03-18T10:07:50.430+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T10:07:57.221+01:00] Blå flyttar: UUV - obemannad undervattensenhet (3,16) -> (5,14)
+[2026-03-18T10:07:58.485+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 0
+[2026-03-18T10:07:59.021+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 1
+[2026-03-18T10:07:59.173+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 2
+[2026-03-18T10:07:59.325+01:00] Blå ändrar djup upp: UUV - obemannad undervattensenhet till djup 3
+[2026-03-18T10:08:00.909+01:00] Blå ändrar djup ned: UUV - obemannad undervattensenhet till djup 2
+[2026-03-18T10:08:07.149+01:00] Blå flyttar: USV - obemannad ytenhet (6,11) -> (8,11)
+[2026-03-18T10:08:12.717+01:00] Blå flyttar: UAV - obemannad flygenhet (4,8) -> (7,11)
+[2026-03-18T10:08:17.956+01:00] Blå flyttar: Stealth-korvett (2,7) -> (3,9)
+[2026-03-18T10:08:20.829+01:00] Blå flyttar: Fregatt (3,4) -> (4,7)
+[2026-03-18T10:08:37.693+01:00] Blå flyttar: Ubåtsjakthelikopter (6,15) -> (9,14)
+[2026-03-18T10:08:40.461+01:00] Blå avslutar sin tur
+[2026-03-18T10:08:40.461+01:00] Turbyte: Blå -> Röd (tur 2)
+[2026-03-18T10:08:40.917+01:00] Röd flyttar: Ubåt (16,16) -> (14,15)
+[2026-03-18T10:08:41.280+01:00] Röd flyttar: Ubåt (14,15) -> (13,13)
+[2026-03-18T10:08:41.635+01:00] Röd flyttar: Ubåt (13,13) -> (10,14)
+[2026-03-18T10:08:41.637+01:00] Turbyte: Röd -> Blå (tur 3)
+[2026-03-18T10:09:00.979+01:00] Blå flyttar: USV - obemannad ytenhet (8,11) -> (9,11)
+[2026-03-18T10:09:09.276+01:00] Blå flyttar: Fregatt (4,7) -> (6,9)
+[2026-03-18T10:09:10.884+01:00] Blå flyttar: Stealth-korvett (3,9) -> (4,11)
+[2026-03-18T10:09:17.556+01:00] Blå flyttar: Ubåtsjakthelikopter (9,14) -> (8,12)
+[2026-03-18T10:09:22.764+01:00] Blå flyttar: UUV - obemannad undervattensenhet (5,14) -> (7,14)
+[2026-03-18T10:09:30.620+01:00] Blå flyttar: Ubåt (6,14) -> (6,13)
+[2026-03-18T10:09:32.948+01:00] Blå avslutar sin tur
+[2026-03-18T10:09:32.949+01:00] Turbyte: Blå -> Röd (tur 3)
+[2026-03-18T10:09:33.406+01:00] Röd attackerar: Ubåt -> UUV - obemannad undervattensenhet, skada=1, återstående HP mål=0
+[2026-03-18T10:09:33.408+01:00] Blå enhet sänkt: UUV - obemannad undervattensenhet
+[2026-03-18T10:09:33.775+01:00] Röd flyttar: Ubåt (10,14) -> (8,13)
+[2026-03-18T10:09:34.131+01:00] Röd attackerar: Ubåt -> UAV - obemannad flygenhet, skada=1, återstående HP mål=0
+[2026-03-18T10:09:34.133+01:00] Blå enhet sänkt: UAV - obemannad flygenhet
+[2026-03-18T10:09:34.135+01:00] Turbyte: Röd -> Blå (tur 4)
+[2026-03-18T10:09:44.308+01:00] Blå flyttar: Ubåt (6,13) -> (7,13)
+[2026-03-18T10:09:47.060+01:00] Blå attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=1
+[2026-03-18T10:09:48.916+01:00] Blå attackerar: Ubåt -> Ubåt, skada=2, återstående HP mål=0
+[2026-03-18T10:09:48.918+01:00] Röd enhet sänkt: Ubåt
+[2026-03-18T10:10:01.500+01:00] Blå flyttar: Fregatt (6,9) -> (8,9)
+[2026-03-18T10:10:09.867+01:00] Blå flyttar: Stealth-korvett (4,11) -> (5,13)
+[2026-03-18T10:10:11.708+01:00] Blå flyttar: Ubåtsjakthelikopter (8,12) -> (6,13)
+[2026-03-18T10:10:14.347+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Aktiv
+[2026-03-18T10:10:15.515+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Passiv
+[2026-03-18T10:10:23.940+01:00] Blå attackerar: USV - obemannad ytenhet -> Mina, skada=1, återstående HP mål=0
+[2026-03-18T10:10:23.941+01:00] Röd enhet sänkt: Mina
+[2026-03-18T10:10:27.851+01:00] Blå flyttar: USV - obemannad ytenhet (9,11) -> (10,11)
+[2026-03-18T10:10:29.363+01:00] Blå avslutar sin tur
+[2026-03-18T10:10:29.364+01:00] Turbyte: Blå -> Röd (tur 4)
+[2026-03-18T10:10:29.820+01:00] Röd flyttar: Konventionell korvett (18,2) -> (16,4)
+[2026-03-18T10:10:30.185+01:00] Röd flyttar: Konventionell korvett (16,4) -> (14,6)
+[2026-03-18T10:10:30.548+01:00] Röd flyttar: Konventionell korvett (14,6) -> (12,8)
+[2026-03-18T10:10:30.552+01:00] Turbyte: Röd -> Blå (tur 5)
+[2026-03-18T10:10:44.947+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T10:10:45.195+01:00] Blå ändrar djup ned: Ubåt till djup 0
+[2026-03-18T10:10:45.851+01:00] Blå ändrar djup upp: Ubåt till djup 1
+[2026-03-18T10:10:46.051+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T10:10:52.627+01:00] Blå flyttar: Ubåtsjakthelikopter (6,13) -> (6,16)
+[2026-03-18T10:11:21.371+01:00] Blå flyttar: USV - obemannad ytenhet (10,11) -> (10,10)
+[2026-03-18T10:11:29.483+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T10:11:35.075+01:00] Blå flyttar: Ubåt (7,13) -> (8,12)
+[2026-03-18T10:11:48.979+01:00] Blå flyttar: Stealth-korvett (5,13) -> (4,13)
+[2026-03-18T10:11:56.386+01:00] Blå flyttar: Fregatt (8,9) -> (9,9)
+[2026-03-18T10:11:57.762+01:00] Blå avslutar sin tur
+[2026-03-18T10:11:57.763+01:00] Turbyte: Blå -> Röd (tur 5)
+[2026-03-18T10:11:58.232+01:00] Röd attackerar: Konventionell korvett -> USV - obemannad ytenhet, skada=1, återstående HP mål=1
+[2026-03-18T10:11:58.591+01:00] Röd attackerar: Konventionell korvett -> USV - obemannad ytenhet, skada=1, återstående HP mål=0
+[2026-03-18T10:11:58.593+01:00] Blå enhet sänkt: USV - obemannad ytenhet
+[2026-03-18T10:11:58.956+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=3
+[2026-03-18T10:11:58.958+01:00] Turbyte: Röd -> Blå (tur 6)
+[2026-03-18T10:12:06.586+01:00] Blå flyttar: Fregatt (9,9) -> (10,9)
+[2026-03-18T10:12:08.610+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T10:12:10.266+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T10:12:11.826+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T10:12:13.338+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T10:12:13.339+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T10:12:20.274+01:00] Blå flyttar: Ubåt (8,12) -> (9,10)
+[2026-03-18T10:12:22.058+01:00] Blå flyttar: Ubåtsjakthelikopter (6,16) -> (7,13)
+[2026-03-18T10:12:27.066+01:00] Blå flyttar: Stealth-korvett (4,13) -> (6,12)
+[2026-03-18T10:12:29.066+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T10:12:41.722+01:00] Blå avslutar sin tur
+[2026-03-18T10:12:41.723+01:00] Turbyte: Blå -> Röd (tur 6)
+[2026-03-18T10:12:42.178+01:00] Röd flyttar: Konventionell korvett (17,15) -> (15,15)
+[2026-03-18T10:12:42.543+01:00] Röd flyttar: Konventionell korvett (15,15) -> (14,14)
+[2026-03-18T10:12:42.911+01:00] Röd flyttar: Konventionell korvett (17,18) -> (15,18)
+[2026-03-18T10:12:42.915+01:00] Turbyte: Röd -> Blå (tur 7)
+[2026-03-18T10:12:57.137+01:00] Blå flyttar: Ubåtsjakthelikopter (7,13) -> (10,11)
+[2026-03-18T10:13:08.569+01:00] Blå flyttar: Fregatt (10,9) -> (11,9)
+[2026-03-18T10:13:18.746+01:00] Blå flyttar: Ubåt (9,10) -> (9,9)
+[2026-03-18T10:13:27.169+01:00] Blå flyttar: Stealth-korvett (6,12) -> (7,11)
+[2026-03-18T10:13:29.729+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T10:13:30.129+01:00] Blå ändrar djup ned: Ubåt till djup 0
+[2026-03-18T10:13:30.633+01:00] Blå ändrar djup upp: Ubåt till djup 1
+[2026-03-18T10:13:30.842+01:00] Blå ändrar djup upp: Ubåt till djup 2
+[2026-03-18T10:13:35.177+01:00] Blå avslutar sin tur
+[2026-03-18T10:13:35.178+01:00] Turbyte: Blå -> Röd (tur 7)
+[2026-03-18T10:13:35.634+01:00] Röd flyttar: Konventionell korvett (14,14) -> (13,13)
+[2026-03-18T10:13:35.994+01:00] Röd flyttar: Konventionell korvett (13,13) -> (12,12)
+[2026-03-18T10:13:36.362+01:00] Röd attackerar: Konventionell korvett -> Ubåtsjakthelikopter, skada=1, återstående HP mål=1
+[2026-03-18T10:13:36.363+01:00] Turbyte: Röd -> Blå (tur 8)
+[2026-03-18T10:13:45.250+01:00] Blå flyttar: Fregatt (11,9) -> (11,11)
+[2026-03-18T10:13:47.801+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T10:13:50.338+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T10:13:52.033+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T10:13:53.977+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T10:13:53.978+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T10:14:04.688+01:00] Blå flyttar: Ubåtsjakthelikopter (10,11) -> (12,9)
+[2026-03-18T10:14:06.680+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Aktiv
+[2026-03-18T10:14:07.345+01:00] Blå växlar sensorläge: Ubåtsjakthelikopter -> Passiv
+[2026-03-18T10:14:16.248+01:00] Blå flyttar: Ubåt (9,9) -> (10,9)
+[2026-03-18T10:14:18.569+01:00] Blå flyttar: Stealth-korvett (7,11) -> (8,10)
+[2026-03-18T10:14:20.480+01:00] Blå avslutar sin tur
+[2026-03-18T10:14:20.481+01:00] Turbyte: Blå -> Röd (tur 8)
+[2026-03-18T10:14:20.937+01:00] Röd flyttar: Konventionell korvett (15,18) -> (15,16)
+[2026-03-18T10:14:21.297+01:00] Röd flyttar: Konventionell korvett (15,16) -> (14,15)
+[2026-03-18T10:14:21.658+01:00] Röd flyttar: Konventionell korvett (14,15) -> (13,14)
+[2026-03-18T10:14:21.661+01:00] Turbyte: Röd -> Blå (tur 9)
+[2026-03-18T10:14:31.057+01:00] Blå flyttar: Ubåtsjakthelikopter (12,9) -> (12,12)
+[2026-03-18T10:14:46.001+01:00] Blå flyttar: Fregatt (11,11) -> (12,13)
+[2026-03-18T10:14:48.720+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=3
+[2026-03-18T10:14:50.785+01:00] Blå attackerar: Fregatt -> Konventionell korvett, skada=1, återstående HP mål=2
+[2026-03-18T10:14:59.896+01:00] Blå flyttar: Stealth-korvett (8,10) -> (8,13)
+[2026-03-18T10:15:10.176+01:00] Blå ändrar djup upp: Ubåt till djup 3
+[2026-03-18T10:15:10.696+01:00] Blå ändrar djup ned: Ubåt till djup 2
+[2026-03-18T10:15:10.879+01:00] Blå ändrar djup ned: Ubåt till djup 1
+[2026-03-18T10:15:12.392+01:00] Blå flyttar: Ubåt (10,9) -> (11,11)
+[2026-03-18T10:15:18.528+01:00] Blå avslutar sin tur
+[2026-03-18T10:15:18.529+01:00] Turbyte: Blå -> Röd (tur 9)
+[2026-03-18T10:15:18.996+01:00] Röd attackerar: Konventionell korvett -> Ubåtsjakthelikopter, skada=1, återstående HP mål=0
+[2026-03-18T10:15:18.997+01:00] Blå enhet sänkt: Ubåtsjakthelikopter
+[2026-03-18T10:15:19.365+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=2
+[2026-03-18T10:15:19.721+01:00] Röd attackerar: Konventionell korvett -> Fregatt, skada=1, återstående HP mål=1
+[2026-03-18T10:15:19.723+01:00] Turbyte: Röd -> Blå (tur 10)
+[2026-03-18T10:15:28.560+01:00] Blå flyttar: Fregatt (12,13) -> (13,13)
+[2026-03-18T10:15:29.920+01:00] Blå flyttar: Ubåt (11,11) -> (12,13)
+[2026-03-18T10:15:32.048+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=1
+[2026-03-18T10:15:34.688+01:00] Blå attackerar: Ubåt -> Konventionell korvett, skada=1, återstående HP mål=0
+[2026-03-18T10:15:34.689+01:00] Röd enhet sänkt: Konventionell korvett
+[2026-03-18T10:15:34.691+01:00] BLÅ VANN
