@@ -1038,7 +1038,7 @@
       elHintPill.textContent = 'Klicka en hex i räckvidd för att flytta';
     }
     if (mode === 'attack') {
-      elHintPill.textContent = 'Klicka en fiende inom räckvidd för att anfalla';
+      elHintPill.textContent = 'Klicka en fiende inom räckvidd för att attackera';
     }
     if (mode === 'mine') {
       elHintPill.textContent = 'Klicka en vattenhex intill för att lägga mina';
@@ -1628,7 +1628,7 @@ function applyMineTrigger(q, r, enteringSide) {
     attacker.ammoLeft -= 1;
     spendActionFor(attacker.side);
     showToast('Träff', `${attacker.type} träffar ${target.type} för ${dmg} skada.`);
-    logEvent(`${attacker.side} anfaller: ${attacker.type} -> ${target.type}, skada=${dmg}, återstående HP mål=${Math.max(0, target.hp)}`);
+    logEvent(`${attacker.side} attackerar: ${attacker.type} -> ${target.type}, skada=${dmg}, återstående HP mål=${Math.max(0, target.hp)}`);
 
     if (attacker.side === Side.RED && target.side === Side.BLUE) {
       if (target.hp <= 0) {
@@ -1760,7 +1760,7 @@ function applyMineTrigger(q, r, enteringSide) {
     btnHelp.addEventListener('click', () => {
       showToast(
         'Hjälp',
-        'Välj en enhet, flytta/anfall/minera.',
+        'Välj en enhet, flytta/attackera/minera.',
         'Minor utlöses när en enhet rör sig över dem.',
         'Minor sänker enhet direkt vid utlösning.'
 
@@ -1887,7 +1887,7 @@ function applyMineTrigger(q, r, enteringSide) {
         return;
       }
 
-      // Anfall om möjligt
+      // Attackera om möjligt
       for (const u of reds) {
         if (u.ammoLeft <= 0) continue;
         const inR = enemiesInRange(u);
