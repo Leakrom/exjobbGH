@@ -1,6 +1,3 @@
-
-
-
 (() => {
   try {
     console.log('=== Script.js loading START ===');
@@ -20,7 +17,7 @@
     const HEX_SIZE = 34;
     const ACTIONS_PER_TURN = 3;
     const BLUE_ACTIONS_UNLIMITED = true;
-    const ASK_BLUE_REFLECTION_EACH_TURN = false; // true = efter varje blå tur, false = först vid spelavslut
+    const ASK_BLUE_REFLECTION_EACH_TURN = true; // true = efter varje blå tur, false = först vid spelavslut
     
     console.log('Step 2: Game constants defined');
 
@@ -1478,6 +1475,30 @@ function applyMineTrigger(q, r, enteringSide) {
     if (!blue || !red) {
       const winner = blue ? Side.BLUE : Side.RED;
       gameOver = true;
+
+      // --- NYTT: logga antal och vilka enheter som finns kvar ---
+      const remainingBlue = units.filter((u) => u.side === Side.BLUE);
+      const remainingRed = units.filter((u) => u.side === Side.RED);
+
+      logEvent(`Återstående enheter vid spelavslut: Blå=${remainingBlue.length}, Röd=${remainingRed.length}`);
+
+      if (remainingBlue.length > 0) {
+        logEvent('Blå enheter: ' + remainingBlue
+          .map(u => `${u.type} (id=${u.id}) @(${u.q},${u.r}) hp=${u.hp}`)
+          .join(' ; '));
+      } else {
+        logEvent('Blå enheter: Inga');
+      }
+
+      if (remainingRed.length > 0) {
+        logEvent('Röda enheter: ' + remainingRed
+          .map(u => `${u.type} (id=${u.id}) @(${u.q},${u.r}) hp=${u.hp}`)
+          .join(' ; '));
+      } else {
+        logEvent('Röda enheter: Inga');
+      }
+      // --- SLUT NYTT ---
+
       showToast(
         'Spelet är slut',
         `${winner} vinner! Tryck "Nytt slag" för att spela igen.`
@@ -1790,7 +1811,6 @@ function applyMineTrigger(q, r, enteringSide) {
     btnDepthDown.addEventListener('click', () => {
       const sel = selectedId ? getUnit(selectedId) : null;
       if (!sel || sel.side !== activeSide) return;
-      if (!SUBMARINE_TYPES.has(sel.type)) return;
       if (sel.depth <= 0) return;
       if (!hasActionsFor(sel.side)) return;
       sel.depth -= 1;
