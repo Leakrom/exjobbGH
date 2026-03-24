@@ -6,7 +6,7 @@ const fsp = require('fs/promises');
 const HOST = '127.0.0.1';
 const PORT = 8080;
 const ROOT_DIR = __dirname;
-const LOG_DIR = 'C:\\Users\\Lina\\exjobbGH\\loggfiler';
+const LOG_DIR = 'C:\\Users\\linene\\exjobbGH\\loggfiler';
 const LOG_FILE = path.join(LOG_DIR, 'spelsession-logg.txt');
 
 const MIME_TYPES = {
